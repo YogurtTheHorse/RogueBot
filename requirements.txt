@@ -1,0 +1,2 @@
+tinydb
+python-telegram-bot

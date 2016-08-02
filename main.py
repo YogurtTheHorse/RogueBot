@@ -1,28 +1,48 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import usermanager
+import telegram
 import logging
+import os
 
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+					level=logging.INFO)
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('rg')
 
 def start(bot, update):
-    bot.sendMessage(update.message.chat_id, text='Hi!')
+	bot.sendMessage(update.message.chat_id, text='Теперь скажи мне свое имя.')
+	usermanager.new_user(update.message.chat_id)
 
-def echo(bot, update):
-    bot.sendMessage(update.message.chat_id, text=update.message.text)
+def setname(bot, update):
+	txt = update.message.text.split()
+	if len(txt) > 9:
+		name = update.message.text[10:]
+		usermanager.setname(update.message.chat_id, name)
 
-def hello(bot, update):
-    bot.sendMessage(update.message.chat_id,
-                    text='Hello {0}'.format(update.message.from_user.first_name))
+		reply('Ну хорошо')
+
+def msg(bot, update):
+	c_id = update.message.chat_id
+	def reply(txt, buttons=None):
+		if buttons:
+			custom_keyboard = [ [x] for x in buttons ]
+			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
+			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)
+		else:
+			bot.sendMessage(c_id, text=txt, parse_mode=telegram.ParseMode.MARKDOWN)
+
+	usermanager.message(c_id, reply, update.message.text)
+
+if not os.path.isdir('users'):
+	logger.info('Creating users directory')
+	os.makedirs('users')
 
 logger.info('Creating Updater...')
 updater = Updater('253526115:AAGBxSDWqJYxwFAZG8rpn1LDwtG1StIBWsk')
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('hello', hello))
-
-updater.dispatcher.add_handler(MessageHandler(False, echo))
+updater.dispatcher.add_handler(CommandHandler('setname', setname))
+updater.dispatcher.add_handler(MessageHandler(False, msg))
 
 logger.info('Starting polling...')
 updater.start_polling()

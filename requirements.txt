@@ -1,2 +1,1 @@
-tinydb
 python-telegram-bot

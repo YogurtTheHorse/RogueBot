@@ -33,6 +33,9 @@ def msg(bot, update):
 
 	usermanager.message(c_id, reply, update.message.text)
 
+def error_callback(bot, update, error):
+	logger.warn('Update "%s" caused error "%s"' % (update, error))
+
 if not os.path.isdir('users'):
 	logger.info('Creating users directory')
 	os.makedirs('users')
@@ -43,6 +46,7 @@ updater = Updater('253526115:AAGBxSDWqJYxwFAZG8rpn1LDwtG1StIBWsk')
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
+updater.dispatcher.addErrorHandler(error_callback)
 
 logger.info('Starting polling...')
 updater.start_polling()

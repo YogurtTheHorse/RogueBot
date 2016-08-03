@@ -38,7 +38,13 @@ def msg(bot, update):
 	usermanager.message(c_id, reply, update.message.text)
 
 def error_callback(bot, update, error):
-	logger.warn('Update "%s" caused error "%s"' % (update, error))
+	error_msg = 'Update "%s" caused error "%s"' % (update, error)
+	logger.warn(error_msg)
+	msg = 'Ошибка внутри сервера. Если это мешает играть, сообщите @yegorf1'
+	bot.sendMessage(update.message.chat_id, text=msg)
+	bot.sendMessage(update.message.chat_id, 
+					text='```text\n{0}\n```'.format(error_msg),
+					parse_mode=telegram.ParseMode.MARKDOWN)
 
 if not os.path.isdir('users'):
 	logger.info('Creating users directory')

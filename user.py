@@ -3,6 +3,7 @@ import random
 from time import gmtime, strftime
 
 import items.itemloader as itemloader
+import rooms.roomloader as roomloader
 
 import logging
 from constants import *
@@ -43,7 +44,8 @@ class User(object):
 		self.shop_items = [ ]
 		self.shop_names = [ ]
 
-		self.room = ''
+		self.room = ('', '')
+		self.subject = None
 
 	def debug_info(self):
 		msg = 'uid: ' + str(self.uid) + '\n'
@@ -110,6 +112,21 @@ class User(object):
 	def get_stats(self):
 		return 'HP: {0} MP: {1} Gold: {2}'.format(self.hp, self.mp, self.gold)
 
+	def remove_items_with_tag(self, tag):
+		items = self.get_items()
+
+		new_items = [ i for i in items if tag not in i.tags ]
+
+		self.items = new_items
+
+	def paid(self, costs):
+		if self.gold >= costs:
+			self.gold -= costs
+
+			return True
+		else:
+			return False
+
 	def name_confirm(self, reply, text):
 		if len(text) == 7:
 			txt = ('Твоя взяла. Отныне и навсегда (Нет) '
@@ -166,8 +183,43 @@ class User(object):
 		reply('Что будем делать?', buttons)
 
 	def open_room(self, reply):
-		reply('Not implemented')
-		reply('Магазин и молитвы снова дозволены')
+		self.state = 'room'
+
+		self.room = roomloader.get_random_room()
+
+		room = roomloader.load_room(self.room[1], self.room[0])
+
+		reply('Вы открываете дверь, а за ней...')
+		reply(room.name + '!')
+
+		room.enter(self, reply)
+
+		reply('Твои действия?', room.actions)
+
+	def in_room(self, reply, text):
+		room = roomloader.load_room(self.room[1], self.room[0])
+		room.action(self, reply, text)
+
+	def throw_dice(self, reply, subject=None):
+		self.state = 'dice'
+		self.subject = subject
+
+		reply('Время кидать кость!', ['Кинуть'])
+
+	def dice(self, reply, text):
+		if text == 'Кинуть':
+			self.state = 'room'
+
+			res = random.randint(1, DICE_MAX)
+			reply('Твой результат *{0}*'.format(res))
+			
+			room = roomloader.load_room(self.room[1], self.room[0])
+			room.dice(self, reply, res, self.subject)
+		else:
+			reply('Не вижу уверенности!', ['Кинуть'])
+
+	def leave(self, reply):
+		self.open_corridor(reply)
 
 		self.visited_shop = False
 		self.prayed = False
@@ -290,8 +342,7 @@ class User(object):
 		reply(txt, self.shop_names)
 
 	def buy(self, item, reply):
-		if self.gold >= item.price:
-			self.gold -= item.price
+		if self.paid(item.price):
 			if item.buff == 'bad':
 				reply('Ну наконец-то кто-то это купил!')
 			elif item.buff == 'good':
@@ -369,7 +420,6 @@ class User(object):
 	def corridor(self, reply, text):
 		if text.startswith('Открыть'):
 			self.open_room(reply)
-			self.open_corridor(reply)
 		elif text.startswith('Молить'):
 			self.pray(reply)
 		elif text.startswith('Зайти'):
@@ -416,3 +466,7 @@ class User(object):
 			self.shop(reply, text)
 		elif self.state == 'inventory':
 			self.inventory(reply, text)
+		elif self.state == 'room':
+			self.in_room(reply, text)
+		elif self.state == 'dice':
+			self.dice(reply, text)

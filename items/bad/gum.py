@@ -9,6 +9,7 @@ description = (
 
 charisma = -1
 price = 10
+tags = ['hair']
 
 def on_buy(user, reply):
 	if user.get_intelligence() < SMART_LEVEL:

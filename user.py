@@ -21,6 +21,9 @@ class User(object):
 		self.mp = 100
 		self.gold = 10 ** 7
 
+		self.max_hp = 150
+		self.max_mp = 150
+
 		self.state = 'name'
 
 		self.items = [ ]

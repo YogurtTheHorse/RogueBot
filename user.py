@@ -270,7 +270,7 @@ class User(object):
 
 		self.shop_items = itemloader.load_shop_items()
 
-		items = self.get_items()
+		items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
 		self.shop_names = [ i.name for i in items ]
 
 		for item in self.get_items():

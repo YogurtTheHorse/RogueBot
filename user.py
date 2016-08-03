@@ -70,7 +70,7 @@ class User(object):
 		return msg
 
 	def get_items(self):
-		return [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
+		return [ itemloader.load_item(i[1], i[0]) for i in self.items ]
 
 	def get_damage(self):
 		res = 0

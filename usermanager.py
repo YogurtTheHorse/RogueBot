@@ -35,6 +35,14 @@ def message(uid, reply, text):
 
 	save_user(usr)
 
+def debug_info(uid):
+	usr = get_user(uid)
+
+	if not usr:
+		return 'Что-то пошло не так. Попробуй /start'
+	else:
+		return usr.debug_info()
+
 def setname(uid, name):
 	usr = get_user(uid)
 	usr.name = name

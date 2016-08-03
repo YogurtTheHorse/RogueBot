@@ -38,7 +38,7 @@ def msg(bot, update):
 	usermanager.message(c_id, reply, update.message.text)
 
 def error_callback(bot, update, error):
-	error_msg = 'Update "%s" caused error "%s"' % (update, error)
+	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
 	logger.warn(error_msg)
 	msg = 'Ошибка внутри сервера. Если это мешает играть, сообщите @yegorf1'
 	bot.sendMessage(update.message.chat_id, text=msg)

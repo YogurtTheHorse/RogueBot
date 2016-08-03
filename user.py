@@ -114,6 +114,8 @@ class User(object):
 					'можно с помощью /setname').format(self.name)
 			self.state = 'first_msg'
 
+			logger.info('New user with id {0}'.format(self.uid))
+
 			reply(txt, [ 'А что дальше?' ])
 		else:
 			self.state = 'name'

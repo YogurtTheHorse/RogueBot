@@ -5,14 +5,14 @@ from importlib.machinery import SourceFileLoader
 
 logger = logging.getLogger('rg')
 
-def load_room(name, room_type='usual'):
+def load_room(name, room_type='usual', user=None):
 	path = 'rooms/{0}/{1}.py'.format(room_type, name)
 
 	if not os.path.exists(path):
 		return None
 
 	room_loader = SourceFileLoader(name, path)
-	room = room_loader.load_module()
+	room = room_loader.load_module(name)
 
 	return check_room(room, name, room_type)
 
@@ -20,7 +20,7 @@ def check_room(room, name, room_type):
 	room.code_name = name
 	room.room_type = room_type
 
-	required = [ 'name', 'actions', 'room_type', 'action' ]
+	required = [ 'name', 'get_actions', 'room_type', 'action' ]
 
 	for r in required:
 		if not hasattr(room, r):

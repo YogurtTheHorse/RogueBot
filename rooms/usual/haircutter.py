@@ -3,8 +3,10 @@ from constants import *
 name = 'Парикмахерская'
 
 room_type = 'other'
+actions = [ 'Подстричься за 10 золотых', 'Сказать, что ты парикмахер и попробовать устроиться на работу', 'Сделать вид, что ошибся дверью' ]
 
-actions = [ 'Подстричься за 10 золотых', 'Сказать, что ты парикмахер и попробовать устроиться на работу', 'Сделать вид, что ошибся дверью']
+def get_actions(user):
+	return actions
 
 def dice(user, reply, result, subject=None):
 	if result > DICE_MIDDLE:

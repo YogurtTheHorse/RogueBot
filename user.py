@@ -44,7 +44,11 @@ class User(object):
 		self.shop_items = [ ]
 		self.shop_names = [ ]
 
+		self.tags = [ ]
+
 		self.room = ('', '')
+		self.room_temp = { }
+
 		self.subject = None
 
 	def debug_info(self):
@@ -127,6 +131,9 @@ class User(object):
 		else:
 			return False
 
+	def steal(self, price):
+		self.gold = max(0, self.gold - price)
+
 	def name_confirm(self, reply, text):
 		if len(text) == 7:
 			txt = ('Твоя взяла. Отныне и навсегда (Нет) '
@@ -182,10 +189,20 @@ class User(object):
 
 		reply('Что будем делать?', buttons)
 
+	def set_room_temp(self, name, val=None):
+		self.room_temp[name] = val
+
+	def get_room_temp(self, name, def_val=None):
+		if name in self.room_temp:
+			return self.room_temp[name]
+		else:
+			return def_val
+
 	def open_room(self, reply):
 		self.state = 'room'
 
 		self.room = roomloader.get_random_room()
+		self.room_temp = { }
 
 		room = roomloader.load_room(self.room[1], self.room[0])
 
@@ -194,14 +211,14 @@ class User(object):
 
 		room.enter(self, reply)
 
-		reply('Твои действия?', room.actions)
+		reply('Твои действия?', room.get_actions(self))
 
 	def in_room(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
 		room.action(self, reply, text)
 
 		if self.state == 'room':
-			reply('Твои действия?', room.actions)
+			reply('Твои действия?', room.get_actions(self))
 
 	def throw_dice(self, reply, subject=None):
 		self.state = 'dice'
@@ -226,6 +243,33 @@ class User(object):
 
 		self.visited_shop = False
 		self.prayed = False
+
+	def escape(self, reply, success=True):
+		for i in self.get_items():
+			i.on_escape(self, reply, success)
+
+		if success:
+			self.leave(reply)
+
+	def add_tag(self, tag):
+		self.tags.append(tag)
+
+	def has_tag(self, tag):
+		if tag in self.tags:
+			return True
+
+		#for i in self.get_items():
+		#	if tag in i.tags:
+		#		return True
+
+		return False
+
+	def has_item(self, code_name):
+		for i in self.items:
+			if i[1] == code_name:
+				return True
+
+		return False
 
 	def evilgod(self, reply, god):
 		self.gods_level = [ 0 for g in self.gods ]

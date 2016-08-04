@@ -327,6 +327,7 @@ class User(object):
 
 		items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
 		self.shop_names = [ i.name for i in items ]
+		self.shop_names.append('Выход')
 
 		for item in self.get_items():
 			item.on_shop(self, reply, items)
@@ -378,14 +379,18 @@ class User(object):
 
 
 	def shop(self, reply, text):
-		for ind, name in enumerate(self.shop_names):
-			if name == text:
-				buff, name = self.shop_items[ind]
-				item = itemloader.load_item(name, buff)
-				self.buy(item, reply)
-				return
+		if text == 'Выход':
+			reply('До новых встреч!')
+			self.open_corridor(reply)
+		else:
+			for ind, name in enumerate(self.shop_names):
+				if name == text:
+					buff, name = self.shop_items[ind]
+					item = itemloader.load_item(name, buff)
+					self.buy(item, reply)
+					return
 
-		reply('У меня такого нет')
+			reply('У меня такого нет')
 
 	def open_inventory(self, reply):
 		self.state = 'inventory'

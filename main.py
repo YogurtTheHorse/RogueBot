@@ -30,12 +30,25 @@ def msg(bot, update):
 	def reply(txt, buttons=None):
 		if buttons:
 			custom_keyboard = [ [x] for x in buttons ]
-			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
+			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, 
+														one_time_keyboard=True)
 			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)
 		else:
-			bot.sendMessage(c_id, text=txt, parse_mode=telegram.ParseMode.MARKDOWN)
+			bot.sendMessage(c_id,
+							text=txt, 
+							parse_mode=telegram.ParseMode.MARKDOWN)
 
-	usermanager.message(c_id, reply, update.message.text)
+	try:
+		usermanager.message(c_id, reply, update.message.text)
+	except BaseException as e:
+		msg = (
+			'Ошибка внутри сервера. Если это мешает играть, сообщите @yegorf1'
+			'\n\n'
+			'{0}'
+		).format(e)
+		
+		reply(msg)
+		raise e
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

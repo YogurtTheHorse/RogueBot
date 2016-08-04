@@ -20,7 +20,7 @@ class User(object):
 		self.name = 'none'
 		self.hp = 100
 		self.mp = 100
-		self.gold = 10 ** 7
+		self.gold = 200
 
 		self.max_hp = 150
 		self.max_mp = 150
@@ -115,7 +115,7 @@ class User(object):
 	def remove_items_with_tag(self, tag):
 		items = self.get_items()
 
-		new_items = [ i for i in items if tag not in i.tags ]
+		new_items = [ (i.buff, i.code_name) for i in items if tag not in i.tags ]
 
 		self.items = new_items
 
@@ -199,6 +199,9 @@ class User(object):
 	def in_room(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
 		room.action(self, reply, text)
+
+		if self.state == 'room':
+			reply('Твои действия?', room.actions)
 
 	def throw_dice(self, reply, subject=None):
 		self.state = 'dice'

@@ -7,8 +7,10 @@ description = (
 	'Он же рассказчик — зачем ему? Правда на ней всегда выпадает единица...'
 )
 
-dice_bonus = 1
 price = 150
+
+def get_dice_bonus(user, reply):
+	return 1
 
 def on_pray(user, reply, god):
 	if god == AUTHOR:

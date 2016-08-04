@@ -9,7 +9,7 @@ description = (
 	'цилиндр, поэтому ни один банкомат ее не принимает.'
 )
 
-def on_dice(reply, user, dice):
+def get_dice_bonus(user, reply):
 	if random.random() <= 0.1:
 		txt = (
 			'Ты это видел? Монетка упала на ребро!\nНаверное, '

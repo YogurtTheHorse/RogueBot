@@ -226,11 +226,21 @@ class User(object):
 
 		reply('Время кидать кость!', ['Кинуть'])
 
+	def get_dice_bonus(self, reply):
+		res = 0
+
+		for i in self.get_items():
+			res += i.get_dice_bonus(self, reply)
+
+		return res
+
+
 	def dice(self, reply, text):
 		if text == 'Кинуть':
 			self.state = 'room'
 
 			res = random.randint(1, DICE_MAX)
+			res += self.get_dice_bonus(reply)
 			reply('Твой результат *{0}*'.format(res))
 			
 			room = roomloader.load_room(self.room[1], self.room[0])

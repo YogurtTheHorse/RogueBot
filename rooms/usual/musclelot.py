@@ -51,7 +51,7 @@ def evil_action(user, reply, text):
 		)
 		reply(msg)
 
-		user.make_damage(30, 40)
+		user.make_damage(30, 40, reply)
 		user.steal(20)
 		user.leave(reply)
 
@@ -76,7 +76,7 @@ def normal_action(user, reply, text):
 				'То, что они тебя не выпускали, их не смущает. Тебя побили'
 			)
 			reply(msg)
-			user.make_damage(40, 60)
+			user.make_damage(40, 60, reply)
 		user.leave(reply)
 	elif text == actions[3]:
 		if user.get_room_temp(LASER_ESCAPE, False):
@@ -96,7 +96,7 @@ def dice(user, reply, result, subject='zhmesh'):
 			reply('Это конечно немного, но я видел рыцарей и по хуже')
 		elif subject == 'fight':
 			reply('Тебя потрепали, но не смертельно. Все обошлось')
-			user.make_damage(5, 10, False)
+			user.make_damage(5, 10, reply, False)
 		else:
 			reply('Ты отбил Сэру Качкалоту руку.\nКрасава!')
 
@@ -104,11 +104,11 @@ def dice(user, reply, result, subject='zhmesh'):
 	else:
 		if subject == 'zhmesh':
 			reply('Слишком мало, поэтому пришлось подкачаться и ты устал')
-			user.make_damage(5, 10)
+			user.make_damage(5, 10, reply)
 		elif subject == 'fight':
 			reply('Тебя в очередной раз хорошенько избили. Не стоило светить в глаза')
-			user.make_damage(50, 60)
+			user.make_damage(50, 60, reply)
 		else:
 			reply('Сэру Качкалот отбил тебе руку.\nКрасава!')
-			user.make_damage(10, 20)
+			user.make_damage(10, 20, reply)
 	user.leave(reply)

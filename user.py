@@ -49,6 +49,8 @@ class User(object):
 		self.room = ('', '')
 		self.room_temp = { }
 
+		self.dead = False
+
 		self.subject = None
 
 	def debug_info(self):
@@ -161,7 +163,7 @@ class User(object):
 
 		reply(msg, buttons)
 
-	def make_damage(self, mn, mx, death=True):
+	def make_damage(self, mn, mx, reply, death=True):
 		old_hp = self.hp
 
 		dmg = max(random.randint(mn, mx) - self.get_defence(), 0)
@@ -169,8 +171,16 @@ class User(object):
 
 		if not death:
 			self.hp = max(self.hp, 1)
+		elif self.hp <= 0:
+			self.death(reply)
 
 		return old_hp - self.hp
+
+	def death(self, reply):
+		self.dead = True
+		self.state = ''
+
+		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -229,9 +239,10 @@ class User(object):
 
 		if self.state == 'room':
 			a, b = room.damage_range
-			dmg = self.make_damage(a, b)
+			dmg = self.make_damage(a, b, reply)
 
-			reply('В ответ ты отхватил *{0}* урона'.format(dmg))
+			if not self.dead:
+				reply('В ответ ты отхватил *{0}* урона'.format(dmg))
 
 	def won(self, reply):
 		loot = 'Ничего'
@@ -255,7 +266,8 @@ class User(object):
 
 		room.enter(self, reply)
 
-		reply('Твои действия?', room.get_actions(self))
+		if self.state == 'room':
+			reply('Твои действия?', room.get_actions(self))
 
 	def in_room(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -337,11 +349,11 @@ class User(object):
 			txt = ('Иисус разгневался и убил всех твоих египтских детей. '
 					'Правда у тебя их не было, но это событие так растрогало '
 					'тебя, что ты потерял частичку себя.')
-			self.make_damage(5, 10, death=False)
+			self.make_damage(5, 10, reply, death=False)
 			reply(txt)
 		elif god == self.gods[2]: # Allah
 			txt = ('Аллах не терпит ошибок и он очень зол.')
-			self.make_damage(20, 30)
+			self.make_damage(20, 30, reply)
 			reply(txt)
 		elif god == self.gods[3]: # Author
 			txt = ('Ты же понимаешь, что я тут заправляю всем и могу отправить '
@@ -559,7 +571,9 @@ class User(object):
 		self.open_corridor(reply)
 
 	def message(self, reply, text):
-		if self.state == 'name':
+		if self.dead:
+			reply('Батенькаъ, вы очень умерли', [ '/start' ])
+		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':
 			self.name_confirm(reply, text)

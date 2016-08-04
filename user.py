@@ -190,7 +190,7 @@ class User(object):
 		self.state = 'corridor'
 		reply(self.get_stats())
 
-		buttons = [ 'Открыть очередную дверь' ]
+		buttons = [ 'Открыть очередную дверь', 'Узнать характеристики героя' ]
 
 		if not self.prayed:
 			buttons.append('Молить Бога о выходе')
@@ -536,6 +536,23 @@ class User(object):
 			
 			self.open_corridor()
 
+	def show_characteristics(self, reply):
+		msg = (
+			'Сила: _{0}_\n'
+			'Защита: _{1}_\n'
+			'Харизма: _{2}_\n'
+			'Интеллект: _{3}_\n'
+			'Магический урон: _{4}_'
+		).format(
+			self.get_damage(), 
+			self.get_defence(), 
+			self.get_charisma(),
+			self.get_mana_damage(),
+			self.get_intelligence()
+		)
+
+		reply(msg)
+
 	def corridor(self, reply, text):
 		if text.startswith('Открыть'):
 			self.open_room(reply)
@@ -545,6 +562,8 @@ class User(object):
 			self.open_shop(reply)
 		elif text.startswith('Посмотреть'):
 			self.open_inventory(reply)
+		elif text.startswith('Узнать'):
+			self.show_characteristics(reply)
 
 
 	def first(self, reply, text):

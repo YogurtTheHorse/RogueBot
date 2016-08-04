@@ -17,3 +17,14 @@ DICE_MIDDLE = DICE_MAX / 2
 
 
 EVIL_MUSCLELOT = 'evil_musclelot'
+
+# Elements
+WATER = 'вода'
+FIRE = 'огонь'
+STONE = 'камень'
+AIR = 'воздух'
+DEAD = 'мертвец'
+NONE = 'нет'
+
+KICK_ARM = 'Ударить рукой'
+KICK_MAGIC = 'Поколдовать удар'

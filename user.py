@@ -34,7 +34,7 @@ class User(object):
 		self.last_god = ''
 		self.prayed = False
 
-		self.damage = 1
+		self.damage = 10
 		self.defence = 1
 		self.charisma = 0
 		self.mana_damage = 0
@@ -162,11 +162,15 @@ class User(object):
 		reply(msg, buttons)
 
 	def make_damage(self, mn, mx, death=True):
-		dmg = random.randint(mn, mx)
+		old_hp = self.hp
+
+		dmg = max(random.randint(mn, mx) - self.get_defence(), 0)
 		self.hp -= dmg
 
 		if not death:
 			self.hp = max(self.hp, 1)
+
+		return old_hp - self.hp
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -198,13 +202,53 @@ class User(object):
 		else:
 			return def_val
 
+	def get_fight_actions(self):
+		actions = [
+			KICK_ARM,
+			KICK_MAGIC
+		]
+
+		return actions
+
+	def fight_action(self, reply, text):
+		room = roomloader.load_room(self.room[1], self.room[0])
+		if text == KICK_ARM:
+			dmg = self.get_damage()
+
+			reply('Ты наносишь монстру урон равный *{0}*'.format(dmg))
+
+			room.make_damage(self, reply, dmg)
+		elif text == KICK_MAGIC:
+			dmg = self.get_mana_damage()
+
+			reply('Ахалай махалай!\nИз неоткуда появляется кулак и наносит *{0}* урона'.format(dmg))
+
+			room.make_damage(self, reply, dmg)
+		else:
+			reply('Не понял тебя')
+
+		if self.state == 'room':
+			a, b = room.damage_range
+			dmg = self.make_damage(a, b)
+
+			reply('В ответ ты отхватил *{0}* урона'.format(dmg))
+
+	def won(self, reply):
+		loot = 'Ничего'
+		reply('Ты победил!\nТак же в комнате ты нашел..\n\n{0}'.format(loot))
+
+		self.leave(reply)
+
 	def open_room(self, reply):
 		self.state = 'room'
 
-		self.room = roomloader.get_random_room()
+		self.room = roomloader.get_next_room()
 		self.room_temp = { }
 
 		room = roomloader.load_room(self.room[1], self.room[0])
+
+		if room.room_type == 'monster':
+			self.set_room_temp('hp', room.hp)
 
 		reply('Вы открываете дверь, а за ней...')
 		reply(room.name + '!')
@@ -218,6 +262,7 @@ class User(object):
 		room.action(self, reply, text)
 
 		if self.state == 'room':
+			reply(self.get_stats())
 			reply('Твои действия?', room.get_actions(self))
 
 	def throw_dice(self, reply, subject=None):

@@ -68,7 +68,7 @@ def normal_action(user, reply, text):
 		else:
 			reply('{0}? Мне это ничего не говорит.\nСколько качаешь?'.format(usr_name))
 	elif text == actions[2]:
-		user.defence += 1
+		user.damage += 5
 		reply('Ты подкачался. Твоя сила выросла, но это стоило денег.')
 		if not user.paid(50):
 			msg = (

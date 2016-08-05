@@ -13,6 +13,11 @@ def dice(user, reply, result, subject=None):
 		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще')
 	else:
 		reply('Мда. Тебя избили битой за то, что ты сломал ножницы.')
+
+		if user.has_item('scissors'):
+			user.remove_items_with_tag('scissors')
+			reply('О. Так у тебя есть ножницы. Ну и их отберем!')
+
 		user.make_damage(20, 30, reply)
 	user.leave(reply)
 

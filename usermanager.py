@@ -49,4 +49,12 @@ def setname(uid, name):
 	save_user(uid)
 
 
+def open_room(uid, reply, room_type, name):
+	usr = get_user(uid)
 
+	if not usr:
+		reply('Что-то пошло не так. Попробуй /start')
+	else:
+		usr.open_room(reply, room_type, name)
+
+	save_user(usr)

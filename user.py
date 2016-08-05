@@ -87,6 +87,13 @@ class User(object):
 
 		return res + self.damage
 
+	def get_damage_bonus(self, reply):
+		res = 0
+		for i in self.get_items():
+			res += i.get_damage_bonus(self, reply)
+
+		return res
+
 	def get_defence(self):
 		res = 0
 		for i in self.get_items():
@@ -223,7 +230,7 @@ class User(object):
 	def fight_action(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
 		if text == KICK_ARM:
-			dmg = self.get_damage()
+			dmg = self.get_damage() + self.get_damage_bonus(reply)
 
 			reply('Ты наносишь монстру урон равный *{0}*'.format(dmg))
 
@@ -250,10 +257,13 @@ class User(object):
 
 		self.leave(reply)
 
-	def open_room(self, reply):
+	def open_room(self, reply, room_type=None, room_name=None):
 		self.state = 'room'
 
-		self.room = roomloader.get_next_room()
+		if not (room_type and room_name):
+			room_type, room_name = roomloader.get_next_room()
+
+		self.room = (room_type, room_name)
 		self.room_temp = { }
 
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -306,10 +316,10 @@ class User(object):
 			reply('Не вижу уверенности!', ['Кинуть'])
 
 	def leave(self, reply):
-		self.open_corridor(reply)
-
 		self.visited_shop = False
 		self.prayed = False
+
+		self.open_corridor(reply)
 
 	def escape(self, reply, success=True):
 		for i in self.get_items():
@@ -317,6 +327,9 @@ class User(object):
 
 		if success:
 			self.leave(reply)
+
+	def add_item(self, buff, name):
+		self.items.append( (buff, name) )
 
 	def add_tag(self, tag):
 		self.tags.append(tag)
@@ -522,7 +535,6 @@ class User(object):
 		else:
 			reply(msg)
 			self.open_corridor(reply)
-
 
 	def inventory(self, reply, text):
 		if text == 'В коридор':

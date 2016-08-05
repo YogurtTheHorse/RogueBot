@@ -25,6 +25,22 @@ def debug_print(bot, update):
 	inf = usermanager.debug_info(update.message.chat_id)
 	bot.sendMessage(update.message.chat_id, text=inf)
 
+def open_room(bot, update):
+	c_id = update.message.chat_id
+	def reply(txt, buttons=None):
+		if buttons:
+			custom_keyboard = [ [x] for x in buttons ]
+			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, 
+														one_time_keyboard=True)
+			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)
+		else:
+			bot.sendMessage(c_id,
+							text=txt, 
+							parse_mode=telegram.ParseMode.MARKDOWN)
+
+	cmd, room_type, name = update.message.text.split()
+	usermanager.open_room(c_id, reply, room_type, name)
+
 def msg(bot, update):
 	c_id = update.message.chat_id
 	def reply(txt, buttons=None):
@@ -38,17 +54,7 @@ def msg(bot, update):
 							text=txt, 
 							parse_mode=telegram.ParseMode.MARKDOWN)
 
-	try:
-		usermanager.message(c_id, reply, update.message.text)
-	except BaseException as e:
-		msg = (
-			'Ошибка внутри сервера. Если это мешает играть, сообщите @yegorf1'
-			'\n\n'
-			'{0}'
-		).format(e)
-		
-		reply(msg)
-		raise e
+	usermanager.message(c_id, reply, update.message.text)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
@@ -67,8 +73,9 @@ logger.info('Creating Updater...')
 updater = Updater('253526115:AAGBxSDWqJYxwFAZG8rpn1LDwtG1StIBWsk')
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
+updater.dispatcher.add_handler(CommandHandler('setname', setname))
+updater.dispatcher.add_handler(CommandHandler('open_room', open_room))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 

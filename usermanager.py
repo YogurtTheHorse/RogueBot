@@ -58,3 +58,8 @@ def open_room(uid, reply, room_type, name):
 		usr.open_room(reply, room_type, name)
 
 	save_user(usr)
+
+def give_item(uid, item_type, name):
+	usr = get_user(uid)
+	usr.add_item(item_type, name)
+	save_user(usr)

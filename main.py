@@ -41,6 +41,10 @@ def open_room(bot, update):
 	cmd, room_type, name = update.message.text.split()
 	usermanager.open_room(c_id, reply, room_type, name)
 
+def give_item(bot, update):
+	cmd, item_type, name = update.message.text.split()
+	usermanager.give_item(update.message.chat_id, item_type, name)
+
 def msg(bot, update):
 	c_id = update.message.chat_id
 	def reply(txt, buttons=None):
@@ -76,6 +80,7 @@ updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('open_room', open_room))
+updater.dispatcher.add_handler(CommandHandler('give_item', give_item))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 

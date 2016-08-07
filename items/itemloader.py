@@ -35,11 +35,11 @@ def check_item(item, name, buff):
 
 	defaults = [
 		( foo, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use' ] ), # callbacks
-		( foo_zero, [ 'get_dice_bonus', 'get_damage_bonus' ]),
+		( foo_zero, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
 		( 0, [ 'damage', 'mana_damage', 'charisma', 'intelligence', 'defence' ] ), # buffs
 		( 'none', [ 'aura' ] ), # eeeh. meh
 		( [ ], [ 'tags' ] ), # some arrays?
-		( False, [ 'usable' ])
+		( False, [ 'usable', 'fightable' ])
 	]
 
 	for def_val, names in defaults:

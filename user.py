@@ -225,7 +225,23 @@ class User(object):
 			KICK_MAGIC
 		]
 
+		for i in self.get_items():
+			if i.fightable:
+				act = USE + i.name
+				if act not in actions:
+					actions.append(act)
+
 		return actions
+
+	def fight_dice(self, reply, result, subject=None):
+		room = roomloader.load_room(self.room[1], self.room[0])
+		if subject == 'noname':
+			dmg = result + self.get_damage_bonus()
+
+			reply('Твоя непонятная штука нанесла урон, равный *{0}*'.format(dmg))
+
+			room.make_damage(self, reply, dmg)
+
 
 	def fight_action(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -241,6 +257,25 @@ class User(object):
 			reply('Ахалай махалай!\nИз неоткуда появляется кулак и наносит *{0}* урона'.format(dmg))
 
 			room.make_damage(self, reply, dmg)
+		elif text.startswith(USE):
+			name = text[len(USE):]
+			item = None
+
+			for i in self.get_items():
+				if i.name == name:
+					item = i
+					break
+
+			if item:
+				dmg = item.fight_use(self, reply, room) + self.get_damage_bonus(reply)
+
+				reply('{0} путем нехитрых махинаций наносит урон, равный {1}'.format(name, dmg))
+
+				room.make_damage(self, reply, dmg)
+			else:
+				reply('У меня такой вещи нет, но ты можешь кинуть кость и попробовать.')
+
+				self.throw_dice(reply, 'noname')
 		else:
 			reply('Не понял тебя')
 

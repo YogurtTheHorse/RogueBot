@@ -15,7 +15,7 @@ GOD_LEVEL = 3
 DICE_MAX = 32
 DICE_MIDDLE = DICE_MAX / 2
 
-USE = 'Использовать '
+USE = 'Использовать: '
 
 EVIL_MUSCLELOT = 'evil_musclelot'
 

@@ -269,7 +269,7 @@ class User(object):
 			if item:
 				dmg = item.fight_use(self, reply, room) + self.get_damage_bonus(reply)
 
-				reply('{0} путем нехитрых махинаций наносит урон, равный {1}'.format(name, dmg))
+				reply('{0} путем нехитрых махинаций наносит урон, равный *{1}*'.format(name, dmg))
 
 				room.make_damage(self, reply, dmg)
 			else:

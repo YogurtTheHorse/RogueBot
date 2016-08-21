@@ -7,7 +7,7 @@ description = (
 	'Некоторые монстры уважают Буддистов и не трогают их.'
 )
 
-aura = 'peace'
+aura = BUDDHA
 price = 150
 
 def on_pray(user, reply, god):

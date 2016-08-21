@@ -1,10 +1,12 @@
 from constants import *
 
-name = 'Крыса'
+name = 'Крыса-летяга'
 
 hp = 15
 element = NONE
 damage_range =  ( 5, 7 )
+
+loot = [ 'bat_wing' ]
 
 def enter(user, reply):
 	msg = (

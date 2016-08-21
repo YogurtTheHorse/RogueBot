@@ -62,11 +62,8 @@ def check_room(room, name, room_type):
 			logger.warn('Item "{0}" has no attribute {1}!'.format(name, r))
 			return None
 
-	def foo(*arg):
-		pass
-
 	defaults = [
-		( foo, [ 'enter', 'dice' ] ),
+		( lambda *args: None, [ 'enter', 'dice' ] ),
 		( 0, [ ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),

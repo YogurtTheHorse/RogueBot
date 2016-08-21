@@ -18,6 +18,7 @@ DICE_MIDDLE = DICE_MAX / 2
 USE = 'Использовать: '
 
 EVIL_MUSCLELOT = 'evil_musclelot'
+JAPANESE = 'japanese'
 
 # Elements
 WATER = 'вода'

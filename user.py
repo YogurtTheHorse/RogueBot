@@ -49,6 +49,7 @@ class User(object):
 		self.room = ('', '')
 		self.room_temp = { }
 
+		self.reborn_answer = None
 		self.dead = False
 
 		self.subject = None
@@ -122,6 +123,13 @@ class User(object):
 
 		return res + self.intelligence
 
+	def has_aura(self, aura):
+		for i in self.get_items():
+			if i.aura == aura:
+				return True
+				
+		return False
+
 	def get_stats(self):
 		return 'HP: {0} MP: {1} Gold: {2}'.format(self.hp, self.mp, self.gold)
 
@@ -158,7 +166,10 @@ class User(object):
 			reply('Ну и как же тебя звать на этот раз?')
 
 	def name_given(self, reply, name):
-		n = random.choice (names)
+		n = name
+		while n == name:
+			n = random.choice (names)
+
 		msg = ('Ты знаешь, у меня есть знакомый по имени «{0}» и '
 				'я считаю, что это звучит лучше «{1}»\n'
 				'Ты уверен?').format(n, name)
@@ -187,7 +198,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ])
+		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ], photo='death.png')
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -287,7 +298,11 @@ class User(object):
 				reply('В ответ ты отхватил *{0}* урона'.format(dmg))
 
 	def won(self, reply):
-		loot = 'Ничего'
+		room = roomloader.load_room(self.room[1], self.room[0])
+
+		items = [ itemloader.load_item(i, 'loot') for i in room.loot ]
+		loot = ', '.join([ item.name for item in items ])
+
 		reply('Ты победил!\nТак же в комнате ты нашел..\n\n{0}'.format(loot))
 
 		self.leave(reply)
@@ -302,6 +317,9 @@ class User(object):
 		self.room_temp = { }
 
 		room = roomloader.load_room(self.room[1], self.room[0])
+
+		for i in self.get_items():
+			i.on_room(user, reply, room)
 
 		if room.room_type == 'monster':
 			self.set_room_temp('hp', room.hp)
@@ -404,10 +422,10 @@ class User(object):
 			self.make_damage(20, 30, reply)
 			reply(txt)
 		elif god == self.gods[3]: # Author
-			txt = ('Ты же понимаешь, что я тут заправляю всем и могу отправить '
-					'тебя к какому-нибудь дракону?')
+			txt = ('Ты же понимаешь, что я тут заправляю? Раз такой умный, держи новенькие ботиночки')
 
-			# TODO: Open dragon
+			user.add_item('special', 'intoxicated_shoes')
+			
 			reply(txt)
 
 	def god_love(self, reply, god):
@@ -422,7 +440,8 @@ class User(object):
 			self.hp = self.max_hp
 		elif god == AUTHOR_NUM: # Author
 			reply('За это я подскажу тебе одну интересную комнату')
-			reply('Not implemented')
+			
+			self.open_room(reply, 'special', 'icecream')
 
 	def prayto(self, reply, god):
 		god_num = -1
@@ -581,7 +600,8 @@ class User(object):
 				if i.name == text:
 					i.on_use(self, reply)
 			
-			self.open_corridor()
+			if self.state == 'inventory':
+				self.open_corridor(reply)
 
 	def show_characteristics(self, reply):
 		msg = (
@@ -636,6 +656,10 @@ class User(object):
 
 		self.open_corridor(reply)
 
+	def reborn(self, reply, answer):
+		self.state = 'reborned'
+		self.reborn_answer = answer
+
 	def message(self, reply, text):
 		if self.dead:
 			reply('Батенькаъ, вы очень умерли', [ '/start' ])
@@ -657,3 +681,5 @@ class User(object):
 			self.in_room(reply, text)
 		elif self.state == 'dice':
 			self.dice(reply, text)
+		elif self.state == 'reborned':
+			reply(self.reborn_answer, [ '/start' ])

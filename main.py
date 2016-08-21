@@ -27,7 +27,7 @@ def debug_print(bot, update):
 
 def open_room(bot, update):
 	c_id = update.message.chat_id
-	def reply(txt, buttons=None):
+	def reply(txt, buttons=None, photo=None):
 		if buttons:
 			custom_keyboard = [ [x] for x in buttons ]
 			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, 
@@ -37,6 +37,9 @@ def open_room(bot, update):
 			bot.sendMessage(c_id,
 							text=txt, 
 							parse_mode=telegram.ParseMode.MARKDOWN)
+
+		if photo:
+			bot.sendPhoto(c_id, photo=open('images/{0}'.format(photo), 'rb'))
 
 	cmd, room_type, name = update.message.text.split()
 	usermanager.open_room(c_id, reply, room_type, name)
@@ -47,7 +50,7 @@ def give_item(bot, update):
 
 def msg(bot, update):
 	c_id = update.message.chat_id
-	def reply(txt, buttons=None):
+	def reply(txt, buttons=None, photo=None):
 		if buttons:
 			custom_keyboard = [ [x] for x in buttons ]
 			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, 
@@ -57,6 +60,9 @@ def msg(bot, update):
 			bot.sendMessage(c_id,
 							text=txt, 
 							parse_mode=telegram.ParseMode.MARKDOWN)
+
+		if photo:
+			bot.sendPhoto(c_id, photo=open('images/{0}'.format(photo), 'rb'))
 
 	usermanager.message(c_id, reply, update.message.text)
 

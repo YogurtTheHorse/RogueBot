@@ -6,8 +6,11 @@ hp = 20
 element = NONE
 damage_range =  ( 2, 4 )
 
+loot = [ 'rat_tooth' ]
+
 def enter(user, reply):
-	msg = (
-		'ААААААААА! ТУТ КРЫСА. УБЕЙ ЕЕ.'
-	)
-	reply(msg)
+	if user.has_aura(BUDDHA):
+		reply('Крысы не трогают буддистов. Иди с миром')
+		user.won(reply)
+	else:
+		reply('ААААААААА! ТУТ КРЫСА. УБЕЙ ЕЕ.')

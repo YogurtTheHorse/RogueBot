@@ -27,19 +27,13 @@ def check_item(item, name, buff):
 			logger.warn('Item "{0}" has no attribute {1}!'.format(name, r))
 			return None
 
-	def foo(*arg):
-		pass
-
-	def foo_zero(*arg):
-		return 0
-
 	defaults = [
-		( foo, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use' ] ), # callbacks
-		( foo_zero, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
+		( lambda *args: None, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use' ] ), # callbacks
+		( lambda *args: 0, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
 		( 0, [ 'damage', 'mana_damage', 'charisma', 'intelligence', 'defence' ] ), # buffs
-		( 'none', [ 'aura' ] ), # eeeh. meh
-		( [ ], [ 'tags' ] ), # some arrays?
-		( False, [ 'usable', 'fightable' ])
+		( '', [ 'aura' ] ), # eeeh. meh
+		( [ ], [ 'tags', 'loot' ] ), # some arrays?
+		( False, [ 'usable', 'fightable', 'iscursed' ])
 	]
 
 	for def_val, names in defaults:

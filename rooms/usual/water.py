@@ -16,7 +16,7 @@ def dice(user, reply, result, subject=None):
 		reply('Ты все таки доплыл! Там лежал трезубец')
 		
 		user.add_tag('wet')
-		#user.add_item('special', 'trident')
+		user.add_item('special', 'trident')
 	else:
 		reply('Что-то пошло не так и тебя все равно смыло в коридор.')
 		user.make_damage(0, 10, reply, False)

@@ -29,7 +29,7 @@ def open_room(bot, update):
 	c_id = update.message.chat_id
 	def reply(txt, buttons=None, photo=None):
 		if buttons:
-			custom_keyboard = [ [x] for x in buttons ]
+			custom_keyboard = [ [ x ] for x in buttons ]
 			reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, 
 														one_time_keyboard=True)
 			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)
@@ -44,7 +44,7 @@ def open_room(bot, update):
 	cmd, room_type, name = update.message.text.split()
 	usermanager.open_room(c_id, reply, room_type, name)
 
-def give_item(bot, update):
+def give(bot, update):
 	cmd, item_type, name = update.message.text.split()
 	usermanager.give_item(update.message.chat_id, item_type, name)
 
@@ -86,7 +86,7 @@ updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('open_room', open_room))
-updater.dispatcher.add_handler(CommandHandler('give_item', give_item))
+updater.dispatcher.add_handler(CommandHandler('give', give))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 

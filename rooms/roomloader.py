@@ -64,10 +64,10 @@ def check_room(room, name, room_type):
 
 	defaults = [
 		( lambda *args: None, [ 'enter', 'dice' ] ),
-		( 0, [ ] ),
+		( 0, [ 'coins' ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),
-		( [ ], [ ] ),
+		( [ ], [ 'loot' ] ),
 		( False, [ ])
 	]
 

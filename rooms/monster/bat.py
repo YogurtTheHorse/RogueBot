@@ -6,6 +6,8 @@ hp = 15
 element = NONE
 damage_range =  ( 5, 7 )
 
+coins = 12
+
 loot = [ 'bat_wing' ]
 
 def enter(user, reply):

@@ -6,6 +6,8 @@ hp = 30
 element = WATER
 damage_range =  ( 0, 3 )
 
+coins = 3
+
 loot = [ 'slime' ]
 
 def enter(user, reply):

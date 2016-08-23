@@ -140,6 +140,20 @@ class User(object):
 
 		self.items = new_items
 
+	def remove_item_by_name(self, name):
+		ind = -1
+		items = self.get_items()
+		for i in range(len(self.items)):
+			if items[i].name == name:
+				ind = i
+				break
+
+		if ind >= 0 and not items[ind].iscursed:
+			del self.items[ind]
+
+			return True
+		return False
+
 	def paid(self, costs):
 		if self.gold >= costs:
 			self.gold -= costs
@@ -280,9 +294,10 @@ class User(object):
 			if item:
 				dmg = item.fight_use(self, reply, room) + self.get_damage_bonus(reply)
 
-				reply('{0} путем нехитрых махинаций наносит урон, равный *{1}*'.format(name, dmg))
+				if self.state == 'room':
+					reply('{0} путем нехитрых махинаций наносит урон, равный *{1}*'.format(name, dmg))
 
-				room.make_damage(self, reply, dmg)
+					room.make_damage(self, reply, dmg)
 			else:
 				reply('У меня такой вещи нет, но ты можешь кинуть кость и попробовать.')
 
@@ -301,7 +316,15 @@ class User(object):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
 		items = [ itemloader.load_item(i, 'loot') for i in room.loot ]
-		loot = ', '.join([ item.name for item in items ])
+		loot = ', '.join([ item.name for item in items ]) if len(items) > 0 else 'Ничего.'
+
+		for lt in room.loot:
+			self.add_item('loot', lt)
+
+		if room.coins > 0:
+			reply('А еще тут лежало несколко золотых. Твой карман потяжелал на *{0}*'.format(room.coins))
+
+			self.gold += room.coins
 
 		reply('Ты победил!\nТак же в комнате ты нашел..\n\n{0}'.format(loot))
 
@@ -319,7 +342,7 @@ class User(object):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
 		for i in self.get_items():
-			i.on_room(user, reply, room)
+			i.on_room(self, reply, room)
 
 		if room.room_type == 'monster':
 			self.set_room_temp('hp', room.hp)
@@ -371,6 +394,10 @@ class User(object):
 	def leave(self, reply):
 		self.visited_shop = False
 		self.prayed = False
+
+		if self.hp < self.max_hp / 2:
+			reply('Ты слегка отдохнул')
+			self.hp = self.max_hp / 2
 
 		self.open_corridor(reply)
 
@@ -424,7 +451,7 @@ class User(object):
 		elif god == self.gods[3]: # Author
 			txt = ('Ты же понимаешь, что я тут заправляю? Раз такой умный, держи новенькие ботиночки')
 
-			user.add_item('special', 'intoxicated_shoes')
+			self.add_item('special', 'intoxicated_shoes')
 			
 			reply(txt)
 
@@ -472,8 +499,9 @@ class User(object):
 				self.god_love(reply, god_num)
 
 
-		self.prayed = True
-		self.open_corridor(reply)
+		if self.state == 'pray':
+			self.prayed = True
+			self.open_corridor(reply)
 
 
 	def pray(self, reply, god=None):
@@ -575,6 +603,10 @@ class User(object):
 
 		items = self.get_items()
 
+		if len(items) == 0:
+			self.open_corridor(reply)
+			return
+
 		actions = [ ]
 		msg = ''
 
@@ -583,16 +615,22 @@ class User(object):
 			if i.usable:
 				actions.append(i.name)
 
-		if len(actions) > 0:
-			actions.append('В коридор')
-			reply(msg, actions)
-		else:
-			reply(msg)
-			self.open_corridor(reply)
+			actions.append('Выкинуть ' + i.name)
+
+		actions.append('В коридор')
+		reply(msg, actions)
 
 	def inventory(self, reply, text):
 		if text == 'В коридор':
 			self.open_corridor(reply)
+		elif text.startswith('Выкинуть '):
+			name = text[len('Выкинуть '):]
+
+			if not self.remove_item_by_name(name):
+				reply('Невыкидывается')
+			else:
+				self.open_inventory(reply)
+					
 		else:
 			items = self.get_items()
 			

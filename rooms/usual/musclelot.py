@@ -62,7 +62,7 @@ def normal_action(user, reply, text):
 		user.throw_dice(reply, 'zhmesh')
 	elif text == actions[1]:
 		usr_name = user.name.lower()
-		if ('качок' in usr_name) or ('качколот' in usr_name):
+		if ('качок' in usr_name) or ('качколот' in usr_name) or ('качкалот' in usr_name):
 			reply('Другое дело, дай пять!')
 			user.throw_dice(reply, 'five')
 		else:
@@ -110,5 +110,5 @@ def dice(user, reply, result, subject='zhmesh'):
 			user.make_damage(50, 60, reply)
 		else:
 			reply('Сэру Качкалот отбил тебе руку.\nКрасава!')
-			user.make_damage(10, 20, reply)
+			user.make_damage(5, 10, reply)
 	user.leave(reply)

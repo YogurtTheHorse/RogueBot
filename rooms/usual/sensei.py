@@ -1,27 +1,14 @@
 from constants import *
 
-name = 'Учитель Японского!'
+name = '先生'
 
 room_type = 'other'
 
-# 			Выучить японский, Сказать, что уже знаешь
-actions = [ '日本語を学びます', 'すでに日本語を知っていると言うこと' ]
+# 			Выучить японский, Сказать, что уже знаешь,  Молча стоять
+actions = [ '日本語を学びます', 'すでに日本語を知っていると言うこと', '静かに立ちます' ]
 
 def get_actions(user):
 	return actions
-
-def dice(user, reply, result, subject=None):
-	if result > DICE_MIDDLE:
-		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще')
-	else:
-		reply('Мда. Тебя избили битой за то, что ты сломал ножницы.')
-
-		if user.has_item('scissors'):
-			user.remove_items_with_tag('scissors')
-			reply('О. Так у тебя есть ножницы. Ну и их отберем!')
-
-		user.make_damage(20, 30, reply)
-	user.leave(reply)
 
 def enter(user, reply):
 	reply('ようこそ！\n私はトトロです')

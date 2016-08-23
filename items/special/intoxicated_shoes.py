@@ -1,5 +1,8 @@
 name = 'Отравленные ботинки'
+description = 'Довыпендривался'
+
 price = 0
+iscursed = True
 
 def on_room(user, reply, room):
 	reply('Как же болят твои ноги')

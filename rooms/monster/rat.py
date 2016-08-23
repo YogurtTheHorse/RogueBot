@@ -6,6 +6,8 @@ hp = 20
 element = NONE
 damage_range =  ( 2, 4 )
 
+coins = 7
+
 loot = [ 'rat_tooth' ]
 
 def enter(user, reply):

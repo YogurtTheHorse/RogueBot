@@ -52,6 +52,9 @@ class User(object):
 		self.reborn_answer = None
 		self.dead = False
 
+		self.rooms_to_story = random.randint(5, 25)
+		self.next_storyroom = 'first'
+
 		self.subject = None
 
 	def debug_info(self):
@@ -132,6 +135,16 @@ class User(object):
 
 	def get_stats(self):
 		return 'HP: {0} MP: {1} Gold: {2}'.format(self.hp, self.mp, self.gold)
+
+	def remove_item(self, code_name):
+		ind = -1
+		for i in range(len(self.items)):
+			if self.items[i][1] == code_name:
+				ind = i
+				break
+
+		if ind >= 0:
+			del self.items[ind]
 
 	def remove_items_with_tag(self, tag):
 		items = self.get_items()
@@ -247,7 +260,8 @@ class User(object):
 	def get_fight_actions(self):
 		actions = [
 			KICK_ARM,
-			KICK_MAGIC
+			KICK_MAGIC,
+			USE + 'Вундервафля'
 		]
 
 		for i in self.get_items():
@@ -261,7 +275,7 @@ class User(object):
 	def fight_dice(self, reply, result, subject=None):
 		room = roomloader.load_room(self.room[1], self.room[0])
 		if subject == 'noname':
-			dmg = result + self.get_damage_bonus()
+			dmg = result + self.get_damage_bonus(reply)
 
 			reply('Твоя непонятная штука нанесла урон, равный *{0}*'.format(dmg))
 
@@ -334,7 +348,12 @@ class User(object):
 		self.state = 'room'
 
 		if not (room_type and room_name):
-			room_type, room_name = roomloader.get_next_room()
+			if self.rooms_to_story < 1:
+				room_type, room_name = 'story', self.next_storyroom
+				self.rooms_to_story = 10 ** 6
+			else:
+				self.rooms_to_story -= 1
+				room_type, room_name = roomloader.get_next_room()
 
 		self.room = (room_type, room_name)
 		self.room_temp = { }

@@ -25,7 +25,7 @@ def debug_print(bot, update):
 	inf = usermanager.debug_info(update.message.chat_id)
 	bot.sendMessage(update.message.chat_id, text=inf)
 
-def open_room(bot, update):
+def room(bot, update):
 	c_id = update.message.chat_id
 	def reply(txt, buttons=None, photo=None):
 		if buttons:
@@ -85,7 +85,7 @@ updater = Updater('253526115:AAGBxSDWqJYxwFAZG8rpn1LDwtG1StIBWsk')
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
-updater.dispatcher.add_handler(CommandHandler('open_room', open_room))
+updater.dispatcher.add_handler(CommandHandler('room', room))
 updater.dispatcher.add_handler(CommandHandler('give', give))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)

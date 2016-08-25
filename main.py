@@ -1,3 +1,5 @@
+import config
+
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import usermanager
 import telegram
@@ -65,7 +67,7 @@ if not os.path.isdir('users'):
 	os.makedirs('users')
 
 logger.info('Creating Updater...')
-updater = Updater('253526115:AAGBxSDWqJYxwFAZG8rpn1LDwtG1StIBWsk')
+updater = Updater(config.TELEGRAM_TOKEN)
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))

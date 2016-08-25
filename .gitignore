@@ -91,3 +91,5 @@ ENV/
 
 # Project trash
 users/
+config.py
+vk_config.json

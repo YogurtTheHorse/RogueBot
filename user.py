@@ -9,6 +9,8 @@ import logging
 from constants import *
 from utils.names import names
 
+from collections import Counter
+
 logger = logging.getLogger('rg')
 
 class User(object):
@@ -629,8 +631,10 @@ class User(object):
 		actions = [ ]
 		msg = ''
 
-		for i in items:
-			msg += '{0}:\n{1}\n\n'.format(i.name, i.description)
+		counter_items = Counter(items)
+
+		for i in list(counter_items):
+			msg += '{0} ({1} шт.):\n{2}\n\n'.format(i.name, counter_items[i], i.description)
 			if i.usable:
 				actions.append(i.name)
 

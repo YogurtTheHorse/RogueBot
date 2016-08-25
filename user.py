@@ -30,6 +30,7 @@ class User(object):
 		self.state = 'name'
 
 		self.items = [ ]
+		self.inventory_page = 0
 
 		self.gods = [ BUDDHA, JESUS, ALLAH, AUTHOR ]
 		self.gods_level = [ 0 for g in self.gods ]
@@ -632,13 +633,22 @@ class User(object):
 		msg = ''
 
 		counter_items = Counter(items)
+		selected_items = list(counter_items)
 
-		for i in list(counter_items):
+		begin = min(self.inventory_page * INVENTORY_PAGE_SIZE, len(selected_items) - 1)
+		end = min((self.inventory_page + 1) * INVENTORY_PAGE_SIZE, len(selected_items))
+
+		for i in selected_items[begin:end]:
 			msg += '{0} ({1} шт.):\n{2}\n\n'.format(i.name, counter_items[i], i.description)
 			if i.usable:
 				actions.append(i.name)
 
 			actions.append('Выкинуть ' + i.name)
+
+		if begin > 0:
+			actions.append('Назад')
+		if end < len(selected_items):
+			actions.append('Дальше')
 
 		actions.append('В коридор')
 		reply(msg, actions)
@@ -653,7 +663,12 @@ class User(object):
 				reply('Невыкидывается')
 			else:
 				self.open_inventory(reply)
-					
+		elif text == 'Назад':
+			self.inventory_page = max(self.inventory_page - 1, 0)
+			self.open_inventory(reply)
+		elif text == 'Дальше':
+			self.inventory_page = self.inventory_page + 1
+			self.open_inventory(reply)
 		else:
 			items = self.get_items()
 			
@@ -689,6 +704,7 @@ class User(object):
 		elif text.startswith('Зайти'):
 			self.open_shop(reply)
 		elif text.startswith('Посмотреть'):
+			self.inventory_page = 0
 			self.open_inventory(reply)
 		elif text.startswith('Узнать'):
 			self.show_characteristics(reply)

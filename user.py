@@ -66,10 +66,14 @@ class User(object):
 		msg += 'hp: ' + str(self.hp) + '\n'
 		msg += 'mp: ' + str(self.mp) + '\n'
 		msg += 'gold: ' + str(self.gold) + '\n'
+		msg += 'max_hp: ' + str(self.max_hp) + '\n'
+		msg += 'max_mp: ' + str(self.max_mp) + '\n'
 		msg += 'state: ' + str(self.state) + '\n'
 		msg += 'items: ' + str(self.items) + '\n'
+		msg += 'inventory_page: ' + str(self.inventory_page) + '\n'
 		msg += 'gods: ' + str(self.gods) + '\n'
 		msg += 'gods_level: ' + str(self.gods_level) + '\n'
+		msg += 'gods: ' + str(self.gods) + '\n'
 		msg += 'last_god: ' + str(self.last_god) + '\n'
 		msg += 'prayed: ' + str(self.prayed) + '\n'
 		msg += 'damage: ' + str(self.damage) + ' ({0})'.format(self.get_damage()) + '\n'
@@ -80,7 +84,14 @@ class User(object):
 		msg += 'visited_shop: ' + str(self.visited_shop) + '\n'
 		msg += 'shop_items: ' + str(self.shop_items) + '\n'
 		msg += 'shop_names: ' + str(self.shop_names) + '\n'
-		msg += 'room: ' + str(self.room)
+		msg += 'tags: ' + str(self.tags) + '\n'
+		msg += 'room: ' + str(self.room) + '\n'
+		msg += 'room_temp: ' + str(self.room_temp) + '\n'
+		msg += 'reborn_answer: ' + str(self.reborn_answer) + '\n'
+		msg += 'dead: ' + str(self.dead) + '\n'
+		msg += 'rooms_to_story: ' + str(self.rooms_to_story) + '\n'
+		msg += 'next_storyroom: ' + str(self.next_storyroom) + '\n'
+		msg += 'subject: ' + str(self.subject)
 
 		return msg
 

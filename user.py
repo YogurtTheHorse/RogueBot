@@ -771,3 +771,4 @@ class User(object):
 			self.dice(reply, text)
 		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
+			

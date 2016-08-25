@@ -65,14 +65,13 @@ def reply(id, txt, buttons=None, photo=None):
 def new_message(event):
 	text = event[6]
 	c_id = event[3]
-
-	logger.info(event)
+	uid = 'vk' + str(c_id)
 
 	if text == '/start':
 		reply(c_id, 'Теперь скажи мне свое имя')
-		usermanager.new_user(c_id)
+		usermanager.new_user(uid)
 	else:
-		usermanager.message(c_id, lambda *a, **kw: reply(c_id, *a, **kw), event[6])
+		usermanager.message(uid, lambda *a, **kw: reply(c_id, *a, **kw), event[6])
 
 
 if __name__ == '__main__':

@@ -42,12 +42,19 @@ def debug_print(bot, update):
 
 def room(bot, update):
 	c_id = update.message.chat_id
-	cmd, room_type, name = update.message.text.split()
-	usermanager.open_room(c_id, lambda *a, **kw: reply(c_id, bot, *a, **kw), room_type, name)
+
+	if str(c_id) in config.ADMINS_IDS:
+		cmd, room_type, name = update.message.text.split()
+		usermanager.open_room(c_id, lambda *a, **kw: reply(c_id, bot, *a, **kw), room_type, name)
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def give(bot, update):
-	cmd, item_type, name = update.message.text.split()
-	usermanager.give_item(update.message.chat_id, item_type, name)
+	if str(update.message.chat_id) in config.ADMINS_IDS:
+		cmd, item_type, name = update.message.text.split()
+		usermanager.give_item(update.message.chat_id, item_type, name)
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def msg(bot, update):
 	c_id = update.message.chat_id

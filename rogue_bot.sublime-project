@@ -1,0 +1,15 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+    [
+        {
+            "name": "Telegram launch",
+            "cmd": [ "python3", "${project_path}/main.py" ]
+        }
+    ]
+}

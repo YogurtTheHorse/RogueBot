@@ -1,0 +1,1181 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"CSSP",
+				"CSSParamType"
+			],
+			[
+				"CSS",
+				"CSSParamType"
+			],
+			[
+				"web",
+				"webtags"
+			],
+			[
+				"ta",
+				"tag_type"
+			],
+			[
+				"elem",
+				"element_src"
+			],
+			[
+				"ele",
+				"element_src"
+			],
+			[
+				"css",
+				"css_src"
+			],
+			[
+				"inter",
+				"integer_px"
+			],
+			[
+				"ite",
+				"iterate_tags"
+			],
+			[
+				"tag",
+				"tag_src"
+			],
+			[
+				"inte",
+				"integer_px"
+			],
+			[
+				"font_",
+				"font_family"
+			],
+			[
+				"fon",
+				"font_style"
+			],
+			[
+				"colos",
+				"colors_need"
+			],
+			[
+				"need",
+				"colors_need"
+			],
+			[
+				"colo",
+				"colors"
+			],
+			[
+				"radi",
+				"radiuses"
+			],
+			[
+				"fu",
+				"fun	Function"
+			],
+			[
+				"file",
+				"file_len"
+			],
+			[
+				"ma",
+				"margin-top"
+			],
+			[
+				"data",
+				"data_in"
+			],
+			[
+				"the",
+				"the_name"
+			],
+			[
+				"the_",
+				"the_name"
+			],
+			[
+				"js",
+				"json"
+			],
+			[
+				"mod",
+				"models_all"
+			],
+			[
+				"nex",
+				"next_ans"
+			],
+			[
+				"img",
+				"imgl"
+			],
+			[
+				"bac",
+				"background-image"
+			],
+			[
+				"im",
+				"imgl"
+			],
+			[
+				"proc",
+				"proc_g"
+			],
+			[
+				"cla",
+				"classificators"
+			],
+			[
+				"c",
+				"cnt"
+			],
+			[
+				"class",
+				"classificators"
+			],
+			[
+				"val",
+				"val_img"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"as",
+				"asynchronous"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"Reset",
+				"ResetPageGamdler"
+			],
+			[
+				"x",
+				"x_part_from_others"
+			],
+			[
+				"x_",
+				"x_part_from_this_man"
+			],
+			[
+				"clas",
+				"classmethod"
+			],
+			[
+				"ans",
+				"answer"
+			],
+			[
+				"xP",
+				"x_part_from_owner"
+			],
+			[
+				"pre",
+				"prepare_data"
+			],
+			[
+				"xp",
+				"x_part_from_owner"
+			],
+			[
+				"x_pa",
+				"x_part_from_owner"
+			],
+			[
+				"SU",
+				"SUPER_dima"
+			],
+			[
+				"ui",
+				"ui_1"
+			],
+			[
+				"j",
+				"jenya_1"
+			],
+			[
+				"ar",
+				"artem_test_bright"
+			],
+			[
+				"aer",
+				"artem_1"
+			],
+			[
+				"art",
+				"artem_2"
+			],
+			[
+				"margo",
+				"margo_1"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"le",
+				"letter"
+			],
+			[
+				"new",
+				"newText"
+			],
+			[
+				"sele",
+				"selectedSector"
+			],
+			[
+				"cha",
+				"channels_names"
+			],
+			[
+				"pa",
+				"_parts"
+			],
+			[
+				"e",
+				"etalon"
+			],
+			[
+				"eta",
+				"etalons"
+			],
+			[
+				"n",
+				"new_ans"
+			],
+			[
+				"dat",
+				"datas"
+			],
+			[
+				"is",
+				"is_bad"
+			],
+			[
+				"gy",
+				"gyro_hist_X"
+			],
+			[
+				"save",
+				"save_log"
+			],
+			[
+				"righ",
+				"right_mid"
+			],
+			[
+				"left",
+				"left_mid"
+			],
+			[
+				"Pre",
+				"Preprocessing"
+			],
+			[
+				"prep",
+				"preprocessing"
+			],
+			[
+				"str",
+				"strip"
+			],
+			[
+				"real",
+				"real_path"
+			],
+			[
+				"send",
+				"send_dump"
+			],
+			[
+				"temp_m",
+				"temp_min"
+			],
+			[
+				"on",
+				"onclick	Attr"
+			],
+			[
+				"temp",
+				"temp_max"
+			],
+			[
+				"light",
+				"light_warn"
+			],
+			[
+				"plant",
+				"plant_controller"
+			],
+			[
+				"pr",
+				"procent"
+			],
+			[
+				"LAS",
+				"LAST"
+			],
+			[
+				"LAST",
+				"LAST_NAME"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"SD_",
+				"SD_DATA_LEN"
+			],
+			[
+				"tr",
+				"tried"
+			],
+			[
+				"em",
+				"emo_api"
+			],
+			[
+				"rea",
+				"read_file"
+			],
+			[
+				"old",
+				"old_time"
+			],
+			[
+				"def",
+				"default_value"
+			],
+			[
+				"na",
+				"nans"
+			],
+			[
+				"sd",
+				"sd_list"
+			],
+			[
+				"SD",
+				"sd_list"
+			],
+			[
+				"DESC",
+				"DESC"
+			],
+			[
+				"get",
+				"get_data"
+			],
+			[
+				"get_",
+				"get_epoc_values"
+			],
+			[
+				"value",
+				"values"
+			],
+			[
+				"start",
+				"start_time"
+			],
+			[
+				"iin",
+				"input_from_file"
+			],
+			[
+				"input",
+				"input_from_file"
+			],
+			[
+				"DATA",
+				"DATA_NAMES"
+			],
+			[
+				"fr",
+				"input_from_file"
+			],
+			[
+				"state",
+				"StateChanged"
+			],
+			[
+				"log",
+				"logfile"
+			],
+			[
+				"er",
+				"eriks_songs"
+			],
+			[
+				"atta",
+				"attachments"
+			],
+			[
+				"audio",
+				"audios"
+			],
+			[
+				"mes",
+				"messages"
+			],
+			[
+				"mess",
+				"message_id"
+			],
+			[
+				"messa",
+				"message"
+			],
+			[
+				"did",
+				"didyou"
+			],
+			[
+				"предм",
+				"предмет"
+			],
+			[
+				"photo",
+				"photo_attach"
+			],
+			[
+				"se",
+				"server"
+			],
+			[
+				"comm",
+				"commands_help"
+			],
+			[
+				"comma",
+				"commands_help"
+			],
+			[
+				"less",
+				"LESSONS"
+			],
+			[
+				"fo",
+				"forward_messages"
+			],
+			[
+				"sch",
+				"SCHEDULE"
+			],
+			[
+				"has",
+				"hash_code"
+			],
+			[
+				"p",
+				"py"
+			],
+			[
+				"message",
+				"message_trimmed"
+			],
+			[
+				"try",
+				"try	Try/Except"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"url",
+				"urllib"
+			],
+			[
+				"prin",
+				"printArr"
+			],
+			[
+				"Ki",
+				"King"
+			],
+			[
+				"cent",
+				"centX"
+			],
+			[
+				"cool",
+				"coolMan"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					""
+				],
+				[
+					"Packages/C++/C++ Single File.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/C++/C++ Single File.sublime-build",
+				"Run"
+			]
+		],
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		],
+		[
+			[
+				[
+					"Packages/User/C++ Make.sublime-build",
+					""
+				],
+				[
+					"Packages/User/C++ Make.sublime-build",
+					"Clean"
+				],
+				[
+					"Packages/User/C++ Make.sublime-build",
+					"Launch"
+				]
+			],
+			[
+				"Packages/User/C++ Make.sublime-build",
+				"Launch"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 306.0,
+		"last_filter": "remove",
+		"selected_items":
+		[
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"repl",
+				"SublimeREPL: Python"
+			],
+			[
+				"REP",
+				"SublimeREPL: Python"
+			],
+			[
+				"replpy",
+				"SublimeREPL: Python"
+			],
+			[
+				"pyth",
+				"Set Syntax: Python3"
+			],
+			[
+				"replpyt",
+				"SublimeREPL: Python"
+			],
+			[
+				"inp",
+				"Package Control: Install Package"
+			],
+			[
+				"insp",
+				"Package Control: Install Package"
+			],
+			[
+				"markw",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"preview",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"view",
+				"Markdown Preview: Preview in Browser"
+			],
+			[
+				"instp",
+				"Package Control: Install Package"
+			],
+			[
+				"instalp",
+				"Package Control: Install Package"
+			],
+			[
+				"oridestr",
+				"Origami: Destroy Pane on the Right"
+			],
+			[
+				"origam crea",
+				"Origami: Create Pane on the Right"
+			],
+			[
+				"origame",
+				"Origami: Destroy Pane Above"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"java",
+				"Javatar: Operations..."
+			],
+			[
+				"11",
+				"Snippet: $1.begin(), $1.end()"
+			],
+			[
+				"set c++1",
+				"Set Syntax: C++11"
+			],
+			[
+				"isntal",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"package lis",
+				"Package Control: List Packages"
+			],
+			[
+				"forma",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"set syntax c++",
+				"Set Syntax: C++"
+			],
+			[
+				"set syn c++",
+				"Set Syntax: C++"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"instP",
+				"Package Control: Install Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"haxe",
+				"Haxe: New Class"
+			],
+			[
+				"build",
+				"Haxe: Choose Build Target"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 406.0,
+		"history":
+		[
+			"sorted(['collect/ne/ks_4.csv', 'collect/ne/jenya_2.csv',  'collect/ne/jenya_3.csv', 'collect/dima3.csv', 'collect/ne/artem_3.csv', 'collect/ne/artem_test_talk.csv', 'collect/ne/artem_test_bright.csv', 'collect/ne/jenya_1.csv',  'collect/ne/jenya_2.csv',  'collect/ne/jenya_3.csv', 'collect/2_dasha.csv',  'collect/SUPER_tanya.csv', 'collect/ne/artem_1.csv', 'collect/ne/artem_2.csv',  'collect/3_alena.csv', 'collect/nastya.csv', ])",
+			"import os; os.environ['PATH']",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/yegorf1/Dev/Python/RogueBot"
+	],
+	"file_history":
+	[
+		"/home/yegorf1/Dev/Python/RogueBot/start_restart.sh",
+		"/home/yegorf1/Dev/sovi/index.html",
+		"/home/yegorf1/Dev/sovi/font/fonts.css",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/styles_generator.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/style_utils.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/multi_css_param.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/designed_element.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/default_elements.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/css_param.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/web_element.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/default_styles.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/tags_utils.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/multi_web_tag.py",
+		"/home/yegorf1/Dev/Python/fronter/tags_generator/__init__.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/graphs.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/index.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/progress.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/debug.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/PageHelper.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/VisualPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/RegisterPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/visual.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/ApiHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/learning/utils.py",
+		"/home/yegorf1/Dev/Calendar/game.js",
+		"/home/yegorf1/Dev/Calendar/constants.js",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/Chart.js",
+		"/home/yegorf1/Dev/Calendar/index.html",
+		"/home/yegorf1/Dev/Python/Tasun/getters/datagetter.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/main.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/DebugHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/learning/mlp_bandpass.py",
+		"/home/yegorf1/Dev/Python/Tasun/getters/emogetter.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/pages/LoginPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/start.py",
+		"/home/yegorf1/Dev/Python/Tasun/preprocessing/utils.py",
+		"/home/yegorf1/Dev/Python/Tasun/start_imgs.py",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/register.html",
+		"/home/yegorf1/Dev/Python/Tasun/web/static/login.html",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/LoginPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/static/register.html",
+		"/home/yegorf1/Dev/Python/Tasun_/web/static/login.html",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/PageHelper.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/static/index.html",
+		"/home/yegorf1/Dev/Python/Tasun_/start.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/static/progress.html",
+		"/home/yegorf1/Dev/Python/Tasun_/learning/utils.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/ApiHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun/work.py",
+		"/home/yegorf1/Dev/Python/Tasun_/graphs.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/ResetPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/getters/datagetter.py",
+		"/home/yegorf1/Dev/Python/Tasun_/checker.py",
+		"/home/yegorf1/Dev/Python/Tasun_/learning/mlp_bandpass.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/main.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/__init__.py",
+		"/home/yegorf1/Dev/Python/Tasun_/learning/emo_api.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/__init__.py",
+		"/home/yegorf1/Dev/Python/Tasun_/getters/emogetter.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/RegisterPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/MainPageHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/FileHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/web/pages/SocketHandler.py",
+		"/home/yegorf1/Dev/Python/Tasun_/getters/filegetter.py",
+		"/home/yegorf1/Dev/Python/Tasun/collect/ne/nue_1.csv",
+		"/home/yegorf1/Dev/Python/Tasun/learning/etalon.py",
+		"/home/yegorf1/Dev/Python/Tasun/collect/ne/ks_2.csv",
+		"/home/yegorf1/Dev/Python/Tasun/d_sol.py",
+		"/home/yegorf1/Dev/Python/Tasun/preprocessing/bandpass.py",
+		"/home/yegorf1/Dev/Python/Tasun/541.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/BACKUP.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/BACKUP_BB.py",
+		"/home/yegorf1/Dev/Python/Tasun/graphs.py",
+		"/home/yegorf1/Dev/Python/Tasun/learn.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learn.py",
+		"/home/yegorf1/Dev/Python/Tasun/learn2bgb.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learn3.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learnNotebook.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learn_neuro.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learn_sklearn.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/learn_sklearn.py",
+		"/home/yegorf1/Dev/Python/Tasun/main.py",
+		"/home/yegorf1/Dev/Python/Tasun/nick.py",
+		"/home/yegorf1/Dev/Python/Tasun/nick.py.save",
+		"/home/yegorf1/Dev/Python/Tasun/test2.py",
+		"/home/yegorf1/Dev/Python/Tasun/tf.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/workBB.py",
+		"/home/yegorf1/Dev/Python/Tasun/workBB_2.py",
+		"/home/yegorf1/Dev/Python/Tasun/workBB_2.py.save",
+		"/home/yegorf1/Dev/Python/Tasun/.ipynb_checkpoints/541-checkpoint.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/.ipynb_checkpoints/BACKUP-checkpoint.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/.ipynb_checkpoints/learn_neuro-checkpoint.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/.ipynb_checkpoints/learn_sklearn-checkpoint.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/.ipynb_checkpoints/tf-checkpoint.ipynb",
+		"/home/yegorf1/Dev/Python/Tasun/collect/1_tanya.csv",
+		"/home/yegorf1/Dev/Python/Tasun/preprocessing.py",
+		"/home/yegorf1/Dev/Python/Tasun/collect/ne/nick_2.csv",
+		"/home/yegorf1/Dev/Python/Tasun/collect/ne/nick.csv",
+		"/home/yegorf1/Dev/Python/Tasun/collect/ne/test.csv",
+		"/home/yegorf1/Загрузки/teamviewer_11.0.57095_i386.deb",
+		"/home/yegorf1/Dev/Calendar/sectors.js",
+		"/home/yegorf1/Dev/Python/Tasun/learning/learn.py",
+		"/home/yegorf1/Dev/Python/Tasun/getters/filegetter.py",
+		"/tmp/mozilla_yegorf10/EEG_with_trigger.ino",
+		"/tmp/mozilla_yegorf10/EEG_with_trigger-1.ino",
+		"/tmp/mozilla_yegorf10/BiTronics-2_1.ino",
+		"/home/yegorf1/Dev/Python/Tasun/emokit/emotiv.py",
+		"/home/yegorf1/Dev/bcp_emo/graphs.py",
+		"/home/yegorf1/Dev/Python/Tasun/.gitignore",
+		"/home/yegorf1/Dev/Python/Tasun/test.py",
+		"/usr/local/lib/python3.4/dist-packages/mne/io/pick.py",
+		"/home/yegorf1/Dev/bcp_emo/log.csv",
+		"/home/yegorf1/Dev/Python/Tasun/getters/__init__.py",
+		"/home/yegorf1/Dev/Python/Tasun/DataGetter.py",
+		"/home/yegorf1/Dev/Python/Tasun/FileGetter.py",
+		"/home/yegorf1/Dev/Python/Tasun/EmoGetter.py",
+		"/home/yegorf1/Dev/emokit-new/mouse_control.py",
+		"/home/yegorf1/Dev/Python/emoserv/pages/emotiv/emo_api.py",
+		"/home/yegorf1/Dev/Python/emoserv/pages/emotiv/__init__.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/test.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/plant_controller.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/main.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/pages/PageHelper.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/static/index.html",
+		"/home/yegorf1/Dev/Python/chrsitmas/first.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/pages/ApiSetHandler.py",
+		"/home/yegorf1/Dev/Python/tornado-websocket-example/pages/MainPageHandler.py",
+		"/home/yegorf1/Dev/Python/emoserv/pages/ApiHandler.py"
+	],
+	"find":
+	{
+		"height": 24.0
+	},
+	"find_in_files":
+	{
+		"height": 94.0,
+		"where_history":
+		[
+			"*.py",
+			"",
+			"<current file>",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"ТАТ",
+			"\"\"\"",
+			"procent",
+			"@",
+			"tag_type",
+			"TagType",
+			"tags",
+			"iterate_tags",
+			"tags_utils",
+			"style_utils",
+			"TagType",
+			"WebTag",
+			"webTag",
+			"WebTag",
+			"web_tag",
+			"CssParamType",
+			"WebElement",
+			"web_tag",
+			"TagType",
+			"CssParam",
+			"WebTag",
+			"conent",
+			"color",
+			"|",
+			"*range",
+			"element",
+			"css",
+			"names",
+			"decoration",
+			"800",
+			"parse",
+			"delta",
+			"10",
+			"100",
+			"0",
+			"]);",
+			"knockout",
+			"textElem",
+			"ses[i].radiu",
+			"radiuses",
+			"pieces",
+			"redraw",
+			"emo",
+			"get_datas",
+			"['the_name']",
+			"the_name",
+			"send_eeg",
+			"\"name",
+			"'name",
+			"json.name",
+			"json['name']",
+			"json.name",
+			".value",
+			"value",
+			"start(",
+			"jon",
+			"deb",
+			"localhos",
+			"PORT",
+			"],",
+			"get_filename",
+			"get_filename(name):\n		return ",
+			"filename",
+			"folde",
+			"sleep(2+",
+			"3",
+			"tatic/img/All",
+			"emo_api",
+			"Gamdler",
+			"LoginPageHandler",
+			"i",
+			"get_part_from_a",
+			"etalon",
+			"get_part_from_a(0",
+			"self.split",
+			"etalon",
+			"get_part_from_a",
+			"self.GETFOR",
+			"Utils.get_filename",
+			"get_filename",
+			"default_value",
+			"truelist",
+			"bandpass",
+			"get_filename",
+			"from .PageHelper",
+			"pages.",
+			"Utils",
+			"testdata",
+			"id",
+			" id",
+			"id",
+			"self.x_part_from_owner",
+			"prepare",
+			"get_files_data(",
+			"get_part_from_a",
+			"artem_te",
+			"mlp",
+			"VUP",
+			"get_files_data",
+			"\"\\t\\t({0}:{1})\".format(ans.count(1), ans.count(0))",
+			"ui_",
+			"/y_",
+			"jenya",
+			"get_files_data",
+			"dima.cs",
+			"GETFOR_TESTING",
+			"get_part_from_a",
+			"etalon +",
+			"etalon ",
+			"get_eta",
+			"get_",
+			"fft=False",
+			"getfit_etanol",
+			"to_fft",
+			"from preprocessing import Preprocessor",
+			" sudo python3 d_sol.py\\\n 	-fl ch_cache\\\n 	-e collect/dima.csv \\\n 	-l collect/2_dasha.csv collect/SUPER_tanya.csv\\\n 	-o collect/nastya.csv collect/SUPER_dima.csv  collect/1_tanya.csv\\\n 	-k s",
+			" sudo python3 d_sol.py -fl cache -e collect/dima.csv -l collect/1_tanya.csv collect/2_dasha.csv collect/nastya.csv -o collect/SUPER_dima.csv logs/dima2.csv -t logs/dima.csv logs/balaginin.csv",
+			"lfm",
+			"parser.",
+			"filename is not None",
+			"db",
+			"db[",
+			"print",
+			"ans",
+			"process_only",
+			"rubber",
+			"staticmethod",
+			"rot90"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"percent",
+			"iterate_styles",
+			"style_utils",
+			"from web.pages.PageHelper",
+			"from preprocessing.preprocessing import Preprocessor",
+			"get_next_data",
+			"get_all_data",
+			"'sender'",
+			"	",
+			"  ",
+			"	",
+			"    ",
+			"\\t",
+			"\"Katarina: ",
+			"\"",
+			"\"Girl:",
+			"Player: {",
+			",",
+			"\"Girl: ",
+			" {",
+			" ",
+			"\\n",
+			"",
+			" ",
+			"note_R",
+			"note_C",
+			"note_b",
+			"note_a",
+			"note_g",
+			"note_f",
+			"note_e",
+			"note_d",
+			"note_c",
+			""
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CppYCM.2":
+	{
+		"height": 0.0
+	},
+	"output.exec":
+	{
+		"height": 179.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.markdown":
+	{
+		"height": 94.0
+	},
+	"output.sftp":
+	{
+		"height": 106.0
+	},
+	"pinned_build_system": "Packages/Python 3/Python3.sublime-build",
+	"project": "rogue_bot.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"test",
+				"test.ny"
+			],
+			[
+				"nya",
+				"nya"
+			],
+			[
+				"",
+				"test.ny"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 242.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

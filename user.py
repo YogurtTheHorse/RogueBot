@@ -97,7 +97,7 @@ class User(object):
 		return msg
 
 	def get_items(self):
-		return [ itemloader.load_item(i[1], i[0]) for i in self.items ]
+		return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.items ] if i is not None ]
 
 	def get_damage(self):
 		res = 0
@@ -401,6 +401,7 @@ class User(object):
 
 		if self.state == 'room':
 			reply(self.get_stats())
+			room = roomloader.load_room(self.room[1], self.room[0])
 			reply('Твои действия?', room.get_actions(self))
 
 	def throw_dice(self, reply, subject=None):
@@ -648,7 +649,7 @@ class User(object):
 			return
 
 		actions = [ ]
-		msg = ''
+		msg = 'В инвентаре ты нашел:\n'
 
 		counter_items = Counter(items)
 		selected_items = list(counter_items)
@@ -657,11 +658,12 @@ class User(object):
 		end = min((self.inventory_page + 1) * INVENTORY_PAGE_SIZE, len(selected_items))
 
 		for i in selected_items[begin:end]:
-			msg += '{0} ({1} шт.):\n{2}\n\n'.format(i.name, counter_items[i], i.description)
-			if i.usable:
-				actions.append(i.name)
+			if i is not None:
+				msg += '{0} ({1} шт.):\n{2}\n\n'.format(i.name, counter_items[i], i.description)
+				if i.usable:
+					actions.append(i.name)
 
-			actions.append('Выкинуть ' + i.name)
+				actions.append('Выкинуть ' + i.name)
 
 		if begin > 0:
 			actions.append('Назад')

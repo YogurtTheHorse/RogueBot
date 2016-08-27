@@ -372,14 +372,14 @@ class User(object):
 		self.room = (room_type, room_name)
 		self.room_temp = { }
 
+		room = roomloader.load_room(self.room[1], self.room[0])
+
 		if room_type == 'story':
 			self.story_level += 1
 			self.next_story_room = room.next_story_room
 
 			mn, mx = room.next_story_room_range
 			self.rooms_to_story = random.randint(mn, mx)
-
-		room = roomloader.load_room(self.room[1], self.room[0])
 
 		for i in self.get_items():
 			i.on_room(self, reply, room)

@@ -276,7 +276,7 @@ class User(object):
 		actions = [
 			KICK_ARM,
 			KICK_MAGIC,
-			USE + 'Вундервафля'
+			USE + 'Воображение'
 		]
 
 		for i in self.get_items():

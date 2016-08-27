@@ -5,6 +5,7 @@ description = (
 )
 
 price = 100
+mana_damage = 20
 fightable = True
 
 def fight_use(user, reply, room):

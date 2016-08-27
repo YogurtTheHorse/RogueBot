@@ -24,7 +24,10 @@ def check_room(room, name, room_type):
 
 	required = [ 'name', 'get_actions', 'action' ]
 
-	if room_type == 'monster':
+	if room_type == 'story':
+		required.append('next_story_room_range')
+		required.append('next_story_room')
+	elif room_type == 'monster':
 		required.append('damage_range')
 
 		def get_actions(user):

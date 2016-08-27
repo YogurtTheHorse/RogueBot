@@ -56,7 +56,8 @@ class User(object):
 		self.dead = False
 
 		self.rooms_to_story = random.randint(5, 25)
-		self.next_storyroom = 'first'
+		self.next_story_room = 'first'
+		self.story_level = 0
 
 		self.subject = None
 
@@ -90,7 +91,7 @@ class User(object):
 		msg += 'reborn_answer: ' + str(self.reborn_answer) + '\n'
 		msg += 'dead: ' + str(self.dead) + '\n'
 		msg += 'rooms_to_story: ' + str(self.rooms_to_story) + '\n'
-		msg += 'next_storyroom: ' + str(self.next_storyroom) + '\n'
+		msg += 'next_story_room: ' + str(self.next_story_room) + '\n'
 		msg += 'subject: ' + str(self.subject)
 
 		return msg
@@ -363,14 +364,20 @@ class User(object):
 
 		if not (room_type and room_name):
 			if self.rooms_to_story < 1:
-				room_type, room_name = 'story', self.next_storyroom
-				self.rooms_to_story = 10 ** 6
+				room_type, room_name = 'story', self.next_story_room
 			else:
 				self.rooms_to_story -= 1
 				room_type, room_name = roomloader.get_next_room()
 
 		self.room = (room_type, room_name)
 		self.room_temp = { }
+
+		if room_type == 'story':
+			self.story_level += 1
+			self.next_story_room = room.next_story_room
+
+			mn, mx = room.next_story_room_range
+			self.rooms_to_story = random.randint(mn, mx)
 
 		room = roomloader.load_room(self.room[1], self.room[0])
 

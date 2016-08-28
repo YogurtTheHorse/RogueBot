@@ -12,7 +12,7 @@ fightable = True
 
 def fight_use(user, reply, room):
 	if room.code_name == 'duck':
-		reply('Пока утка ела крошки, ты сломал ей шею. Так держать!')
+		reply('Пока утка ела крошки, ты свернул ей шею. Так держать!')
 		user.won(reply)
 
 		return 0

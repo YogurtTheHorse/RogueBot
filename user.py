@@ -429,6 +429,9 @@ class User(object):
 			
 			room = roomloader.load_room(self.room[1], self.room[0])
 			room.dice(self, reply, res, self.subject)
+
+			if self.state == 'room':
+				reply('Твои действия?', room.get_actions(self))
 		else:
 			reply('Не вижу уверенности!', ['Кинуть'])
 

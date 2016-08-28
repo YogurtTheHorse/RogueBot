@@ -451,7 +451,7 @@ class User(object):
 
 		if success:
 			self.leave(reply)
-
+			
 	def add_item(self, buff, name):
 		self.items.append( (buff, name) )
 

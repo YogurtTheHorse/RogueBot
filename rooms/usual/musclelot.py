@@ -93,7 +93,7 @@ def normal_action(user, reply, text):
 def dice(user, reply, result, subject='zhmesh'):
 	if result > DICE_MIDDLE:
 		if subject == 'zhmesh':
-			reply('Это конечно немного, но я видел рыцарей и по хуже')
+			reply('Это, конечно, не много, но я видел рыцарей и похуже')
 		elif subject == 'fight':
 			reply('Тебя потрепали, но не смертельно. Все обошлось')
 			user.make_damage(5, 10, reply, False)

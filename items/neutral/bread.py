@@ -11,6 +11,12 @@ description = (
 fightable = True
 
 def fight_use(user, reply, room):
-	reply('Ты раскрошил хлеб. Зачем?')
-	
-	return 0
+	if room.code_name == 'duck':
+		reply('Пока утка ела крошки, ты сломал ей шею. Так держать!')
+		user.won(reply)
+
+		return 0
+	else:
+		reply('Ты раскрошил хлеб. Зачем?')
+
+		return 0

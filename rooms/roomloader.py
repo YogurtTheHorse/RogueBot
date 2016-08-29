@@ -2,6 +2,7 @@ import os
 import random
 import logging
 from importlib.machinery import SourceFileLoader
+from importlib.machinery import SourcelessFileLoader
 
 from constants import *
 
@@ -11,9 +12,14 @@ def load_room(name, room_type='usual', user=None):
 	path = 'rooms/{0}/{1}.py'.format(room_type, name)
 
 	if not os.path.exists(path):
-		return None
+		path += 'c'
+		if not os.path.exists(path):
+			return None
 
-	room_loader = SourceFileLoader(name, path)
+	if path.endswith('c'):
+		room_loader = SourcelessFileLoader(name, path)
+	else:
+		room_loader = SourceFileLoader(name, path)
 	room = room_loader.load_module(name)
 
 	return check_room(room, name, room_type)
@@ -92,5 +98,6 @@ def get_next_room():
 def get_random_room(room_type='usual'):
 	pth = 'rooms/' + room_type + '/'
 	rooms =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
+	comp_rooms =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
-	return (room_type, random.choice(rooms))
+	return (room_type, random.choice(rooms + comp_rooms))

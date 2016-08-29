@@ -9,7 +9,9 @@ def load_item(name, buff):
 	path = 'items/{0}/{1}.py'.format(buff, name)
 
 	if not os.path.exists(path):
-		return None
+		path += 'c'
+		if not os.path.exists(path):
+			return None
 
 	item_loader = SourceFileLoader(name, path)
 	item = item_loader.load_module()
@@ -46,8 +48,9 @@ def check_item(item, name, buff):
 def load_random_item(buff):
 	pth = 'items/' + buff + '/'
 	items =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
+	comp_items =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
-	return (buff, random.choice(items))
+	return (buff, random.choice(items + comp_items))
 
 def load_shop_items():
 	items = [

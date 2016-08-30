@@ -64,7 +64,7 @@ def msg(bot, update):
 	image = None
 	buttons = None
 
-	def rep(txt, btns=None, pht=None):
+	def rep(txt, btns=None, photo=None):
 		global msg, image, buttons
 
 		msg += '\n\n'
@@ -72,8 +72,8 @@ def msg(bot, update):
 
 		if btns:
 			buttons = btns
-		if pht:
-			image = pht
+		if photo:
+			image = photo
 
 	usermanager.message(c_id, rep, update.message.text)
 

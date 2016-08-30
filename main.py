@@ -77,7 +77,8 @@ def msg(bot, update):
 
 	usermanager.message(c_id, rep, update.message.text)
 
-	reply(c_id, bot, msg, buttons, image)
+	if len(msg) > 0 or image:
+		reply(c_id, bot, msg, buttons, image)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

@@ -275,8 +275,7 @@ class User(object):
 	def get_fight_actions(self):
 		actions = [
 			KICK_ARM,
-			KICK_MAGIC,
-			USE + 'Воображение'
+			KICK_MAGI# USE + 'Воображение'
 		]
 
 		for i in self.get_items():

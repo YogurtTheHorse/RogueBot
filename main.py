@@ -15,7 +15,7 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 	if buttons:
 		custom_keyboard = [ [ x ] for x in buttons ]
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
-		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)
+		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
 	else:
 		bot.sendMessage(c_id,
 						text=txt, 
@@ -58,7 +58,26 @@ def give(bot, update):
 
 def msg(bot, update):
 	c_id = update.message.chat_id
-	usermanager.message(c_id, lambda *a, **kw: reply(c_id, bot, *a, **kw), update.message.text)
+
+	global msg, image, buttons
+	msg = ''
+	image = None
+	buttons = None
+
+	def rep(txt, btns=None, pht=None):
+		global msg, image, buttons
+
+		msg += '\n\n'
+		msg += txt
+
+		if btns:
+			buttons = btns
+		if pht:
+			image = pht
+
+	usermanager.message(c_id, rep, update.message.text)
+
+	reply(c_id, bot, msg, buttons, image)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

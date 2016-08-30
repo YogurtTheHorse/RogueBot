@@ -31,9 +31,9 @@ def action(user, reply, text):
 
 		user.add_item('special', 'icecream')
 	elif text == actions[1]:
-		if user.gods_level[BUUDHA_NUM] > 0:
+		if user.gods_level[BUDDHA_NUM] > 0:
 			reply('Ты не следовал восмеричному пути и слегка испортил баланс кармы в своей жизни.')
-			user.gods_level[BUUDHA_NUM] = 0
+			user.gods_level[BUDDHA_NUM] = 0
 		else:
 			reply('Вкусно и _больно_')
 			user.make_damage(1, 5, reply, death=False)

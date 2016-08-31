@@ -279,7 +279,8 @@ class User(object):
 	def get_fight_actions(self):
 		actions = [
 			KICK_ARM,
-			KICK_MAGIC#, USE + 'Воображение'
+			KICK_MAGIC,
+			USE + 'Воображение'
 		]
 
 		for i in self.get_items():
@@ -293,11 +294,13 @@ class User(object):
 	def fight_dice(self, reply, result, subject=None):
 		room = roomloader.load_room(self.room[1], self.room[0])
 		if subject == 'noname':
-			dmg = result + self.get_damage_bonus(reply)
+			dmg = result + self.get_damage_bonus(reply) // 2
 
 			reply('Твоя непонятная штука нанесла урон, равный *{0}*'.format(dmg))
 
 			room.make_damage(self, reply, dmg)
+
+			self.fight_answer(reply)
 
 
 	def fight_action(self, reply, text):
@@ -338,11 +341,16 @@ class User(object):
 			reply('Не понял тебя')
 
 		if self.state == 'room':
-			a, b = room.damage_range
-			dmg = self.make_damage(a, b, reply)
+			self.fight_answer(reply)
 
-			if not self.dead:
-				reply('В ответ ты отхватил *{0}* урона'.format(dmg))
+	def fight_answer(self, reply):
+		room = roomloader.load_room(self.room[1], self.room[0])
+
+		a, b = room.damage_range
+		dmg = self.make_damage(a, b, reply)
+
+		if not self.dead:
+			reply('В ответ ты отхватил *{0}* урона'.format(dmg))
 
 	def won(self, reply):
 		room = roomloader.load_room(self.room[1], self.room[0])

@@ -17,7 +17,11 @@ def new_user(uid):
 
 def get_telegram_users():
 	for f in glob.glob('users/*.usr'):
-		uid = f.split('/')[1][:-4]
+		uid = ''
+		try:
+			uid = f.split('/')[1][:-4]
+		except:
+			uid = f.split('\\')[1][:-4]
 
 		if not uid.startswith('vk'):
 			yield uid

@@ -76,7 +76,7 @@ def notify(bot, update):
 			try:
 				reply(user_id, bot, msg)
 			except:
-				pass
+				logger.info('Couldn\'t send message to {0}'.format(user_id))
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 

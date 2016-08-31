@@ -8,7 +8,7 @@ price = 1000
 fightable = True
 
 def fight_use(user, reply, room):
-	if room.code_name == 'dragon':
+	if room.code_name == 'dragon' or room.code_name == 'quinquepede':
 		reply('Это может показаться читерским, но ты выиграл этот поединок.')
 		user.won(reply)
 

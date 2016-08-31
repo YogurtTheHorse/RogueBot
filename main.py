@@ -141,6 +141,14 @@ def msg(bot, update):
 	def rep(txt, btns=None, photo=None):
 		global msg, image, buttons
 
+		if len(msg) + len(txt) + 2 >= 4096:
+			reply(c_id, bot, msg, buttons, image)
+			
+			msg = ''
+			image = None
+			buttons = None
+
+
 		msg += '\n\n'
 		msg += txt
 

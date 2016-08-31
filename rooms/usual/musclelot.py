@@ -103,7 +103,7 @@ def dice(user, reply, result, subject='zhmesh'):
 		reply('Ты уходишь с миром')
 	else:
 		if subject == 'zhmesh':
-			reply('Слишком мало, поэтому пришлось подкачаться и ты устал')
+			reply('Слишком мало, поэтому пришлось подкачаться. Ты устал')
 			user.make_damage(5, 10, reply)
 		elif subject == 'fight':
 			reply('Тебя в очередной раз хорошенько избили. Не стоило светить в глаза')

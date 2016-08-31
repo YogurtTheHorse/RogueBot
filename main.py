@@ -86,6 +86,8 @@ def save_question():
 		f.write(' '.join(asked))
 
 def zero(bot, update):
+	global question_yes, question_no, asked
+
 	if str(update.message.chat_id) in config.ADMINS_IDS:
 		question_yes = 0
 		question_no = 0

@@ -11,6 +11,16 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 
 logger = logging.getLogger('rg')
 
+question_filename = 'question.int'
+question_yes = 0
+question_no = 0
+asked = [ ]
+
+if os.path.isfile(question_filename):
+	with open(question_filename, 'r') as f:
+ 		question_yes, question_no = map(int, f.readline().split())
+ 		asked = f.readline().split()
+
 def reply(c_id, bot, txt, buttons=None, photo=None):
 	if buttons:
 		custom_keyboard = [ [ x ] for x in buttons ]
@@ -70,6 +80,54 @@ def notify(bot, update):
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
+def save_question():
+	with open(question_filename, 'w') as f:
+		f.write('{0} {1}\n'.format(question_yes, question_no))
+		f.write(' '.join(asked))
+
+def zero(bot, update):
+	if str(update.message.chat_id) in config.ADMINS_IDS:
+		question_yes = 0
+		question_no = 0
+
+		asked = [ ]
+
+		save_question()
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
+
+def question_status(bot, update):
+	msg ='Да: {0}\nНет: {1}'.format(question_yes, question_no)
+	bot.sendMessage(update.message.chat_id, text=msg)
+
+def yes(bot, update):
+	global question_yes, asked
+
+	uid = str(update.message.chat_id)
+
+	if uid in asked:
+		bot.sendMessage(update.message.chat_id, text='Только 1 раз ;)')
+	else:
+		question_yes += 1
+		bot.sendMessage(update.message.chat_id, text='Голос учтен. Чтобы посмотреть результат, используй /question_status')
+		asked.append(uid)
+
+		save_question()
+
+def no(bot, update):
+	global question_no, asked
+
+	uid = str(update.message.chat_id)
+
+	if uid in asked:
+		bot.sendMessage(update.message.chat_id, text='Только 1 раз ;)')
+	else:
+		question_no += 1
+		bot.sendMessage(update.message.chat_id, text='Голос учтен. Чтобы посмотреть результат, используй /question_status')
+		asked.append(uid)
+
+		save_question()
+
 def msg(bot, update):
 	c_id = update.message.chat_id
 
@@ -116,6 +174,12 @@ updater.dispatcher.add_handler(CommandHandler('notify', notify))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('room', room))
 updater.dispatcher.add_handler(CommandHandler('give', give))
+
+
+updater.dispatcher.add_handler(CommandHandler('question_status', question_status))
+updater.dispatcher.add_handler(CommandHandler('zero', zero))
+updater.dispatcher.add_handler(CommandHandler('yes', yes))
+updater.dispatcher.add_handler(CommandHandler('no', no))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 

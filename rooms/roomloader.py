@@ -90,7 +90,7 @@ def check_room(room, name, room_type):
 def get_next_room():
 	p = random.random()
 
-	if p <= 0.7:
+	if p <= 0.5:
 		return get_random_room('monster')
 	else:
 		return get_random_room('usual')

@@ -1,4 +1,4 @@
-from constants import *
+import random
 
 name = 'Винцо'
 
@@ -8,7 +8,18 @@ description = (
 )
 
 price = 300
-usable = True
+fightable = True
 
-def on_use(user, reply):
-	reply('Not implemented')
+def fight_use(user, reply, room):
+	reply('ЗА ВДВ!')
+
+	if random.random() < 0.3:
+		reply('Это было больно.')
+		user.death(reply)
+
+		return 0
+	else:
+		reply('Противник попятился назад. Это победа!')
+		user.won(reply)
+
+		return 0

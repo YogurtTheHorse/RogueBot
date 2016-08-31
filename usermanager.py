@@ -1,4 +1,5 @@
 import os
+import glob
 import pickle
 from user import User
 		
@@ -13,6 +14,13 @@ def new_user(uid):
 	usr = User(uid)
 
 	save_user(usr)
+
+def get_telegram_users():
+	for f in glob.glob('users/*.usr'):
+		uid = f.split('/')[1][:-4]
+
+		if not uid.startswith('vk'):
+			yield uid
 
 def get_user(uid):
 	if os.path.exists(get_fname(uid)):

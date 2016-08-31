@@ -56,6 +56,20 @@ def give(bot, update):
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
+def notify(bot, update):
+	if str(update.message.chat_id) in config.ADMINS_IDS:
+		msg = update.message.text[len('/notify'):]
+
+		logger.info(msg)
+
+		for user_id in usermanager.get_telegram_users():
+			try:
+				reply(user_id, bot, msg)
+			except:
+				pass
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
+
 def msg(bot, update):
 	c_id = update.message.chat_id
 
@@ -98,6 +112,7 @@ updater = Updater(config.TELEGRAM_TOKEN)
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
+updater.dispatcher.add_handler(CommandHandler('notify', notify))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('room', room))
 updater.dispatcher.add_handler(CommandHandler('give', give))

@@ -655,7 +655,7 @@ class User(object):
 					self.buy(item, reply)
 					return
 
-			reply('У меня такого нет')
+			reply('У меня такого нет', self.shop_names)
 
 	def open_inventory(self, reply):
 		self.state = 'inventory'

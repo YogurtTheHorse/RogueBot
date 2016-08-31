@@ -32,3 +32,5 @@ NONE = 'нет'
 
 KICK_ARM = 'Ударить рукой'
 KICK_MAGIC = 'Поколдовать удар'
+
+SLIME_STICKER = 'BQADAgAD7AADDLXzAxPOv_f69TwOAg'

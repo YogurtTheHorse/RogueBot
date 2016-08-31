@@ -244,7 +244,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ], photo='death.png')
+		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':

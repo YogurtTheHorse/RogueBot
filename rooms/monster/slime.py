@@ -14,7 +14,7 @@ def enter(user, reply):
 	msg = (
 		'Это слизень. Самый обычный слизень.'
 	)
-	reply(msg)
+	reply(msg, photo=SLIME_STICKER)
 
 def get_actions(user):
 	return user.get_fight_actions() + [ 'Раздавить' ]

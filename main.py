@@ -32,7 +32,7 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 						parse_mode=telegram.ParseMode.MARKDOWN)
 
 	if photo:
-		bot.sendPhoto(c_id, photo=open('images/{0}'.format(photo), 'rb'))
+		bot.sendSticker(c_id, sticker=photo)
 
 def start(bot, update):
 	bot.sendMessage(update.message.chat_id, text='Теперь скажи мне свое имя.')
@@ -143,7 +143,7 @@ def msg(bot, update):
 
 		if len(msg) + len(txt) + 2 >= 4096:
 			reply(c_id, bot, msg, buttons, image)
-			
+
 			msg = ''
 			image = None
 			buttons = None

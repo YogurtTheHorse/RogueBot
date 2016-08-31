@@ -3,7 +3,7 @@ name = 'Неестественная семилапка'
 hp = 50
 damage_range =  ( 15, 30 )
 
-coins = 300
+coins = 30
 
 loot = [ ]
 

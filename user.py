@@ -717,6 +717,7 @@ class User(object):
 		)
 
 		reply(msg)
+		self.open_corridor(reply)
 
 	def corridor(self, reply, text):
 		if text.startswith('Открыть'):

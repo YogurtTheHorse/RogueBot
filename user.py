@@ -629,7 +629,7 @@ class User(object):
 			self.visited_shop = True
 			self.open_corridor(reply)
 		else:
-			reply('Нет денег — нет товара!')
+			reply('Нет денег — нет товара!', self.shop_names)
 
 
 	def shop(self, reply, text):

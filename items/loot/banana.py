@@ -18,7 +18,10 @@ def fight_use(user, reply, room):
 
 		return 0
 	else:
-		reply('Ты поскользнулся на кожуре\Теперь будет синяк')
+		reply(
+			'Ты поскользнулся на кожуре\n'
+			'Теперь будет синяк'
+		)
 		user.make_damage(1, 2, reply, death=False)
 		user.remove_item_by_name(name)
 		return 0

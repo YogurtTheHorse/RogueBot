@@ -208,20 +208,24 @@ class User(object):
 			reply('Ну и как же тебя звать на этот раз?')
 
 	def name_given(self, reply, name):
-		n = name
-		while n == name:
-			n = random.choice (names)
+		if '_' in name:
+			reply('Имя не может содержать символ нижнего подчеркивания, потмоу что жизнь борьба.')
+			reply('Как звать?')
+		else:
+			n = name
+			while n == name:
+				n = random.choice (names)
 
-		msg = ('Ты знаешь, у меня есть знакомый по имени {0}, и '
-				'я считаю, что это звучит лучше {1}\n'
-				'Ты уверен?').format(n, name)
+			msg = ('Ты знаешь, у меня есть знакомый по имени {0}, и '
+					'я считаю, что это звучит лучше {1}\n'
+					'Ты уверен?').format(n, name)
 
-		buttons = [ 'Уверен.', 'Дай-ка я поменяю.' ]
-			
-		self.state = 'name_confirm'
-		self.name = name
+			buttons = [ 'Уверен.', 'Дай-ка я поменяю.' ]
+				
+			self.state = 'name_confirm'
+			self.name = name
 
-		reply(msg, buttons)
+			reply(msg, buttons)
 
 	def make_damage(self, mn, mx, reply, death=True):
 		old_hp = self.hp

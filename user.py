@@ -314,7 +314,7 @@ class User(object):
 		elif text == KICK_MAGIC:
 			dmg = self.get_mana_damage()
 
-			reply('Ахалай махалай!\nИз неоткуда появляется кулак и наносит *{0}* урона'.format(dmg))
+			reply('Ахалай махалай!\nИз ниоткуда появляется кулак и наносит *{0}* урона'.format(dmg))
 
 			room.make_damage(self, reply, dmg)
 		elif text.startswith(USE):

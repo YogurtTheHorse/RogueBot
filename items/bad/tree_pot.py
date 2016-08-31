@@ -8,6 +8,7 @@ description = (
 
 price = 100
 usable = True
+disposable = True
 
 def on_use(user, reply):
 	reply('Теперь ты Дерево.', [ ])

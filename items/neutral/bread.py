@@ -9,6 +9,7 @@ description = (
 )
 
 fightable = True
+disposable = True
 
 def fight_use(user, reply, room):
 	if room.code_name == 'duck':

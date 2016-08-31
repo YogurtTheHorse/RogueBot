@@ -9,6 +9,7 @@ description = (
 
 price = 300
 fightable = True
+disposable = True
 
 def fight_use(user, reply, room):
 	reply('ЗА ВДВ!')

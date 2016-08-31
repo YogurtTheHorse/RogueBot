@@ -329,6 +329,9 @@ class User(object):
 			if item:
 				dmg = item.fight_use(self, reply, room) + self.get_damage_bonus(reply)
 
+				if item.disposable:
+					self.remove_item(item.code_name)
+
 				if self.state == 'room':
 					reply('{0} путем нехитрых махинаций наносит урон, равный *{1}*'.format(name, dmg))
 
@@ -710,6 +713,11 @@ class User(object):
 			for i in items:
 				if i.name == text:
 					i.on_use(self, reply)
+
+					if i.disposable:
+						self.remove_item(i.code_name)
+
+					break
 			
 			if self.state == 'inventory':
 				self.open_corridor(reply)

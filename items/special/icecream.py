@@ -8,6 +8,7 @@ description = (
 
 price = 30
 tags = [ 'ice' ]
+disposable = True
 
 fightable = True
 

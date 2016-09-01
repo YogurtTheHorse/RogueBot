@@ -19,7 +19,6 @@ def enter(user, reply):
 
 
 def action(user, reply, text):
-
 	if text == actions[0]:
 		reply(
 			'И он остановил бой. И заключили силы Света и силы Тьмы договор о перемирии. '
@@ -28,6 +27,4 @@ def action(user, reply, text):
 			'И было сказано, что будет Ночной дозор, чтобы следить за силами Тьмы.\n'
 		)
 
-
-	else:
-		user.leave(reply)
+	user.leave(reply)

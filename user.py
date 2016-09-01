@@ -454,8 +454,9 @@ class User(object):
 		self.prayed = False
 
 		if self.hp < self.max_hp / 2:
-			reply('Ты слегка отдохнул')
-			self.hp = self.max_hp / 2
+			#reply('Ты слегка отдохнул')
+			#self.hp = self.max_hp / 2
+			pass
 
 		self.open_corridor(reply)
 

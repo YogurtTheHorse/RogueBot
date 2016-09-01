@@ -26,7 +26,7 @@ def action(user, reply, text):
 			msg = (
 				'—Проходи, {0}, чего хотел?\nНа негнущихся коленях Вы проходите в середину комнаты. '
 				'Да, глаза Вас не подвели, это действительно...\n*Хидэо Кодзима*!'
-			)
+			).format(user.name)
 
 			reply(msg)
 			user.set_room_temp('question', 'kodzima')

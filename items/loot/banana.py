@@ -28,4 +28,4 @@ def fight_use(user, reply, room):
 def on_use(user, reply):
 	reply('Ты чувствуешь себя лучше, теперь главное не поскользнуться на кожуре')
 
-	user.hp += 15
+	user.hp = min(user.max_hp, user.hp + 5)

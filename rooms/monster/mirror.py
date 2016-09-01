@@ -31,10 +31,10 @@ def make_damage(user, reply, dmg):
 	hp = user.get_room_temp('hp', 0)
 	hp -= dmg
 
-	reply('Ты нанес сам себе урон, равный *{0}*'.format(dmg))
-	user.make_damage(dmg, dmg, reply)
-
 	if hp <= 0:
 		user.won(reply)
 	else:
 		user.set_room_temp('hp', hp)
+
+		reply('Ты нанес сам себе урон, равный *{0}*'.format(dmg))
+		user.make_damage(dmg, dmg, reply)

@@ -7,8 +7,8 @@ damage_range = (1, 5)
 
 coins = 0
 
-loot = [ 'unity' ]
+loot = []
 
 
 def enter(user, reply):
-	reply('Не прикаенно бродит по темным коридорам'.format(name))
+	reply('Единение!!!'.format(name))

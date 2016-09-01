@@ -1,6 +1,7 @@
 import os
 import glob
 import pickle
+import random
 from user import User
 		
 def get_fname(uid):
@@ -14,6 +15,9 @@ def new_user(uid):
 	usr = User(uid)
 
 	save_user(usr)
+
+def random_user():
+	return get_user(random.choice(list(get_telegram_users())))
 
 def get_telegram_users():
 	for f in glob.glob('users/*.usr'):

@@ -33,6 +33,10 @@ def make_damage(user, reply, dmg):
 
 	if hp <= 0:
 		user.won(reply)
+
+		reply('Ты перестарался и оно нанесло тебе немного урона в ответ')
+
+		user.make_damage(-hp, 0, reply)
 	else:
 		user.set_room_temp('hp', hp)
 

@@ -24,6 +24,10 @@ if os.path.isfile(question_filename):
  		question_yes, question_no = map(int, f.readline().split())
  		asked = f.readline().split()
 
+def reply_job(bot, job):
+	c_id, bot, txt, buttons, photo = job.context
+	reply(c_id, bot, txt, buttons, photo)
+
 @run_async
 def reply(c_id, bot, txt, buttons=None, photo=None):
 	if buttons:
@@ -165,6 +169,11 @@ def msg(bot, update):
 
 	if len(msg) > 0 or image:
 		global updater
+
+		send_job = Job(reply_job,
+						0.040,
+						repeat=False,
+						context=(c_id, bot, msg, buttons, image))
 		reply(c_id, bot, msg, buttons, image)
 
 def error_callback(bot, update, error):

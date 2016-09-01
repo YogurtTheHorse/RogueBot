@@ -7,7 +7,7 @@ def get_actions(user):
 		actions.append(str(g))
 		g += 50
 
-	return actions
+	return actions[:min(10, len(actions))]
 
 
 def enter(user, reply):
@@ -19,7 +19,7 @@ def action(user, reply, text):
 	try:
 		integer = int(text)
 
-		if user.paid(integer):
+		if user.paid(integer) and integer > 0:
 			reply('«Держи эту прекрасную ложку ручной работы!»')
 
 			user.add_item('special', 'spoon')

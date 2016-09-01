@@ -352,7 +352,7 @@ class User(object):
 		a, b = room.damage_range
 		dmg = self.make_damage(a, b, reply)
 
-		if not self.dead:
+		if not self.dead and dmg > 0.2:
 			reply('В ответ ты отхватил *{0}* урона'.format(dmg))
 
 	def won(self, reply):

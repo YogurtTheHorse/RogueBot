@@ -164,8 +164,7 @@ def msg(bot, update):
 
 	if len(msg) > 0 or image:
 		global updater
-		snd = Job(lambda bot, job: reply(c_id, bot, msg, buttons, image), 0.05, repeat=False)
-		updater.job_queue.put(snd)
+		reply(c_id, bot, msg, buttons, image)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

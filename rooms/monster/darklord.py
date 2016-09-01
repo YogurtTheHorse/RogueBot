@@ -42,9 +42,6 @@ def enter(user, reply):
 				'Мамочки! Мне страшно!\n'
 				'Верни ему то что он просит! НЕМЕДЛЕННО!'
 			)
-			
-		user.story_level = 25
-		user.set_room_temp('question')
 
 
 def dice(user, reply, result, subject=None):
@@ -80,5 +77,4 @@ def action(user, reply, text):
 
 
 def get_actions(user):
-	question = user.get_room_temp('question')
 	return [FIGHT, ESCAPE]

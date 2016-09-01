@@ -9,15 +9,13 @@ loot = [ ]
 
 
 def enter(user, reply):
-
-	reply('ЭЙ, Приятель! Ты случайно историей не ошибся?')
+	reply('Эй, Приятель! Ты случайно историей не ошибся?')
 
 	if user.story_level < 5:
-		reply('*{} обиженно уходит'.format(name))
+		reply('{} обиженно уходит'.format(name))
 		user.leave(reply)
 
 	else:
-		user.story_level += 2
 		reply(
 			'*Из-под капюшона послышалось шипение*\n'
 			'Ой-ой! Кажется он не в духе!'

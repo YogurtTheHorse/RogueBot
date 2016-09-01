@@ -9,5 +9,4 @@ loot = [ ]
 
 
 def enter(user, reply):
-	user.story_level += 1
 	reply('Чудовищное волкоподобное существо!')

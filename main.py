@@ -23,8 +23,7 @@ if os.path.isfile(question_filename):
 	with open(question_filename, 'r') as f:
  		question_yes, question_no = map(int, f.readline().split())
  		asked = f.readline().split()
-
-@run_async
+#@run_async
 def reply(c_id, bot, txt, buttons=None, photo=None):
 	if buttons:
 		custom_keyboard = [ [ x ] for x in buttons ]

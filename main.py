@@ -1,7 +1,9 @@
 import config
 
+from telegram.ext import Job
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+
 import usermanager
 import telegram
 import logging
@@ -162,7 +164,9 @@ def msg(bot, update):
 	usermanager.message(c_id, rep, update.message.text)
 
 	if len(msg) > 0 or image:
-		reply(c_id, bot, msg, buttons, image)
+		global updater
+		snd = Job(lambda bot, job: reply(c_id, bot, msg, buttons, image), 0.05, repeat=False)
+		updater.job_queue.put(snd)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

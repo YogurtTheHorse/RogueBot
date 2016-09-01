@@ -11,4 +11,4 @@ loot = []
 
 
 def enter(user, reply):
-	reply('Единение!!!'.format(name))
+	reply('Единение!')

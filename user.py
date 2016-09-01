@@ -752,6 +752,8 @@ class User(object):
 			self.open_inventory(reply)
 		elif text.startswith('Узнать'):
 			self.show_characteristics(reply)
+		else:
+			self.open_corridor(reply)
 
 
 	def first(self, reply, text):

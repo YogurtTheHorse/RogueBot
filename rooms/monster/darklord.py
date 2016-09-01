@@ -18,11 +18,12 @@ def enter(user, reply):
 		'Очень надеюсь что {} не обратит на нас внимание.'.format(name)
 	)
 
-	if user.darklord_level < 25:
+	if user.story_level < 25:
 		reply(
 			'Кажется он вас не заметил.\n'
 			'Вот и славненько, пойдем отсюда скорее, не будем мешать'
 		)
+
 		user.leave(reply)
 
 	else:
@@ -41,7 +42,8 @@ def enter(user, reply):
 				'Мамочки! Мне страшно!\n'
 				'Верни ему то что он просит! НЕМЕДЛЕННО!'
 			)
-
+			
+		user.story_level = 25
 		user.set_room_temp('question')
 
 

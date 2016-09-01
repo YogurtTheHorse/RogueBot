@@ -30,7 +30,7 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 		custom_keyboard = [ [ x ] for x in buttons ]
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
-	else:
+	elif len(txt) > 0:
 		bot.sendMessage(c_id,
 						text=txt, 
 						parse_mode=telegram.ParseMode.MARKDOWN)

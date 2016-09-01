@@ -183,7 +183,7 @@ class User(object):
 		return False
 
 	def paid(self, costs):
-		if self.gold >= costs:
+		if self.gold >= costs and costs >= 0:
 			self.gold -= costs
 
 			return True

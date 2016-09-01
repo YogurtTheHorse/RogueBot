@@ -12,11 +12,20 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Ты видишь какого-то сранного, грязного и страшного человека'
+		'Ты видишь какого-то странного, грязного и страшного человека'
 	)
 	reply(msg)
 
 	user.set_room_temp('hp', user.hp)
+
+	ch = user.get_charisma()
+
+	if ch < 0:
+		reply('Оно треснуло')
+		user.won(reply)
+	elif ch > 10:
+		reply('Такой красивый. Иди с миром ;)')
+		user.won(reply)
 
 def make_damage(user, reply, dmg):
 	hp = user.get_room_temp('hp', 0)

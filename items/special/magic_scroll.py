@@ -8,6 +8,7 @@ description = (
 
 mp_cost = 100
 
+prive = 300
 fightable = True
 disposable = True
 

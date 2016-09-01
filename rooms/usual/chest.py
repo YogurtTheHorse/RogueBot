@@ -26,7 +26,7 @@ def action(user, reply, text):
 			'Поднимаешь крышку\n'
 		)
 
-		if random.random > 0.5:
+		if random.random() > 0.5:
 			reply('Пусто\nОчень жаль. Повезет в следующий раз.')
 
 		else:

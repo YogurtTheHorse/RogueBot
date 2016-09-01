@@ -30,7 +30,7 @@ def on_use(user, reply):
 
 			user.remove_item('tooth_basilisk')
 			user.mp -= mp_cost
-			user.add_item( 'magic_scroll' )
+			user.add_item('special', 'magic_scroll')
 
 		else:
 			reply('Не получилось.\n\n *Ты лишился Свитка и зуба Василиска*')

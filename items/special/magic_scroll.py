@@ -19,7 +19,7 @@ def fight_use(user, reply, room):
 		reply('Чпок!')
 		user.mp -= mp_cost
 
-		if random.random < 0.25:
+		if random.random() < 0.25:
 			reply(
 				'Ты непонял как это случилось, '
 				'но ты превратился в лягушку.\n\n'
@@ -39,3 +39,4 @@ def fight_use(user, reply, room):
 
 	else:
 		reply('А маны то не хватает!')
+	return 0

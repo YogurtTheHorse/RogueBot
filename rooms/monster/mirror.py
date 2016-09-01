@@ -36,7 +36,7 @@ def make_damage(user, reply, dmg):
 
 		reply('Ты перестарался и оно нанесло тебе немного урона в ответ')
 
-		user.make_damage(-hp, 0, reply)
+		user.make_damage(0, -hp, reply)
 	else:
 		user.set_room_temp('hp', hp)
 

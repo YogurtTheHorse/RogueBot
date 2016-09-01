@@ -1,3 +1,4 @@
+import random
 from constants import *
 
 EVIL_COMISSAR = 'EVIL_COMISSAR'
@@ -92,10 +93,15 @@ def action(user, reply, text):
 
 def get_actions(user):
 	question = user.get_room_temp('question', def_val='first')
+	ans = [ ]
 
 	if question == 'first':
-		return [ READY, ESCAPE, FIGHT ]
+		ans = [ READY, ESCAPE, FIGHT ]
 	elif question == 'smell' or question == 'mage':
-		return [ 'Да', 'Нет' ]
-	elif question == 'poster':
-		return [ 'Черт возьми, ДА!', 'Нет' ]
+		ans = [ 'Да', 'Нет' ]
+	else:
+		ans = [ 'Черт возьми, ДА!', 'Нет' ]
+
+	random.shuffle(ans)
+
+	return ans

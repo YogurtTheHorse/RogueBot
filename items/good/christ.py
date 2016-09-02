@@ -11,5 +11,5 @@ tags = [ 'wine' ]
 price = 150
 
 def on_pray(user, reply, god):
-	if god == JESUS:
+	if god == JESUS_NUM:
 		user.gods_level[JESUS_NUM] += 1

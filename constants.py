@@ -13,6 +13,7 @@ DICE_MIDDLE = DICE_MAX / 2
 
 INVENTORY_PAGE_SIZE = 5
 
+AURA_BUDDHA = 'мир'
 WATER = 'вода'
 FIRE = 'огонь'
 STONE = 'камень'

@@ -10,5 +10,5 @@ description = (
 price = 100
 
 def on_pray(user, reply, god):
-	if god == ALLAH:
+	if god == ALLAH_NUM:
 		user.gods_level[ALLAH_NUM] += 1

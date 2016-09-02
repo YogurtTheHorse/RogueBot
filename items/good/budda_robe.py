@@ -7,10 +7,10 @@ description = (
 	'Некоторые монстры уважают Буддистов и не трогают их.'
 )
 
-aura = BUDDHA
+aura = AURA_BUDDHA
 price = 150
 
 def on_pray(user, reply, god):
-	if god == BUDDHA:
+	if god == BUDDHA_NUM:
 		user.gods_level[BUDDHA_NUM] += 1
 		

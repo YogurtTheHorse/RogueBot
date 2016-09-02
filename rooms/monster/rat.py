@@ -11,7 +11,7 @@ coins = 7
 loot = [ 'rat_tooth' ]
 
 def enter(user, reply):
-	if user.has_aura(BUDDHA):
+	if user.has_aura(BUDDHA_AURA):
 		reply('Крысы не трогают буддистов. Иди с миром')
 		user.won(reply)
 	else:

@@ -434,7 +434,7 @@ class User(object):
 		if text == locale_manager.get('THOW_DICE'):
 			self.state = 'room'
 
-			res = random.randint(1, locale_manager.get('DICE_MAX'))
+			res = random.randint(1, DICE_MAX)
 			res += self.get_dice_bonus(reply)
 			reply(locale_manager.get('DICE_RESULT').format(res))
 			
@@ -509,34 +509,34 @@ class User(object):
 			reply(locale_manager.get('EVIL_AUTHOR'))
 
 	def god_love(self, reply, god):
-		if god == locale_manager.get('BUDDHA_NUM'): # Buddha
+		if god == BUDDHA_NUM: # Buddha
 			reply(locale_manager.get('BUDDHA_LOVE'))
 			self.mp = self.max_mp
-		elif god == locale_manager.get('JESUS_NUM'): # Jesus
+		elif god == JESUS_NUM: # Jesus
 			reply(locale_manager.get('JESUS_LOVE'))
 			self.items.append(('special', 'wine'))
-		elif god == locale_manager.get('ALLAH_NUM'): # Allah
+		elif god == ALLAH_NUM: # Allah
 			reply(locale_manager.get('ALLAH_LOVE'))
 			self.hp = self.max_hp
-		elif god == locale_manager.get('AUTHOR_NUM'): # Author
+		elif god == AUTHOR_NUM: # Author
 			reply(locale_manager.get('AUTHOR_LOVE'))
 			self.open_room(reply, 'special', 'icecream')
 
 	def prayto(self, reply, god):
 		god_num = -1
 
-		if god == self.gods[locale_manager.get('BUDDHA_NUM')]: # Buddha
+		if god == self.gods[BUDDHA_NUM]: # Buddha
 			reply(locale_manager.get('BUDDHA_PRAYED'))
-			god_num = locale_manager.get('BUDDHA_NUM')
-		elif god == self.gods[locale_manager.get('JESUS_NUM')]: # Jesus
+			god_num = BUDDHA_NUM
+		elif god == self.gods[JESUS_NUM]: # Jesus
 			reply(locale_manager.get('JESUS_PRAYED'))
-			god_num = locale_manager.get('JESUS_NUM')
-		elif god == self.gods[locale_manager.get('ALLAH_NUM')]: # Allah
+			god_num = JESUS_NUM
+		elif god == self.gods[ALLAH_NUM]: # Allah
 			reply(locale_manager.get('ALLAH_PRAYED'))
-			god_num = locale_manager.get('ALLAH_NUM')
-		elif god == self.gods[locale_manager.get('AUTHOR_NUM')]: # Author
+			god_num = ALLAH_NUM
+		elif god == self.gods[AUTHOR_NUM]: # Author
 			reply(locale_manager.get('AUTHOR_PRAYED'))
-			god_num = locale_manager.get('AUTHOR_NUM')
+			god_num = AUTHOR_NUM
 		else:
 			reply(locale_manager.get('NO_GOD'))
 
@@ -544,10 +544,10 @@ class User(object):
 			self.gods_level[god_num] += 1
 
 			for item in self.get_items():
-				item.on_pray(self, reply, god)
+				item.on_pray(self, reply, god_num)
 
 
-			if self.gods_level[god_num] >= locale_manager.get('GOD_LEVEL'):
+			if self.gods_level[god_num] >= GOD_LEVEL:
 				self.god_love(reply, god_num)
 
 
@@ -648,8 +648,8 @@ class User(object):
 		counter_items = Counter(items)
 		selected_items = list(counter_items)
 
-		begin = min(self.inventory_page * locale_manager.get('INVENTORY_PAGE_SIZE'), len(selected_items) - 1)
-		end = min((self.inventory_page + 1) * locale_manager.get('INVENTORY_PAGE_SIZE'), len(selected_items))
+		begin = min(self.inventory_page * INVENTORY_PAGE_SIZE, len(selected_items) - 1)
+		end = min((self.inventory_page + 1) * INVENTORY_PAGE_SIZE, len(selected_items))
 
 		for i in selected_items[begin:end]:
 			if i is not None:

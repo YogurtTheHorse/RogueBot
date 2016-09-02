@@ -13,5 +13,5 @@ def get_dice_bonus(user, reply):
 	return 1
 
 def on_pray(user, reply, god):
-	if god == AUTHOR:
+	if god == AUTHOR_NUM:
 		user.gods_level[AUTHOR_NUM] += 1

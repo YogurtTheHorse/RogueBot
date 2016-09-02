@@ -31,6 +31,7 @@ def enter(user, reply):
 def action(user, reply, text):
 	if text == actions[0]:
 		user.remove_items_with_tag('hair')
+		user.charisma += 10
 		
 		if user.paid(10):
 			reply('С вами приятно работать!')

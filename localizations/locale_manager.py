@@ -19,8 +19,8 @@ def get_locale(language=None):
 	try:
 		with open('localizations/{0}.json'.format(language)) as lang_file:
 			locale = json.load(lang_file)
-	except:
-		logger.warn('Error loading "{0}" locale'.format(language))
+	except BaseException as e:
+		logger.warn('Error loading "{0}" locale: {1}'.format(language, e))
 
 	return locale
 

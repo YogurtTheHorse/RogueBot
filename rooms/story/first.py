@@ -2,8 +2,8 @@ name = 'Старик'
 
 actions = [ 'Помолчать', 'Уйти' ]
 
-next_story_room_range = (100025, 100025)
-next_story_room = 'none'
+next_story_room_range = (20, 30)
+next_story_room = 'second'
 
 def get_actions(user):
 	return actions

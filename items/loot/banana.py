@@ -1,3 +1,4 @@
+import random
 from constants import *
 
 name = 'Банан'
@@ -17,11 +18,15 @@ def fight_use(user, reply, room):
 
 		return 0
 	else:
-		reply(
-			'Ты поскользнулся на кожуре\n'
-			'Теперь будет синяк'
-		)
-		user.make_damage(1, 2, reply, death=False)
+		if random.random() > 0.1:
+			reply(
+				'Ты поскользнулся на кожуре\n'
+				'Теперь будет синяк'
+			)
+			user.make_damage(1, 2, reply, death=False)
+		else:
+			on_use(user, reply)
+		
 		return 0
 
 

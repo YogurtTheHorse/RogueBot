@@ -15,3 +15,9 @@ def on_use(user, reply):
 	reply('Это оказалось зелье жизни. Теперь ты полностью здоров')
 
 	user.hp = user.max_hp
+
+fightable = True
+def fight_use(user, reply, room):
+	on_use(user, reply)
+
+	return 0

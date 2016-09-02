@@ -607,7 +607,7 @@ class User(object):
 			else:
 				reply(locale_manager.get('NEUTRAL_BUYED'))
 
-			check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S locale_manager.get('UTC')", gmtime()), item.name, item.price,)
+			check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
 
 			self.items.append((item.buff, item.code_name))
 			item.on_buy(self, reply)

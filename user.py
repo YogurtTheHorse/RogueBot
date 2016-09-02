@@ -483,6 +483,9 @@ class User(object):
 
 		return False
 
+	def remove_tag(self, tag):
+		self.tags.remove(tag)
+
 	def has_item(self, code_name):
 		for i in self.items:
 			if i[1] == code_name:

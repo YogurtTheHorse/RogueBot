@@ -11,6 +11,8 @@ from utils.names import names
 
 from collections import Counter
 
+from localizations.ru import *
+
 logger = logging.getLogger('rg')
 
 class User(object):
@@ -149,7 +151,7 @@ class User(object):
 		return False
 
 	def get_stats(self):
-		return 'HP: {0} MP: {1} Gold: {2}'.format(self.hp, self.mp, self.gold)
+		return USER_STATS.format(self.hp, self.mp, self.gold)
 
 	def remove_item(self, code_name):
 		ind = -1
@@ -195,32 +197,27 @@ class User(object):
 
 	def name_confirm(self, reply, text):
 		if len(text) == 7:
-			txt = ('Твоя взяла. Отныне и навсегда (Нет) '
-					'тебя будут звать «{0}». Поменять имя '
-					'можно с помощью /setname').format(self.name)
+			txt = NAME_CONFIRMED.format(self.name)
 			self.state = 'first_msg'
 
 			logger.info('New user with id {0}'.format(self.uid))
 
-			reply(txt, [ 'А что дальше?' ])
+			reply(txt, [ WHATS_NEXT ])
 		else:
 			self.state = 'name'
-			reply('Ну и как же тебя звать на этот раз?')
+			reply(ASK_NAME_AGAIN)
 
 	def name_given(self, reply, name):
 		if '_' in name:
-			reply('Имя не может содержать символ нижнего подчеркивания, потмоу что жизнь борьба.')
-			reply('Как звать?')
+			reply(NAME_ERROR)
 		else:
 			n = name
 			while n == name:
 				n = random.choice (names)
 
-			msg = ('Ты знаешь, у меня есть знакомый по имени {0}, и '
-					'я считаю, что это звучит лучше {1}\n'
-					'Ты уверен?').format(n, name)
+			msg = NAME_CONFIRM.format(n, name)
 
-			buttons = [ 'Уверен.', 'Дай-ка я поменяю.' ]
+			buttons = [ NAME_AGREE, NAME_DISMISS ]
 				
 			self.state = 'name_confirm'
 			self.name = name
@@ -244,7 +241,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		reply('Батенькаъ, да вы умерли! Все начинай с начала', [ '/start' ])
+		reply(DEAD_MESSAGE, [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -254,18 +251,18 @@ class User(object):
 		self.state = 'corridor'
 		reply(self.get_stats())
 
-		buttons = [ 'Открыть очередную дверь', 'Узнать характеристики героя' ]
+		buttons = [ OPEN_NEXT_DOOR, PLAYER_CHARACTERISTICS ]
 
 		if not self.prayed:
-			buttons.append('Молить Бога о выходе')
+			buttons.append(PRAY_TO_GOD)
 
 		if not self.visited_shop:
-			buttons.append('Зайти в Магазин алхимика')
+			buttons.append(OPEN_SHOP)
 
 		if len(self.items) > 0:
-			buttons.append('Посмотреть инвентарь')
+			buttons.append(SHOW_INVENTORY)
 
-		reply('Что будем делать?', buttons)
+		reply(WHAT_WILL_WE_DO, buttons)
 
 	def set_room_temp(self, name, val=None):
 		self.room_temp[name] = val
@@ -280,7 +277,7 @@ class User(object):
 		actions = [
 			KICK_ARM,
 			KICK_MAGIC,
-			USE + 'Воображение'
+			USE + IMAGINATION
 		]
 
 		for i in self.get_items():
@@ -296,7 +293,7 @@ class User(object):
 		if subject == 'noname':
 			dmg = result + self.get_damage_bonus(reply) // 2
 
-			reply('Твоя непонятная штука нанесла урон, равный *{0}*'.format(dmg))
+			reply(IMAGINATION_FIGHT.format(dmg))
 
 			room.make_damage(self, reply, dmg)
 
@@ -308,13 +305,13 @@ class User(object):
 		if text == KICK_ARM:
 			dmg = self.get_damage() + self.get_damage_bonus(reply)
 
-			reply('Ты наносишь монстру урон равный *{0}*'.format(dmg))
+			reply(MONSTER_DAMAGED.format(dmg))
 
 			room.make_damage(self, reply, dmg)
 		elif text == KICK_MAGIC:
 			dmg = self.get_mana_damage()
 
-			reply('Ахалай махалай!\nИз ниоткуда появляется кулак и наносит *{0}* урона'.format(dmg))
+			reply(MAGIC_KICKED.format(dmg))
 
 			room.make_damage(self, reply, dmg)
 		elif text.startswith(USE):
@@ -333,15 +330,15 @@ class User(object):
 					self.remove_item(item.code_name)
 
 				if self.state == 'room':
-					reply('{0} путем нехитрых махинаций наносит урон, равный *{1}*'.format(name, dmg))
+					reply(ITEM_USED.format(name, dmg))
 
 					room.make_damage(self, reply, dmg)
 			else:
-				reply('У меня такой вещи нет, но ты можешь кинуть кость и попробовать.')
+				reply(NO_FIGHT_THING)
 
 				self.throw_dice(reply, 'noname')
 		else:
-			reply('Не понял тебя')
+			reply(DIDNT_UNDERSTAND)
 
 		if self.state == 'room':
 			self.fight_answer(reply)
@@ -353,7 +350,7 @@ class User(object):
 		dmg = self.make_damage(a, b, reply)
 
 		if not self.dead and dmg > 0.2:
-			reply('В ответ ты отхватил *{0}* урона'.format(dmg))
+			reply(USER_DAMAGED.format(dmg))
 
 	def won(self, reply):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -365,11 +362,11 @@ class User(object):
 			self.add_item('loot', lt)
 
 		if room.coins > 0:
-			reply('А еще тут лежало несколько золотых. Твой карман потяжелел на *{0}*'.format(room.coins))
+			reply(GOLD_FOUND.format(room.coins))
 
 			self.gold += room.coins
 
-		reply('Ты победил!\nТакже в комнате ты нашел..\n\n{0}'.format(loot))
+		reply(YOU_WON.format(loot))
 
 		self.leave(reply)
 
@@ -401,13 +398,13 @@ class User(object):
 		if room.room_type == 'monster':
 			self.set_room_temp('hp', room.hp)
 
-		reply('Вы открываете дверь, а за ней...')
+		reply(ROOM_OPENED)
 		reply(room.name + '!')
 
 		room.enter(self, reply)
 
 		if self.state == 'room':
-			reply('Твои действия?', room.get_actions(self))
+			reply(YOUR_ACTIONS, room.get_actions(self))
 
 	def in_room(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -416,13 +413,13 @@ class User(object):
 		if self.state == 'room':
 			reply(self.get_stats())
 			room = roomloader.load_room(self.room[1], self.room[0])
-			reply('Твои действия?', room.get_actions(self))
+			reply(YOUR_ACTIONS, room.get_actions(self))
 
 	def throw_dice(self, reply, subject=None):
 		self.state = 'dice'
 		self.subject = subject
 
-		reply('Время кидать кость!', ['Кинуть'])
+		reply(DICE_TIME, [THOW_DICE])
 
 	def get_dice_bonus(self, reply):
 		res = 0
@@ -434,20 +431,20 @@ class User(object):
 
 
 	def dice(self, reply, text):
-		if text == 'Кинуть':
+		if text == THOW_DICE:
 			self.state = 'room'
 
 			res = random.randint(1, DICE_MAX)
 			res += self.get_dice_bonus(reply)
-			reply('Твой результат *{0}*'.format(res))
+			reply(DICE_RESULT.format(res))
 			
 			room = roomloader.load_room(self.room[1], self.room[0])
 			room.dice(self, reply, res, self.subject)
 
 			if self.state == 'room':
-				reply('Твои действия?', room.get_actions(self))
+				reply(YOUR_ACTIONS, room.get_actions(self))
 		else:
-			reply('Не вижу уверенности!', ['Кинуть'])
+			reply(DICE_CONFIDENCE, [THOW_DICE])
 
 	def leave(self, reply):
 		self.visited_shop = False
@@ -497,58 +494,51 @@ class User(object):
 		self.gods_level = [ 0 for g in self.gods ]
 
 		if god == self.gods[0]: # Buddha
-			txt = ('Тебе повезло, что Буддисты полны спокойствия и не злятся, '
-					'когда кто-то меняет Веру. Им вообще пофиг. На _все_.')
-			reply(txt)
+			txt = ()
+			reply(EVIL_BUDDHA)
 		elif god == self.gods[1]: # Jesus
-			txt = ('Иисус разгневался и убил всех твоих египтских детей. '
-					'Правда у тебя их не было, но это событие так растрогало '
-					'тебя, что ты потерял частичку себя.')
+			txt = ()
 			self.make_damage(5, 10, reply, death=False)
-			reply(txt)
+			reply(EVIL_JESUS)
 		elif god == self.gods[2]: # Allah
-			txt = ('Аллах не терпит ошибок и он очень зол.')
 			self.make_damage(20, 30, reply)
-			reply(txt)
+			reply(EVIL_ALLAH)
 		elif god == self.gods[3]: # Author
-			txt = ('Ты же понимаешь, что я тут заправляю? Раз такой умный, держи новенькие ботиночки')
-
 			self.add_item('special', 'intoxicated_shoes')
 			
-			reply(txt)
+			reply(EVIL_AUTHOR)
 
 	def god_love(self, reply, god):
 		if god == BUDDHA_NUM: # Buddha
-			reply('Ты обрел частичку Нирваны, парень.')
+			reply(BUDDHA_LOVE)
 			self.mp = self.max_mp
 		elif god == JESUS_NUM: # Jesus
-			reply('Твой рюкзак потяжелел.. Хм.. Странно')
+			reply(JESUS_LOVE)
 			self.items.append(('special', 'wine'))
 		elif god == ALLAH_NUM: # Allah
-			reply('Ты чувствуешь как силы приходят к тебе!')
+			reply(ALLAH_LOVE)
 			self.hp = self.max_hp
 		elif god == AUTHOR_NUM: # Author
-			reply('За это я подскажу тебе одну интересную комнату')
-			
+			reply(AUTHOR_LOVE)
 			self.open_room(reply, 'special', 'icecream')
 
 	def prayto(self, reply, god):
 		god_num = -1
 
 		if god == self.gods[BUDDHA_NUM]: # Buddha
-			reply('Не хочу тебя расстраивать, но буддисты не молятся')
+			reply(BUDDHA_PRAYED)
 			god_num = BUDDHA_NUM
 		elif god == self.gods[JESUS_NUM]: # Jesus
-			reply('Продолжай в том же духе и мы сможем пройти по воде')
+			reply(JESUS_PRAYED)
 			god_num = JESUS_NUM
 		elif god == self.gods[ALLAH_NUM]: # Allah
-			reply('Аллах не терпит ошибок.')
+			reply(ALLAH_PRAYED)
 			god_num = ALLAH_NUM
 		elif god == self.gods[AUTHOR_NUM]: # Author
-			reply('Ох как приятно. Спасибо тебе')	
+			reply(AUTHOR_PRAYED)
 			god_num = AUTHOR_NUM
 		else:
-			reply('Таких не молим.')
+			reply(NO_GOD)
 
 		if god_num >= 0:
 			self.gods_level[god_num] += 1
@@ -571,11 +561,11 @@ class User(object):
 
 		if god == None:
 			if self.prayed:
-				reply('Не так часто, Боги не любят культивистов.')
+				reply(FAST_GOD)
 			else:
-				reply('Ну и кому в этот раз?', self.gods)
+				reply(GOD_ASK, self.gods)
 		elif god not in self.gods:
-			reply('Для такого нет оборудования', self.gods)
+			reply(NO_GOD, self.gods)
 		else:
 			if len(self.last_god) > 0 and god != self.last_god:
 				self.evilgod(reply, self.last_god)
@@ -595,17 +585,12 @@ class User(object):
 
 		items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
 		self.shop_names = [ i.name for i in items ]
-		self.shop_names.append('Выход')
+		self.shop_names.append(EXIT)
 
 		for item in self.get_items():
 			item.on_shop(self, reply, items)
 
-		txt = (
-			'Привет! Давно не виделись, смотри, что у меня есть:\n\n'
-			'{0}\nЦена: {1}\n{2}\n\n'
-			'{3}\nЦена: {4}\n{5}\n\n'
-			'{6}\nЦена: {7}\n{8}'
-		).format(
+		txt = SHOP_MESSAGE.format(
 			items[0].name, items[0].price, items[0].description, 
 			items[1].name, items[1].price, items[1].description,
 			items[2].name, items[2].price, items[2].description
@@ -616,26 +601,13 @@ class User(object):
 	def buy(self, item, reply):
 		if self.paid(item.price):
 			if item.buff == 'bad':
-				reply('Ну наконец-то кто-то это купил!')
+				reply(BAD_BUYED)
 			elif item.buff == 'good':
-				reply('Хороший выбор')
+				reply(GOOD_BUYED)
 			else:
-				reply('Забирай скорей')
+				reply(NEUTRAL_BUYED)
 
-			check = ( '```text'
-				'              ФИКСАЛЬНЫЙ ЧЕК              \n'
-				'         ООО "Магазин подземелья"         \n'
-				'             ДОБРО ПОЖАЛОВАТЬ!            \n'
-				'Покупка: {0}\n'
-				'Кассир: №1\n\n'
-				'------------------------------------------\n\n'
-				'ПРОДАЖА\n'
-				'  {1} 1 шт. — {2}.00 злт\n'
-				'\n'
-				'ИТОГО — {2}.00 злт\n'
-				'\nСпасибо за покупку!\n'
-				'```'
-			).format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
+			check = SHOP_CHECK.format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
 
 			self.items.append((item.buff, item.code_name))
 			item.on_buy(self, reply)
@@ -644,12 +616,12 @@ class User(object):
 			self.visited_shop = True
 			self.open_corridor(reply)
 		else:
-			reply('Нет денег — нет товара!', self.shop_names)
+			reply(NO_GOLD, self.shop_names)
 
 
 	def shop(self, reply, text):
-		if text == 'Выход':
-			reply('До новых встреч!')
+		if text == EXIT:
+			reply(SHOP_EXITED)
 			self.open_corridor(reply)
 		else:
 			for ind, name in enumerate(self.shop_names):
@@ -659,7 +631,7 @@ class User(object):
 					self.buy(item, reply)
 					return
 
-			reply('У меня такого нет', self.shop_names)
+			reply(NO_GOODS, self.shop_names)
 
 	def open_inventory(self, reply):
 		self.state = 'inventory'
@@ -671,7 +643,7 @@ class User(object):
 			return
 
 		actions = [ ]
-		msg = 'В инвентаре ты нашел:\n'
+		msg = INVENTORY_MESSAGE
 
 		counter_items = Counter(items)
 		selected_items = list(counter_items)
@@ -685,30 +657,30 @@ class User(object):
 				if i.usable:
 					actions.append(i.name)
 
-				actions.append('Выкинуть ' + i.name)
+				actions.append(THROW_AWAY + i.name)
 
 		if begin > 0:
-			actions.append('Назад')
+			actions.append(BACK)
 		if end < len(selected_items):
-			actions.append('Дальше')
+			actions.append(NEXT)
 
-		actions.append('В коридор')
+		actions.append(TO_CORRIDOR)
 		reply(msg, actions)
 
 	def inventory(self, reply, text):
-		if text == 'В коридор':
+		if text == TO_CORRIDOR:
 			self.open_corridor(reply)
-		elif text.startswith('Выкинуть '):
-			name = text[len('Выкинуть '):]
+		elif text.startswith(THROW_AWAY):
+			name = text[len(THROW_AWAY):]
 
 			if not self.remove_item_by_name(name):
-				reply('Не выкидывается')
+				reply(CANT_THROW)
 			else:
 				self.open_inventory(reply)
-		elif text == 'Назад':
+		elif text == BACK:
 			self.inventory_page = max(self.inventory_page - 1, 0)
 			self.open_inventory(reply)
-		elif text == 'Дальше':
+		elif text == NEXT:
 			self.inventory_page = self.inventory_page + 1
 			self.open_inventory(reply)
 		else:
@@ -727,13 +699,7 @@ class User(object):
 				self.open_corridor(reply)
 
 	def show_characteristics(self, reply):
-		msg = (
-			'Сила: _{0}_\n'
-			'Защита: _{1}_\n'
-			'Харизма: _{2}_\n'
-			'Интеллект: _{3}_\n'
-			'Магический урон: _{4}_'
-		).format(
+		msg = CHARACTERISTICS.format(
 			self.get_damage(), 
 			self.get_defence(), 
 			self.get_charisma(),
@@ -745,41 +711,23 @@ class User(object):
 		self.open_corridor(reply)
 
 	def corridor(self, reply, text):
-		if text.startswith('Открыть'):
+		if text.startswith(OPEN_NEXT_DOOR.split()[0]):
 			self.open_room(reply)
-		elif text.startswith('Молить'):
+		elif text.startswith(PRAY_TO_GOD.split()[0]):
 			self.pray(reply)
-		elif text.startswith('Зайти'):
+		elif text.startswith(OPEN_SHOP.split()[0]):
 			self.open_shop(reply)
-		elif text.startswith('Посмотреть'):
+		elif text.startswith(SHOW_INVENTORY.split()[0]):
 			self.inventory_page = 0
 			self.open_inventory(reply)
-		elif text.startswith('Узнать'):
+		elif text.startswith(PLAYER_CHARACTERISTICS.split()[0]):
 			self.show_characteristics(reply)
 		else:
 			self.open_corridor(reply)
 
 
 	def first(self, reply, text):
-		txt = (''
-			'Ты начинаешь сложный путь, а я твой рассказчик. Сейчас ты стоишь '
-			'посреди коридора - центр нашей с тобой игры. В нем множество '
-			'разных дверей, и каждый ход ты будешь открывать одну из них. Есть '
-			'ли выход из этого ада я, честно говоря, не знаю, но мы можем '
-			'проверить.\n\n'
-			'Будь осторожен, за дверью может оказать подземелье с драконом, '
-			'хотя с такой же вероятностью и озеро мороженого.\n\n'
-			'Держи игральные кости, их нужно будет кидать каждое действие, '
-			'требущее удачи и мастерства. При хорошем броске монстр падет. '
-			'А при неудаче.. Ну.. можно рассмешить твоих противников, и они '
-			'сжалятся над тобой.\n\n'
-			'Еще у нас есть место для мольбы. Если помолиться несколько раз '
-			'одному Богу, то можно получить что-то хорошее. В этом деле '
-			'главное не смешивать.'
-		)
-
-
-		reply(txt)
+		reply(HELLO_MESSAGE)
 
 		self.open_corridor(reply)
 
@@ -789,7 +737,7 @@ class User(object):
 
 	def message(self, reply, text):
 		if self.dead:
-			reply('Батенькаъ, вы очень умерли', [ '/start' ])
+			reply(DEAD_MESSAGE_AGAIN, [ '/start' ])
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':

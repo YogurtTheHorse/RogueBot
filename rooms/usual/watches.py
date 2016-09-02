@@ -40,10 +40,12 @@ def enter(user, reply):
 def action(user, reply, text):
 
 	if user.has_tag('watches_escape'):
-		reply('Тут больше нечего делать')
+		if text == actions_state_1[0]:
+			reply('Тут больше нечего делать')
 
 	elif user.has_tag('watches_stop'):
-		reply('Возможно, скоро что-то случится, а пока пойдем дальше')
+		if text == actions_state_2[0]:
+			reply('Возможно, скоро что-то случится, а пока пойдем дальше')
 
 	else:
 		if text == actions_state_0[0]:

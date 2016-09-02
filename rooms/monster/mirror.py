@@ -23,7 +23,7 @@ def enter(user, reply):
 	if ch < 0:
 		reply('Оно треснуло')
 		user.won(reply)
-	elif ch > 10:
+	elif ch > 15:
 		reply('Такой красивый. Иди с миром ;)')
 		user.won(reply)
 

@@ -1,10 +1,6 @@
-BUDDHA = 'Будда'
 BUDDHA_NUM = 0
-JESUS = 'Иисус'
 JESUS_NUM = 1
-ALLAH = 'Аллах'
 ALLAH_NUM = 2
-AUTHOR = 'Рассказчик'
 AUTHOR_NUM = 3
 
 SMART_LEVEL = 10
@@ -17,12 +13,6 @@ DICE_MIDDLE = DICE_MAX / 2
 
 INVENTORY_PAGE_SIZE = 5
 
-USE = 'Использовать: '
-
-EVIL_MUSCLELOT = 'evil_musclelot'
-JAPANESE = 'japanese'
-
-# Elements
 WATER = 'вода'
 FIRE = 'огонь'
 STONE = 'камень'
@@ -30,7 +20,7 @@ AIR = 'воздух'
 DEAD = 'мертвец'
 NONE = 'нет'
 
-KICK_ARM = 'Ударить рукой'
-KICK_MAGIC = 'Поколдовать удар'
+EVIL_MUSCLELOT = 'evil_musclelot'
+JAPANESE = 'japanese'
 
 SLIME_STICKER = 'BQADAgAD7AADDLXzAxPOv_f69TwOAg'

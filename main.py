@@ -178,7 +178,7 @@ def msg(bot, update):
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
-	if '429' in error_msg:
+	if '429' in str(error):
 		logger.warn('429!')
 	else:
 		logger.warn(error_msg)

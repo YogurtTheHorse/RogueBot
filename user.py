@@ -11,7 +11,7 @@ from utils.names import names
 
 from collections import Counter
 
-from localizations.ru import *
+from localizations import locale_manager
 
 logger = logging.getLogger('rg')
 
@@ -34,7 +34,7 @@ class User(object):
 		self.items = [ ]
 		self.inventory_page = 0
 
-		self.gods = [ BUDDHA, JESUS, ALLAH, AUTHOR ]
+		self.gods = [ locale_manager.get('BUDDHA'), locale_manager.get('JESUS'), locale_manager.get('ALLAH'), locale_manager.get('AUTHOR') ]
 		self.gods_level = [ 0 for g in self.gods ]
 		self.last_god = ''
 		self.prayed = False
@@ -151,7 +151,7 @@ class User(object):
 		return False
 
 	def get_stats(self):
-		return USER_STATS.format(self.hp, self.mp, self.gold)
+		return locale_manager.get('USER_STATS').format(self.hp, self.mp, self.gold)
 
 	def remove_item(self, code_name):
 		ind = -1
@@ -197,27 +197,27 @@ class User(object):
 
 	def name_confirm(self, reply, text):
 		if len(text) == 7:
-			txt = NAME_CONFIRMED.format(self.name)
+			txt = locale_manager.get('NAME_CONFIRMED').format(self.name)
 			self.state = 'first_msg'
 
 			logger.info('New user with id {0}'.format(self.uid))
 
-			reply(txt, [ WHATS_NEXT ])
+			reply(txt, [ locale_manager.get('WHATS_NEXT') ])
 		else:
 			self.state = 'name'
-			reply(ASK_NAME_AGAIN)
+			reply(locale_manager.get('ASK_NAME_AGAIN'))
 
 	def name_given(self, reply, name):
 		if '_' in name:
-			reply(NAME_ERROR)
+			reply(locale_manager.get('NAME_ERROR'))
 		else:
 			n = name
 			while n == name:
 				n = random.choice (names)
 
-			msg = NAME_CONFIRM.format(n, name)
+			msg = locale_manager.get('NAME_CONFIRM').format(n, name)
 
-			buttons = [ NAME_AGREE, NAME_DISMISS ]
+			buttons = [ locale_manager.get('NAME_AGREE'), locale_manager.get('NAME_DISMISS') ]
 				
 			self.state = 'name_confirm'
 			self.name = name
@@ -241,7 +241,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		reply(DEAD_MESSAGE, [ '/start' ])
+		reply(locale_manager.get('DEAD_MESSAGE'), [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -251,18 +251,18 @@ class User(object):
 		self.state = 'corridor'
 		reply(self.get_stats())
 
-		buttons = [ OPEN_NEXT_DOOR, PLAYER_CHARACTERISTICS ]
+		buttons = [ locale_manager.get('OPEN_NEXT_DOOR'), locale_manager.get('PLAYER_CHARACTERISTICS') ]
 
 		if not self.prayed:
-			buttons.append(PRAY_TO_GOD)
+			buttons.append(locale_manager.get('PRAY_TO_GOD'))
 
 		if not self.visited_shop:
-			buttons.append(OPEN_SHOP)
+			buttons.append(locale_manager.get('OPEN_SHOP'))
 
 		if len(self.items) > 0:
-			buttons.append(SHOW_INVENTORY)
+			buttons.append(locale_manager.get('SHOW_INVENTORY'))
 
-		reply(WHAT_WILL_WE_DO, buttons)
+		reply(locale_manager.get('WHAT_WILL_WE_DO'), buttons)
 
 	def set_room_temp(self, name, val=None):
 		self.room_temp[name] = val
@@ -275,14 +275,14 @@ class User(object):
 
 	def get_fight_actions(self):
 		actions = [
-			KICK_ARM,
-			KICK_MAGIC,
-			USE + IMAGINATION
+			locale_manager.get('KICK_ARM'),
+			locale_manager.get('KICK_MAGIC'),
+			locale_manager.get('USE') + locale_manager.get('IMAGINATION')
 		]
 
 		for i in self.get_items():
 			if i.fightable:
-				act = USE + i.name
+				act = locale_manager.get('USE') + i.name
 				if act not in actions:
 					actions.append(act)
 
@@ -293,7 +293,7 @@ class User(object):
 		if subject == 'noname':
 			dmg = result + self.get_damage_bonus(reply) // 2
 
-			reply(IMAGINATION_FIGHT.format(dmg))
+			reply(locale_manager.get('IMAGINATION_FIGHT').format(dmg))
 
 			room.make_damage(self, reply, dmg)
 
@@ -302,20 +302,20 @@ class User(object):
 
 	def fight_action(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
-		if text == KICK_ARM:
+		if text == locale_manager.get('KICK_ARM'):
 			dmg = self.get_damage() + self.get_damage_bonus(reply)
 
-			reply(MONSTER_DAMAGED.format(dmg))
+			reply(locale_manager.get('MONSTER_DAMAGED').format(dmg))
 
 			room.make_damage(self, reply, dmg)
-		elif text == KICK_MAGIC:
+		elif text == locale_manager.get('KICK_MAGIC'):
 			dmg = self.get_mana_damage()
 
-			reply(MAGIC_KICKED.format(dmg))
+			reply(locale_manager.get('MAGIC_KICKED').format(dmg))
 
 			room.make_damage(self, reply, dmg)
-		elif text.startswith(USE):
-			name = text[len(USE):]
+		elif text.startswith(locale_manager.get('USE')):
+			name = text[len(locale_manager.get('USE')):]
 			item = None
 
 			for i in self.get_items():
@@ -330,15 +330,15 @@ class User(object):
 					self.remove_item(item.code_name)
 
 				if self.state == 'room':
-					reply(ITEM_USED.format(name, dmg))
+					reply(locale_manager.get('ITEM_USED').format(name, dmg))
 
 					room.make_damage(self, reply, dmg)
 			else:
-				reply(NO_FIGHT_THING)
+				reply(locale_manager.get('NO_FIGHT_THING'))
 
 				self.throw_dice(reply, 'noname')
 		else:
-			reply(DIDNT_UNDERSTAND)
+			reply(locale_manager.get('DIDNT_UNDERSTAND'))
 
 		if self.state == 'room':
 			self.fight_answer(reply)
@@ -350,7 +350,7 @@ class User(object):
 		dmg = self.make_damage(a, b, reply)
 
 		if not self.dead and dmg > 0.2:
-			reply(USER_DAMAGED.format(dmg))
+			reply(locale_manager.get('USER_DAMAGED').format(dmg))
 
 	def won(self, reply):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -362,11 +362,11 @@ class User(object):
 			self.add_item('loot', lt)
 
 		if room.coins > 0:
-			reply(GOLD_FOUND.format(room.coins))
+			reply(locale_manager.get('GOLD_FOUND').format(room.coins))
 
 			self.gold += room.coins
 
-		reply(YOU_WON.format(loot))
+		reply(locale_manager.get('YOU_WON').format(loot))
 
 		self.leave(reply)
 
@@ -398,13 +398,13 @@ class User(object):
 		if room.room_type == 'monster':
 			self.set_room_temp('hp', room.hp)
 
-		reply(ROOM_OPENED)
+		reply(locale_manager.get('ROOM_OPENED'))
 		reply(room.name + '!')
 
 		room.enter(self, reply)
 
 		if self.state == 'room':
-			reply(YOUR_ACTIONS, room.get_actions(self))
+			reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
 
 	def in_room(self, reply, text):
 		room = roomloader.load_room(self.room[1], self.room[0])
@@ -413,13 +413,13 @@ class User(object):
 		if self.state == 'room':
 			reply(self.get_stats())
 			room = roomloader.load_room(self.room[1], self.room[0])
-			reply(YOUR_ACTIONS, room.get_actions(self))
+			reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
 
 	def throw_dice(self, reply, subject=None):
 		self.state = 'dice'
 		self.subject = subject
 
-		reply(DICE_TIME, [THOW_DICE])
+		reply(locale_manager.get('DICE_TIME'), [locale_manager.get('THOW_DICE')])
 
 	def get_dice_bonus(self, reply):
 		res = 0
@@ -431,20 +431,20 @@ class User(object):
 
 
 	def dice(self, reply, text):
-		if text == THOW_DICE:
+		if text == locale_manager.get('THOW_DICE'):
 			self.state = 'room'
 
-			res = random.randint(1, DICE_MAX)
+			res = random.randint(1, locale_manager.get('DICE_MAX'))
 			res += self.get_dice_bonus(reply)
-			reply(DICE_RESULT.format(res))
+			reply(locale_manager.get('DICE_RESULT').format(res))
 			
 			room = roomloader.load_room(self.room[1], self.room[0])
 			room.dice(self, reply, res, self.subject)
 
 			if self.state == 'room':
-				reply(YOUR_ACTIONS, room.get_actions(self))
+				reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
 		else:
-			reply(DICE_CONFIDENCE, [THOW_DICE])
+			reply(locale_manager.get('DICE_CONFIDENCE'), [locale_manager.get('THOW_DICE')])
 
 	def leave(self, reply):
 		self.visited_shop = False
@@ -495,50 +495,50 @@ class User(object):
 
 		if god == self.gods[0]: # Buddha
 			txt = ()
-			reply(EVIL_BUDDHA)
+			reply(locale_manager.get('EVIL_BUDDHA'))
 		elif god == self.gods[1]: # Jesus
 			txt = ()
 			self.make_damage(5, 10, reply, death=False)
-			reply(EVIL_JESUS)
+			reply(locale_manager.get('EVIL_JESUS'))
 		elif god == self.gods[2]: # Allah
 			self.make_damage(20, 30, reply)
-			reply(EVIL_ALLAH)
+			reply(locale_manager.get('EVIL_ALLAH'))
 		elif god == self.gods[3]: # Author
 			self.add_item('special', 'intoxicated_shoes')
 			
-			reply(EVIL_AUTHOR)
+			reply(locale_manager.get('EVIL_AUTHOR'))
 
 	def god_love(self, reply, god):
-		if god == BUDDHA_NUM: # Buddha
-			reply(BUDDHA_LOVE)
+		if god == locale_manager.get('BUDDHA_NUM'): # Buddha
+			reply(locale_manager.get('BUDDHA_LOVE'))
 			self.mp = self.max_mp
-		elif god == JESUS_NUM: # Jesus
-			reply(JESUS_LOVE)
+		elif god == locale_manager.get('JESUS_NUM'): # Jesus
+			reply(locale_manager.get('JESUS_LOVE'))
 			self.items.append(('special', 'wine'))
-		elif god == ALLAH_NUM: # Allah
-			reply(ALLAH_LOVE)
+		elif god == locale_manager.get('ALLAH_NUM'): # Allah
+			reply(locale_manager.get('ALLAH_LOVE'))
 			self.hp = self.max_hp
-		elif god == AUTHOR_NUM: # Author
-			reply(AUTHOR_LOVE)
+		elif god == locale_manager.get('AUTHOR_NUM'): # Author
+			reply(locale_manager.get('AUTHOR_LOVE'))
 			self.open_room(reply, 'special', 'icecream')
 
 	def prayto(self, reply, god):
 		god_num = -1
 
-		if god == self.gods[BUDDHA_NUM]: # Buddha
-			reply(BUDDHA_PRAYED)
-			god_num = BUDDHA_NUM
-		elif god == self.gods[JESUS_NUM]: # Jesus
-			reply(JESUS_PRAYED)
-			god_num = JESUS_NUM
-		elif god == self.gods[ALLAH_NUM]: # Allah
-			reply(ALLAH_PRAYED)
-			god_num = ALLAH_NUM
-		elif god == self.gods[AUTHOR_NUM]: # Author
-			reply(AUTHOR_PRAYED)
-			god_num = AUTHOR_NUM
+		if god == self.gods[locale_manager.get('BUDDHA_NUM')]: # Buddha
+			reply(locale_manager.get('BUDDHA_PRAYED'))
+			god_num = locale_manager.get('BUDDHA_NUM')
+		elif god == self.gods[locale_manager.get('JESUS_NUM')]: # Jesus
+			reply(locale_manager.get('JESUS_PRAYED'))
+			god_num = locale_manager.get('JESUS_NUM')
+		elif god == self.gods[locale_manager.get('ALLAH_NUM')]: # Allah
+			reply(locale_manager.get('ALLAH_PRAYED'))
+			god_num = locale_manager.get('ALLAH_NUM')
+		elif god == self.gods[locale_manager.get('AUTHOR_NUM')]: # Author
+			reply(locale_manager.get('AUTHOR_PRAYED'))
+			god_num = locale_manager.get('AUTHOR_NUM')
 		else:
-			reply(NO_GOD)
+			reply(locale_manager.get('NO_GOD'))
 
 		if god_num >= 0:
 			self.gods_level[god_num] += 1
@@ -547,7 +547,7 @@ class User(object):
 				item.on_pray(self, reply, god)
 
 
-			if self.gods_level[god_num] >= GOD_LEVEL:
+			if self.gods_level[god_num] >= locale_manager.get('GOD_LEVEL'):
 				self.god_love(reply, god_num)
 
 
@@ -561,11 +561,11 @@ class User(object):
 
 		if god == None:
 			if self.prayed:
-				reply(FAST_GOD)
+				reply(locale_manager.get('FAST_GOD'))
 			else:
-				reply(GOD_ASK, self.gods)
+				reply(locale_manager.get('GOD_ASK'), self.gods)
 		elif god not in self.gods:
-			reply(NO_GOD, self.gods)
+			reply(locale_manager.get('NO_GOD'), self.gods)
 		else:
 			if len(self.last_god) > 0 and god != self.last_god:
 				self.evilgod(reply, self.last_god)
@@ -585,12 +585,12 @@ class User(object):
 
 		items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
 		self.shop_names = [ i.name for i in items ]
-		self.shop_names.append(EXIT)
+		self.shop_names.append(locale_manager.get('EXIT'))
 
 		for item in self.get_items():
 			item.on_shop(self, reply, items)
 
-		txt = SHOP_MESSAGE.format(
+		txt = locale_manager.get('SHOP_MESSAGE').format(
 			items[0].name, items[0].price, items[0].description, 
 			items[1].name, items[1].price, items[1].description,
 			items[2].name, items[2].price, items[2].description
@@ -601,13 +601,13 @@ class User(object):
 	def buy(self, item, reply):
 		if self.paid(item.price):
 			if item.buff == 'bad':
-				reply(BAD_BUYED)
+				reply(locale_manager.get('BAD_BUYED'))
 			elif item.buff == 'good':
-				reply(GOOD_BUYED)
+				reply(locale_manager.get('GOOD_BUYED'))
 			else:
-				reply(NEUTRAL_BUYED)
+				reply(locale_manager.get('NEUTRAL_BUYED'))
 
-			check = SHOP_CHECK.format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
+			check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S locale_manager.get('UTC')", gmtime()), item.name, item.price,)
 
 			self.items.append((item.buff, item.code_name))
 			item.on_buy(self, reply)
@@ -616,12 +616,12 @@ class User(object):
 			self.visited_shop = True
 			self.open_corridor(reply)
 		else:
-			reply(NO_GOLD, self.shop_names)
+			reply(locale_manager.get('NO_GOLD'), self.shop_names)
 
 
 	def shop(self, reply, text):
-		if text == EXIT:
-			reply(SHOP_EXITED)
+		if text == locale_manager.get('EXIT'):
+			reply(locale_manager.get('SHOP_EXITED'))
 			self.open_corridor(reply)
 		else:
 			for ind, name in enumerate(self.shop_names):
@@ -631,7 +631,7 @@ class User(object):
 					self.buy(item, reply)
 					return
 
-			reply(NO_GOODS, self.shop_names)
+			reply(locale_manager.get('NO_GOODS'), self.shop_names)
 
 	def open_inventory(self, reply):
 		self.state = 'inventory'
@@ -643,13 +643,13 @@ class User(object):
 			return
 
 		actions = [ ]
-		msg = INVENTORY_MESSAGE
+		msg = locale_manager.get('INVENTORY_MESSAGE')
 
 		counter_items = Counter(items)
 		selected_items = list(counter_items)
 
-		begin = min(self.inventory_page * INVENTORY_PAGE_SIZE, len(selected_items) - 1)
-		end = min((self.inventory_page + 1) * INVENTORY_PAGE_SIZE, len(selected_items))
+		begin = min(self.inventory_page * locale_manager.get('INVENTORY_PAGE_SIZE'), len(selected_items) - 1)
+		end = min((self.inventory_page + 1) * locale_manager.get('INVENTORY_PAGE_SIZE'), len(selected_items))
 
 		for i in selected_items[begin:end]:
 			if i is not None:
@@ -657,30 +657,30 @@ class User(object):
 				if i.usable:
 					actions.append(i.name)
 
-				actions.append(THROW_AWAY + i.name)
+				actions.append(locale_manager.get('THROW_AWAY') + i.name)
 
 		if begin > 0:
-			actions.append(BACK)
+			actions.append(locale_manager.get('BACK'))
 		if end < len(selected_items):
-			actions.append(NEXT)
+			actions.append(locale_manager.get('NEXT'))
 
-		actions.append(TO_CORRIDOR)
+		actions.append(locale_manager.get('TO_CORRIDOR'))
 		reply(msg, actions)
 
 	def inventory(self, reply, text):
-		if text == TO_CORRIDOR:
+		if text == locale_manager.get('TO_CORRIDOR'):
 			self.open_corridor(reply)
-		elif text.startswith(THROW_AWAY):
-			name = text[len(THROW_AWAY):]
+		elif text.startswith(locale_manager.get('THROW_AWAY')):
+			name = text[len(locale_manager.get('THROW_AWAY')):]
 
 			if not self.remove_item_by_name(name):
-				reply(CANT_THROW)
+				reply(locale_manager.get('CANT_THROW'))
 			else:
 				self.open_inventory(reply)
-		elif text == BACK:
+		elif text == locale_manager.get('BACK'):
 			self.inventory_page = max(self.inventory_page - 1, 0)
 			self.open_inventory(reply)
-		elif text == NEXT:
+		elif text == locale_manager.get('NEXT'):
 			self.inventory_page = self.inventory_page + 1
 			self.open_inventory(reply)
 		else:
@@ -699,7 +699,7 @@ class User(object):
 				self.open_corridor(reply)
 
 	def show_characteristics(self, reply):
-		msg = CHARACTERISTICS.format(
+		msg = locale_manager.get('CHARACTERISTICS').format(
 			self.get_damage(), 
 			self.get_defence(), 
 			self.get_charisma(),
@@ -711,23 +711,23 @@ class User(object):
 		self.open_corridor(reply)
 
 	def corridor(self, reply, text):
-		if text.startswith(OPEN_NEXT_DOOR.split()[0]):
+		if text.startswith(locale_manager.get('OPEN_NEXT_DOOR').split()[0]):
 			self.open_room(reply)
-		elif text.startswith(PRAY_TO_GOD.split()[0]):
+		elif text.startswith(locale_manager.get('PRAY_TO_GOD').split()[0]):
 			self.pray(reply)
-		elif text.startswith(OPEN_SHOP.split()[0]):
+		elif text.startswith(locale_manager.get('OPEN_SHOP').split()[0]):
 			self.open_shop(reply)
-		elif text.startswith(SHOW_INVENTORY.split()[0]):
+		elif text.startswith(locale_manager.get('SHOW_INVENTORY').split()[0]):
 			self.inventory_page = 0
 			self.open_inventory(reply)
-		elif text.startswith(PLAYER_CHARACTERISTICS.split()[0]):
+		elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 			self.show_characteristics(reply)
 		else:
 			self.open_corridor(reply)
 
 
 	def first(self, reply, text):
-		reply(HELLO_MESSAGE)
+		reply(locale_manager.get('HELLO_MESSAGE'))
 
 		self.open_corridor(reply)
 
@@ -737,7 +737,7 @@ class User(object):
 
 	def message(self, reply, text):
 		if self.dead:
-			reply(DEAD_MESSAGE_AGAIN, [ '/start' ])
+			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':

@@ -2,7 +2,7 @@ import random
 
 name = 'Сундук'
 
-actions = ['Открыть сундку', 'Уйти']
+actions = ['Открыть сундук', 'Уйти']
 
 
 def get_actions(user):
@@ -41,7 +41,7 @@ def action(user, reply, text):
 				user.add_item('loot', 'bat_wing')
 			elif generator == 3:
 				reply('В сундуке был Указатель')
-				user.add_item('neutral', 'sing')
+				user.add_item('neutral', 'sign')
 			elif generator == 4:
 				reply('В сундуке был Трезубец')
 				user.add_item('special', 'trident', )

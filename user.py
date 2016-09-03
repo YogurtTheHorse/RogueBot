@@ -108,7 +108,7 @@ class User(object):
 		return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.items ] if i is not None ]
 
 	def get_active_items(self):
-		return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.active_items ] if i is not None ]
+		return self.get_items()
 
 	def get_damage(self):
 		res = 0
@@ -160,7 +160,7 @@ class User(object):
 		return False
 
 	def get_active_slots_len(self):
-		return 10 + self.story_level * 3
+		return 10 + self.story_level * 3 + self.rooms_count // 15
 
 	def heal(self, hp):
 		self.hp = min(self.hp + hp, self.max_hp)
@@ -716,10 +716,10 @@ class User(object):
 					actions.append(i.name)
 
 				if active_items.count(i) > 0:
-					actions.append(locale_manager.get('DEACTIVATE') + i.name)
+					pass#actions.append(locale_manager.get('DEACTIVATE') + i.name)
 
 				if active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
-					actions.append(locale_manager.get('ACTIVATE') + i.name)
+					pass#actions.append(locale_manager.get('ACTIVATE') + i.name)
 
 				actions.append(locale_manager.get('THROW_AWAY') + i.name)
 
@@ -734,7 +734,7 @@ class User(object):
 	def inventory(self, reply, text):
 		if text == locale_manager.get('TO_CORRIDOR'):
 			self.open_corridor(reply)
-		elif text.startswith(locale_manager.get('ACTIVATE')):
+		elif False and text.startswith(locale_manager.get('ACTIVATE')):
 			name = text[len(locale_manager.get('ACTIVATE')):]
 
 			item = self.get_item_by_name(name)
@@ -749,7 +749,7 @@ class User(object):
 				reply(locale_manager.get('CANT_ACTIVATE'))
 
 			self.open_inventory(reply)
-		elif text.startswith(locale_manager.get('DEACTIVATE')):
+		elif False and text.startswith(locale_manager.get('DEACTIVATE')):
 			name = text[len(locale_manager.get('DEACTIVATE')):]
 
 			item = self.get_item_by_name(name)

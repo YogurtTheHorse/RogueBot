@@ -739,14 +739,17 @@ class User(object):
 
 			item = self.get_item_by_name(name)
 			
-			if item is None:
-				reply(locale_manager.get('CANT_ACTIVATE'))
-			else:
+			if item is not None and active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
 				self.active_items.append((item.buff, item.code_name))
 				reply(locale_manager.get('ACTIVATED'))
+			else:
+				reply(locale_manager.get('CANT_ACTIVATE'))
+				
 			self.open_inventory(reply)
 		elif text.startswith(locale_manager.get('DEACTIVATE')):
 			name = text[len(locale_manager.get('DEACTIVATE')):]
+
+			item = self.get_item_by_name(name)
 
 			self.deactivate_item_by_name(name)
 			self.open_inventory(reply)

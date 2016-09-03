@@ -1,6 +1,6 @@
 from constants import *
 
-name = 'Длиноволоссая брюнетка'
+name = 'Длинноволосая брюнетка'
 
 hp = 120
 element = NONE

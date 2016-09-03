@@ -741,7 +741,7 @@ class User(object):
 
 			active_items = self.get_active_items()
 			
-			if item is not None and active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
+			if item is not None and active_items.count(item) < items.count(item) and (len(active_items) < self.get_active_slots_len()):
 				self.active_items.append((item.buff, item.code_name))
 				reply(locale_manager.get('ACTIVATED'))
 			else:

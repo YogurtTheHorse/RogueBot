@@ -715,10 +715,10 @@ class User(object):
 				if i.usable:
 					actions.append(i.name)
 
-				if active_items.count(i) == items.count(i):
+				if active_items.count(i) > 0:
 					actions.append(locale_manager.get('DEACTIVATE') + i.name)
 
-				if active_items.count(i) > 0 and (len(active_items) < self.get_active_slots_len()):
+				if active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
 					actions.append(locale_manager.get('ACTIVATE') + i.name)
 
 				actions.append(locale_manager.get('THROW_AWAY') + i.name)

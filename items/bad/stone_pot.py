@@ -1,6 +1,6 @@
 from constants import *
 
-name = 'Серое зелье'
+name = 'Белок зелье'
 
 description = (
 	'Пробирка с каким-то серым зельем'
@@ -13,4 +13,4 @@ disposable = True
 def on_use(user, reply):
 	reply('Теперь ты Булыжник.', [ ])
 
-	user.reborn(reply, 'Булыжник должен лежать')
+	user.reborn(reply, 'Булыжник должен лежать', photo='BQADAgAD8gADDLXzAxLUH2ng6NIiAg')

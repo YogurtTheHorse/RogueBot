@@ -1,6 +1,6 @@
 from constants import *
 
-name = 'Зеленое зелье'
+name = 'Коричневое зелье'
 
 description = (
 	'Пробирка с каким-то зеленым зельем'

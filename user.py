@@ -230,10 +230,12 @@ class User(object):
 
 			reply(msg, buttons)
 
-	def make_damage(self, mn, mx, reply, death=True):
+	def make_damage(self, mn, mx, reply, death=True, defence=True):
 		old_hp = self.hp
 
-		dmg = max(random.randint(mn, mx) - self.get_defence(), 0)
+		dmg = random.randint(mn, mx)
+		if defence:
+			dmg = max(dmg - self.get_defence(), 0)
 		self.hp -= dmg
 
 		if not death:

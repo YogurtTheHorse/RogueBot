@@ -23,7 +23,7 @@ def enter(user, reply):
 	if ch < 0:
 		reply('Оно треснуло')
 		user.won(reply)
-	elif ch > 10:
+	elif ch > 15:
 		reply('Такой красивый. Иди с миром ;)')
 		user.won(reply)
 
@@ -36,9 +36,9 @@ def make_damage(user, reply, dmg):
 
 		reply('Ты перестарался и оно нанесло тебе немного урона в ответ')
 
-		user.make_damage(0, -hp, reply)
+		user.make_damage(0, -hp, reply, defence=False)
 	else:
 		user.set_room_temp('hp', hp)
 
 		reply('Ты нанес сам себе урон, равный *{0}*'.format(dmg))
-		user.make_damage(dmg, dmg, reply)
+		user.make_damage(dmg, dmg, reply, defence=False)

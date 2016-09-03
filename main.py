@@ -243,7 +243,7 @@ updater.dispatcher.add_handler(CommandHandler('no', no))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 
-intervention_job = Job(divine_intervention, 60 * 60.0)
+intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
 updater.job_queue.put(intervention_job)
 
 logger.info('Starting polling...')

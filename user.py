@@ -249,6 +249,10 @@ class User(object):
 		return old_hp - self.hp
 
 	def death(self, reply):
+		if self.state == 'room':
+			room = roomloader.load_room(self.room[1], self.room[0])
+			reply(locale_manager.get('DEATH_PLACE').format(room.name))
+
 		self.dead = True
 		self.state = ''
 
@@ -755,18 +759,24 @@ class User(object):
 		except:
 			self.last_message = datetime.now()
 
+		if self.dead:
+			return
+
 		if self.has_item('intoxicated_shoes'):
 			reply(locale_manager.get('DIVINE_FORGIVES'))
+			self.remove_item('intoxicated_shoes')
 		else:
 			if res < 0.1 and not self.has_item('assasin_ticket'):
 				self.add_item('special', 'assasin_ticket')
 				reply(locale_manager.get('DIVINE_ASSASIN'))
-			elif res < 0.55:
+			elif res < 0.55 and self.hp < self.max_hp:
 				self.heal(self.max_hp // 2)
 				reply(locale_manager.get('DIVINE_HEAL'))
-			else:
+			elif self.mp < self.max_mp:
 				self.mana(self.max_mp // 2)
 				reply(locale_manager.get('DIVINE_MANA'))
+			else:
+				self.gold += 2000
 
 
 	def message(self, reply, text):

@@ -2,7 +2,7 @@ from constants import *
 
 name = 'Кролик'
 
-hp = 700
+hp = 250
 element = NONE
 damage_range = ( 1, 3 )
 

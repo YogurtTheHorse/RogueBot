@@ -16,7 +16,7 @@ def get_actions(user):
 
 def action(user, reply, text):
 	if text == 'Начать кружится с ним':
-		reply('Ты укружился обратно в коридор. А в корманах стало меньше денег.')
+		reply('Ты укружился обратно в коридор. А в карманах стало меньше денег.')
 
 		user.steal(150)
 		user.leave(reply)

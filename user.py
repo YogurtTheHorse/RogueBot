@@ -301,6 +301,9 @@ class User(object):
 
 		buttons = [ locale_manager.get('OPEN_NEXT_DOOR'), locale_manager.get('PLAYER_CHARACTERISTICS') ]
 
+		if self.has_item('sign'):
+			buttons.append(locale_manager.get('USE_SIGN'))
+
 		if not self.prayed:
 			buttons.append(locale_manager.get('PRAY_TO_GOD'))
 
@@ -745,7 +748,7 @@ class User(object):
 
 			if not self.remove_item_by_name(name):
 				reply(locale_manager.get('CANT_THROW'))
-				self.open_inventory(reply)
+				self.open_inventory(reply)			
 			else:
 				self.open_inventory(reply)
 		elif text == locale_manager.get('BACK'):
@@ -784,6 +787,8 @@ class User(object):
 	def corridor(self, reply, text):
 		if text.startswith(locale_manager.get('OPEN_NEXT_DOOR').split()[0]):
 			self.open_room(reply)
+		elif text == locale_manager.get('USE_SIGN'):
+			self.open_room(reply, 'special', 'sign')
 		elif text.startswith(locale_manager.get('PRAY_TO_GOD').split()[0]):
 			self.pray(reply)
 		elif text.startswith(locale_manager.get('OPEN_SHOP').split()[0]):

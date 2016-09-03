@@ -291,7 +291,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		reply(locale_manager.get('DEAD_MESSAGE'), [ '/start' ])
+		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -408,6 +408,8 @@ class User(object):
 	def won(self, reply):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
+		self.monsters_killed += 1
+
 		items = [ itemloader.load_item(i, 'loot') for i in room.loot ]
 		loot = ', '.join([ item.name for item in items ]) if len(items) > 0 else 'Ничего.'
 
@@ -425,6 +427,8 @@ class User(object):
 
 	def open_room(self, reply, room_type=None, room_name=None):
 		self.state = 'room'
+
+		self.rooms_count += 1
 
 		if not (room_type and room_name):
 			if self.rooms_to_story < 1:
@@ -781,7 +785,9 @@ class User(object):
 			self.get_defence(), 
 			self.get_charisma(),
 			self.get_mana_damage(),
-			self.get_intelligence()
+			self.get_intelligence(),
+			self.monsters_killed,
+			self.rooms_count
 		)
 
 		reply(msg)

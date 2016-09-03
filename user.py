@@ -64,6 +64,8 @@ class User(object):
 		self.story_level = 0
 
 		self.last_message = datetime.now()
+		self.rooms_count = 0
+		self.monsters_killed = 0
 
 		self.subject = None
 

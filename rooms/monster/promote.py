@@ -10,3 +10,15 @@ loot = [ ]
 def enter(user, reply):
 	reply('Он в костюме пачки сигарет «Мальберт». Он выглядит весьма упоротым и почему-то кружится на месте.')
 	reply('Сегодня его выкуривали несколько раз. Он будет мстить')
+
+def get_actions(user):
+	return user.get_fight_actions() + [ 'Начать кружится с ним' ]
+
+def action(user, reply, text):
+	if text == 'Начать кружится с ним':
+		reply('Ты укружился обратно в коридор. А в корманах стало меньше денег.')
+
+		user.steal(150)
+		user.leave(reply)
+	else:
+		user.fight_action(reply, text)

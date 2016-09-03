@@ -704,14 +704,15 @@ class User(object):
 
 		for i in selected_items[begin:end]:
 			if i is not None:
-				is_atcive = '(+)' if i in active_items else ''
-				msg += '{0} {1} ({2} шт.):\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description)
+				is_atcive = '(Надето: {0} шт.)'.format(active_items.count(i)) if i in active_items else ''
+				msg += '{0} ({2} шт.) {1}:\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description)
 				if i.usable:
 					actions.append(i.name)
 
-				if i in active_items:
+				if active_items.count(i) == items.count(i):
 					actions.append(locale_manager.get('DEACTIVATE') + i.name)
-				elif len(active_items) < self.get_active_slots_len():
+
+				if active_items.count(i) <= items.count(i) and (len(active_items) < self.get_active_slots_len()):
 					actions.append(locale_manager.get('ACTIVATE') + i.name)
 
 				actions.append(locale_manager.get('THROW_AWAY') + i.name)

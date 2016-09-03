@@ -37,7 +37,7 @@ def dice(user, reply, result, subject=None):
 		if result > DICE_MIDDLE:
 			reply('Победа за тобой. НО комиссар тебе это припомнит')
 			user.add_tag(EVIL_COMISSAR)
-			user.add_item('special', 'laser_gun')
+			user.add_item('loot', 'laser_gun')
 			user.leave(reply)
 		else:
 			reply('Да вас, батенька, расстреляли')

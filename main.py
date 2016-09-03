@@ -1,8 +1,8 @@
 import config
 
-from telegram.ext import Job
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Job
 
 import usermanager
 import telegram
@@ -138,6 +138,39 @@ def no(bot, update):
 
 		save_question()
 
+def divine_intervention(bot, job):
+	logger.info('Divine intervention!')
+
+	for uid in usermanager.get_telegram_users():
+		global msg, image, buttons
+		msg = ''
+		image = None
+		buttons = None
+
+		def rep(txt, btns=None, photo=None):
+			global msg, image, buttons
+
+			if len(msg) + len(txt) + 2 >= 4096:
+				reply(uid, bot, msg, buttons, image)
+
+				msg = ''
+				image = None
+				buttons = None
+
+
+			msg += '\n\n'
+			msg += txt
+
+			if btns:
+				buttons = btns
+			if photo:
+				image = photo
+				
+		usermanager.divine_intervention(uid, rep)
+
+		if len(msg) > 0 or image:
+			reply(uid, bot, msg, buttons, image)
+
 def msg(bot, update):
 	c_id = update.message.chat_id
 
@@ -210,7 +243,11 @@ updater.dispatcher.add_handler(CommandHandler('no', no))
 updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 
+intervention_job = Job(divine_intervention, 60 * 60.0)
+updater.job_queue.put(intervention_job)
+
 logger.info('Starting polling...')
 updater.start_polling()
+
 logger.info('Bot now officially started!')
 updater.idle()

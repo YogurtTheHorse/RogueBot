@@ -41,6 +41,11 @@ def get_user(uid):
 	else:
 		return None
 
+def divine_intervention(uid, reply):
+	usr = get_user(uid)
+	usr.divine_intervention(reply)
+	save_user(usr)
+
 def message(uid, reply, text):
 	usr = get_user(uid)
 

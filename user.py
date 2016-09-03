@@ -150,6 +150,12 @@ class User(object):
 				
 		return False
 
+	def heal(self, hp):
+		self.hp = min(self.hp + hp, self.max_hp)
+
+	def mana(self, mp):
+		self.mp = min(self.mp + mp, self.max_mp)
+
 	def get_stats(self):
 		return locale_manager.get('USER_STATS').format(self.hp, self.mp, self.gold)
 
@@ -734,6 +740,23 @@ class User(object):
 	def reborn(self, reply, answer):
 		self.state = 'reborned'
 		self.reborn_answer = answer
+
+	def divine_intervention(self, reply):
+		res = random.random()
+
+		if self.has_item('intoxicated_shoes'):
+			reply(locale_manager.get('DIVINE_FORGIVES'))
+		else:
+			if res < 0.1 and not self.has_item('assasin_ticket'):
+				self.add_item('special', 'assasin_ticket')
+				reply(locale_manager.get('DIVINE_ASSASIN'))
+			elif res < 0.55:
+				self.heal(self.max_hp // 2)
+				reply(locale_manager.get('DIVINE_HEAL'))
+			else:
+				self.mana(self.max_mp // 2)
+				reply(locale_manager.get('DIVINE_MANA'))
+
 
 	def message(self, reply, text):
 		if self.dead:

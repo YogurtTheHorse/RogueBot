@@ -105,54 +105,60 @@ class User(object):
 	def get_items(self):
 		return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.items ] if i is not None ]
 
+	def get_active_items(self):
+		return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.active_items ] if i is not None ]
+
 	def get_damage(self):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.damage
 
 		return res + self.damage
 
 	def get_damage_bonus(self, reply):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.get_damage_bonus(self, reply)
 
 		return res
 
 	def get_defence(self):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.defence
 
 		return res + self.defence
 
 	def get_charisma(self):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.charisma
 
 		return res + self.charisma
 
 	def get_mana_damage(self):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.mana_damage
 
 		return res + self.mana_damage
 
 	def get_intelligence(self):
 		res = 0
-		for i in self.get_items():
+		for i in self.get_active_items():
 			res += i.intelligence
 
 		return res + self.intelligence
 
 	def has_aura(self, aura):
-		for i in self.get_items():
+		for i in self.get_active_items():
 			if i.aura == aura:
 				return True
 				
 		return False
+
+	def get_active_slots_len(self):
+		return 10 + self.story_level * 3
 
 	def heal(self, hp):
 		self.hp = min(self.hp + hp, self.max_hp)
@@ -175,10 +181,27 @@ class User(object):
 
 	def remove_items_with_tag(self, tag):
 		items = self.get_items()
+		active_items = self.get_active_items()
 
 		new_items = [ (i.buff, i.code_name) for i in items if tag not in i.tags ]
+		new_active_items = [ (i.buff, i.code_name) for i in active_items if tag not in i.tags ]
 
 		self.items = new_items
+		self.active_items = new_items
+
+	def deactivate_item_by_name(self, name):
+		ind = -1
+		active_items = self.get_active_items()
+		for i in range(len(self.active_items)):
+			if active_items[i].name == name:
+				ind = i
+				break
+
+		if ind >= 0:
+			del self.active_items[ind]
+
+			return True
+		return False
 
 	def remove_item_by_name(self, name):
 		ind = -1
@@ -188,11 +211,20 @@ class User(object):
 				ind = i
 				break
 
-		if ind >= 0 and not items[ind].iscursed:
+		if ind >= 0 and not items[ind].iscursed and items[ind] not in self.get_active_items():
 			del self.items[ind]
 
 			return True
 		return False
+
+	def get_item_by_name(self, name):
+		items = self.get_items()
+		
+		for i in items:
+			if i.name == name:
+				return i
+
+		return None
 
 	def paid(self, costs):
 		if self.gold >= costs and costs >= 0:
@@ -634,7 +666,6 @@ class User(object):
 		else:
 			reply(locale_manager.get('NO_GOLD'), self.shop_names)
 
-
 	def shop(self, reply, text):
 		if text == locale_manager.get('EXIT'):
 			reply(locale_manager.get('SHOP_EXITED'))
@@ -653,6 +684,7 @@ class User(object):
 		self.state = 'inventory'
 
 		items = self.get_items()
+		active_items = self.get_active_items()
 
 		if len(items) == 0:
 			self.open_corridor(reply)
@@ -669,9 +701,15 @@ class User(object):
 
 		for i in selected_items[begin:end]:
 			if i is not None:
-				msg += '{0} ({1} шт.):\n{2}\n\n'.format(i.name, counter_items[i], i.description)
+				is_atcive = '(+)' if i in active_items else ''
+				msg += '{0} {1} ({2} шт.):\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description)
 				if i.usable:
 					actions.append(i.name)
+
+				if i in active_items:
+					actions.append(locale_manager.get('DEACTIVATE') + i.name)
+				elif len(active_items) < self.get_active_slots_len():
+					actions.append(locale_manager.get('ACTIVATE') + i.name)
 
 				actions.append(locale_manager.get('THROW_AWAY') + i.name)
 
@@ -686,11 +724,28 @@ class User(object):
 	def inventory(self, reply, text):
 		if text == locale_manager.get('TO_CORRIDOR'):
 			self.open_corridor(reply)
+		elif text.startswith(locale_manager.get('ACTIVATE')):
+			name = text[len(locale_manager.get('ACTIVATE')):]
+
+			item = self.get_item_by_name(name)
+			
+			if item is None:
+				reply(locale_manager.get('CANT_ACTIVATE'))
+			else:
+				self.active_items.append((item.buff, item.code_name))
+				reply(locale_manager.get('ACTIVATED'))
+			self.open_inventory(reply)
+		elif text.startswith(locale_manager.get('DEACTIVATE')):
+			name = text[len(locale_manager.get('DEACTIVATE')):]
+
+			self.deactivate_item_by_name(name)
+			self.open_inventory(reply)
 		elif text.startswith(locale_manager.get('THROW_AWAY')):
 			name = text[len(locale_manager.get('THROW_AWAY')):]
 
 			if not self.remove_item_by_name(name):
 				reply(locale_manager.get('CANT_THROW'))
+				self.open_inventory(reply)
 			else:
 				self.open_inventory(reply)
 		elif text == locale_manager.get('BACK'):

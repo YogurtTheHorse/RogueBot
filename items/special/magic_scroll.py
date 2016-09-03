@@ -27,7 +27,7 @@ def fight_use(user, reply, room):
 				'Надеюсь она не в другом замке'
 			)
 
-			user.reborn(reply)
+			user.reborn(reply, 'Ква')
 
 		else:
 			reply(

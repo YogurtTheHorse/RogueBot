@@ -1,3 +1,5 @@
+from constants import *
+
 name = 'Длиноволоссая брюнетка'
 
 hp = 120

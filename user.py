@@ -1,4 +1,5 @@
 import random
+from datetime import datetime
 
 from time import gmtime, strftime
 
@@ -60,6 +61,8 @@ class User(object):
 		self.rooms_to_story = random.randint(5, 25)
 		self.next_story_room = 'first'
 		self.story_level = 0
+
+		self.last_message = datetime.now()
 
 		self.subject = None
 
@@ -746,6 +749,12 @@ class User(object):
 	def divine_intervention(self, reply):
 		res = random.random()
 
+		try:
+			if (datetime.now() - self.last_message).total_seconds() > 60 * 60 * 2:
+				return
+		except:
+			self.last_message = datetime.now()
+
 		if self.has_item('intoxicated_shoes'):
 			reply(locale_manager.get('DIVINE_FORGIVES'))
 		else:
@@ -761,6 +770,8 @@ class User(object):
 
 
 	def message(self, reply, text):
+		self.last_message = datetime.now()
+
 		if self.dead:
 			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])
 		elif self.state == 'name':

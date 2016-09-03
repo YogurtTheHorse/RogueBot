@@ -33,6 +33,7 @@ class User(object):
 		self.state = 'name'
 
 		self.items = [ ]
+		self.active_items = [ ]
 		self.inventory_page = 0
 
 		self.gods = [ locale_manager.get('BUDDHA'), locale_manager.get('JESUS'), locale_manager.get('ALLAH'), locale_manager.get('AUTHOR') ]

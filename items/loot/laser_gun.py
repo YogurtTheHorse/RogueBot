@@ -11,7 +11,7 @@ def fight_use(user, reply, room):
 	if user.has_item('laser_bullet'):
 		reply('БАХ! Выстрел!')
 
-		user.remove_item('bullet')
+		user.remove_item('laser_bullet')
 
 		return 60
 	else:

@@ -739,6 +739,7 @@ class User(object):
 
 			item = self.get_item_by_name(name)
 
+			items = self.get_items()
 			active_items = self.get_active_items()
 			
 			if item is not None and active_items.count(item) < items.count(item) and (len(active_items) < self.get_active_slots_len()):

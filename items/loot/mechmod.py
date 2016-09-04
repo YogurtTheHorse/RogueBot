@@ -1,4 +1,5 @@
-﻿name = 'Мехмод'
+﻿import random
+name = 'Мехмод'
 description = 'Вы чувствуете, как подворачиваются ваши штаны'
 
 price = 15

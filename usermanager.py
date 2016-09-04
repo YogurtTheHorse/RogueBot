@@ -21,7 +21,7 @@ def random_user():
 	return get_user(random.choice(list(get_telegram_users())))
 
 def get_telegram_users():
-	for f in glob.glob('users/*.usr'):
+	for f in glob.glob(config.USERS_PATH + '/*.usr'):
 		uid = ''
 		try:
 			uid = f.split('/')[1][:-4]

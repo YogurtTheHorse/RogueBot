@@ -46,6 +46,12 @@ cd build
 python3 main.pyc
 ```
 
+# Contributing localization
+
+- Edit the translations directly on the [yegorf1/RogueBot](http://www.localeapp.com/projects/public?search=yegorf1/RogueBot) project on Locale.
+- **That's it!**
+- The maintainer will then pull translations from the Locale project and push to Github.
+
 That's it.
 
 You can write me via Telegram (@yegorf1) or VK.com (vk.com/yegorf1) if you have any questions.

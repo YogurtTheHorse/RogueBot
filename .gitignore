@@ -100,3 +100,4 @@ question.int
 *.iml
 
 *.xml
+.localeapp

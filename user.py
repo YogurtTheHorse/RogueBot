@@ -169,7 +169,7 @@ class User(object):
 		self.mp = min(self.mp + mp, self.max_mp)
 
 	def get_stats(self):
-		return locale_manager.get('USER_STATS').format(self.hp, self.mp, self.gold)
+		return locale_manager.get('user.stats').format(self.hp, self.mp, self.gold)
 
 	def remove_item(self, code_name):
 		ind = -1
@@ -241,27 +241,27 @@ class User(object):
 
 	def name_confirm(self, reply, text):
 		if len(text) == 7:
-			txt = locale_manager.get('NAME_CONFIRMED').format(self.name)
+			txt = locale_manager.get('messages.name_confirmed').format(self.name)
 			self.state = 'first_msg'
 
 			logger.info('New user with id {0}'.format(self.uid))
 
-			reply(txt, [ locale_manager.get('WHATS_NEXT') ])
+			reply(txt, [ locale_manager.get('messages.whats_next') ])
 		else:
 			self.state = 'name'
-			reply(locale_manager.get('ASK_NAME_AGAIN'))
+			reply(locale_manager.get('messages.ask_name_again'))
 
 	def name_given(self, reply, name):
 		if '_' in name:
-			reply(locale_manager.get('NAME_ERROR'))
+			reply(locale_manager.get('messages.name_error'))
 		else:
 			n = name
 			while n == name:
 				n = random.choice (names)
 
-			msg = locale_manager.get('NAME_CONFIRM').format(n, name)
+			msg = locale_manager.get('messages.name_confirm').format(n, name)
 
-			buttons = [ locale_manager.get('NAME_AGREE'), locale_manager.get('NAME_DISMISS') ]
+			buttons = [ locale_manager.get('messages.name_agree'), locale_manager.get('messages.name_dismiss') ]
 				
 			self.state = 'name_confirm'
 			self.name = name
@@ -286,12 +286,12 @@ class User(object):
 	def death(self, reply):
 		if self.state == 'room':
 			room = roomloader.load_room(self.room[1], self.room[0])
-			reply(locale_manager.get('DEATH_PLACE').format(room.name))
+			reply(locale_manager.get('messages.dead_place').format(room.name))
 
 		self.dead = True
 		self.state = ''
 
-		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
+		reply(locale_manager.get('messages.dead_message').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
 	def open_corridor(self, reply):
 		if self.state == 'room':
@@ -859,7 +859,7 @@ class User(object):
 		self.last_message = datetime.now()
 
 		if self.dead:
-			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])
+			reply(locale_manager.get('messages.dead_message_again'), [ '/start' ])
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':

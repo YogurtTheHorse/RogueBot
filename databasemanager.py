@@ -48,6 +48,6 @@ def get_leaderboard(leaderboard_name='rooms', count=10):
 	table = db.table(leaderboard_name)
 
 	res = table.all()
-	res.sort(key=sort_by_score)
+	res.sort(key=sort_by_score, reverse=True)
 
 	return res[:count]

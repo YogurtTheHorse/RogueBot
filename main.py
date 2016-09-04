@@ -235,7 +235,7 @@ def leaderboard(bot, update):
 		score = r['score']
 
 		table_name = "{0} ({1})".format(name, bot.getChat(uid)['username'])
-		msg += '{0}. {1}: {2}'.format(i + 1, table_name, score)
+		msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
 
 	bot.sendMessage(update.message.chat_id, text=msg)
 

@@ -71,6 +71,9 @@ class User(object):
 
 		self.subject = None
 
+		self.race = 'human'
+		self.pet = None
+
 	def debug_info(self):
 		msg = 'uid: ' + str(self.uid) + '\n'
 		msg += 'name: ' + str(self.name) + '\n'
@@ -288,7 +291,10 @@ class User(object):
 	def update_leaderbord(self):
 		rate = 0
 		if self.rooms_count > 0:
-			rate =((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+			try:
+				rate =((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+			except:
+				pass
 
 		dbmanager.add_to_leaderboard(self, rate, dbmanager.RATE_TABLE)
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)

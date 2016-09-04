@@ -8,13 +8,9 @@ price = 300
 fightable = True
 
 def fight_use(user, reply, room):
-	if user.has_item('laser_bullet'):
-		reply('БАХ! Выстрел!')
-
+	res = 0
+	while user.has_item('laser_bullet') and res // 60 < 10:
 		user.remove_item('laser_bullet')
 
-		return 60
-	else:
-		reply('Пластикавая пулялка не работает без патронов. А жаль')
-
-		return 0
+		res += 60
+	return res

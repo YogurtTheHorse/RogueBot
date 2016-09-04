@@ -331,6 +331,9 @@ class User(object):
 		if not self.visited_shop:
 			buttons.append(locale_manager.get('OPEN_SHOP'))
 
+		if self.race == RAT_RACE:
+			buttons.append('Умереть')			
+
 		if len(self.items) > 0:
 			buttons.append(locale_manager.get('SHOW_INVENTORY'))
 
@@ -837,6 +840,8 @@ class User(object):
 			self.open_inventory(reply)
 		elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 			self.show_characteristics(reply)
+		elif text == 'Умереть':
+			self.death(reply)
 		else:
 			self.open_corridor(reply)
 

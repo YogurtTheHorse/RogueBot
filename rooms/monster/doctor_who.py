@@ -1,6 +1,6 @@
 name = 'Доктор кто'
 
-hp = 5000
+hp = 500000
 damage_range =  ( 0, 50 )
 
 coins = 0

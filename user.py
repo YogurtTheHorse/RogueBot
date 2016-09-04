@@ -70,6 +70,7 @@ class User(object):
 		self.monsters_killed = 0
 
 		self.subject = None
+		ыуда
 
 	def debug_info(self):
 		msg = 'uid: ' + str(self.uid) + '\n'
@@ -285,6 +286,13 @@ class User(object):
 
 		return old_hp - self.hp
 
+	def update_leaderbord(self):
+		rate = ((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+
+		dbmanager.add_to_leaderboard(self, rate, dbmanager.RATE_TABLE)
+		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
+		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
+
 	def death(self, reply, reason=None):
 		if self.state == 'room':
 			room = roomloader.load_room(self.room[1], self.room[0])
@@ -292,9 +300,6 @@ class User(object):
 
 		self.dead = True
 		self.state = ''
-
-		dbmanager.add_to_leaderboard(self, self.rooms_count)
-		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
@@ -831,8 +836,7 @@ class User(object):
 		self.state = 'reborned'
 		self.reborn_answer = answer
 
-		dbmanager.add_to_leaderboard(self, self.rooms_count)
-		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
+		self.update_leaderbord()
 
 	def divine_intervention(self, reply):
 		res = random.random()

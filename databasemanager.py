@@ -5,6 +5,7 @@ VAR_TABLE = 'vars'
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
 GNOME_TABLE = 'gnome'
+RATE_TABLE = 'rate'
 
 db = TinyDB(config.DATABASE_PATH)
 
@@ -25,7 +26,7 @@ def set_variable(name, value):
 	table = db.table(VAR_TABLE)
 	return table.insert({'name':name,'value':value})
 
-def add_to_leaderboard(user, score, reason=None, leaderboard_name='rooms'):
+def add_to_leaderboard(user, score, reason=None, leaderboard_name='rate'):
 	global db
 
 	table = db.table(leaderboard_name)
@@ -37,7 +38,7 @@ def add_to_leaderboard(user, score, reason=None, leaderboard_name='rooms'):
 	}
 	table.insert(doc)
 
-def get_leaderboard(leaderboard_name='rooms', count=10):
+def get_leaderboard(leaderboard_name='rate', count=10):
 	global db
 
 	if leaderboard_name not in db.tables():

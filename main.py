@@ -213,7 +213,7 @@ def msg(bot, update):
 def leaderboard(bot, update):
 	c_id = update.message.chat_id
 
-	lb = databasemanager.ROOMS_TABLE
+	lb = databasemanager.RATE_TABLE
 	cnt = 10
 	if len(update.message.text.split(' ')) >= 2:
 		lb = update.message.text.split(' ')[1]

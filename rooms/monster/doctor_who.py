@@ -1,3 +1,5 @@
+import databasemanager
+
 name = 'Доктор кто'
 
 hp = 500000
@@ -10,6 +12,10 @@ loot = [ 'fez', 'laser_screwdriver' ]
 def enter(user, reply):
 	reply('Кто-кто?..')
 
+	number = databasemanager.get_variable('doctor_num', 11)
+
+	reply('Я — _{0}_й Доктор!'.format(numer))
+
 def get_actions(user):
 	return user.get_fight_actions() + [ 'Сдаться' ]
 
@@ -20,3 +26,5 @@ def action(user, reply, text):
 		user.leave(reply)
 	else:
 		user.fight_action(reply, text)
+		number = databasemanager.get_variable('doctor_num', 1)
+		databasemanager.set_variable('doctor_num', number + 1)

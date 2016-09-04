@@ -38,7 +38,8 @@ def add_to_leaderboard(user, score, reason=None, leaderboard_name='rate'):
 		'uid': user.uid,
 		'name': user.name,
 		'score': score,
-		'reason': reason
+		'reason': reason,
+		'death_reason': user.death_reason
 	}
 	table.insert(doc)
 

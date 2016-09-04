@@ -24,7 +24,7 @@ def dice(user, reply, result, subject=None):
 	if subject == ESCAPE:
 		if result > (DICE_MAX / 3) * 2:
 			reply('Ты сбежал без потерь.')
-			user.make_damage(10, 20, reply)
+			user.make_damage(10, 20, reply, name=name)
 			user.leave(reply)
 		elif result > DICE_MAX / 3:
 			reply('Подстрелили руку. Держись, борец')

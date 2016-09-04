@@ -292,7 +292,7 @@ class User(object):
 
 		return old_hp - self.hp
 
-	def update_leaderbord(self):
+	def update_leaderbord(self, reason=None):
 		rate = 0
 		if self.rooms_count > 0:
 			try:
@@ -300,6 +300,7 @@ class User(object):
 			except:
 				pass
 
+		user.death_reason = reason
 		dbmanager.add_to_leaderboard(self, rate, dbmanager.RATE_TABLE)
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
 		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
@@ -312,7 +313,7 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		self.update_leaderbord()
+		self.update_leaderbord(reason)
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
@@ -845,7 +846,7 @@ class User(object):
 		elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 			self.show_characteristics(reply)
 		elif text == 'Умереть':
-			self.death(reply)
+			self.death(reply, reason='Суицид')
 		else:
 			self.open_corridor(reply)
 

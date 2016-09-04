@@ -234,12 +234,19 @@ def leaderboard(bot, update):
 		name = r['name']
 		score = r['score']
 		username = bot.getChat(uid)['username']
+		death_reason = None
+		if 'death_reason' in r:
+			death_reason = r['death_reason']
 
 		table_name = "{0}".format(name)
 		if len(username) > 0:
 			table_name += ' (@{0})'.format(username)
 			
 		msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
+		if death_reason is not None:
+			msg += 'Причина смерти: ' + death_reason
+
+		msg += '\n'
 
 	bot.sendMessage(update.message.chat_id, text=msg)
 

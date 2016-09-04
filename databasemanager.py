@@ -25,14 +25,15 @@ def set_variable(name, value):
 	table = db.table(VAR_TABLE)
 	return table.insert({'name':name,'value':value})
 
-def add_to_leaderboard(user, score, leaderboard_name='rooms'):
+def add_to_leaderboard(user, score, reason=None, leaderboard_name='rooms'):
 	global db
 
 	table = db.table(leaderboard_name)
 	doc = {
 		'uid': user.uid,
 		'name': user.name,
-		'score': score
+		'score': score,
+		'reason': reason
 	}
 	table.insert(doc)
 

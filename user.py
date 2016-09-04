@@ -27,6 +27,7 @@ class User(object):
 		self.hp = 100
 		self.mp = 100
 		self.gold = 200
+		self.race = HUMAN
 
 		self.max_hp = 150
 		self.max_mp = 150
@@ -284,7 +285,7 @@ class User(object):
 
 		return old_hp - self.hp
 
-	def death(self, reply):
+	def death(self, reply, reason=None):
 		if self.state == 'room':
 			room = roomloader.load_room(self.room[1], self.room[0])
 			reply(locale_manager.get('DEATH_PLACE').format(room.name))
@@ -829,7 +830,7 @@ class User(object):
 	def reborn(self, reply, answer):
 		self.state = 'reborned'
 		self.reborn_answer = answer
-		
+
 		dbmanager.add_to_leaderboard(self, self.rooms_count)
 		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 

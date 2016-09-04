@@ -40,9 +40,9 @@ def action(user, reply, text):
 			user.leave(reply)
 		else:
 			reply('Мужик одним ловким движением достал пистолет и... заморозил тебя')
-			reply('Приходи через 2 годика, может, уже и оттаишь')
+			reply('Приходи через 2 годика, может, уже и оттаешь')
 
-			user.reborn(reply, 'Еще чуть-чуть и оттаишь!')
+			user.reborn(reply, 'Еще чуть-чуть и оттаешь!')
 
 def get_actions(user):
 	question = user.get_room_temp('question', def_val='first')
@@ -52,8 +52,6 @@ def get_actions(user):
 		ans = [ READY, ESCAPE ]
 	elif question == 'action':
 		ans = [ HELLO, FIGHT ]
-	else:
-		ans = [ 'Черт возьми, ДА!', 'Нет' ]
 
 	random.shuffle(ans)
 

@@ -300,7 +300,7 @@ class User(object):
 			except:
 				pass
 
-		user.death_reason = reason
+		self.death_reason = reason
 		dbmanager.add_to_leaderboard(self, rate, dbmanager.RATE_TABLE)
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
 		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)

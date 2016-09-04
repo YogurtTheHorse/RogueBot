@@ -17,7 +17,14 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	rooms = [ roomloader.get_next_room() for i in range(3) ]
+	rooms = [  ]
+
+	while len(rooms) < 3:
+		rm = roomloader.get_next_room()
+		if rm[1] != 'empty':
+			rooms.append(rm)
+
+
 	user.set_room_temp('rooms', rooms)
 
 def action(user, reply, text):

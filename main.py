@@ -4,6 +4,7 @@ from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
 
+import databasemanager
 import usermanager
 import telegram
 import logging
@@ -209,6 +210,36 @@ def msg(bot, update):
 						context=(c_id, bot, msg, buttons, image))
 		reply(c_id, bot, msg, buttons, image)
 
+def leaderboard(bot, update):
+	c_id = update.message.chat_id
+
+	lb = databasemanager.ROOMS_TABLE
+	cnt = 10
+	if len(update.message.text.split(' ')) >= 2:
+		lb = update.message.text.split(' ')[1]
+		if len(update.message.text.split(' ')) >= 3:
+			try:
+				cnt_ = int(update.message.text.split(' ')[2])
+				if cnt_ > 0:
+					cnt = cnt_
+			except:
+				pass
+
+	res = databasemanager.get_leaderboard(lb)
+
+	msg = ''
+
+	for i, r in enumerate(res):
+		uid = r['uid']
+		name = r['name']
+		score = r['score']
+
+		table_name = "{0} ({1})".format(name, bot.getChat(uid)['username'])
+		msg += '{0}. {1}: {2}'.format(i + 1, table_name, score)
+
+	bot.sendMessage(update.message.chat_id, text=msg)
+
+
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
 	if '429' in str(error):
@@ -221,17 +252,18 @@ def error_callback(bot, update, error):
 					text='```text\n{0}\n```'.format(error_msg),
 					parse_mode=telegram.ParseMode.MARKDOWN)
 
-if not os.path.isdir('users'):
+if not os.path.isdir(config.USERS_PATH):
 	logger.info('Creating users directory')
-	os.makedirs('users')
+	os.makedirs(config.USERS_PATH)
 
 logger.info('Creating Updater...')
 updater = Updater(config.TELEGRAM_TOKEN)
 
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
-updater.dispatcher.add_handler(CommandHandler('notify', notify))
+updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
+updater.dispatcher.add_handler(CommandHandler('notify', notify))
+updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
+updater.dispatcher.add_handler(CommandHandler('start', start))
 updater.dispatcher.add_handler(CommandHandler('room', room))
 updater.dispatcher.add_handler(CommandHandler('give', give))
 

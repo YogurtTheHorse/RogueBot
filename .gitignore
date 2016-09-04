@@ -91,6 +91,7 @@ ENV/
 
 # Project trash
 users/
+data/
 config.py
 vk_config.json
 rogue_bot.sublime-workspace

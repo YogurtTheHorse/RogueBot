@@ -22,9 +22,13 @@ def get_variable(name, def_val=None):
 
 def set_variable(name, value):
 	global db
+	Variable = Query()
 
 	table = db.table(VAR_TABLE)
-	return table.insert({'name':name,'value':value})
+	if table.contains(Variable.name == name):
+		table.update({'value':value}, Variable.name == name)
+	else:
+		table.insert({'name':name,'value':value})
 
 def add_to_leaderboard(user, score, reason=None, leaderboard_name='rate'):
 	global db

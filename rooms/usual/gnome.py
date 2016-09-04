@@ -22,10 +22,13 @@ def action(user, reply, text):
 		integer = int(text)
 
 		if user.paid(integer) and integer > 0:
-			databasemanager.add_to_leaderboard(user, integer, databasemanager.GNOME_TABLE)
 			reply('«Держи эту прекрасную ложку ручной работы!»')
 
 			user.add_item('special', 'spoon')
+			try:
+				databasemanager.add_to_leaderboard(user, integer, databasemanager.GNOME_TABLE)
+			except:
+				pass
 		else:
 			reply('Вы ничего не поняли, но у вас исчезли деньги, а под глазом образовался синяк')
 			user.gold = 0

@@ -38,13 +38,12 @@ def add_to_leaderboard(user, score, leaderboard_name='rate'):
 		'uid': user.uid,
 		'name': user.name,
 		'score': score
-		
 	}
 	try:
 		doc['death_reason'] = user.death_reason
 	except:
 		pass
-		
+
 	table.insert(doc)
 
 def get_leaderboard(leaderboard_name='rate', count=10):

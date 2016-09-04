@@ -4,6 +4,7 @@ from tinydb import TinyDB, Query
 VAR_TABLE = 'vars'
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
+GNOME_TABLE = 'gnome'
 
 db = TinyDB(config.DATABASE_PATH)
 
@@ -20,14 +21,14 @@ def get_variabe(name, def_val=None):
 
 def set_variable(name, value):
 	global db
-	
+
 	table = db.table(VAR_TABLE)
 	return table.insert({'name':name,'value':value})
 
-def add_to_lederboard(user, score, lederboard_name='rooms'):
+def add_to_leaderboard(user, score, leaderboard_name='rooms'):
 	global db
-	
-	table = db.table(lederboard_name)
+
+	table = db.table(leaderboard_name)
 	doc = {
 		'uid': user.uid,
 		'name': user.name,
@@ -35,13 +36,16 @@ def add_to_lederboard(user, score, lederboard_name='rooms'):
 	}
 	table.insert(doc)
 
-def get_lederboard(lederboard_name='rooms', count=10):
+def get_leaderboard(leaderboard_name='rooms', count=10):
 	global db
-	
+
+	if leaderboard_name not in db.tables():
+		return [ ]
+
 	def sort_by_score(doc):
 		return doc['score']
 
-	table = db.table(lederboard_name)
+	table = db.table(leaderboard_name)
 
 	res = table.all()
 	res.sort(key=sort_by_score)

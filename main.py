@@ -210,12 +210,24 @@ def msg(bot, update):
 						context=(c_id, bot, msg, buttons, image))
 		reply(c_id, bot, msg, buttons, image)
 
-def lederboard(bot, update):
+def leaderboard(bot, update):
 	c_id = update.message.chat_id
 
-	res = databasemanager.get_lederboard()
+	lb = databasemanager.ROOMS_TABLE
+	cnt = 10
+	if len(update.message.text.split(' ')) >= 2:
+		lb = update.message.text.split(' ')[1]
+		if len(update.message.text.split(' ')) >= 3:
+			try:
+				cnt_ = int(update.message.text.split(' ')[2])
+				if cnt_ > 0:
+					cnt = cnt_
+			except:
+				pass
 
-	msg = 'По открытым комнатам побеждают:\n\n'
+	res = databasemanager.get_leaderboard(lb)
+
+	msg = ''
 
 	for i, r in enumerate(res):
 		uid = r['uid']
@@ -247,7 +259,7 @@ if not os.path.isdir(config.USERS_PATH):
 logger.info('Creating Updater...')
 updater = Updater(config.TELEGRAM_TOKEN)
 
-updater.dispatcher.add_handler(CommandHandler('lederboard', lederboard))
+updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
 updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('notify', notify))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))

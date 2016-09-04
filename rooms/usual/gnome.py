@@ -1,3 +1,5 @@
+import databasemanager
+
 name = 'Гном в красной шапке'
 
 def get_actions(user):
@@ -20,6 +22,7 @@ def action(user, reply, text):
 		integer = int(text)
 
 		if user.paid(integer) and integer > 0:
+			databasemanager.add_to_leaderboard(user, integer, databasemanager.GNOME_TABLE)
 			reply('«Держи эту прекрасную ложку ручной работы!»')
 
 			user.add_item('special', 'spoon')

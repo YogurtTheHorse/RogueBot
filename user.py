@@ -292,8 +292,8 @@ class User(object):
 		self.dead = True
 		self.state = ''
 
-		dbmanager.add_to_lederboard(self, self.rooms_count)
-		dbmanager.add_to_lederboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
+		dbmanager.add_to_leaderboard(self, self.rooms_count)
+		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 

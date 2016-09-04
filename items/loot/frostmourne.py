@@ -9,7 +9,7 @@ fightable = True
 def fight_use(user, reply, room):
 
 	if random.random() < 0.3:
-		reply('')
+		reply('Ледяная скорбь поглотила вашу душу')
 		user.death(reply)
 
 		return 0

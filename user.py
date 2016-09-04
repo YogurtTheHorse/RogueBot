@@ -829,6 +829,9 @@ class User(object):
 	def reborn(self, reply, answer):
 		self.state = 'reborned'
 		self.reborn_answer = answer
+		
+		dbmanager.add_to_leaderboard(self, self.rooms_count)
+		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
 	def divine_intervention(self, reply):
 		res = random.random()

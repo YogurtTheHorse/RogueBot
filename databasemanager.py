@@ -30,17 +30,21 @@ def set_variable(name, value):
 	else:
 		table.insert({'name':name,'value':value})
 
-def add_to_leaderboard(user, score, reason=None, leaderboard_name='rate'):
+def add_to_leaderboard(user, score, leaderboard_name='rate'):
 	global db
 
 	table = db.table(leaderboard_name)
 	doc = {
 		'uid': user.uid,
 		'name': user.name,
-		'score': score,
-		'reason': reason,
-		'death_reason': user.death_reason
+		'score': score
+		
 	}
+	try:
+		doc['death_reason'] = user.death_reason
+	except:
+		pass
+		
 	table.insert(doc)
 
 def get_leaderboard(leaderboard_name='rate', count=10):

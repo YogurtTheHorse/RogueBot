@@ -13,6 +13,7 @@ from utils.names import names
 from collections import Counter
 
 from localizations import locale_manager
+import databasemanager as dbmanager
 
 logger = logging.getLogger('rg')
 
@@ -290,6 +291,9 @@ class User(object):
 
 		self.dead = True
 		self.state = ''
+
+		dbmanager.add_to_lederboard(self, self.rooms_count)
+		dbmanager.add_to_lederboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 

@@ -2,10 +2,11 @@ import os
 import glob
 import pickle
 import random
+import config
 from user import User
 		
 def get_fname(uid):
-	return 'users/{0}.usr'.format(uid)
+	return config.USERS_PATH + '/{0}.usr'.format(uid)
 
 def save_user(usr):
 	with open(get_fname(usr.uid), 'wb') as outfile:

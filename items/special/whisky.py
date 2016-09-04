@@ -3,4 +3,8 @@ description = 'Jack Daniel’s'
 price = 100
 
 def on_room(user, reply, room):
-	reply('Допивать будете?')
+	if room.room_type == 'monster' and room.hp > 120:
+		reply('Ну нахрен, ты это вообще видел? Я сваливаю. И виски забиру с собой!')
+		user.remove_item('whisky')
+	else:
+		reply('Допивать будете?')

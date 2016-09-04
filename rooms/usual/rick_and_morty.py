@@ -3,7 +3,7 @@ from constants import *
 
 READY = 'Подойти ближе'
 ESCAPE = 'Уйти'
-HELLO = 'Поздароваться'
+HELLO = 'Поздороваться'
 FIGHT = 'Атаковать'
 
 name = 'Портал'

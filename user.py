@@ -286,7 +286,9 @@ class User(object):
 		return old_hp - self.hp
 
 	def update_leaderbord(self):
-		rate = ((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+		rate = 0
+		if self.rooms_count > 0:
+			rate =((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
 
 		dbmanager.add_to_leaderboard(self, rate, dbmanager.RATE_TABLE)
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
@@ -299,6 +301,8 @@ class User(object):
 
 		self.dead = True
 		self.state = ''
+
+		self.update_leaderbord()
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 

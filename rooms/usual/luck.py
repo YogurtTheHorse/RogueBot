@@ -7,7 +7,7 @@ def enter(user, reply):
 	user.leave(reply)
 
 def get_actions(user):
-	return х ъ
+	return [ ]
 
 
 def action(user, reply, text):

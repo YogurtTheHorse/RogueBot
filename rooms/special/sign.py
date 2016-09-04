@@ -1,3 +1,4 @@
+import random
 import rooms.roomloader as roomloader
 
 name = 'Распутье'

@@ -14,7 +14,7 @@ def enter(user, reply):
 
 	number = databasemanager.get_variable('doctor_num', 11)
 
-	reply('Я — _{0}_й Доктор!'.format(numer))
+	reply('Я — _{0}_й Доктор!'.format(number))
 
 def get_actions(user):
 	return user.get_fight_actions() + [ 'Сдаться' ]

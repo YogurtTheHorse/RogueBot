@@ -8,7 +8,7 @@ GNOME_TABLE = 'gnome'
 
 db = TinyDB(config.DATABASE_PATH)
 
-def get_variabe(name, def_val=None):
+def get_variable(name, def_val=None):
 	global db
 	Variable = Query()
 

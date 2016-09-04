@@ -1,7 +1,7 @@
 name = 'Сундук'
 
 ACTIVATED = 'activated'
-actions = ['Открыть сундку', 'Уйти']
+actions = ['Открыть сундук', 'Уйти']
 
 hp = 50
 damage_range = (50, 50)
@@ -19,7 +19,7 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видешь сундук.\nОбычный сундук')
+	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук')
 
 	user.set_room_temp(ACTIVATED, False)
 

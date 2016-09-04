@@ -10,7 +10,7 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видешь сундук.\nОбычный сундук')
+	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук')
 
 
 def action(user, reply, text):

@@ -1,7 +1,7 @@
 from constants import *
 from random import randrange
 
-name = 'Зобми'
+name = 'Зомби'
 element = DEAD
 hp = 20
 damage_range = (0, 2)

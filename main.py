@@ -233,8 +233,12 @@ def leaderboard(bot, update):
 		uid = r['uid']
 		name = r['name']
 		score = r['score']
+		username = bot.getChat(uid)['username']
 
-		table_name = "{0} ({1})".format(name, bot.getChat(uid)['username'])
+		table_name = "{0}".format(name)
+		if len(username) > 0:
+			table_name += ' (@{0})'.format(username)
+			
 		msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
 
 	bot.sendMessage(update.message.chat_id, text=msg)

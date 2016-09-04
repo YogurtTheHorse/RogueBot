@@ -70,7 +70,6 @@ class User(object):
 		self.monsters_killed = 0
 
 		self.subject = None
-		ыуда
 
 	def debug_info(self):
 		msg = 'uid: ' + str(self.uid) + '\n'

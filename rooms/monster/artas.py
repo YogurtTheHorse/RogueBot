@@ -1,6 +1,6 @@
 name = 'Король Лич'
 hp = 300
-dmg_range = ( 100, 120 )
+damage_range = ( 100, 120 )
 loot = [ 'frostmourne' ]
 
 def enter(user, reply):

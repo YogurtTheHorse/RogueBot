@@ -445,6 +445,11 @@ class User(object):
 		self.leave(reply)
 
 	def open_room(self, reply, room_type=None, room_name=None):
+		if self.race = RAT_RACE:
+			reply('Ты крыса, у тебя не хватило сил сдвинуть дверь с места :(')
+			self.open_corridor(reply)
+			return
+
 		self.state = 'room'
 
 		self.rooms_count += 1

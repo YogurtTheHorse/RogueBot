@@ -27,3 +27,4 @@ JAPANESE = 'japanese'
 SLIME_STICKER = 'BQADAgAD7AADDLXzAxPOv_f69TwOAg'
 
 HUMAN = 'human'
+RAT_RACE = 'rat'

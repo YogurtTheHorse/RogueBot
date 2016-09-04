@@ -5,7 +5,7 @@ price = 0
 disposable = True
 fightable = True
 
-def on_fight(user, reply, room):
+def fight_use(user, reply, room):
 	reply('Ты моргнул, а противн получил *9000* урона')
 
 	return 9000

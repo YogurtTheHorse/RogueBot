@@ -22,6 +22,6 @@ def action(user, reply, text):
 		user.add_item('loot', 'apple')
 	else:
 		reply('Из дерева выпадает змей и кусает тебя.')
-		user.make_damage(20, 30, reply)
+		user.make_damage(20, 30, reply, name=name)
 
 	user.leave(reply)

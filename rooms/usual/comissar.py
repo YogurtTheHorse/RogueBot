@@ -32,7 +32,7 @@ def dice(user, reply, result, subject=None):
 			user.leave(reply)
 		else:
 			reply('Да вас, батенька, расстреляли')
-			user.death(reply)
+			user.death(reply, reason=name)
 	elif subject == FIGHT:
 		if result > DICE_MIDDLE:
 			reply('Победа за тобой. НО комиссар тебе это припомнит')
@@ -41,7 +41,7 @@ def dice(user, reply, result, subject=None):
 			user.leave(reply)
 		else:
 			reply('Да вас, батенька, расстреляли')
-			user.death(reply)
+			user.death(reply, reason=name)
 
 def action(user, reply, text):
 	question = user.get_room_temp('question', def_val='first')

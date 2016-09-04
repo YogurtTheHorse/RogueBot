@@ -20,6 +20,6 @@ def fight_use(user, reply, room):
 		)
 		reply(msg)
 
-		user.make_damage(20, 40, reply)
+		user.make_damage(20, 40, reply, name=name)
 
 		return 0

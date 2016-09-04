@@ -273,7 +273,7 @@ class User(object):
 
 			reply(msg, buttons)
 
-	def make_damage(self, mn, mx, reply, death=True, defence=True):
+	def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 		old_hp = self.hp
 
 		dmg = random.randint(mn, mx)
@@ -284,7 +284,11 @@ class User(object):
 		if not death:
 			self.hp = max(self.hp, 1)
 		elif self.hp <= 0:
-			self.death(reply)
+			if name is None and self.state == 'room':
+				room = roomloader.load_room(self.room[1], self.room[0])
+				name = room.name
+
+			self.death(reply, reason=name)
 
 		return old_hp - self.hp
 
@@ -422,7 +426,7 @@ class User(object):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
 		a, b = room.damage_range
-		dmg = self.make_damage(a, b, reply)
+		dmg = self.make_damage(a, b, reply, name=room.name)
 
 		if not self.dead and dmg > 0.2:
 			reply(locale_manager.get('USER_DAMAGED').format(dmg))
@@ -585,7 +589,7 @@ class User(object):
 			self.make_damage(5, 10, reply, death=False)
 			reply(locale_manager.get('EVIL_JESUS'))
 		elif god == self.gods[2]: # Allah
-			self.make_damage(20, 30, reply)
+			self.make_damage(20, 30, reply, name='Аллах')
 			reply(locale_manager.get('EVIL_ALLAH'))
 		elif god == self.gods[3]: # Author
 			self.add_item('special', 'intoxicated_shoes')

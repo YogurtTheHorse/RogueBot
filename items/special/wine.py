@@ -16,7 +16,7 @@ def fight_use(user, reply, room):
 
 	if random.random() < 0.3:
 		reply('Это было больно.')
-		user.death(reply)
+		user.death(reply, reason=name)
 
 		return 0
 	else:

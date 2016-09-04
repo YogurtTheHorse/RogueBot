@@ -18,7 +18,7 @@ def dice(user, reply, result, subject=None):
 			user.remove_items_with_tag('scissors')
 			reply('О. Так у тебя есть ножницы. Ну и их отберем!')
 
-		user.make_damage(20, 30, reply)
+		user.make_damage(20, 30, reply, name=name)
 	user.leave(reply)
 
 def enter(user, reply):
@@ -37,7 +37,7 @@ def action(user, reply, text):
 			reply('С вами приятно работать!')
 		else:
 			reply('Наверное, без денег лучше не стричься. Вам постригли волосы и не только.')
-			user.make_damage(20, 30, reply)
+			user.make_damage(20, 30, reply, name=name)
 		
 		user.leave(reply)
 	elif text == actions[1]:

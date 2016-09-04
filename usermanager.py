@@ -27,6 +27,10 @@ def get_telegram_users():
 		if not uid.startswith('vk'):
 			yield uid
 
+def delete(uid):
+	if os.path.exists(get_fname(uid)):
+		os.remove(get_fname(uid))
+
 def get_user(uid):
 	if os.path.exists(get_fname(uid)):
 		usr = None

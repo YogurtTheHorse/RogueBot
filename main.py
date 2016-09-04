@@ -243,6 +243,9 @@ def leaderboard(bot, update):
 
 	bot.sendMessage(update.message.chat_id, text=msg)
 
+def stop(bot, update):
+	usermanager.delete(update.message.chat_id)
+
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
@@ -268,6 +271,7 @@ updater.dispatcher.add_handler(CommandHandler('setname', setname))
 updater.dispatcher.add_handler(CommandHandler('notify', notify))
 updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
 updater.dispatcher.add_handler(CommandHandler('start', start))
+updater.dispatcher.add_handler(CommandHandler('stop', stop))
 updater.dispatcher.add_handler(CommandHandler('room', room))
 updater.dispatcher.add_handler(CommandHandler('give', give))
 

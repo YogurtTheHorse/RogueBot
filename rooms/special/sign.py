@@ -24,7 +24,11 @@ def action(user, reply, text):
 	for room_type, room_name in rooms:
 		loaded_room = roomloader.load_room(room_name, room_type)
 		if loaded_room.name == text:
-			user.open_room(reply, room_type, room_name)
+			if random.random() < 0.1:
+				reply('Что-то пошло не так, ты увидел фезку пролетающую у тебя над головой. Ощущения будто был нарушен межпространственный континиум.')
+				user.open_room(reply)
+			else:
+				user.open_room(reply, room_type, room_name)
 			return
 
 	reply('Такого выбора тебе не давали')

@@ -4,7 +4,7 @@ damage_range = ( 100, 120 )
 loot = [ 'frostmourne' ]
 
 def enter(user, reply):
-	if user.story_level < 2:
+	if user.rooms_count < 500:
 		reply('Жалкая курица, пшел вон!')
 		user.leave(reply)
 	else:

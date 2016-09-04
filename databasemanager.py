@@ -39,10 +39,8 @@ def add_to_leaderboard(user, score, leaderboard_name='rate'):
 		'name': user.name,
 		'score': score
 	}
-	try:
+	if hasattr(user, 'death_reason'):
 		doc['death_reason'] = user.death_reason
-	except:
-		pass
 
 	table.insert(doc)
 

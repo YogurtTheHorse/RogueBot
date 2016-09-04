@@ -16,7 +16,6 @@ def enter(user, reply):
 	if user.has_aura(AURA_BUDDHA):
 		reply('Чубака уважает буддистов, правда не знает, кто это, но уважает.')
 		user.leave(reply)
-
-	if user.rooms_count < 100:
+	elif user.rooms_count < 100:
 		reply('Ты потерялся в его волосах и скрылся.')
 		user.leave(reply)

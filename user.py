@@ -281,7 +281,7 @@ class User(object):
 	def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 		old_hp = self.hp
 
-		dmg = random.randint(mn, mx)
+		dmg = random.randint(mn, mx) + self.rooms_count // 10
 		if defence:
 			dmg = max(dmg - self.get_defence(), 0)
 		self.hp -= dmg
@@ -553,7 +553,7 @@ class User(object):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
 		a, b = room.damage_range
-		dmg = self.make_damage(a, b, reply, name=room.name) + self.rooms_count // 10
+		dmg = self.make_damage(a, b, reply, name=room.name)
 
 		if not self.dead and dmg > 0.2:
 			reply(locale_manager.get('USER_DAMAGED').format(dmg))

@@ -357,6 +357,15 @@ class User(object):
 		else:
 			return def_val
 
+	def set_variable(self, name, val=None):
+		self.variables[name] = val
+
+	def get_variable(self, name, def_val=None):
+		if name in self.variables:
+			return self.variables[name]
+		else:
+			return def_val
+
 	def get_fight_actions(self):
 		actions = [
 			locale_manager.get('KICK_ARM'),

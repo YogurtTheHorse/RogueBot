@@ -71,15 +71,15 @@ def check_room(room, name, room_type):
 		required.append('damage_range')
 
 		def enter(user, reply):
-		  msg = (
-		    '*Ахххр-гр!*\n'
-		  )
+			msg = (
+				'*Ахххр-гр!*\n'
+			)
 
-		  reply(msg)
+			reply(msg)
 
-		  boss = bossmanager.current()
+			boss = bossmanager.current()
 
-		  user.set_room_temp('boss_id', boss['id'])
+			user.set_room_temp('boss_id', boss['id'])
 
 		def get_actions(user):
 			return user.get_fight_actions() + [ 'Уйти' ]
@@ -88,53 +88,53 @@ def check_room(room, name, room_type):
 			return user.fight_dice(reply, result, subject)
 
 		def action(user, reply, text):
-		  if text == 'Уйти':
-		    boss = bossmanager.current()
-		    user_boss_id = user.get_room_temp('boss_id')
+			if text == 'Уйти':
+				boss = bossmanager.current()
+				user_boss_id = user.get_room_temp('boss_id')
 
-		    if boss['id'] == user_boss_id and boss['alive'] is True:
-		      msg = (
-		        'Густой туман не дает тебе выйти.\n'
-		        'У боса осталось *{} HP*'.format(boss['hp'])
-		      )
+				if boss['id'] == user_boss_id and boss['alive']:
+					msg = (
+						'Густой туман не дает тебе выйти.\n'
+						'У боса осталось {} HP'.format(boss['hp'])
+					)
 
-		      reply(msg)
+					reply(msg)
 
-		    else:
-		      user.leave(reply)
+				else:
+					user.leave(reply)
 
-		  else:
-		    user.fight_action(reply, text)
+			else:
+				user.fight_action(reply, text)
 
 		def make_damage(user, reply, dmg):
-		  boss = bossmanager.current()
-		  user_boss_id = user.get_room_temp('boss_id')
+			boss = bossmanager.current()
+			user_boss_id = user.get_room_temp('boss_id')
 
-		  if boss['id'] == user_boss_id and boss['hp'] > 0:
-		    boss['hp'] -= dmg
+			if boss['id'] == user_boss_id and boss['hp'] > 0:
+				boss['hp'] -= dmg
 
-		    if boss['hp'] <= 0:
-		      bossmanager.die(boss)
-		      user.won(reply)
+				if boss['hp'] <= 0:
+					bossmanager.die(boss)
+					user.won(reply)
 
-		    else:
-		      msg = (
-		        'У боса осталось *{} HP*'.format(boss['hp'])
-		      )
+				else:
+					msg = (
+						'У боса осталось {} HP'.format(boss['hp'])
+					)
 
-		      reply(msg)
+					reply(msg)
 
-		      bossmanager.save(boss)
+					bossmanager.save(boss)
 
-		  else:
-		    msg = (
-		      'Ты ударил мертвую тушу и ничего не произошло.\n'
-		      'Так же ты заметил, что туман позади тебя исчез.\n'
-		    )
+			else:
+				msg = (
+					'Ты ударил мертвую тушу и ничего не произошло.\n'
+					'Так же ты заметил, что туман позади тебя исчез.\n'
+				)
 
-		    reply(msg)
+				reply(msg)
 
-		    user.leave(reply)
+				user.leave(reply)
 
 		if not hasattr(room, 'enter'):
 			setattr(room, 'enter', enter)
@@ -150,7 +150,6 @@ def check_room(room, name, room_type):
 
 		if not hasattr(room, 'make_damage'):
 			setattr(room, 'make_damage', make_damage)
-
 
 	for r in required:
 		if not hasattr(room, r):

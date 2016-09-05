@@ -309,60 +309,110 @@ class User(object):
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
 		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
+	def save(self):
+		save = dict()
+
+		save['hp'] = self.hp
+		save['mp'] = self.mp
+		save['gold'] = self.gold
+		save['race'] = self.race
+
+		save['max_hp'] = self.max_hp
+		save['max_mp'] = self.max_mp
+
+
+		save['items'] = self.items
+		save['active_items'] = self.active_items
+		save['inventory_page'] = self.inventory_page
+
+		save['gods'] = self.gods
+		save['gods_level'] = self.gods_level
+		save['last_god'] = self.last_god
+		save['prayed'] = self.prayed
+
+		save['damage'] = self.damage
+		save['defence'] = self.defence
+		save['charisma'] = self.charisma
+		save['mana_damage'] = self.mana_damage
+		save['intelligence'] = self.intelligence
+
+		save['tags'] = self.tags
+
+		save['reborn_answer'] = self.reborn_answer
+
+		save['rooms_to_story'] = self.rooms_to_story
+		save['next_story_room'] = self.next_story_room
+		save['story_level'] = self.story_level
+
+		save['last_message'] = self.last_message
+		save['rooms_count'] = self.rooms_count
+		save['monsters_killed'] = self.monsters_killed
+
+		save['variables'] = self.variables
+		save['pet'] = self.pet
+
+		self.set_variable('save', save)
+
 	def recover(self, reply):
 		save = self.get_variable('save')
 
-		self.hp = save.hp
-		self.mp = save.mp
-		self.gold = save.gold
-		self.race = save.race
+		try:
+			self.hp = save['hp']
+			self.mp = save['mp']
+			self.gold = save['gold']
+			self.race = save['race']
 
-		self.max_hp = save.max_hp
-		self.max_mp = save.max_mp
+			self.max_hp = save['max_hp']
+			self.max_mp = save['max_mp']
 
-		self.state = 'corridor'
 
-		self.items = save.items
-		self.active_items = save.active_items
-		self.inventory_page = save.inventory_page
+			self.items = save['items']
+			self.active_items = save['active_items']
+			self.inventory_page = save['inventory_page']
 
-		self.gods = save.gods
-		self.gods_level = save.gods_level
-		self.last_god = save.last_god
-		self.prayed = save.prayed
+			self.gods = save['gods']
+			self.gods_level = save['gods_level']
+			self.last_god = save['last_god']
+			self.prayed = save['prayed']
 
-		self.damage = save.damage
-		self.defence = save.defence
-		self.charisma = save.charisma
-		self.mana_damage = save.mana_damage
-		self.intelligence = save.intelligence
+			self.damage = save['damage']
+			self.defence = save['defence']
+			self.charisma = save['charisma']
+			self.mana_damage = save['mana_damage']
+			self.intelligence = save['intelligence']
 
-		self.tags = save.tags
+			self.tags = save['tags']
 
-		self.reborn_answer = save.reborn_answer
-		self.dead = False
+			self.reborn_answer = save['reborn_answer']
 
-		self.rooms_to_story = save.rooms_to_story
-		self.next_story_room = save.next_story_room
-		self.story_level = save.story_level
+			self.rooms_to_story = save['rooms_to_story']
+			self.next_story_room = save['next_story_room']
+			self.story_level = save['story_level']
 
-		self.last_message = save.last_message
-		self.rooms_count = save.rooms_count
-		self.monsters_killed = save.monsters_killed
+			self.last_message = save['last_message']
+			self.rooms_count = save['rooms_count']
+			self.monsters_killed = save['monsters_killed']
 
-		self.variables = save.variables
+			self.variables = save['variables']
+			self.pet = save['pet']
 
-		self.subject = None
-		self.pet = save.pet
+			self.state = 'corridor'
+			self.subject = None
 
-		self.room = ('', '')
-		self.room_temp = { }
+			self.room = ('', '')
+			self.room_temp = { }
 
-		self.visited_shop = False
-		self.shop_items = [ ]
-		self.shop_names = [ ]
+			self.dead = False
+			self.visited_shop = False
+			self.shop_items = [ ]
+			self.shop_names = [ ]
 
-		self.open_corridor(reply)
+			self.set_variable('save', None)
+		except:
+			pass
+		finally:
+			reply('О, сохранение!')
+			self.open_corridor(reply)
 
 	def death(self, reply, reason=None):
 		if self.state == 'room':
@@ -377,7 +427,6 @@ class User(object):
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
 		if 'save' in self.variables:
-			reply('Оказывается вы сохранены!')
 			self.recover(reply)
 
 	def open_corridor(self, reply):
@@ -936,6 +985,9 @@ class User(object):
 		self.reborn_answer = answer
 
 		self.update_leaderbord()
+
+		if 'save' in self.variables:
+			self.recover(reply)
 
 	def divine_intervention(self, reply):
 		res = random.random()

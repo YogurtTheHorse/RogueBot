@@ -378,8 +378,9 @@ class User(object):
 			reply(locale_manager.get('IMAGINATION_FIGHT').format(dmg))
 
 			room.make_damage(self, reply, dmg)
-
-			self.fight_answer(reply)
+			
+			if self.state == 'room':
+				self.fight_answer(reply)
 
 
 	def fight_action(self, reply, text):

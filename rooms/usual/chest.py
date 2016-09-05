@@ -1,8 +1,13 @@
+from constants import *
+import items.itemloader as itemloader
+import itertools
 import random
 
 name = 'Сундук'
 
 actions = ['Открыть сундук', 'Уйти']
+
+TYPES_OF_ITEMS = [ 'bad', 'good', 'neutral' ]
 
 
 def get_actions(user):
@@ -14,7 +19,6 @@ def enter(user, reply):
 
 
 def action(user, reply, text):
-
 	if text == actions[0]:
 		reply(
 			'Ты подходишь к сундуку...\n'
@@ -26,27 +30,31 @@ def action(user, reply, text):
 			'Поднимаешь крышку\n'
 		)
 
-		if random.random() > 0.5:
+		random_number = random.random();
+
+		if random_number < 0.33:
 			reply('Пусто\nОчень жаль. Повезет в следующий раз.')
 
+		elif random_number < 0.66:
+			coins = random.randrange(2, 5, 1)
+
+			reply('Яркий свет ослепил тебя. В сундуке ты нашел немного монет.')
+			for _ in itertools.repeat(None, coins):
+				user.add_item('neutral', 'coin')
+
 		else:
+			item_type, item_name, item = __random_item()
 
-			generator = random.randrange(0, 5, 1)
-
-			if generator == 1:
-				reply('В сундуке был Банан')
-				user.add_item('loot', 'banana')
-			elif generator == 2:
-				reply('В сундуке был Крыло крысы-летяги')
-				user.add_item('loot', 'bat_wing')
-			elif generator == 3:
-				reply('В сундуке был Указатель')
-				user.add_item('neutral', 'sign')
-			elif generator == 4:
-				reply('В сундуке был Трезубец')
-				user.add_item('special', 'trident', )
-			else:
-				reply('В сундуке был Амулет мага')
-				user.add_item('loot', 'mage_amulet')
+			reply('В сундуке был {}'.format(item.name))
+			user.add_item(item_type, item_name)
 
 	user.leave(reply)
+
+
+def __random_item():
+	items = list(map(itemloader.load_random_item, TYPES_OF_ITEMS))
+
+	item_type, item_name = random.choice(items)
+	item = itemloader.load_item(item_name, item_type)
+
+	return (item_type, item_name, item)

@@ -2,7 +2,7 @@ import databasemanager
 
 name = 'Доктор кто'
 
-hp = 500000
+hp = 5000000
 damage_range =  ( 0, 50 )
 
 coins = 0

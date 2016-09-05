@@ -1,6 +1,6 @@
 name = 'Диппер'
 
-hp = 250
+hp = 121
 damage_range = ( 16, 32 )
 
 coins = 9

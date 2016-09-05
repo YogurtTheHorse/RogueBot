@@ -21,12 +21,6 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text == TOOK_TOOK:
-			msg = (
-				'—Проходи, {0}, чего хотел?\nНа негнущихся коленях Вы проходите в середину комнаты. '
-				'Да, глаза Вас не подвели, это действительно...\n*Хидэо Кодзима*!'
-			).format(user.name)
-
-			reply(msg)
 			rnd = random.random()
 			if rnd < 0.33:
 				user.open_room(reply, 'special', 'kodzima')

@@ -1,6 +1,7 @@
 import os
 import random
 import logging
+import bossmanager
 from importlib.machinery import SourceFileLoader
 from importlib.machinery import SourcelessFileLoader
 
@@ -65,6 +66,91 @@ def check_room(room, name, room_type):
 
 		if not hasattr(room, 'make_damage'):
 			setattr(room, 'make_damage', make_damage)
+
+	elif room_type == 'boss':
+		required.append('damage_range')
+
+		def enter(user, reply):
+		  msg = (
+		    '*Ахххр-гр!*\n'
+		  )
+
+		  reply(msg)
+
+		  boss = bossmanager.current()
+
+		  user.set_room_temp('boss_id', boss['id'])
+
+		def get_actions(user):
+			return user.get_fight_actions() + [ 'Уйти' ]
+
+		def dice(user, reply, result, subject=None):
+			return user.fight_dice(reply, result, subject)
+
+		def action(user, reply, text):
+		  if text == 'Уйти':
+		    boss = bossmanager.current()
+		    user_boss_id = user.get_room_temp('boss_id')
+
+		    if boss['id'] == user_boss_id and boss['alive'] is True:
+		      msg = (
+		        'Густой туман не дает тебе выйти.\n'
+		        'У боса осталось *{} HP*'.format(boss['hp'])
+		      )
+
+		      reply(msg)
+
+		    else:
+		      user.leave(reply)
+
+		  else:
+		    user.fight_action(reply, text)
+
+		def make_damage(user, reply, dmg):
+		  boss = bossmanager.current()
+		  user_boss_id = user.get_room_temp('boss_id')
+
+		  if boss['id'] == user_boss_id and boss['hp'] > 0:
+		    boss['hp'] -= dmg
+
+		    if boss['hp'] <= 0:
+		      bossmanager.die(boss)
+		      user.won(reply)
+
+		    else:
+		      msg = (
+		        'У боса осталось *{} HP*'.format(boss['hp'])
+		      )
+
+		      reply(msg)
+
+		      bossmanager.save(boss)
+
+		  else:
+		    msg = (
+		      'Ты ударил мертвую тушу и ничего не произошло.\n'
+		      'Так же ты заметил, что туман позади тебя исчез.\n'
+		    )
+
+		    reply(msg)
+
+		    user.leave(reply)
+
+		if not hasattr(room, 'enter'):
+			setattr(room, 'enter', enter)
+
+		if not hasattr(room, 'get_actions'):
+			setattr(room, 'get_actions', get_actions)
+
+		if not hasattr(room, 'dice'):
+			setattr(room, 'dice', dice)
+
+		if not hasattr(room, 'action'):
+			setattr(room, 'action', action)
+
+		if not hasattr(room, 'make_damage'):
+			setattr(room, 'make_damage', make_damage)
+
 
 	for r in required:
 		if not hasattr(room, r):

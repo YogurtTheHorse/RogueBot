@@ -225,7 +225,7 @@ def leaderboard(bot, update):
 			except:
 				pass
 
-	res = databasemanager.get_leaderboard(lb)
+	res = databasemanager.get_leaderboard(lb, count=cnt)
 	msg = ''
 
 	if lb == 'death':

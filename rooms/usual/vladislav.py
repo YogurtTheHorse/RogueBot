@@ -27,9 +27,10 @@ def action(user, reply, text):
 			).format(user.name)
 
 			reply(msg)
-			if random.random() < 0.33:
+			rnd = random.random()
+			if rnd < 0.33:
 				user.open_room(reply, 'special', 'kodzima')
-			elif random.random() < 0.33:
+			elif rnd < 0.66:
 				user.open_room(reply, 'special', 'gabe')
 			else:
 				user.open_room(reply, 'special', 'bill_gates')

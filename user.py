@@ -1,3 +1,4 @@
+import copy
 import random
 from datetime import datetime
 
@@ -312,44 +313,44 @@ class User(object):
 	def save(self):
 		save = dict()
 
-		save['hp'] = self.hp
-		save['mp'] = self.mp
-		save['gold'] = self.gold
-		save['race'] = self.race
+		save['hp'] = copy.copy(self.hp)
+		save['mp'] = copy.copy(self.mp)
+		save['gold'] = copy.copy(self.gold)
+		save['race'] = copy.copy(self.race)
 
-		save['max_hp'] = self.max_hp
-		save['max_mp'] = self.max_mp
+		save['max_hp'] = copy.copy(self.max_hp)
+		save['max_mp'] = copy.copy(self.max_mp)
 
 
-		save['items'] = self.items
-		save['active_items'] = self.active_items
-		save['inventory_page'] = self.inventory_page
+		save['items'] = copy.copy(self.items)
+		save['active_items'] = copy.copy(self.active_items)
+		save['inventory_page'] = copy.copy(self.inventory_page)
 
-		save['gods'] = self.gods
-		save['gods_level'] = self.gods_level
-		save['last_god'] = self.last_god
-		save['prayed'] = self.prayed
+		save['gods'] = copy.copy(self.gods)
+		save['gods_level'] = copy.copy(self.gods_level)
+		save['last_god'] = copy.copy(self.last_god)
+		save['prayed'] = copy.copy(self.prayed)
 
-		save['damage'] = self.damage
-		save['defence'] = self.defence
-		save['charisma'] = self.charisma
-		save['mana_damage'] = self.mana_damage
-		save['intelligence'] = self.intelligence
+		save['damage'] = copy.copy(self.damage)
+		save['defence'] = copy.copy(self.defence)
+		save['charisma'] = copy.copy(self.charisma)
+		save['mana_damage'] = copy.copy(self.mana_damage)
+		save['intelligence'] = copy.copy(self.intelligence)
 
-		save['tags'] = self.tags
+		save['tags'] = copy.copy(self.tags)
 
-		save['reborn_answer'] = self.reborn_answer
+		save['reborn_answer'] = copy.copy(self.reborn_answer)
 
-		save['rooms_to_story'] = self.rooms_to_story
-		save['next_story_room'] = self.next_story_room
-		save['story_level'] = self.story_level
+		save['rooms_to_story'] = copy.copy(self.rooms_to_story)
+		save['next_story_room'] = copy.copy(self.next_story_room)
+		save['story_level'] = copy.copy(self.story_level)
 
-		save['last_message'] = self.last_message
-		save['rooms_count'] = self.rooms_count
-		save['monsters_killed'] = self.monsters_killed
+		save['last_message'] = copy.copy(self.last_message)
+		save['rooms_count'] = copy.copy(self.rooms_count)
+		save['monsters_killed'] = copy.copy(self.monsters_killed)
 
-		save['variables'] = self.variables
-		save['pet'] = self.pet
+		save['variables'] = copy.copy(self.variables)
+		save['pet'] = copy.copy(self.pet)
 
 		self.set_variable('save', save)
 

@@ -54,10 +54,10 @@ def get_leaderboard(leaderboard_name='rate', count=10):
 		res = table.all()
 
 		for r in res:
-			if 'death_reason' in r:
+			if 'death_reason' in r and str(r['death_reason']) != 'None':
 				counter.update([r['death_reason']])
 
-		return counter.most_common(count+1)[1:]
+		return counter.most_common(count)
 	else:
 		if leaderboard_name not in db.tables():
 			return [ ]

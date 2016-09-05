@@ -230,7 +230,7 @@ def leaderboard(bot, update):
 
 	if lb == 'death':
 		for i, r in enumerate(res):
-			msg += '{0}. {1}: {2}\n'.format(i, r[0], r[1])
+			msg += '{0}. {1}: {2}\n'.format(i + 1, r[0], r[1])
 	else:
 		for i, r in enumerate(res):
 			uid = r['uid']

@@ -309,6 +309,61 @@ class User(object):
 		dbmanager.add_to_leaderboard(self, self.rooms_count, dbmanager.ROOMS_TABLE)
 		dbmanager.add_to_leaderboard(self, self.monsters_killed, dbmanager.KILLS_TABLE)
 
+	def recover(self, reply):
+		save = self.get_variable('save')
+
+		self.hp = save.hp
+		self.mp = save.mp
+		self.gold = save.gold
+		self.race = save.race
+
+		self.max_hp = save.max_hp
+		self.max_mp = save.max_mp
+
+		self.state = 'corridor'
+
+		self.items = save.items
+		self.active_items = save.active_items
+		self.inventory_page = save.inventory_page
+
+		self.gods = save.gods
+		self.gods_level = save.gods_level
+		self.last_god = save.last_god
+		self.prayed = save.prayed
+
+		self.damage = save.damage
+		self.defence = save.defence
+		self.charisma = save.charisma
+		self.mana_damage = save.mana_damage
+		self.intelligence = save.intelligence
+
+		self.tags = save.tags
+
+		self.reborn_answer = save.reborn_answer
+		self.dead = False
+
+		self.rooms_to_story = save.rooms_to_story
+		self.next_story_room = save.next_story_room
+		self.story_level = save.story_level
+
+		self.last_message = save.last_message
+		self.rooms_count = save.rooms_count
+		self.monsters_killed = save.monsters_killed
+
+		self.variables = save.variables
+
+		self.subject = None
+		self.pet = save.pet
+
+		self.room = ('', '')
+		self.room_temp = { }
+
+		self.visited_shop = False
+		self.shop_items = [ ]
+		self.shop_names = [ ]
+
+		self.open_corridor(reply)
+
 	def death(self, reply, reason=None):
 		if self.state == 'room':
 			room = roomloader.load_room(self.room[1], self.room[0])
@@ -320,6 +375,10 @@ class User(object):
 		self.update_leaderbord(reason)
 
 		reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
+
+		if 'save' in self.variables:
+			reply('Оказывается вы сохранены!')
+			self.recover(reply)
 
 	def open_corridor(self, reply):
 		if self.state == 'room':

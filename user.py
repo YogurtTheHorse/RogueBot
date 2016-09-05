@@ -981,9 +981,12 @@ class User(object):
 
 		self.open_corridor(reply)
 
-	def reborn(self, reply, answer):
+	def reborn(self, reply, answer, name=None):
 		self.state = 'reborned'
 		self.reborn_answer = answer
+		self.death_reason = 'Перерождение'
+		if name is not None:
+			self.death_reason += ' ({0})'.format(name)
 
 		self.update_leaderbord()
 

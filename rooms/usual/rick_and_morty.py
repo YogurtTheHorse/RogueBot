@@ -44,7 +44,7 @@ def action(user, reply, text):
 			reply('Мужик одним ловким движением достал пистолет и... заморозил тебя')
 			reply('Приходи через 2 годика, может, уже и оттаешь')
 
-			user.reborn(reply, 'Еще чуть-чуть и оттаешь!')
+			user.reborn(reply, 'Еще чуть-чуть и оттаешь!', name='Кусок льда')
 
 def get_actions(user):
 	question = user.get_room_temp('question', def_val='first')

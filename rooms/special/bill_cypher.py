@@ -36,7 +36,7 @@ def action(user, reply, text):
 			user.set_room_temp('question', 'negotiate')
 		elif text == FIGHT:
 			reply('Посмотри на себя, зачем так злиться?.\nТеперь ты зеркало')
-			user.reborn(reply, 'Зеркало может только отражать')
+			user.reborn(reply, 'Зеркало может только отражать', name='Зеркало')
 	elif question == 'negotiate':
 		if text == 'Да, забирай!':
 			reply('Вот и славно. Смотри не рассыпь.')
@@ -44,4 +44,4 @@ def action(user, reply, text):
 			user.leave(reply)
 		else:
 			reply('Какой ты не сговорчивый.\nСловно воды в рот набрал.')
-			user.reborn(reply, 'Рыбы на суше не живут')
+			user.reborn(reply, 'Рыбы на суше не живут', name='Рыба')

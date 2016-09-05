@@ -13,4 +13,4 @@ disposable = True
 def on_use(user, reply):
 	reply('Теперь ты Дерево.', [ ])
 
-	user.reborn(reply, 'Деревья ничего не делают')
+	user.reborn(reply, 'Деревья ничего не делают', name='Дерево')

@@ -7,9 +7,16 @@ def get_actions(user):
 
 def enter(user, reply):
 	reply('Дубовая!')
+	user.set_room_temp('cnt', 0)
 
 def action(user, reply, text):
 	if text == actions[0]:
+		cnt = user.get_room_temp('cnt', def_val=0)
+		if cnt > 10:
+			reply('_Ты устал_')
+		elif cnt > 20:
+			reply('_Ты умер от изнеможения')
+			user.death(reply, reason='Столкновение с дверью')
 		reply('_тишина_')
 	else:
 		reply('Ты открываешь дверь, а за ней.. Коридор!')

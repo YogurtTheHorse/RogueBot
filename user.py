@@ -301,7 +301,7 @@ class User(object):
 		rate = 0
 		if self.rooms_count > 0:
 			try:
-				rate =((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+				rate = ((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
 			except:
 				pass
 
@@ -984,11 +984,11 @@ class User(object):
 	def reborn(self, reply, answer, name=None):
 		self.state = 'reborned'
 		self.reborn_answer = answer
-		self.death_reason = 'Перерождение'
+		reason = 'Перерождение'
 		if name is not None:
-			self.death_reason += ' ({0})'.format(name)
+			reason += ' ({0})'.format(name)
 
-		self.update_leaderbord()
+		self.update_leaderbord(reason=reason)
 
 		if 'save' in self.variables:
 			self.recover(reply)

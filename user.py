@@ -75,6 +75,8 @@ class User(object):
 		self.race = 'human'
 		self.pet = None
 
+		self.variables = dict()
+
 	def debug_info(self):
 		msg = 'uid: ' + str(self.uid) + '\n'
 		msg += 'name: ' + str(self.name) + '\n'

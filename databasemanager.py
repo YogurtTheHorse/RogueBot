@@ -1,4 +1,5 @@
 import config
+import collections
 from tinydb import TinyDB, Query
 
 VAR_TABLE = 'vars'
@@ -47,15 +48,26 @@ def add_to_leaderboard(user, score, leaderboard_name='rate'):
 def get_leaderboard(leaderboard_name='rate', count=10):
 	global db
 
-	if leaderboard_name not in db.tables():
-		return [ ]
+	if leaderboard_name == 'death':
+		counter = collections.Counter()
+		table = db.table(RATE_TABLE)
+		res = table.all()
 
-	def sort_by_score(doc):
-		return doc['score']
+		for r in res:
+			if 'death_reason' in r:
+				counter.update([r['death_reason']])
 
-	table = db.table(leaderboard_name)
+		return counter.most_common(count+1)[1:]
+	else:
+		if leaderboard_name not in db.tables():
+			return [ ]
 
-	res = table.all()
-	res.sort(key=sort_by_score, reverse=True)
+		def sort_by_score(doc):
+			return doc['score']
 
-	return res[:count]
+		table = db.table(leaderboard_name)
+
+		res = table.all()
+		res.sort(key=sort_by_score, reverse=True)
+
+		return res[:count]

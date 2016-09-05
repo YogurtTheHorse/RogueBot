@@ -226,27 +226,30 @@ def leaderboard(bot, update):
 				pass
 
 	res = databasemanager.get_leaderboard(lb)
-
 	msg = ''
 
-	for i, r in enumerate(res):
-		uid = r['uid']
-		name = r['name']
-		score = r['score']
-		username = bot.getChat(uid)['username']
-		death_reason = None
-		if 'death_reason' in r:
-			death_reason = r['death_reason']
+	if lb == 'death':
+		for i, r in enumerate(res):
+			msg += '{0}. {1}: {2}\n'.format(i, r[0], r[1])
+	else:
+		for i, r in enumerate(res):
+			uid = r['uid']
+			name = r['name']
+			score = r['score']
+			username = bot.getChat(uid)['username']
+			death_reason = None
+			if 'death_reason' in r:
+				death_reason = r['death_reason']
 
-		table_name = "{0}".format(name)
-		if len(username) > 0:
-			table_name += ' (@{0})'.format(username)
-			
-		msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
-		if death_reason is not None:
-			msg += 'Причина смерти: ' + death_reason
+			table_name = "{0}".format(name)
+			if len(username) > 0:
+				table_name += ' (@{0})'.format(username)
+				
+			msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
+			if death_reason is not None:
+				msg += 'Причина смерти: ' + death_reason
 
-		msg += '\n'
+			msg += '\n'
 
 	bot.sendMessage(update.message.chat_id, text=msg)
 

@@ -30,7 +30,7 @@ def action(user, reply, text):
 			rnd = random.random()
 			if rnd < 0.33:
 				user.open_room(reply, 'special', 'kodzima')
-			elif rnd < 0.66:
+			elif rnd > 0.66:
 				user.open_room(reply, 'special', 'gabe')
 			else:
 				user.open_room(reply, 'special', 'bill_gates')

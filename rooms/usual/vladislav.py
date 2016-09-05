@@ -5,8 +5,6 @@ from constants import *
 TOOK_TOOK = 'Отдышаться и вежливо постучать в дверь'
 SPINE = 'Войти спиной вперёд'
 
-QUESTION_KODZIMA = '—А... э-э... как Вы здесь оказались?'
-
 name = 'Человек'
 
 def enter(user, reply):
@@ -29,24 +27,15 @@ def action(user, reply, text):
 			).format(user.name)
 
 			reply(msg)
-			user.set_room_temp('question', 'kodzima')
+			if random.random() < 0.33:
+				user.open_room(reply, 'special', 'kodzima')
+			elif random.random() < 0.33:
+				user.open_room(reply, 'special', 'gabe')
+			else:
+				user.open_room(reply, 'special', 'bill_gates')
 		elif text == SPINE:
 			reply('Начав движение, из-за спины Вы слышите голос с небольшим восточным акцентом:—Ты что, идиот?')
 			user.set_room_temp('question', 'spine')
-	elif question == 'kodzima':
-		if text == QUESTION_KODZIMA:
-			user1 = usermanager.random_user()
-			user2 = usermanager.random_user()
-			name1 = user1.name
-			name2 = user2.name
-
-			reply('—Так же, как и ты, очевидно же. Всё, не занимай линию, там за тобой уже двое в очереди. {0} и {1}, чёрт бы его побрал, уже третий раз за сегодня'.format(name1, name2))
-		else:
-			reply('От волнения Вы не придумали ничего лучше, как рассказать анекдот собственного сочинения.\n—Заходит как-то геймдизайнер в бар, \n—бодро начинаете Вы, но неожиданно с Вашим лицом резко стыкуется табурет, на котором недавно сидел Хидэо:—Пошёл вон!')
-			user.make_damage(25, 50, reply, False)
-
-		reply('Тебя выставили за дверь')
-		user.leave(reply)
 	elif question == 'spine':
 		reply('Вы испытываете сильный стыд и так краснеете, что на лице лопается капилляр.')
 		user.make_damage(10, 15, reply, False)
@@ -59,8 +48,6 @@ def get_actions(user):
 
 	if question == 'first':
 		ans = [ TOOK_TOOK, SPINE ]
-	elif question == 'kodzima':
-		ans = [ QUESTION_KODZIMA, 'Рассказать анекдот' ]
 	else:
 		ans = [ 'Я... э-э... (сбежать)' ]
 

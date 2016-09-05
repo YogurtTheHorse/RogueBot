@@ -553,7 +553,7 @@ class User(object):
 		room = roomloader.load_room(self.room[1], self.room[0])
 
 		a, b = room.damage_range
-		dmg = self.make_damage(a, b, reply, name=room.name)
+		dmg = self.make_damage(a, b, reply, name=room.name) + self.rooms_count // 10
 
 		if not self.dead and dmg > 0.2:
 			reply(locale_manager.get('USER_DAMAGED').format(dmg))

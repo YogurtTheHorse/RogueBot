@@ -404,7 +404,9 @@ class User(object):
 					break
 
 			if item:
-				dmg = item.fight_use(self, reply, room) + self.get_damage_bonus(reply)
+				dmg = item.fight_use(self, reply, room)
+				if dmg != 0:
+					dmg += self.get_damage(reply) + self.get_damage_bonus(reply)
 
 				if item.disposable:
 					self.remove_item(item.code_name)

@@ -501,6 +501,7 @@ class User(object):
 			
 			if self.state == 'room':
 				self.fight_answer(reply)
+				reply(self.get_stats())
 
 
 	def fight_action(self, reply, text):

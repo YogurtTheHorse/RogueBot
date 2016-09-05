@@ -13,6 +13,7 @@ from utils.names import names
 from collections import Counter
 
 from localizations import locale_manager
+import usermanager
 import databasemanager as dbmanager
 
 logger = logging.getLogger('rg')
@@ -262,7 +263,8 @@ class User(object):
 		else:
 			n = name
 			while n == name:
-				n = random.choice (names)
+				usr = usermanager.random_user()
+				n = usr.name
 
 			msg = locale_manager.get('NAME_CONFIRM').format(n, name)
 

@@ -13,7 +13,7 @@ disposable = True
 def fight_use(user, reply, room):
 	reply('Ты бросаешь мешочек со спойлерами в врага и..')
 
-	if random.random() < 0.66:
+	if random.random() < 0.66 or room.code_name == 'doctor_who':
 		reply('Ничего не происходит.')
 		reply('К сожалению, противник тщательно готовился к бою и досмотрел все сериалы.')
 	else:

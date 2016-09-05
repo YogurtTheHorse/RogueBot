@@ -14,7 +14,7 @@ disposable = True
 def fight_use(user, reply, room):
 	reply('ЗА ВДВ!')
 
-	if random.random() < 0.3:
+	if random.random() < 0.3 or room.code_name == 'doctor_who':
 		reply('Это было больно.')
 		user.death(reply, reason=name)
 

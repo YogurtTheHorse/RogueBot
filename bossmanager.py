@@ -1,5 +1,5 @@
 import databasemanager
-from rooms import roomloader
+import random
 from datetime import datetime
 
 SECONDS_WAIT = 60 * 60
@@ -23,14 +23,13 @@ def create(old_boss = None):
 	if old_boss is not None:
 		boss_id = old_boss['id']
 
-	room_type, room_name = roomloader.get_random_room('boss')
-	room = roomloader.load_room(room_name, room_type)
-
+	# Костыли, велосипеды
+	room_name, hp = random.choice([('black_knight', 129500), ('hellkite_dragon', 175500), ('moonlight_butterfly', 49500), ('naping_dragon', 77500)])
 	new_boss = {
 		'id': boss_id + 1,
 		'name': room_name,
 		'alive': True,
-		'hp': room.hp,
+		'hp': hp,
 		'die_seconds': None
 	}
 

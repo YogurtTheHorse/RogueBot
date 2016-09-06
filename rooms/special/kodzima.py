@@ -93,7 +93,7 @@ def get_actions(user):
 	ans = [ ]
 
 	if question == 'first':
-		if user.get_intelligence() < 7:
+		if user.get_mana_damage() < 7:
 			ans = [ HOW, JOKE ]
 		else:
 			ans = [ ASK ]

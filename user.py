@@ -937,7 +937,7 @@ class User(object):
 			self.get_damage(), 
 			self.get_defence(), 
 			self.get_charisma(),
-			self.get_mana_damage()
+			self.get_mana_damage(),
 			self.monsters_killed,
 			self.rooms_count
 		)

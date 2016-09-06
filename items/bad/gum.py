@@ -12,7 +12,7 @@ price = 10
 tags = ['hair']
 
 def on_buy(user, reply):
-	if user.get_intelligence() < SMART_LEVEL:
+	if user.get_mana_damage() < SMART_LEVEL:
 		reply('Надувать пузырь не стоило — жвачка застряла в волосах, а парикмахера ты тут вряд ли найдешь.')
 	else:
 		charisma = 0

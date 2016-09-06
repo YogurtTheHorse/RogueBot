@@ -8,7 +8,7 @@ price = 3
 usable = True
 def on_use(user, reply):
 	reply('Ты пытаешься согнуть ложку и..')
-	if user.get_intelligence() < 150:
+	if user.get_mana_damage() < 150:
 		reply(
 			'Как ты ни пытался, столовый прибор форму не изменил. Все руки в '
 			'кровь стёр. Что-то ты делаешь не так, кажется, *тебе не хватает '

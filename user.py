@@ -49,7 +49,6 @@ class User(object):
 		self.defence = 1
 		self.charisma = 0
 		self.mana_damage = 0
-		self.intelligence = 0
 
 		self.visited_shop = False
 		self.shop_items = [ ]
@@ -98,7 +97,6 @@ class User(object):
 		msg += 'defence: ' + str(self.defence) + ' ({0})'.format(self.get_defence()) + '\n'
 		msg += 'charisma: ' + str(self.charisma) + ' ({0})'.format(self.get_charisma()) + '\n'
 		msg += 'mana_damage: ' + str(self.mana_damage) + ' ({0})'.format(self.get_mana_damage()) + '\n'
-		msg += 'intelligence: ' + str(self.intelligence) + ' ({0})'.format(self.get_intelligence()) + '\n'
 		msg += 'visited_shop: ' + str(self.visited_shop) + '\n'
 		msg += 'shop_items: ' + str(self.shop_items) + '\n'
 		msg += 'shop_names: ' + str(self.shop_names) + '\n'
@@ -153,13 +151,6 @@ class User(object):
 			res += i.mana_damage
 
 		return res + self.mana_damage
-
-	def get_intelligence(self):
-		res = 0
-		for i in self.get_active_items():
-			res += i.intelligence
-
-		return res + self.intelligence
 
 	def has_aura(self, aura):
 		for i in self.get_active_items():
@@ -301,7 +292,7 @@ class User(object):
 		rate = 0
 		if self.rooms_count > 0:
 			try:
-				rate = ((((self.get_damage() * self.get_intelligence() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
+				rate = ((((self.get_damage() * self.get_mana_damage() + self.gold) / self.rooms_count) ** 0.5) ** 1.5) // 100 
 			except:
 				pass
 
@@ -335,7 +326,6 @@ class User(object):
 		save['defence'] = copy.copy(self.defence)
 		save['charisma'] = copy.copy(self.charisma)
 		save['mana_damage'] = copy.copy(self.mana_damage)
-		save['intelligence'] = copy.copy(self.intelligence)
 
 		save['tags'] = copy.copy(self.tags)
 
@@ -380,7 +370,6 @@ class User(object):
 			self.defence = save['defence']
 			self.charisma = save['charisma']
 			self.mana_damage = save['mana_damage']
-			self.intelligence = save['intelligence']
 
 			self.tags = save['tags']
 
@@ -948,8 +937,7 @@ class User(object):
 			self.get_damage(), 
 			self.get_defence(), 
 			self.get_charisma(),
-			self.get_mana_damage(),
-			self.get_intelligence(),
+			self.get_mana_damage()
 			self.monsters_killed,
 			self.rooms_count
 		)

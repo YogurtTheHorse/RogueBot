@@ -53,7 +53,6 @@ def die(boss):
 def save(boss):
 	databasemanager.set_variable('boss', boss)
 
-
 def need_to_reborn(boss):
 	if boss['die_seconds'] is None:
 		return False

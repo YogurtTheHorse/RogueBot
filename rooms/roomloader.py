@@ -116,7 +116,6 @@ def check_room(room, name, room_type):
 				if boss['hp'] <= 0:
 					bossmanager.die(boss)
 					user.won(reply)
-
 				else:
 					msg = (
 						'У боса осталось {} HP'.format(boss['hp'])

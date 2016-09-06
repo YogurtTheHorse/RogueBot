@@ -4,6 +4,7 @@ from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
 
+import tornamentmanager
 import databasemanager
 import usermanager
 import telegram
@@ -138,6 +139,37 @@ def no(bot, update):
 		asked.append(uid)
 
 		save_question()
+
+def update_tornament(bot, job):
+	global uid, msg, image, buttons
+	uid = 0
+	msg = ''
+	image = None
+	buttons = None
+
+	def rep(c_id, txt, btns=None, photo=None):
+		global uid, msg, image, buttons
+
+		if uid != 0 and c_id != uid:
+			reply(uid, bot, msg, buttons, image)
+
+			msg = ''
+			image = None
+			buttons = None
+
+		uid = c_id
+
+		msg += '\n\n'
+		msg += txt
+
+		if btns:
+			buttons = btns
+		if photo:
+			image = photo
+
+	tornamentmanager.update(rep)
+	if len(msg) > 0 or image:
+		reply(uid, bot, msg, buttons, image)
 
 def divine_intervention(bot, job):
 	logger.info('Divine intervention!')
@@ -294,7 +326,9 @@ updater.dispatcher.add_handler(MessageHandler(False, msg))
 updater.dispatcher.add_error_handler(error_callback)
 
 intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
+update_tornament_job = Job(update_tornament, 10.0)
 updater.job_queue.put(intervention_job)
+updater.job_queue.put(update_tornament_job)
 
 logger.info('Starting polling...')
 updater.start_polling()

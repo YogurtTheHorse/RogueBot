@@ -82,6 +82,8 @@ def fight_action(self, reply, text):
 
 def fight_answer(self, reply):
 	room = roomloader.load_room(self.room[1], self.room[0])
+	if room.code_name == 'tornament':
+		return
 
 	a, b = room.damage_range
 	dmg = self.make_damage(a, b, reply, name=room.name)
@@ -96,8 +98,13 @@ def escape(self, reply, success=True):
 	if success:
 		self.leave(reply)
 
-def won(self, reply):
+def won(self, reply, tornament=False):
 	room = roomloader.load_room(self.room[1], self.room[0])
+
+	if room.code_name == 'tornament' and tornament:
+		reply('Стоп. Это же турнир, тут все работает не так. Ты просто нанес огромный урон противникам. Примерно `100`')
+		room.make_damage(self, reply, 100)
+		return
 
 	self.monsters_killed += 1
 

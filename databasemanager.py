@@ -2,15 +2,18 @@ import config
 import collections
 from tinydb import TinyDB, Query
 
-VAR_TABLE = 'vars'
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
 GNOME_TABLE = 'gnome'
 RATE_TABLE = 'rate'
 
+VAR_TABLE = 'vars'
+LIST_TABLE = '__list'
+TORNAMENTS_TABLE = '__tor'
+
 db = TinyDB(config.DATABASE_PATH)
 
-def get_variable(name, def_val=None):
+def get_variable(name, def_val=None, table=VAR_TABLE):
 	global db
 	Variable = Query()
 
@@ -21,7 +24,7 @@ def get_variable(name, def_val=None):
 	else:
 		return def_val
 
-def set_variable(name, value):
+def set_variable(name, value, table=VAR_TABLE):
 	global db
 	Variable = Query()
 
@@ -30,6 +33,64 @@ def set_variable(name, value):
 		table.update({'value':value}, Variable.name == name)
 	else:
 		table.insert({'name':name,'value':value})
+
+def clear_list(name):
+	global db
+	ListQ = Query()
+
+	table = db.table(LIST_TABLE)
+	table.update({'value': [ ]}, ListQ.name == name)
+
+	set_variable(name, [ ], table=LIST_TABLE)
+
+def remove_from_list(name, val):
+	lst = get_list(name)
+	lst.remove(val)
+
+	global db
+	ListQ = Query()
+
+	table = db.table(LIST_TABLE)
+	table.update({'value': lst}, ListQ.name == name)
+
+	set_variable(name, lst, table=LIST_TABLE)
+
+def add_to_list(name, value, force=False):
+	global db
+	ListQ = Query()
+
+	lst = [ ]
+
+	table = db.table(LIST_TABLE)
+	ans = table.get(ListQ.name == name)
+	if ans:
+		lst = ans['value']
+
+	res = len(lst)
+
+	if value not in lst or force:
+		lst.append(value)
+	else:
+		res = -1
+
+	if ans:
+		table.update({'value':lst}, ListQ.name == name)
+	else:
+		table.insert({'name':name,'value':lst})
+
+	return res
+
+def get_list(name):
+	global db
+	ListQ = Query()
+
+	table = db.table(LIST_TABLE)
+	ans = table.get(ListQ.name == name)
+	if ans:
+		return ans['value']
+	else:
+		return [ ]
+
 
 def add_to_leaderboard(user, score, leaderboard_name='rate'):
 	global db

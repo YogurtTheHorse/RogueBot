@@ -24,6 +24,7 @@ def enter(user, reply):
 	reply(msg.format(user.name))
 	user.set_room_temp('question', 'first')
 
+	gabe_quest = user.get_variable('gabe', def_val=0)
 	if user.has_item('chicken') and gabe_quest > 0:
 		reply('—Где-то я уже Вас видел...')
 		user.set_room_temp('question', 'chicken')

@@ -44,12 +44,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 	self.state = 'room'
 
 	self.rooms_count += 1
+	self.rooms_to_story -= 1
 
 	if not (room_type and room_name):
 		if self.rooms_to_story < 1:
 			room_type, room_name = 'story', self.next_story_room
 		else:
-			self.rooms_to_story -= 1
 			room_type, room_name = roomloader.get_next_room()
 
 	self.room = (room_type, room_name)

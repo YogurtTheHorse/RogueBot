@@ -281,9 +281,9 @@ class User(object):
 	def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 		old_hp = self.hp
 
-		dmg = random.randint(mn, mx) + self.rooms_count // 20
+		dmg = random.randint(mn, mx)
 		if defence:
-			dmg = max(dmg - self.get_defence(), 0)
+			dmg = max(dmg + self.rooms_count // 20 - self.get_defence(), 1)
 		self.hp -= dmg
 
 		if not death:

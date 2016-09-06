@@ -1,6 +1,6 @@
 ﻿name = 'Вейпер'
 hp = 80
-damage_range = ( 25, 45 )
+damage_range = ( 10, 20 )
 loot = [ 'mechmod' ]
 
 def enter(user, reply):

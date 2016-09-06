@@ -1,3 +1,5 @@
+from localizations import locale_manager
+
 def debug_info(self):
 	msg = 'uid: ' + str(self.uid) + '\n'
 	msg += 'name: ' + str(self.name) + '\n'

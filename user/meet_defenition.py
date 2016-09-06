@@ -6,6 +6,8 @@ from constants import *
 from localizations import locale_manager
 import usermanager
 
+logger = logging.getLogger('rg')
+
 def name_confirm(self, reply, text):
 	if len(text) == 7:
 		txt = locale_manager.get('NAME_CONFIRMED').format(self.name)

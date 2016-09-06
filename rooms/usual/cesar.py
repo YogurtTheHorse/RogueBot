@@ -1,3 +1,4 @@
+import databasemanager
 import tornamentmanager
 
 name = 'Цезарь'
@@ -20,6 +21,8 @@ def action(user, reply, text):
 	if text == actions[0]:
 		if user.get_damage() > 100:
 			reply('Ты слишком силен для всего этого, я не могу пустить тебя к ним.')
+		elif databasemanager.get_variable('ces', def_val=False) is False:
+			reply('На сегодня запись закрыта. Приходите завтра')
 		else:
 			reply('Тебе сообщат о начале турнира.')
 			if tornamentmanager.add_to_list('cesar', user.uid) < 0:

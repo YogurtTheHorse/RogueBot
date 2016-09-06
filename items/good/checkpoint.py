@@ -7,8 +7,8 @@ usable = True
 def on_use(user, reply):
 	user.remove_item('checkpoint')
 
-	if user.ger_variable('was_checkpoint', def_val=False):
-		user.ser_variable('was_checkpoint', True)
+	if user.get_variable('was_checkpoint', def_val=False):
+		user.set_variable('was_checkpoint', True)
 		user.save()
 		reply('Вы спасены и сохранены!')
 	else:

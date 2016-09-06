@@ -61,7 +61,7 @@ def update(reply):
 
 	for name in names:
 		lst = databasemanager.get_list(name)
-		if len(lst) > 1:
+		if len(lst) > 9:
 			start_tornament(name, reply)
 
 	for tornament_id in tors:

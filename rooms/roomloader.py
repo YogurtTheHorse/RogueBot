@@ -21,11 +21,13 @@ def load_room(name, room_type='usual', user=None):
 		room_loader = SourcelessFileLoader(name, path)
 	else:
 		room_loader = SourceFileLoader(name, path)
+
 	room = room_loader.load_module(name)
 
 	return check_room(room, name, room_type)
 
 def check_room(room, name, room_type):
+	logger.info('123')
 	room.code_name = name
 	room.room_type = room_type
 

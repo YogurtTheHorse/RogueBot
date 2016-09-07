@@ -108,7 +108,7 @@ class User(object):
 	from user.items_defenition import remove_item_by_name, get_item_by_name, get_items, get_active_items
 	from user.items_defenition import add_item, get_active_slots_len, has_item
 	from user.meet_defenition import name_confirm, name_given, first
-	from user.money_defenition import paid, steal
+	from user.money_defenition import paid, steal, found
 	from user.room_defenition import make_damage, set_room_temp, get_room_temp, open_room, in_room
 	from user.room_defenition import throw_dice, get_dice_bonus, dice, leave
 	from user.save_defenition import save, recover

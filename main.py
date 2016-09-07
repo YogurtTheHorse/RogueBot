@@ -290,7 +290,7 @@ def stop(bot, update):
 
 def cesar(bot, update):
 	v = databasemanager.get_variable('ces', def_val=True)
-	databasemanager.set_variable(ces, not v)
+	databasemanager.set_variable('ces', not v)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

@@ -1,5 +1,6 @@
 import items.itemloader as itemloader
 import rooms.roomloader as roomloader
+import bossmanager
 
 import logging
 from constants import *
@@ -59,7 +60,13 @@ def fight_action(self, reply, text):
 				break
 
 		if item:
-			dmg = item.fight_use(self, reply, room)
+			dmg = 0
+			if item.can_use(self, reply, room):
+				item.success(self, reply, room)
+				dmg += item.fight_use(self, reply, room)
+			else:
+				item.failure(self, reply, room)
+
 			if dmg != 0:
 				dmg += self.get_damage() + self.get_damage_bonus(reply)
 
@@ -85,6 +92,14 @@ def fight_answer(self, reply):
 	if room.code_name == 'tornament':
 		return
 
+	room_type, room_name = self.room
+	if room_type == 'boss':
+		boss = bossmanager.current()
+		user_boss_id = self.get_room_temp('boss_id', def_val=0)
+
+		if boss.get('alive') is False or boss.get('id') is not user_boss_id:
+			return
+
 	a, b = room.damage_range
 	dmg = self.make_damage(a, b, reply, name=room.name)
 
@@ -98,7 +113,7 @@ def escape(self, reply, success=True):
 	if success:
 		self.leave(reply)
 
-def won(self, reply, tornament=False):
+def won(self, reply, tornament=False, boss=None):
 	room = roomloader.load_room(self.room[1], self.room[0])
 
 	if room.code_name == 'tornament' and tornament:
@@ -114,6 +129,15 @@ def won(self, reply, tornament=False):
 	for lt in room.loot:
 		self.add_item('loot', lt)
 
+	if room.room_type == 'boss' and boss is not None:
+		total_damage = self.get_room_temp('user_damage', def_val=0)
+
+		if total_damage >= 1:
+			room.coins = round(total_damage / boss['max_hp'] * boss['coins'])
+
+		else:
+			room.coins = 0
+
 	if room.coins > 0:
 		reply(locale_manager.get('GOLD_FOUND').format(room.coins))
 
@@ -121,4 +145,5 @@ def won(self, reply, tornament=False):
 
 	reply(locale_manager.get('YOU_WON').format(loot))
 
-	self.leave(reply)
+	if room.room_type != 'boss':
+		self.leave(reply)

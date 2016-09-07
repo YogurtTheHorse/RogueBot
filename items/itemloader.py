@@ -30,8 +30,9 @@ def check_item(item, name, buff):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use' ] ), # callbacks
+		( lambda *args: None, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use', 'failure', 'success' ] ), # callbacks
 		( lambda *args: 0, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
+		( lambda *args: True, [ 'can_use' ]),
 		( 0, [ 'damage', 'mana_damage', 'charisma', 'defence' ] ), # buffs
 		( '', [ 'aura' ] ), # eeeh. meh
 		( [ ], [ 'tags', 'loot' ] ), # some arrays?

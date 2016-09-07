@@ -27,7 +27,6 @@ def load_room(name, room_type='usual', user=None):
 	return check_room(room, name, room_type)
 
 def check_room(room, name, room_type):
-	logger.info('123')
 	room.code_name = name
 	room.room_type = room_type
 

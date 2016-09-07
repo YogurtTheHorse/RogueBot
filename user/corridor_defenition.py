@@ -51,6 +51,6 @@ def corridor(self, reply, text):
 	elif text == 'Умереть':
 		self.death(reply, reason='Суицид')
 	elif text == locale_manager.get('JOIN_TORNAMENT'):
-		self.open_room('usual', 'cesar')
+		self.open_room(reply, 'usual', 'cesar')
 	else:
 		self.open_corridor(reply)

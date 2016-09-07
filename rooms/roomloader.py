@@ -93,48 +93,84 @@ def check_room(room, name, room_type):
 				boss = bossmanager.current()
 				user_boss_id = user.get_room_temp('boss_id')
 
-				if boss['id'] == user_boss_id and boss['alive']:
-					msg = (
-						'Густой туман не дает тебе выйти.\n'
-						'У боса осталось {} HP'.format(boss['hp'])
-					)
-
-					reply(msg)
+				if boss.get('id') is not user_boss_id:
+					user.leave(reply)
 
 				else:
-					user.leave(reply)
+					if boss.get('alive'):
+						msg = (
+							'Густой туман не дает тебе выйти.\n'
+							'У боса осталось {} HP'.format(boss['hp'])
+						)
+
+						reply(msg)
+
+					else:
+						if user.get_room_temp('was_received_reward', def_val=False) is False:
+							msg = (
+								'Ты ушел, но на мгновение тебе показалось, что ты не забрал свой трофей.\n'
+								' - Да не, бред какой-то, - и ты продолжил свой путь к коридору.'
+							)
+
+							reply(msg)
+
+							user.leave(reply)
 
 			else:
 				user.fight_action(reply, text)
 
-		def make_damage(user, reply, dmg):
-			boss = bossmanager.current()
-			user_boss_id = user.get_room_temp('boss_id')
+		def give_reward(user, reply, boss):
+			if user.get_room_temp('was_received_reward', def_val=False) is False:
+				user.set_room_temp('was_received_reward', True)
 
-			if boss['id'] == user_boss_id and boss['hp'] > 0:
-				boss['hp'] -= dmg
-
-				if boss['hp'] <= 0:
-					bossmanager.die(boss)
-					user.won(reply)
-				else:
-					msg = (
-						'У боса осталось {} HP'.format(boss['hp'])
-					)
-
-					reply(msg)
-
-					bossmanager.save(boss)
+				user.won(reply, boss=boss)
 
 			else:
 				msg = (
-					'Ты ударил мертвую тушу и ничего не произошло.\n'
-					'Так же ты заметил, что туман позади тебя исчез.\n'
+					'Ты можешь и дальше продолжать избивать мертвую тушу, но зачем?'
 				)
 
 				reply(msg)
 
-				user.leave(reply)
+
+		def make_damage(user, reply, dmg):
+			boss = bossmanager.current()
+			user_boss_id = user.get_room_temp('boss_id')
+			user_damage = user.get_room_temp('user_damage', def_val=0)
+
+			if boss['id'] == user_boss_id:
+				if boss['hp'] > 0:
+					boss['hp'] -= dmg
+
+					user.set_room_temp('user_damage', user_damage + dmg)
+
+					if boss['hp'] <= 0:
+						bossmanager.die(boss)
+						give_reward(user, reply, boss)
+					else:
+						msg = (
+							'У босса осталось {} HP'.format(boss['hp'])
+						)
+
+						reply(msg)
+
+						bossmanager.save(boss)
+
+				else:
+					msg = (
+						'Ты ударил мертвую тушу и ничего не произошло.\n'
+						'Так же ты заметил, что туман позади тебя исчез.\n'
+					)
+
+					reply(msg)
+					give_reward(user, reply, boss)
+
+			else:
+				msg = (
+					'Ты ударил в пустоту, но зачем?'
+				)
+
+				reply(msg)
 
 		if not hasattr(room, 'enter'):
 			setattr(room, 'enter', enter)
@@ -147,6 +183,9 @@ def check_room(room, name, room_type):
 
 		if not hasattr(room, 'action'):
 			setattr(room, 'action', action)
+
+		if not hasattr(room, 'give_reward'):
+			setattr(room, 'give_reward', give_reward)
 
 		if not hasattr(room, 'make_damage'):
 			setattr(room, 'make_damage', make_damage)

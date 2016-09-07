@@ -14,22 +14,44 @@ def current():
 	if need_to_reborn(boss):
 		return create(boss)
 
-	return boss
+	return migration(boss)
 
 
-def create(old_boss = None):
+def migration(old_boss):
+	if 'coins' not in old_boss:
+		new_boss = {
+			'id': old_boss.get('id', 1),
+			'name': old_boss.get('name'),
+			'alive': old_boss.get('alive'),
+			'hp': old_boss.get('hp'),
+			'max_hp': old_boss.get('hp'),
+			'coins': 10000,
+			'die_seconds': old_boss.get('die_seconds')
+		}
+
+		save(new_boss)
+
+		return new_boss
+
+	return old_boss
+
+
+def create(old_boss=None):
 	boss_id = 1
 
 	if old_boss is not None:
 		boss_id = old_boss['id']
 
 	# Костыли, велосипеды
-	room_name, hp = random.choice([('black_knight', 129500), ('hellkite_dragon', 175500), ('moonlight_butterfly', 49500), ('naping_dragon', 77500)])
+	# Тараканы, мотыльки
+	room_name, hp, max_coins = random.choice([('black_knight', 129500, 50000 ), ('hellkite_dragon', 175500, 70000), ('moonlight_butterfly', 49500, 20000), ('naping_dragon', 77500, 40000)])
 	new_boss = {
 		'id': boss_id + 1,
 		'name': room_name,
 		'alive': True,
 		'hp': hp,
+		'max_hp': hp,
+		'coins': random.randrange(1000, max_coins, 1),
 		'die_seconds': None
 	}
 
@@ -44,6 +66,8 @@ def die(boss):
 		'name': boss['name'],
 		'alive': False,
 		'hp': 0,
+		'max_hp': boss['max_hp'],
+		'coins': boss['coins'],
 		'die_seconds': (datetime.now() - datetime(1970,1,1)).total_seconds()
 	}
 

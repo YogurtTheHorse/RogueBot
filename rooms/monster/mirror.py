@@ -29,7 +29,7 @@ def enter(user, reply):
 
 def make_damage(user, reply, dmg):
 	hp = user.get_room_temp('hp', 0)
-	hp -= dmg
+	hp -= dmg + 1
 
 	if hp <= 0:
 		user.won(reply)

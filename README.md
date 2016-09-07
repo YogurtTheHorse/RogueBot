@@ -1,4 +1,4 @@
-# RogueBot
+# RogueBot [![Build Status](https://travis-ci.org/yegorf1/RogueBot.svg?branch=master)](https://travis-ci.org/yegorf1/RogueBot)
 My simple rogue-like game for Telegram and VK (in dev)
 
 # Requirements

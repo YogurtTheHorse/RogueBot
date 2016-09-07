@@ -1,6 +1,8 @@
 import config
 import collections
+
 from tinydb import TinyDB, Query
+from tinyrecord import transaction
 
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
@@ -29,17 +31,20 @@ def set_variable(name, value, table=VAR_TABLE):
 	Variable = Query()
 
 	table = db.table(VAR_TABLE)
-	if table.contains(Variable.name == name):
-		table.update({'value':value}, Variable.name == name)
-	else:
-		table.insert({'name':name,'value':value})
+	with transaction(table) as tr:
+		if table.contains(Variable.name == name):
+			tr.update({'value':value}, Variable.name == name)
+		else:
+			tr.insert({'name':name,'value':value})
 
 def clear_list(name):
 	global db
 	ListQ = Query()
 
 	table = db.table(LIST_TABLE)
-	table.update({'value': [ ]}, ListQ.name == name)
+
+	with transaction(table) as tr:
+		tr.update({'value': [ ]}, ListQ.name == name)
 
 	set_variable(name, [ ], table=LIST_TABLE)
 
@@ -51,7 +56,8 @@ def remove_from_list(name, val):
 	ListQ = Query()
 
 	table = db.table(LIST_TABLE)
-	table.update({'value': lst}, ListQ.name == name)
+	with transaction(table) as tr:
+		tr.update({'value': lst}, ListQ.name == name)
 
 	set_variable(name, lst, table=LIST_TABLE)
 
@@ -73,10 +79,11 @@ def add_to_list(name, value, force=False):
 	else:
 		res = -1
 
-	if ans:
-		table.update({'value':lst}, ListQ.name == name)
-	else:
-		table.insert({'name':name,'value':lst})
+	with transaction(table) as tr:
+		if ans:
+			tr.update({'value':lst}, ListQ.name == name)
+		else:
+			tr.insert({'name':name,'value':lst})
 
 	return res
 
@@ -104,7 +111,9 @@ def add_to_leaderboard(user, score, leaderboard_name='rate'):
 	if hasattr(user, 'death_reason'):
 		doc['death_reason'] = user.death_reason
 
-	table.insert(doc)
+
+	with transaction(table) as tr:
+		tr.insert(doc)
 
 def get_leaderboard(leaderboard_name='rate', count=10):
 	global db

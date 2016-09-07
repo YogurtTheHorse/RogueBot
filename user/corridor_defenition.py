@@ -11,7 +11,11 @@ def open_corridor(self, reply):
 	self.state = 'corridor'
 	reply(self.get_stats())
 
-	buttons = [ locale_manager.get('OPEN_NEXT_DOOR'), locale_manager.get('PLAYER_CHARACTERISTICS') ]
+	buttons = [ 
+		locale_manager.get('OPEN_NEXT_DOOR'), 
+		locale_manager.get('PLAYER_CHARACTERISTICS'),
+		locale_manager.get('JOIN_TORNAMENT')
+	]
 
 	if self.has_item('sign'):
 		buttons.append(locale_manager.get('USE_SIGN'))
@@ -46,5 +50,7 @@ def corridor(self, reply, text):
 		self.show_characteristics(reply)
 	elif text == 'Умереть':
 		self.death(reply, reason='Суицид')
+	elif text == locale_manager.get('JOIN_TORNAMENT'):
+		self.open_room('usual', 'cesar')
 	else:
 		self.open_corridor(reply)

@@ -13,7 +13,11 @@ VAR_TABLE = 'vars'
 LIST_TABLE = '__list'
 TORNAMENTS_TABLE = '__tor'
 
-db = TinyDB(config.DATABASE_PATH)
+global db
+try:
+	db is None
+except:
+	db = TinyDB(config.DATABASE_PATH)
 
 def get_variable(name, def_val=None, table=VAR_TABLE):
 	global db

@@ -32,6 +32,8 @@ def reply_job(bot, job):
 
 @run_async
 def reply(c_id, bot, txt, buttons=None, photo=None):
+	if c_id == 0:
+		return
 	if buttons:
 		custom_keyboard = [ [ x ] for x in buttons ]
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)

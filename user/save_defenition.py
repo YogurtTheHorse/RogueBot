@@ -1,4 +1,5 @@
 import copy
+import usermanager
 
 def save(self):
 	save = dict()
@@ -97,6 +98,8 @@ def recover(self, reply):
 		self.shop_names = [ ]
 
 		self.set_variable('save', None)
+
+		usermanager.save_user(self)
 	except:
 		pass
 	finally:

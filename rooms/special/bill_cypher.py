@@ -29,7 +29,7 @@ def action(user, reply, text):
 	if question == 'first':
 		if text == ESCAPE:
 			reply('Хороший мальчик, а теперь прощай!')
-			user.max_hp += 25
+			user.max_hp += 10
 			user.leave(reply)
 		elif text == READY:
 			reply('Я думаю это тебя убедит. Здесь 4000 золотых')

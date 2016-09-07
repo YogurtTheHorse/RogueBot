@@ -13,8 +13,8 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if room.code_name == 'duck':
-		reply('Пока утка ела крошки, ты свернул ей шею. Так держать!')
-		user.won(reply)
+		reply('Ты ей понравился.')
+		user.new_pet(reply, 'duck')
 
 		return 0
 	else:

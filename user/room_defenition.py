@@ -67,6 +67,9 @@ def open_room(self, reply, room_type=None, room_name=None):
 	for i in self.get_items():
 		i.on_room(self, reply, room)
 
+	if self.pet:
+		self.get_pet().on_room(self, reply, room)
+
 	if room.room_type == 'monster':
 		self.set_room_temp('hp', room.hp)
 
@@ -99,6 +102,9 @@ def get_dice_bonus(self, reply):
 	for i in self.get_items():
 		res += i.get_dice_bonus(self, reply)
 
+	if self.pet:
+		res += self.get_pet().get_dice_bonus(self, reply)
+
 	return res
 
 
@@ -128,3 +134,7 @@ def leave(self, reply):
 		pass
 
 	self.open_corridor(reply)
+
+def start_tornament(self, tid, reply):
+	self.tornament_id = tid
+	self.open_room(reply, 'special', 'tornament')

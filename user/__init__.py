@@ -100,6 +100,8 @@ class User(object):
 			self.in_room(reply, text)
 		elif self.state == 'dice':
 			self.dice(reply, text)
+		elif self.state.startswith('pet'):
+			self.on_pet(reply, text)
 		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
 			
@@ -120,7 +122,4 @@ class User(object):
 	from user.stats_defenition import debug_info, get_damage, get_damage_bonus, get_defence, get_charisma
 	from user.stats_defenition import get_mana_damage, has_aura, heal, mana, get_stats, add_tag, has_tag, remove_tag
 	from user.stats_defenition import show_characteristics, set_variable, get_variable
-
-	def start_tornament(self, tid, reply):
-		self.tornament_id = tid
-		self.open_room(reply, 'special', 'tornament')
+	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone

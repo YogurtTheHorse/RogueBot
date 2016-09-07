@@ -106,10 +106,15 @@ def get_list(name):
 def add_to_leaderboard(user, score, leaderboard_name='rooms'):
 	global db
 
+	name = user.name
+	if user.pet:
+		pet = user.get_pet()
+		name += ' и {0} {1}'.format(pet.name, pet.real_name)
+
 	table = db.table(leaderboard_name)
 	doc = {
 		'uid': user.uid,
-		'name': user.name,
+		'name': name,
 		'score': score
 	}
 	if hasattr(user, 'death_reason'):

@@ -5,8 +5,10 @@ def debug_info(self):
 	msg += 'name: ' + str(self.name) + '\n'
 	msg += 'hp: ' + str(self.hp) + '\n'
 	msg += 'mp: ' + str(self.mp) + '\n'
+	msg += 'pet: ' + str(self.pet) + '\n'
 	msg += 'gold: ' + str(self.gold) + '\n'
-	msg += 'max_hp: ' + str(self.max_hp) + '\n'
+	
+	"""msg += 'max_hp: ' + str(self.max_hp) + '\n'
 	msg += 'max_mp: ' + str(self.max_mp) + '\n'
 	msg += 'state: ' + str(self.state) + '\n'
 	msg += 'items: ' + str(self.items) + '\n'
@@ -30,7 +32,7 @@ def debug_info(self):
 	msg += 'dead: ' + str(self.dead) + '\n'
 	msg += 'rooms_to_story: ' + str(self.rooms_to_story) + '\n'
 	msg += 'next_story_room: ' + str(self.next_story_room) + '\n'
-	msg += 'subject: ' + str(self.subject)
+	msg += 'subject: ' + str(self.subject)"""
 
 	return msg
 
@@ -39,12 +41,18 @@ def get_damage(self):
 	for i in self.get_active_items():
 		res += i.damage
 
+	if self.pet:
+		res += self.get_pet().damage
+
 	return res + self.damage
 
 def get_damage_bonus(self, reply):
 	res = 0
 	for i in self.get_active_items():
 		res += i.get_damage_bonus(self, reply)
+
+	if self.pet:
+		res += self.get_pet().get_damage_bonus(self, reply)
 
 	return res
 
@@ -53,6 +61,9 @@ def get_defence(self):
 	for i in self.get_active_items():
 		res += i.defence
 
+	if self.pet:
+		res += self.get_pet().defence
+
 	return res + self.defence
 
 def get_charisma(self):
@@ -60,12 +71,18 @@ def get_charisma(self):
 	for i in self.get_active_items():
 		res += i.charisma
 
+	if self.pet:
+		res += self.get_pet().charisma
+
 	return res + self.charisma
 
 def get_mana_damage(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.mana_damage
+
+	if self.pet:
+		res += self.get_pet().mana_damage
 
 	return res + self.mana_damage
 

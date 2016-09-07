@@ -1,7 +1,9 @@
 import config
+import asyncio
 import collections
+import threading
 
-from tunydb import TinyDB, Query
+from tinydb import TinyDB, Query
 from tinyrecord import transaction
 
 ROOMS_TABLE = 'rooms'
@@ -13,16 +15,19 @@ VAR_TABLE = 'vars'
 LIST_TABLE = '__list'
 TORNAMENTS_TABLE = '__tor'
 
-global database
+global db, db_lock
 try:
-	database is None
+	db is None
+	db_lock is None
 except:
-	database = TinyDB(config.DATABASE_PATH)
+	db = TinyDB(config.DATABASE_PATH)
+	db_lock = threading.RLock()
+
 
 def get_variable(name, def_val=None, table=VAR_TABLE):
-	global database
+	global db
 
-	with database as db:
+	with db_lock:
 		Variable = Query()
 
 		table = db.table(VAR_TABLE)
@@ -33,9 +38,9 @@ def get_variable(name, def_val=None, table=VAR_TABLE):
 			return def_val
 
 def set_variable(name, value, table=VAR_TABLE):
-	global database
+	global db
 
-	with database as db:
+	with db_lock:
 		Variable = Query()
 
 		table = db.table(VAR_TABLE)
@@ -46,10 +51,10 @@ def set_variable(name, value, table=VAR_TABLE):
 				tr.insert({'name':name,'value':value})
 
 def clear_list(name):
-	global database
+	global db
 	ListQ = Query()
 
-	with database as db:
+	with db_lock:
 		table = db.table(LIST_TABLE)
 
 		with transaction(table) as tr:
@@ -61,8 +66,8 @@ def remove_from_list(name, val):
 	lst = get_list(name)
 	lst.remove(val)
 
-	global database
-	with database as db:
+	global db
+	with db_lock:
 		ListQ = Query()
 
 		table = db.table(LIST_TABLE)
@@ -72,8 +77,8 @@ def remove_from_list(name, val):
 	set_variable(name, lst, table=LIST_TABLE)
 
 def add_to_list(name, value, force=False):
-	global database
-	with database as db:
+	global db
+	with db_lock:
 		ListQ = Query()
 
 		lst = [ ]
@@ -99,8 +104,8 @@ def add_to_list(name, value, force=False):
 	return res
 
 def get_list(name):
-	global database
-	with database as db:
+	global db
+	with db_lock:
 		ListQ = Query()
 
 		table = db.table(LIST_TABLE)
@@ -112,14 +117,14 @@ def get_list(name):
 
 
 def add_to_leaderboard(user, score, leaderboard_name='rooms'):
-	global database
+	global db
 
 	name = user.name
 	if user.pet:
 		pet = user.get_pet()
 		name += ' и {0} {1}'.format(pet.name, pet.real_name)
 
-	with database as db:
+	with db_lock:
 		table = db.table(leaderboard_name)
 		doc = {
 			'uid': user.uid,
@@ -134,9 +139,9 @@ def add_to_leaderboard(user, score, leaderboard_name='rooms'):
 			tr.insert(doc)
 
 def get_leaderboard(leaderboard_name='rooms', count=10):
-	global database
+	global db
 
-	with database as db:
+	with db_lock:
 		if leaderboard_name == 'death':
 			counter = collections.Counter()
 			table = db.table(RATE_TABLE)

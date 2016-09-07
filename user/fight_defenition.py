@@ -60,7 +60,13 @@ def fight_action(self, reply, text):
 				break
 
 		if item:
-			dmg = item.fight_use(self, reply, room)
+			dmg = 0
+			if item.can_use(self, reply, room):
+				item.success(self, reply, room)
+				dmg += item.fight_use(self, reply, room)
+			else:
+				item.failure(self, reply, room)
+
 			if dmg != 0:
 				dmg += self.get_damage() + self.get_damage_bonus(reply)
 

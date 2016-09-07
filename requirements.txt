@@ -2,3 +2,4 @@ python-telegram-bot
 vk_api
 tinydb
 tinyrecord
+codecov

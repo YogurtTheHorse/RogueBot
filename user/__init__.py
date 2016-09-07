@@ -1,11 +1,5 @@
-import copy
 import random
 from datetime import datetime
-
-from time import gmtime, strftime
-
-import items.itemloader as itemloader
-import rooms.roomloader as roomloader
 
 import logging
 from constants import *
@@ -123,3 +117,4 @@ class User(object):
 	from user.stats_defenition import get_mana_damage, has_aura, heal, mana, get_stats, add_tag, has_tag, remove_tag
 	from user.stats_defenition import show_characteristics, set_variable, get_variable
 	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
+	

@@ -45,12 +45,17 @@ def check_item(item, name, buff):
 
 	return item
 
-def load_random_item(buff):
+def get_all_items(buff):
 	pth = 'items/' + buff + '/'
 	items =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
 	comp_items =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
-	return (buff, random.choice(items + comp_items))
+	return items + comp_items
+
+def load_random_item(buff):
+	items = get_all_items(buff)
+
+	return (buff, random.choice(items))
 
 def load_shop_items():
 	items = [

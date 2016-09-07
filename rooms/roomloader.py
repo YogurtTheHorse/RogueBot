@@ -182,9 +182,14 @@ def get_next_room():
 	else:
 		return get_random_room('usual')
 
-def get_random_room(room_type='usual'):
+def get_all_rooms(room_type='usual'):
 	pth = 'rooms/' + room_type + '/'
 	rooms =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
 	comp_rooms =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
-	return (room_type, random.choice(rooms + comp_rooms))
+	return rooms + comp_rooms
+
+def get_random_room(room_type='usual'):
+	rooms = get_all_rooms(room_type)
+
+	return (room_type, random.choice(rooms))

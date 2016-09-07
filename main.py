@@ -21,11 +21,6 @@ question_yes = 0
 question_no = 0
 asked = [ ]
 
-if os.path.isfile(question_filename):
-	with open(question_filename, 'r') as f:
- 		question_yes, question_no = map(int, f.readline().split())
- 		asked = f.readline().split()
-
 def reply_job(bot, job):
 	c_id, bot, txt, buttons, photo = job.context
 	reply(c_id, bot, txt, buttons, photo)
@@ -313,39 +308,45 @@ def error_callback(bot, update, error):
 					text='```text\n{0}\n```'.format(error_msg),
 					parse_mode=telegram.ParseMode.MARKDOWN)
 
-if not os.path.isdir(config.USERS_PATH):
-	logger.info('Creating users directory')
-	os.makedirs(config.USERS_PATH)
+if __name__ == '__main__':
+	if os.path.isfile(question_filename):
+		with open(question_filename, 'r') as f:
+			question_yes, question_no = map(int, f.readline().split())
+			asked = f.readline().split()
+			
+	if not os.path.isdir(config.USERS_PATH):
+		logger.info('Creating users directory')
+		os.makedirs(config.USERS_PATH)
 
-logger.info('Creating Updater...')
-updater = Updater(config.TELEGRAM_TOKEN)
+	logger.info('Creating Updater...')
+	updater = Updater(config.TELEGRAM_TOKEN)
 
-updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
-updater.dispatcher.add_handler(CommandHandler('setname', setname))
-updater.dispatcher.add_handler(CommandHandler('notify', notify))
-updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
-updater.dispatcher.add_handler(CommandHandler('cesar', cesar))
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('stop', stop))
-updater.dispatcher.add_handler(CommandHandler('room', room))
-updater.dispatcher.add_handler(CommandHandler('give', give))
-updater.dispatcher.add_handler(CommandHandler('pet', pet))
+	updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
+	updater.dispatcher.add_handler(CommandHandler('setname', setname))
+	updater.dispatcher.add_handler(CommandHandler('notify', notify))
+	updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
+	updater.dispatcher.add_handler(CommandHandler('cesar', cesar))
+	updater.dispatcher.add_handler(CommandHandler('start', start))
+	updater.dispatcher.add_handler(CommandHandler('stop', stop))
+	updater.dispatcher.add_handler(CommandHandler('room', room))
+	updater.dispatcher.add_handler(CommandHandler('give', give))
+	updater.dispatcher.add_handler(CommandHandler('pet', pet))
 
 
-updater.dispatcher.add_handler(CommandHandler('question_status', question_status))
-updater.dispatcher.add_handler(CommandHandler('zero', zero))
-updater.dispatcher.add_handler(CommandHandler('yes', yes))
-updater.dispatcher.add_handler(CommandHandler('no', no))
-updater.dispatcher.add_handler(MessageHandler(False, msg))
-updater.dispatcher.add_error_handler(error_callback)
+	updater.dispatcher.add_handler(CommandHandler('question_status', question_status))
+	updater.dispatcher.add_handler(CommandHandler('zero', zero))
+	updater.dispatcher.add_handler(CommandHandler('yes', yes))
+	updater.dispatcher.add_handler(CommandHandler('no', no))
+	updater.dispatcher.add_handler(MessageHandler(False, msg))
+	updater.dispatcher.add_error_handler(error_callback)
 
-intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
-update_tornament_job = Job(update_tornament, 10.0)
-updater.job_queue.put(intervention_job)
-updater.job_queue.put(update_tornament_job)
+	intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
+	update_tornament_job = Job(update_tornament, 10.0)
+	updater.job_queue.put(intervention_job)
+	updater.job_queue.put(update_tornament_job)
 
-logger.info('Starting polling...')
-updater.start_polling()
+	logger.info('Starting polling...')
+	updater.start_polling()
 
-logger.info('Bot now officially started!')
-updater.idle()
+	logger.info('Bot now officially started!')
+	updater.idle()

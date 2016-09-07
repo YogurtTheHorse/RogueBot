@@ -45,3 +45,4 @@ def reborn(self, reply, answer, name=None):
 
 	if 'save' in self.variables:
 		self.recover(reply)
+	

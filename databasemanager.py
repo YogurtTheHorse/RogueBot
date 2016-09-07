@@ -99,7 +99,7 @@ def get_list(name):
 		return [ ]
 
 
-def add_to_leaderboard(user, score, leaderboard_name='rate'):
+def add_to_leaderboard(user, score, leaderboard_name='rooms'):
 	global db
 
 	table = db.table(leaderboard_name)
@@ -115,7 +115,7 @@ def add_to_leaderboard(user, score, leaderboard_name='rate'):
 	with transaction(table) as tr:
 		tr.insert(doc)
 
-def get_leaderboard(leaderboard_name='rate', count=10):
+def get_leaderboard(leaderboard_name='rooms', count=10):
 	global db
 
 	if leaderboard_name == 'death':

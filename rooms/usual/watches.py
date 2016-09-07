@@ -58,7 +58,7 @@ def action(user, reply, text):
 			user.add_tag('watches_stop')
 
 		else:
-			reply('Правильно! Не чего вмешиватся в чужие разборки')
+			reply('Правильно! Нечего вмешиватся в чужие разборки')
 			user.add_tag('watches_escape')
 
 	user.leave(reply)

@@ -15,6 +15,7 @@ def get_dice_bonus(user, reply):
 		return 7
 	else:
 		reply('Нет виски — нет помощи')
+		return 0
 
 def on_room(user, reply, room):
 	if room.room_type == 'monster' and room.hp > 120:

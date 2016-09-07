@@ -65,21 +65,21 @@ def debug_print(bot, update):
 def room(bot, update):
 	c_id = update.message.chat_id
 
-	if str(c_id) in config.ADMINS_IDS:
+	if str(c_id) in config.MODERS_IDS:
 		cmd, room_type, name = update.message.text.split()
 		usermanager.open_room(c_id, lambda *a, **kw: reply(c_id, bot, *a, **kw), room_type, name)
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def give(bot, update):
-	if str(update.message.chat_id) in config.ADMINS_IDS:
+	if str(update.message.chat_id) in config.MODERS_IDS:
 		cmd, item_type, name = update.message.text.split()
 		usermanager.give_item(update.message.chat_id, item_type, name)
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def pet(bot, update):
-	if str(update.message.chat_id) in config.ADMINS_IDS:
+	if str(update.message.chat_id) in config.MODERS_IDS:
 		cmd, pet, name = update.message.text.split()
 		usermanager.new_pet(update.message.chat_id, pet, name)
 	else:

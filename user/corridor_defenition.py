@@ -13,8 +13,7 @@ def open_corridor(self, reply):
 
 	buttons = [ 
 		locale_manager.get('OPEN_NEXT_DOOR'), 
-		locale_manager.get('PLAYER_CHARACTERISTICS'),
-		locale_manager.get('JOIN_TORNAMENT')
+		locale_manager.get('PLAYER_CHARACTERISTICS')#, locale_manager.get('JOIN_TORNAMENT')
 	]
 
 	if self.has_item('sign'):

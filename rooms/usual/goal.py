@@ -10,8 +10,8 @@ def get_actions(user):
 def dice(user, reply, result, subject=None):
 	if result <= DICE_MAX:
 		gold = 10 + result
-		user.gold += gold
-		reply('Держи золото: {0} монет')
+		user.found(gold)
+		reply('Держи золото: {0} монет'.format(gold))
 	else:
 		reply('Читатила! Стреляй в него!')
 		user.make_damage(10, 30, reply, name='Кодекс чести лучников')

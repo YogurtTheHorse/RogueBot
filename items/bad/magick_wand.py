@@ -10,3 +10,5 @@ disposable = True
 def fight_use(user, reply, room):
 	reply('Авада Кедавра!\n\nПалочка убила всё вокруг и не только')
 	user.death(reply, reason='Магия')
+
+	return 0

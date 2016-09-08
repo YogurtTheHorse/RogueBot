@@ -10,6 +10,9 @@
         {
             "name": "Telegram launch",
             "cmd": [ "python3", "${project_path}/main.py" ]
+        },{
+            "name": "Tests",
+            "cmd": [ "python3", "${project_path}/tests.py" ]
         }
     ]
 }

@@ -44,7 +44,13 @@ def create(old_boss=None):
 
 	# Костыли, велосипеды
 	# Тараканы, мотыльки
-	room_name, hp, max_coins = random.choice([('black_knight', 129500, 50000 ), ('hellkite_dragon', 175500, 70000), ('moonlight_butterfly', 49500, 20000), ('naping_dragon', 77500, 40000)])
+	room_name, hp, max_coins = random.choice([
+		('black_knight', 129500, 50000 ),
+		('hellkite_dragon', 175500, 70000),
+		('moonlight_butterfly', 49500, 20000),
+		('naping_dragon', 77500, 40000),
+		('cthulhu', 575900, 100000)
+	])
 	new_boss = {
 		'id': boss_id + 1,
 		'name': room_name,

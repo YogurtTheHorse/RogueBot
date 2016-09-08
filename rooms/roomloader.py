@@ -114,7 +114,7 @@ def check_room(room, name, room_type):
 
 							reply(msg)
 
-							user.leave(reply)
+						user.leave(reply)
 
 			else:
 				user.fight_action(reply, text)

@@ -124,6 +124,7 @@ def check_room(room, name, room_type):
 				user.set_room_temp('was_received_reward', True)
 
 				user.won(reply, boss=boss)
+				room.on_die(user, reply)
 
 			else:
 				msg = (
@@ -197,7 +198,7 @@ def check_room(room, name, room_type):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'enter', 'dice' ] ),
+		( lambda *args: None, [ 'enter', 'dice', 'on_die' ] ),
 		( 0, [ 'coins' ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),

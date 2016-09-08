@@ -131,6 +131,7 @@ def check_room(room, name, room_type):
 				)
 
 				reply(msg)
+				user.leave(reply)
 
 
 		def make_damage(user, reply, dmg):

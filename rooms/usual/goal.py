@@ -4,27 +4,44 @@ name = 'Мишень'
 
 actions = [ 'Попробовать попасть в нее', 'Уйти' ]
 
+
 def get_actions(user):
 	return actions
 
+
 def dice(user, reply, result, subject=None):
 	if result <= DICE_MAX:
+		msg = (
+			'Держи золото: {0} монет'
+		)
+
 		gold = 10 + result
-		user.gold += gold
-		reply('Держи золото: {0} монет')
+
+		reply(msg.format(gold))
+		user.found(gold)
+
 	else:
-		reply('Читатила! Стреляй в него!')
+		msg = (
+			'Читатила! Стреляй в него!'
+		)
+
+		reply(msg)
 		user.make_damage(10, 30, reply, name='Кодекс чести лучников')
+
 	user.leave(reply)
+
 
 def action(user, reply, text):
 	if text == actions[0]:
 		user.throw_dice(reply)
+
 	else:
-		reply(
-			'Ты повернулся спиной, а не спене у тебя оказалась _мишень_! Вот почему тебя хотят убить все! '
+		msg = (
+			'Ты повернулся спиной, а не спине у тебя оказалась _мишень_! Вот почему тебя хотят убить все!\n'
 			'Ну а еще потому что это страшное подземлье — такие тут правила.\n'
-			'В общем, в твою мишень прилетела стрела.'
+			'В общем, в твою _мишень_ прилетела стрела.'
 		)
+
+		reply(msg)
 		user.make_damage(10, 30, reply, name='Какой-то лучник')
 		user.leave(reply)

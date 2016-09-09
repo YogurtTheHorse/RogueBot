@@ -11,7 +11,7 @@ def foo(*v, **kw):
 
 class Tests(unittest.TestCase):
 	def test_rooms(self):
-		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'story' ]
+		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main' ]
 		for t in ROOM_TYPES:
 			for r in roomloader.get_all_rooms(t):
 				room = roomloader.load_room(r, t)

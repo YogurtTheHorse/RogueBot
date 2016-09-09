@@ -43,26 +43,16 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	self.state = 'room'
 
-	self.rooms_count += 1
-	self.rooms_to_story -= 1
+	for m in self.missions:
+		m.room_opened()
 
 	if not (room_type and room_name):
-		if self.rooms_to_story < 1:
-			room_type, room_name = 'story', self.next_story_room
-		else:
-			room_type, room_name = roomloader.get_next_room()
+		room_type, room_name = roomloader.get_next_room(self)
 
 	self.room = (room_type, room_name)
 	self.room_temp = { }
 
 	room = roomloader.load_room(self.room[1], self.room[0])
-
-	if room_type == 'story':
-		self.story_level += 1
-		self.next_story_room = room.next_story_room
-
-		mn, mx = room.next_story_room_range
-		self.rooms_to_story = random.randint(mn, mx)
 
 	for i in self.get_items():
 		i.on_room(self, reply, room)

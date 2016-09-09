@@ -32,10 +32,7 @@ def check_room(room, name, room_type):
 
 	required = [ 'name', 'get_actions', 'action' ]
 
-	if room_type == 'story':
-		required.append('next_story_room_range')
-		required.append('next_story_room')
-	elif room_type == 'monster':
+	if room_type == 'monster':
 		required.append('damage_range')
 
 		def get_actions(user):
@@ -262,7 +259,12 @@ def check_room(room, name, room_type):
 
 	return room
 
-def get_next_room():
+def get_next_room(user=None):
+	if user is not None:
+		if user.get_last_mission().is_ready():
+			mission = user.pop_mission()
+			return (mission.get_room_type(), mission.get_room_name())
+
 	p = random.random()
 
 	if p < 1 / 100:

@@ -31,10 +31,6 @@ def save(self):
 
 	save['reborn_answer'] = copy.copy(self.reborn_answer)
 
-	save['rooms_to_story'] = copy.copy(self.rooms_to_story)
-	save['next_story_room'] = copy.copy(self.next_story_room)
-	save['story_level'] = copy.copy(self.story_level)
-
 	save['last_message'] = copy.copy(self.last_message)
 	save['rooms_count'] = copy.copy(self.rooms_count)
 	save['monsters_killed'] = copy.copy(self.monsters_killed)
@@ -74,10 +70,6 @@ def recover(self, reply):
 		self.tags = save['tags']
 
 		self.reborn_answer = save['reborn_answer']
-
-		self.rooms_to_story = save['rooms_to_story']
-		self.next_story_room = save['next_story_room']
-		self.story_level = save['story_level']
 
 		self.last_message = save['last_message']
 		self.rooms_count = save['rooms_count']

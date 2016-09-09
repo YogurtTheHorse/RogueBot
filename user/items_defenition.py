@@ -64,7 +64,7 @@ def get_active_items(self):
 	return self.get_items()
 
 def get_active_slots_len(self):
-	return 10 + self.story_level * 3 + self.rooms_count // 15
+	return 10 + self.rooms_count // 15
 
 def has_item(self, code_name):
 	for i in self.items:

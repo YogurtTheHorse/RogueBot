@@ -10,7 +10,7 @@ loot = [ ]
 def enter(user, reply):
 	reply('Ты видишь лысого азиата в желтом костюме и красных перчатках')
 
-	if user.story_level < 15:
+	if user.rooms_count < 1000:
 		reply('Он быстро куда-то убежал, кажется он опаздывает на распродажу')
 		user.leave(reply)
 	else:

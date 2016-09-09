@@ -11,7 +11,7 @@ loot = [ ]
 def enter(user, reply):
 	reply('Эй, Приятель! Ты случайно историей не ошибся?')
 
-	if user.story_level < 5:
+	if user.rooms_count < 75:
 		reply('{} обиженно уходит'.format(name))
 		user.leave(reply)
 

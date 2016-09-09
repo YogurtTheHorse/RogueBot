@@ -20,7 +20,7 @@ def enter(user, reply):
 	rooms = [  ]
 
 	while len(rooms) < 3:
-		rm = roomloader.get_next_room()
+		rm = roomloader.get_next_room(user)
 		if rm[1] != 'empty':
 			rooms.append(rm)
 

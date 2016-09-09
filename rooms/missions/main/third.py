@@ -2,9 +2,6 @@ name = 'Зеркало'
 
 actions = [ 'Разбить', 'Уйти с миром' ]
 
-next_story_room_range = (100000000000000, 200000000000000)
-next_story_room = 'none'
-
 def get_actions(user):
 	return actions
 

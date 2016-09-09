@@ -58,10 +58,6 @@ class User(object):
 		self.reborn_answer = None
 		self.dead = False
 
-		self.rooms_to_story = random.randint(5, 25)
-		self.next_story_room = 'first'
-		self.story_level = 0
-
 		self.last_message = datetime.now()
 		self.rooms_count = 0
 		self.monsters_killed = 0
@@ -73,6 +69,8 @@ class User(object):
 
 		self.variables = dict()
 		self.missions = SortedList(key=mission_sort_key)
+
+		self.new_mission('main', path_len=1)
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()
@@ -99,7 +97,7 @@ class User(object):
 			self.dice(reply, text)
 		elif self.state.startswith('pet'):
 			self.on_pet(reply, text)
-		elif self.state == 'reborned':
+		elif self.state == 'rebornd':
 			reply(self.reborn_answer, [ '/start' ])
 			
 	from user.corridor_defenition import open_corridor, corridor
@@ -120,4 +118,5 @@ class User(object):
 	from user.stats_defenition import get_mana_damage, has_aura, heal, mana, get_stats, add_tag, has_tag, remove_tag
 	from user.stats_defenition import show_characteristics, set_variable, get_variable
 	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
+	from user.missions_defenition import new_mission, get_last_mission, pop_mission
 	

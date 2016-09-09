@@ -89,8 +89,9 @@ def check_room(room, name, room_type):
 			return user.fight_dice(reply, result, subject)
 
 		def action(user, reply, text):
+			boss = bossmanager.current()
+
 			if text == 'Уйти':
-				boss = bossmanager.current()
 				user_boss_id = user.get_room_temp('boss_id')
 
 				if boss.get('id') is not user_boss_id:
@@ -117,6 +118,14 @@ def check_room(room, name, room_type):
 						user.leave(reply)
 
 			else:
+				user_damage = user.get_room_temp('user_damage', def_val=0)
+
+				if user_damage > 0 and boss.get('max_hp') // user_damage < 10:
+					skill_damage = room.skill(user, reply, boss)
+
+					if skill_damage > 0:
+						user.make_damage(skill_damage, skill_damage, reply, defence=False, name=room.name)
+
 				user.fight_action(reply, text)
 
 		def give_reward(user, reply, boss):
@@ -133,6 +142,43 @@ def check_room(room, name, room_type):
 
 				reply(msg)
 				user.leave(reply)
+
+
+		def skill(user, reply, boss):
+			if random.random() < 0.45:
+				msg = (
+					'Ты пытаешься увернуться и ...'
+				)
+
+				room.skill_preparing(user, reply, boss)
+
+				reply(msg)
+
+				if random.random() < 0.65:
+					msg = (
+						'У тебя не получилось.\n'
+						'Босс попадает в тебя и наносит *{}* урона'
+					)
+
+					room.skill_success(user, reply, boss)
+
+					min_dmg, max_dmg = room.damage_range
+					damage = random.randrange(min_dmg, max_dmg, 1)
+
+					reply(msg.format(damage))
+
+					return damage
+
+				else:
+					msg = (
+						'Тебе это удалось!'
+					)
+
+					room.skill_failure(user, reply, boss)
+
+					reply(msg)
+
+			return 0
 
 
 		def make_damage(user, reply, dmg):
@@ -189,6 +235,9 @@ def check_room(room, name, room_type):
 		if not hasattr(room, 'give_reward'):
 			setattr(room, 'give_reward', give_reward)
 
+		if not hasattr(room, 'skill'):
+			setattr(room, 'skill', skill)
+
 		if not hasattr(room, 'make_damage'):
 			setattr(room, 'make_damage', make_damage)
 
@@ -198,7 +247,7 @@ def check_room(room, name, room_type):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'enter', 'dice', 'on_die' ] ),
+		( lambda *args: None, [ 'enter', 'dice', 'on_die', 'skill_preparing', 'skill_success', 'skill_failure' ] ),
 		( 0, [ 'coins' ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),

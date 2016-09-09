@@ -7,21 +7,19 @@ def debug_info(self):
 	msg += 'mp: ' + str(self.mp) + '\n'
 	msg += 'pet: ' + str(self.pet) + '\n'
 	msg += 'gold: ' + str(self.gold) + '\n'
-	
-	"""msg += 'max_hp: ' + str(self.max_hp) + '\n'
+	msg += 'max_hp: ' + str(self.max_hp) + '\n'
 	msg += 'max_mp: ' + str(self.max_mp) + '\n'
 	msg += 'state: ' + str(self.state) + '\n'
-	msg += 'items: ' + str(self.items) + '\n'
 	msg += 'inventory_page: ' + str(self.inventory_page) + '\n'
 	msg += 'gods: ' + str(self.gods) + '\n'
 	msg += 'gods_level: ' + str(self.gods_level) + '\n'
 	msg += 'gods: ' + str(self.gods) + '\n'
 	msg += 'last_god: ' + str(self.last_god) + '\n'
 	msg += 'prayed: ' + str(self.prayed) + '\n'
-	msg += 'damage: ' + str(self.damage) + ' ({0})'.format(self.get_damage()) + '\n'
-	msg += 'defence: ' + str(self.defence) + ' ({0})'.format(self.get_defence()) + '\n'
-	msg += 'charisma: ' + str(self.charisma) + ' ({0})'.format(self.get_charisma()) + '\n'
-	msg += 'mana_damage: ' + str(self.mana_damage) + ' ({0})'.format(self.get_mana_damage()) + '\n'
+	msg += 'damage: ' + str(self.damage) + '\n'
+	msg += 'defence: ' + str(self.defence) + '\n'
+	msg += 'charisma: ' + str(self.charisma) + '\n'
+	msg += 'mana_damage: ' + str(self.mana_damage) + '\n'
 	msg += 'visited_shop: ' + str(self.visited_shop) + '\n'
 	msg += 'shop_items: ' + str(self.shop_items) + '\n'
 	msg += 'shop_names: ' + str(self.shop_names) + '\n'
@@ -30,9 +28,8 @@ def debug_info(self):
 	msg += 'room_temp: ' + str(self.room_temp) + '\n'
 	msg += 'reborn_answer: ' + str(self.reborn_answer) + '\n'
 	msg += 'dead: ' + str(self.dead) + '\n'
-	msg += 'rooms_to_story: ' + str(self.rooms_to_story) + '\n'
-	msg += 'next_story_room: ' + str(self.next_story_room) + '\n'
-	msg += 'subject: ' + str(self.subject)"""
+	msg += 'subject: ' + str(self.subject) + '\n'
+	msg += 'missions: ' + str(self.missions)
 
 	return msg
 

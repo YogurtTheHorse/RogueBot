@@ -6,6 +6,8 @@ from constants import *
 from utils.names import names
 
 from collections import Counter
+from sortedcontainers import SortedList
+from missions import mission_sort_key
 
 from localizations import locale_manager
 import usermanager
@@ -70,6 +72,7 @@ class User(object):
 		self.pet = None
 
 		self.variables = dict()
+		self.missions = SortedList(key=mission_sort_key)
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()

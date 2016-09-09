@@ -1,3 +1,4 @@
+import re
 import random
 
 import logging
@@ -7,6 +8,8 @@ from localizations import locale_manager
 import usermanager
 
 logger = logging.getLogger('rg')
+
+
 
 def name_confirm(self, reply, text):
 	if len(text) == 7:
@@ -21,7 +24,7 @@ def name_confirm(self, reply, text):
 		reply(locale_manager.get('ASK_NAME_AGAIN'))
 
 def name_given(self, reply, name):
-	if '_' in name:
+	if not only_letters(name):
 		reply(locale_manager.get('NAME_ERROR'))
 	else:
 		n = name
@@ -42,3 +45,7 @@ def first(self, reply, text):
 	reply(locale_manager.get('HELLO_MESSAGE'))
 
 	self.open_corridor(reply)
+
+def only_letters(tested_string):
+    match = re.match(u"^[A-Za-z0-9\u0400-\u0500 ]*$", tested_string)
+    return match is not None

@@ -154,7 +154,7 @@ def check_room(room, name, room_type):
 
 				reply(msg)
 
-				if random.random() < 0.85:
+				if random.random() < 0.65:
 					msg = (
 						'У тебя не получилось.\n'
 						'Босс попадает в тебя и наносит *{}* урона'

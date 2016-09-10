@@ -43,6 +43,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	self.state = 'room'
 
+	self.rooms_count += 1
 	for m in self.missions:
 		m.room_opened()
 

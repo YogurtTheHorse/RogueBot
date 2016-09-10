@@ -12,7 +12,7 @@ def get_actions(user):
 
 	for room_type, room_name in rooms:
 		loaded_room = roomloader.load_room(room_name, room_type)
-		actions.append(loaded_room.name)
+		actions.append([loaded_room.name])
 
 	return actions
 
@@ -22,7 +22,7 @@ def enter(user, reply):
 	while len(rooms) < 3:
 		rm = roomloader.get_next_room(user)
 		if rm[1] != 'empty':
-			rooms.append([rm])
+			rooms.append(rm)
 
 
 	user.set_room_temp('rooms', rooms)

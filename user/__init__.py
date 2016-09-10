@@ -70,7 +70,7 @@ class User(object):
 		self.variables = dict()
 		self.missions = SortedList(key=mission_sort_key)
 
-		self.new_mission('main', path_len=1)
+		self.new_mission('main')
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()

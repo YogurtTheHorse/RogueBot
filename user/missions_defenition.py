@@ -3,7 +3,7 @@ from missions import mission_sort_key
 
 def new_mission(self, mission_name, room_name='first', path_len=10):
 	for m in self.missions:
-		if m.mission_name == mission_name:
+		if m.name == mission_name:
 			return
 
 	mission = Mission(mission_name, room_name, path_len)

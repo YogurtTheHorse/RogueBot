@@ -30,7 +30,21 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 	if c_id == 0:
 		return
 	if buttons:
-		custom_keyboard = [ [ x ] for x in buttons ]
+		custom_keyboard = [ [ ] ]
+		last_string_len = 0
+
+		for b in buttons:
+			if len(custom_keyboard[-1]) == 0:
+				custom_keyboard[-1].append(b)
+				last_string_len = len(b)
+			elif last_string_len + len(b) < 30:
+				custom_keyboard[-1].append(b)
+				last_string_len += len(b)
+			else:
+				custom_keyboard.append([b])
+				last_string_len = len(b)
+
+
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
 	elif len(txt) > 0:

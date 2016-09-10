@@ -18,7 +18,7 @@ def enter(user, reply):
 		'Очень надеюсь что {} не обратит на нас внимание.'.format(name)
 	)
 
-	if user.rooms_count < 500:
+	if user.rooms_count < 500000:
 		reply(
 			'Кажется он вас не заметил.\n'
 			'Вот и славненько, пойдем отсюда скорее, не будем мешать'
@@ -42,6 +42,7 @@ def enter(user, reply):
 				'Мамочки! Мне страшно!\n'
 				'Верни ему то что он просит! НЕМЕДЛЕННО!'
 			)
+		user.leave(reply)
 
 
 def dice(user, reply, result, subject=None):

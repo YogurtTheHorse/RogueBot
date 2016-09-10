@@ -34,7 +34,10 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 		last_string_len = 0
 
 		for b in buttons:
-			if len(custom_keyboard[-1]) == 0:
+			if isinstance(b, list):
+				custom_keyboard.extend([ b, [] ])
+				last_string_len = 0
+			elif len(custom_keyboard[-1]) == 0:
 				custom_keyboard[-1].append(b)
 				last_string_len = len(b)
 			elif last_string_len + len(b) < 30 and len(custom_keyboard[-1]) < 3:

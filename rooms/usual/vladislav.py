@@ -22,9 +22,11 @@ def action(user, reply, text):
 	if question == 'first':
 		if text == TOOK_TOOK:
 			rnd = random.random()
-			if rnd < 0.33:
+			if rnd < 0.25:
+				user.open_room(reply, 'special', 'kiba')
+			elif rnd < 0.50:
 				user.open_room(reply, 'special', 'kodzima')
-			elif rnd > 0.66:
+			elif rnd < 0.75:
 				user.open_room(reply, 'special', 'gabe')
 			else:
 				user.open_room(reply, 'special', 'bill_gates')

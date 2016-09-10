@@ -18,7 +18,6 @@ def open_shop(self, reply):
 
 	items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
 	self.shop_names = [ i.name for i in items ]
-	self.shop_names.append(locale_manager.get('EXIT'))
 
 	for item in self.get_items():
 		item.on_shop(self, reply, items)
@@ -29,7 +28,9 @@ def open_shop(self, reply):
 		items[2].name, items[2].price, items[2].description
 	)
 
-	reply(txt, self.shop_names)
+	keyboard = [ self.shop_names[0:2], [ self.shop_names[2] ], locale_manager.get('EXIT') ]
+
+	reply(txt, keyboard)
 
 def buy(self, item, reply):
 	if self.paid(item.price):

@@ -73,6 +73,9 @@ def prayto(self, reply, god):
 
 
 def pray(self, reply, god=None):
+	if self.prayed:
+		return self.open_corridor(reply)
+
 	self.state = 'pray'
 
 	if god == None:

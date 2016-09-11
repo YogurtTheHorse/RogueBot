@@ -87,10 +87,9 @@ def check_room(room, name, room_type):
 
 		def action(user, reply, text):
 			boss = bossmanager.current()
+			user_boss_id = user.get_room_temp('boss_id')
 
 			if text == 'Уйти':
-				user_boss_id = user.get_room_temp('boss_id')
-
 				if boss.get('id') is not user_boss_id:
 					user.leave(reply)
 
@@ -117,13 +116,13 @@ def check_room(room, name, room_type):
 			else:
 				user_damage = user.get_room_temp('user_damage', def_val=0)
 
-				if user_damage > 0 and boss.get('max_hp') // user_damage < 10:
+				user.fight_action(reply, text)
+
+				if user_damage > 0 and boss.get('alive') and boss.get('id') is user_boss_id and boss.get('max_hp') // user_damage < 10:
 					skill_damage = room.skill(user, reply, boss)
 
 					if skill_damage > 0:
 						user.make_damage(skill_damage, skill_damage, reply, defence=False, name=room.name)
-
-				user.fight_action(reply, text)
 
 		def give_reward(user, reply, boss):
 			if user.get_room_temp('was_received_reward', def_val=False) is False:
@@ -142,7 +141,7 @@ def check_room(room, name, room_type):
 
 
 		def skill(user, reply, boss):
-			if random.random() < 0.45:
+			if random.random() < 0.55:
 				msg = (
 					'Ты пытаешься увернуться и ...'
 				)
@@ -151,7 +150,7 @@ def check_room(room, name, room_type):
 
 				reply(msg)
 
-				if random.random() < 0.65:
+				if random.random() < 0.75:
 					msg = (
 						'У тебя не получилось.\n'
 						'Босс попадает в тебя и наносит *{}* урона'

@@ -50,7 +50,7 @@ def buy(self, item, reply):
 		self.visited_shop = True
 		self.open_corridor(reply)
 	else:
-		reply(locale_manager.get('NO_GOLD'), self.shop_names)
+		reply(locale_manager.get('NO_GOLD'), [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ])
 
 def shop(self, reply, text):
 	if text == locale_manager.get('EXIT'):
@@ -64,4 +64,4 @@ def shop(self, reply, text):
 				self.buy(item, reply)
 				return
 
-		reply(locale_manager.get('NO_GOODS'), self.shop_names)
+		reply(locale_manager.get('NO_GOODS'), [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ])

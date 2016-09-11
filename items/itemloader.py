@@ -62,6 +62,7 @@ def load_shop_items():
 	items = [
 		load_random_item('bad'),
 		load_random_item('good'),
+		load_random_item('good'),
 		load_random_item('neutral')
 	]
 

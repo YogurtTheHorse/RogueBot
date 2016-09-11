@@ -26,10 +26,11 @@ def open_shop(self, reply):
 	txt = locale_manager.get('SHOP_MESSAGE').format(
 		items[0].name, items[0].price, items[0].description, 
 		items[1].name, items[1].price, items[1].description,
-		items[2].name, items[2].price, items[2].description
+		items[2].name, items[2].price, items[2].description,
+		items[3].name, items[3].price, items[3].description
 	)
 
-	keyboard = [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ]
+	keyboard = [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('EXIT') ]
 
 	reply(txt, keyboard)
 
@@ -52,7 +53,7 @@ def buy(self, item, reply):
 		self.visited_shop = True
 		self.open_corridor(reply)
 	else:
-		reply(locale_manager.get('NO_GOLD'), [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ])
+		reply(locale_manager.get('NO_GOLD'), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('EXIT') ])
 
 def shop(self, reply, text):
 	if text == locale_manager.get('EXIT'):
@@ -66,4 +67,4 @@ def shop(self, reply, text):
 				self.buy(item, reply)
 				return
 
-		reply(locale_manager.get('NO_GOODS'), [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ])
+		reply(locale_manager.get('NO_GOODS'), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('EXIT') ])

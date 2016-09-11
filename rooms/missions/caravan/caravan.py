@@ -111,7 +111,7 @@ def order(user, name):
 		new_order_list = user.get_room_temp('new_order_list', def_val=[ ])
 		ind = names.index(name)
 
-		item = new_order_list1[ind]
+		item = new_order_list[ind]
 
 		del new_order_list[ind]
 		del names[ind]

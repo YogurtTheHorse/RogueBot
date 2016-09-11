@@ -14,7 +14,7 @@ def open_shop(self, reply):
 		self.open_corridor(reply)
 		return
 
-	if self.shop_names is None or len(self.shop_items) == 0:
+	if self.shop_names is None or len(self.shop_items) != 4:
 		self.shop_items = itemloader.load_shop_items()
 
 	items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]

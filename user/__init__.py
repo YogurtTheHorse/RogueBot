@@ -71,6 +71,7 @@ class User(object):
 		self.missions = SortedList(key=mission_sort_key)
 
 		self.new_mission('main')
+		self.new_mission('caravan', path_len=20)
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()

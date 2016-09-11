@@ -29,6 +29,7 @@ def debug_info(self):
 	msg += 'reborn_answer: ' + str(self.reborn_answer) + '\n'
 	msg += 'dead: ' + str(self.dead) + '\n'
 	msg += 'subject: ' + str(self.subject) + '\n'
+	msg += 'variables: ' + str(self.variables) + '\n'
 	msg += 'missions: ' + str(self.missions)
 
 	return msg

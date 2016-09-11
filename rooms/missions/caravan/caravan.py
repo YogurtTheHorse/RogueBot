@@ -96,6 +96,12 @@ def buy(user, reply, name):
 	else:
 		return False
 
+def steal(user):
+	trade_items = user.get_room_temp('trade_items', def_val=[ ])
+
+	for i in trade_items:
+		user.add_item(i[0], i[1])
+
 def order(user, name):
 	names = user.get_room_temp('new_order_list_names', [])
 	descriptions = user.get_room_temp('new_order_list_descriptions', [])
@@ -148,6 +154,7 @@ def action(user, reply, text):
 				'Ты избил всех дварфов (Благо они маленькие и ты просто пинал их по лицу) и '
 				'забрал все вещи и деньги! Так держать, Воришка!'
 			)
+			stel(user)
 			leave(user, reply, with_army=True)
 		else:
 			reply('Приятных путешествий! Мы еще встретимся')

@@ -21,4 +21,4 @@ def action(user, reply, text):
 		user.gold -= 1000
 		user.leave(reply)
 	else:
-		user.fight_action(user, reply, text)
+		user.fight_action(reply, text)

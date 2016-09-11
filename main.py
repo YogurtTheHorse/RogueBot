@@ -47,6 +47,9 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 				custom_keyboard.append([b])
 				last_string_len = len(b)
 
+		if len(custom_keyboard[-1]) == 0:
+			del custom_keyboard[-1]
+
 
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)

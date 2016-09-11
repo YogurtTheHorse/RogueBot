@@ -96,7 +96,7 @@ def action(user,reply, text):
 	elif question == 'seventeenth':
 		if text == 'Бежать к двери':
 			reply('Ты захлопываешь за собой дверь и слышишь глухие удары с другой стороны. Надо убираться отсюда.\nРядом с дверью ты обнаруживаешь 1000 золотых')
-			user.gold += 1000
+			user.gold += 100
 			user.leave(reply)
 
 def get_actions(user):

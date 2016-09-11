@@ -21,8 +21,8 @@ def enter(user, reply):
 
 	while len(rooms) < 3:
 		rm = roomloader.get_next_room(user)
-		
-		if random.random < 0.05:
+
+		if random.random() < 0.05:
 			rm = ('special', 'rick_astley')
 
 		if rm[1] != 'empty' and rm not in rooms:

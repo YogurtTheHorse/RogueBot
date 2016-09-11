@@ -43,13 +43,4 @@ def get_actions(user):
 	question = user.get_room_temp('question', def_val='first')
 	ans = [ ]
 
-	if question == 'first':
-		ans = [ 'Перевернуть страницу', 'Уйти' ]
-	elif question == 'second':
-		ans = [ 'Перевернуть страницу', 'Уйти' ]
-	elif question == 'third':
-		ans = [ 'Перевернуть страницу', 'Уйти' ]
-	else:
-		ans = [ 'Перевернуть страницу', 'Уйти' ]
-
-	return ans
+	return [ 'Перевернуть страницу', 'Уйти' ]

@@ -30,26 +30,13 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 	if c_id == 0:
 		return
 	if buttons:
-		custom_keyboard = [ [ ] ]
-		last_string_len = 0
+		custom_keyboard = [ ]
 
 		for b in buttons:
 			if isinstance(b, list):
-				custom_keyboard.extend([ b, [] ])
-				last_string_len = 0
-			elif len(custom_keyboard[-1]) == 0:
-				custom_keyboard[-1].append(b)
-				last_string_len = len(b)
-			elif last_string_len + len(b) + len(custom_keyboard[-1]) * 10 < 35 and len(custom_keyboard[-1]) < 3:
-				custom_keyboard[-1].append(b)
-				last_string_len += len(b)
+				custom_keyboard.append(b)
 			else:
 				custom_keyboard.append([b])
-				last_string_len = len(b)
-
-		if len(custom_keyboard[-1]) == 0:
-			del custom_keyboard[-1]
-
 
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)

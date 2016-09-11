@@ -28,7 +28,7 @@ def open_shop(self, reply):
 		items[2].name, items[2].price, items[2].description
 	)
 
-	keyboard = [ self.shop_names[0:2], [ self.shop_names[2] ], locale_manager.get('EXIT') ]
+	keyboard = [ self.shop_names[0:2], self.shop_names[2], locale_manager.get('EXIT') ]
 
 	reply(txt, keyboard)
 

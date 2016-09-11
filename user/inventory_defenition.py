@@ -37,7 +37,7 @@ def open_inventory(self, reply):
 			if active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
 				pass#actions.append(locale_manager.get('ACTIVATE') + i.name)
 
-			acts.append([locale_manager.get('THROW_AWAY') + i.name])
+			acts.append(locale_manager.get('THROW_AWAY') + i.name)
 
 			actions.append(acts)
 

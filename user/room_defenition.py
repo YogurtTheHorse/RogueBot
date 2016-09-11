@@ -117,6 +117,7 @@ def dice(self, reply, text):
 
 def leave(self, reply):
 	self.visited_shop = False
+	self.shop_items = [ ]
 	self.prayed = False
 
 	if self.hp < self.max_hp / 2:

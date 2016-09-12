@@ -73,6 +73,7 @@ class User(object):
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()
+		logger.info('msg from {0}'.format(self.uid))
 
 		if self.dead:
 			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])

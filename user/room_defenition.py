@@ -2,10 +2,12 @@ import random
 
 import rooms.roomloader as roomloader
 
-import logging
 from constants import *
 
 from localizations import locale_manager
+
+import logging
+logger = logging.getLogger('rg')
 
 def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 	old_hp = self.hp
@@ -49,6 +51,8 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	if not (room_type and room_name):
 		room_type, room_name = roomloader.get_next_room(self)
+
+	logger.info('room_opened' + room_name)
 
 	last_mission = self.get_last_mission()
 	if last_mission.get_room_type() == room_type and last_mission.get_room_name() == room_name:

@@ -12,6 +12,7 @@ def new_mission(self, mission_name, room_name='first', path_len=10):
 			path_len += 1
 		elif self.missions[i].path_length >= path_len:
 			break
+		i += 1
 
 	mission = Mission(mission_name, room_name, path_len)
 	self.missions.insert(i, mission)

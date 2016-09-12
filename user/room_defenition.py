@@ -52,7 +52,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	last_mission = selg.get_last_mission()
 	if last_mission.get_room_type() == room_type and last_mission.get_room_name() == room_name:
-		self.pop_mission)_
+		self.pop_mission()
 
 	self.room = (room_type, room_name)
 	self.room_temp = { }

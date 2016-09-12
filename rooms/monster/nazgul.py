@@ -3,7 +3,7 @@ name = 'Назгул'
 hp = 100
 damage_range = ( 10, 15 )
 
-coins = 0
+coins = 130
 
 loot = [ ]
 

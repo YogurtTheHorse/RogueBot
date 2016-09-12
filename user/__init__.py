@@ -6,9 +6,6 @@ from constants import *
 from utils.names import names
 
 from collections import Counter
-from sortedcontainers import SortedList
-from missions import mission_sort_key
-
 from localizations import locale_manager
 import usermanager
 import databasemanager as dbmanager
@@ -68,7 +65,8 @@ class User(object):
 		self.pet = None
 
 		self.variables = dict()
-		self.missions = SortedList(key=mission_sort_key)
+		self.missions = list()
+		self.buffs = list()
 
 		self.new_mission('main')
 		self.new_mission('caravan', path_len=20)

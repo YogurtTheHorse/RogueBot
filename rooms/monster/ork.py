@@ -1,6 +1,9 @@
 name = 'Орк'
 hp = 130
 damage_range = ( 20, 40 )
+
+coins = 150
+
 loot = [ 'tooth' ]
 
 def enter(user, reply):

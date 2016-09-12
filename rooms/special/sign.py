@@ -25,7 +25,7 @@ def enter(user, reply):
 		if random.random() < 0.05:
 			rm = ('special', 'rick_astley')
 
-		if rm[1] != 'empty' and rm not in rooms:
+		if rm[1] != 'empty':
 			rooms.append(rm)
 
 

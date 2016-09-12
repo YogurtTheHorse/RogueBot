@@ -62,9 +62,14 @@ def load_shop_items():
 	items = [
 		load_random_item('bad'),
 		load_random_item('good'),
-		load_random_item('good'),
 		load_random_item('neutral')
 	]
+
+	it = load_random_item('good')
+	while it in items:
+		it = load_random_item('good')
+
+	items.append(it)
 
 	random.shuffle(items)
 

@@ -1,3 +1,5 @@
+from constants import *
+
 READY = 'Подойти ближе'
 ESCAPE = 'Уйти'
 CLOSER = 'Подойти еще ближе'
@@ -30,7 +32,7 @@ def action(user, reply, text):
 					'Вместо нее появляются три мужика в красном\n'
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАН...\n'
-					'А, так ты из наших, держи, это тебе.\n'
+					'А, так ты из наших, держи, это тебе. Да хранит тебя Господь!\n'
 					'Протягивает Винцо'
 				)
 				user.add_item('special', 'wine')
@@ -41,10 +43,9 @@ def action(user, reply, text):
 					'Вместо нее появляются три мужика в красном\n'
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАНСКУЮ ИНКВИЗИЦИЮ!\n'
-					'На костёр неверного!'
 				)
 				reply(msg)
-				user.death(reply, reason='Инквизиция')
+				user.throw_dice(reply, 'burn')
 		else:
 			reply('Красотка обиженно на вас смотрит')
 			user.leave(reply)
@@ -59,3 +60,11 @@ def get_actions(user):
 		ans = [ CLOSER, ESCAPE]
 
 	return ans
+
+def dice(user, reply, result, subject='burn'):
+	if result > DICE_MIDDLE:
+		reply('Инквизиция злобно на тебя смотрит.\nВ другой раз ты не уйдешь!')
+		user.leave(reply)
+	else:
+		reply('На костёр неверного!')
+		user.death(reply, reason='Инквизиция')	

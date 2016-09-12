@@ -262,7 +262,7 @@ def check_room(room, name, room_type):
 def get_next_room(user=None):
 	if user is not None:
 		if user.get_last_mission().is_ready():
-			mission = user.pop_mission()
+			mission = user.get_last_mission()
 			return (mission.get_room_type(), mission.get_room_name())
 
 	p = random.random()

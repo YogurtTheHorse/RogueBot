@@ -50,6 +50,10 @@ def open_room(self, reply, room_type=None, room_name=None):
 	if not (room_type and room_name):
 		room_type, room_name = roomloader.get_next_room(self)
 
+	last_mission = selg.get_last_mission()
+	if last_mission.get_room_type() == room_type and last_mission.get_room_name() == room_name:
+		self.pop_mission)_
+
 	self.room = (room_type, room_name)
 	self.room_temp = { }
 

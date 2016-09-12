@@ -116,7 +116,7 @@ class User(object):
 	from user.shop_defenition import open_shop, buy, shop
 	from user.stats_defenition import debug_info, get_damage, get_damage_bonus, get_defence, get_charisma
 	from user.stats_defenition import get_mana_damage, has_aura, heal, mana, get_stats, add_tag, has_tag, remove_tag
-	from user.stats_defenition import show_characteristics, set_variable, get_variable
+	from user.stats_defenition import show_characteristics, set_variable, get_variable, new_buff
 	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
 	from user.missions_defenition import new_mission, get_last_mission, pop_mission
 	

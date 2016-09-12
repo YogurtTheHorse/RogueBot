@@ -52,7 +52,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 	if not (room_type and room_name):
 		room_type, room_name = roomloader.get_next_room(self)
 
-	logger.info('room_opened' + room_name)
+	logger.info('room_opened ' + room_name)
 
 	last_mission = self.get_last_mission()
 	if last_mission.get_room_type() == room_type and last_mission.get_room_name() == room_name:
@@ -65,6 +65,15 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	for i in self.get_items():
 		i.on_room(self, reply, room)
+
+	to_delete = [ ]
+	for i, b in enumerate(self.buffs):
+		b.on_room(self, reply, room)
+		if b.time <= 0:
+			to_delete.append(i)
+
+	for i in reversed(to_delete):
+		del self.buffs[i]
 
 	if self.pet:
 		self.get_pet().on_room(self, reply, room)

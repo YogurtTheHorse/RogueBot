@@ -11,7 +11,7 @@ def new_mission(self, mission_name, room_name='first', path_len=10):
 	logger.info('new_mission ' + mission_name)
 	
 	mission = Mission(mission_name, room_name, path_len)
-	self.missions.append(i, mission)
+	self.missions.append(mission)
 
 	self.missions = sorted(self.missions, key=mission_sort_key)
 

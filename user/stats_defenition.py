@@ -30,6 +30,7 @@ def debug_info(self):
 	msg += 'dead: ' + str(self.dead) + '\n'
 	msg += 'subject: ' + str(self.subject) + '\n'
 	msg += 'variables: ' + str(self.variables) + '\n'
+	msg += 'buffs: ' + str(self.buffs) + '\n'
 	msg += 'missions: ' + str(self.missions)
 
 	return msg
@@ -49,6 +50,9 @@ def get_damage_bonus(self, reply):
 	for i in self.get_active_items():
 		res += i.get_damage_bonus(self, reply)
 
+	for b in self.buffs:
+		res += b.damage_plus
+
 	if self.pet:
 		res += self.get_pet().get_damage_bonus(self, reply)
 
@@ -58,6 +62,9 @@ def get_defence(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.defence
+
+	for b in self.buffs:
+		res += b.defence
 
 	if self.pet:
 		res += self.get_pet().defence
@@ -69,6 +76,9 @@ def get_charisma(self):
 	for i in self.get_active_items():
 		res += i.charisma
 
+	for b in self.buffs:
+		res += b.charisma
+
 	if self.pet:
 		res += self.get_pet().charisma
 
@@ -78,6 +88,9 @@ def get_mana_damage(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.mana_damage
+
+	for b in self.buffs:
+		res += b.mana_damage_plus
 
 	if self.pet:
 		res += self.get_pet().mana_damage
@@ -137,3 +150,6 @@ def get_variable(self, name, def_val=None):
 		return self.variables[name]
 	else:
 		return def_val
+
+def new_buff(self, buff):
+	self.buffs.append(buff)

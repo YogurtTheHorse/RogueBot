@@ -104,7 +104,7 @@ def action(user, reply, text):
 			reply(get_message(user))
 		else:
 			reply('Приятных путешествий! Мы еще встретимся')
-			leave(reply)
+			leave(user, reply)
 	else:
 		if text == 'Выйти' or len(user.get_room_temp('names')) == 0:
 			reply('До новых встреч! Мы еще вернемся')

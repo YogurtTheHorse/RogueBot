@@ -73,6 +73,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 			to_delete.append(i)
 
 	for i in reversed(to_delete):
+		self.buffs[i].on_end(self, reply, room)
 		del self.buffs[i]
 
 	if self.pet:

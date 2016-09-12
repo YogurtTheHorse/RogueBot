@@ -11,6 +11,9 @@ class Buff(object):
 
 	def on_room(self, user, reply, room):
 		self.time -= 1
+
+	def on_end(self, user, reply, room):
+		pass
 		
 class RainbowBuff(Buff):
 	def __init__(self):

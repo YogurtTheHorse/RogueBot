@@ -21,7 +21,7 @@ class User(object):
 		self.name = 'none'
 		self.hp = 100
 		self.mp = 100
-		self.gold = 5200
+		self.gold = 200
 		self.race = HUMAN
 
 		self.max_hp = 150

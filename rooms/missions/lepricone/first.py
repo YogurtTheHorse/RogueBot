@@ -5,7 +5,7 @@ loot = [ 'clever' ]
 
 is_monster = True
 
-def on_enter(user, reply):
+def enter(user, reply):
 	reply('Набежали процентики.. Он требует *1000* золотых')
 
 def get_actions(user):

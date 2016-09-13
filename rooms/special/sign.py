@@ -29,7 +29,7 @@ def enter(user, reply):
 			rooms.append(rm)
 
 
-	user.set_room_temp('rooms', rooms)
+	user.set_room_temp('rooms', list(set(rooms)))
 
 def action(user, reply, text):
 	rooms = user.get_room_temp('rooms')

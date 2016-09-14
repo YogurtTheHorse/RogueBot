@@ -13,7 +13,7 @@ def load_item(name, buff):
 		if not os.path.exists(path):
 			return None
 
-	item_loader = SourceFileLoader('{0}/{1}'.format(buff, name), path)
+	item_loader = SourceFileLoader('{0}_{1}'.format(buff, name), path)
 	item = item_loader.load_module()
 
 	return check_item(item, name, buff)

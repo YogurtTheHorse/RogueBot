@@ -17,7 +17,7 @@ def load_room(name, room_type='usual', user=None):
 		if not os.path.exists(path):
 			return None
 
-	import_name = (room_type + name).replace('/', '.');
+	import_name = (room_type + '.' + name).replace('/', '.');
 
 	if path.endswith('c'):
 		room_loader = SourcelessFileLoader(import_name, path)

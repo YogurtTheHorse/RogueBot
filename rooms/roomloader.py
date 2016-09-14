@@ -17,12 +17,14 @@ def load_room(name, room_type='usual', user=None):
 		if not os.path.exists(path):
 			return None
 
-	if path.endswith('c'):
-		room_loader = SourcelessFileLoader(name, path)
-	else:
-		room_loader = SourceFileLoader(name, path)
+	import_name = (room_type + name).replace('/', '.');
 
-	room = room_loader.load_module(name)
+	if path.endswith('c'):
+		room_loader = SourcelessFileLoader(import_name, path)
+	else:
+		room_loader = SourceFileLoader(import_name, path)
+
+	room = room_loader.load_module(import_name)
 
 	return check_room(room, name, room_type)
 

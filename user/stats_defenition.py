@@ -46,7 +46,7 @@ def get_gold_bonus(self):
 	if self.pet:
 		res *= self.get_pet().gold_bonus
 
-	return res + self.damage
+	return res
 
 def get_damage(self):
 	res = 0

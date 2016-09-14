@@ -68,9 +68,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	to_delete = [ ]
 	for i, b in enumerate(self.buffs):
-		b.on_room(self, reply, room)
-		if b.time <= 0:
-			to_delete.append(i)
+		try:
+			b.on_room(self, reply, room)
+			if b.time <= 0:
+				to_delete.append(i)
+		except:
+			pass
 
 	for i in reversed(to_delete):
 		self.buffs[i].on_end(self, reply, room)

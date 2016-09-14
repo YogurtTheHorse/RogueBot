@@ -20,7 +20,7 @@ def load_room(name, room_type='usual', user=None):
 	if path.endswith('c'):
 		room_loader = SourcelessFileLoader(name, path)
 	else:
-		room_loader = SourceFileLoader(name, path)
+		room_loader = SourceFileLoader('{0}/{1}'.format(room_type, name), path)
 
 	room = room_loader.load_module(name)
 

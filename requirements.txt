@@ -4,3 +4,4 @@ vk_api
 tinydb
 tinyrecord
 codecov
+tweepy

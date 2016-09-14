@@ -18,7 +18,7 @@ def dice(user, reply, result, subject=None):
 		gold = 10 + result
 
 		reply(msg.format(gold))
-		user.found(gold)
+		user.give_gold(gold)
 
 	else:
 		msg = (

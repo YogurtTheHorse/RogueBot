@@ -141,7 +141,7 @@ def won(self, reply, tornament=False, boss=None):
 	if room.coins > 0:
 		reply(locale_manager.get('GOLD_FOUND').format(room.coins))
 
-		self.gold += room.coins
+		self.give_gold(room.coins)
 
 	reply(locale_manager.get('YOU_WON').format(loot))
 

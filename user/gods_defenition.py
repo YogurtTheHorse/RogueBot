@@ -118,4 +118,4 @@ def divine_intervention(self, reply):
 			self.mana(self.max_mp // 2)
 			reply(locale_manager.get('DIVINE_MANA'))
 		else:
-			self.gold += 2000
+			self.give_gold(2000)

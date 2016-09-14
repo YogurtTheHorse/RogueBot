@@ -48,7 +48,7 @@ def dice(user, reply, result, subject=None):
 			reply('Ловким ударом вы сбили каску троллю на глаза. Второй окончательно отправил монстра в мир снов.')
 			reply('Вы нашли немного денег и забрали каску.')
 			user.add_item('loot','sunion_helmet')
-			user.gold += random.randrange(5,100,5)
+			user.give_gold(random.randrange(5,100,5))
 			user.leave(reply)
 		else:
 			reply('Зря вы так поверили в свои силы. Драться с троллем - та еще затея.')

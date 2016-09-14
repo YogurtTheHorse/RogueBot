@@ -91,7 +91,7 @@ def update_tornament(reply, tid):
 		gold = random.randint(10000, 20000)
 
 		rep('Это победа! Цезарь дарует тебе *{0}* злт.'.format(gold))
-		user.gold += gold
+		user.give_gold(gold)
 		user.open_corridor(rep)
 
 		usermanager.save_user(user)

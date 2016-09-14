@@ -35,6 +35,19 @@ def debug_info(self):
 
 	return msg
 
+def get_gold_bonus(self):
+	res = 1
+	for i in self.get_active_items():
+		res *= i.gold_bonus
+
+	for b in self.buffs:
+		res *= b.gold_bonus
+
+	if self.pet:
+		res *= self.get_pet().gold_bonus
+
+	return res + self.damage
+
 def get_damage(self):
 	res = 0
 	for i in self.get_active_items():

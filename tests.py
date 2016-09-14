@@ -14,6 +14,8 @@ class Tests(unittest.TestCase):
 		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main' ]
 		for t in ROOM_TYPES:
 			for r in roomloader.get_all_rooms(t):
+				print(t, r)
+
 				room = roomloader.load_room(r, t)
 
 				self.assertFalse(room is None)

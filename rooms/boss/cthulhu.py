@@ -5,7 +5,7 @@ name = 'Ктулху'
 hp = 575900
 damage_range = ( 150, 250 )
 
-coins = random.randrange( 1000, 100000, 1 )
+coins = random.randrange( 1000, 251000, 1 )
 
 
 def skill_preparing(user, reply, boss):

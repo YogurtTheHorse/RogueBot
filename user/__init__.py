@@ -1,18 +1,11 @@
-import copy
 import random
 from datetime import datetime
-
-from time import gmtime, strftime
-
-import items.itemloader as itemloader
-import rooms.roomloader as roomloader
 
 import logging
 from constants import *
 from utils.names import names
 
 from collections import Counter
-
 from localizations import locale_manager
 import usermanager
 import databasemanager as dbmanager
@@ -62,10 +55,6 @@ class User(object):
 		self.reborn_answer = None
 		self.dead = False
 
-		self.rooms_to_story = random.randint(5, 25)
-		self.next_story_room = 'first'
-		self.story_level = 0
-
 		self.last_message = datetime.now()
 		self.rooms_count = 0
 		self.monsters_killed = 0
@@ -76,9 +65,15 @@ class User(object):
 		self.pet = None
 
 		self.variables = dict()
+		self.missions = list()
+		self.buffs = list()
+
+		self.new_mission('main')
+		self.new_mission('caravan', path_len=20)
 
 	def message(self, reply, text):
 		self.last_message = datetime.now()
+		logger.info('msg from {0}'.format(self.uid))
 
 		if self.dead:
 			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])
@@ -100,7 +95,9 @@ class User(object):
 			self.in_room(reply, text)
 		elif self.state == 'dice':
 			self.dice(reply, text)
-		elif self.state == 'reborned':
+		elif self.state.startswith('pet'):
+			self.on_pet(reply, text)
+		elif self.state == 'rebornd':
 			reply(self.reborn_answer, [ '/start' ])
 			
 	from user.corridor_defenition import open_corridor, corridor
@@ -112,11 +109,14 @@ class User(object):
 	from user.items_defenition import remove_item_by_name, get_item_by_name, get_items, get_active_items
 	from user.items_defenition import add_item, get_active_slots_len, has_item
 	from user.meet_defenition import name_confirm, name_given, first
-	from user.money_defenition import paid, steal
+	from user.money_defenition import paid, steal, give_gold
 	from user.room_defenition import make_damage, set_room_temp, get_room_temp, open_room, in_room
 	from user.room_defenition import throw_dice, get_dice_bonus, dice, leave
 	from user.save_defenition import save, recover
 	from user.shop_defenition import open_shop, buy, shop
-	from user.stats_defenition import debug_info, get_damage, get_damage_bonus, get_defence, get_charisma
+	from user.stats_defenition import debug_info, get_damage, get_damage_bonus, get_defence, get_charisma, get_gold_bonus
 	from user.stats_defenition import get_mana_damage, has_aura, heal, mana, get_stats, add_tag, has_tag, remove_tag
-	from user.stats_defenition import show_characteristics, set_variable, get_variable
+	from user.stats_defenition import show_characteristics, set_variable, get_variable, new_buff
+	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
+	from user.missions_defenition import new_mission, get_last_mission, pop_mission
+	

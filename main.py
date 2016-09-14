@@ -4,6 +4,7 @@ from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
 
+import tornamentmanager
 import databasemanager
 import usermanager
 import telegram
@@ -20,19 +21,23 @@ question_yes = 0
 question_no = 0
 asked = [ ]
 
-if os.path.isfile(question_filename):
-	with open(question_filename, 'r') as f:
- 		question_yes, question_no = map(int, f.readline().split())
- 		asked = f.readline().split()
-
 def reply_job(bot, job):
 	c_id, bot, txt, buttons, photo = job.context
 	reply(c_id, bot, txt, buttons, photo)
 
 @run_async
 def reply(c_id, bot, txt, buttons=None, photo=None):
+	if c_id == 0:
+		return
 	if buttons:
-		custom_keyboard = [ [ x ] for x in buttons ]
+		custom_keyboard = [ ]
+
+		for b in buttons:
+			if isinstance(b, list):
+				custom_keyboard.append(b)
+			else:
+				custom_keyboard.append([b])
+
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
 	elif len(txt) > 0:
@@ -62,16 +67,23 @@ def debug_print(bot, update):
 def room(bot, update):
 	c_id = update.message.chat_id
 
-	if str(c_id) in config.ADMINS_IDS:
+	if str(c_id) in config.MODERS_IDS:
 		cmd, room_type, name = update.message.text.split()
 		usermanager.open_room(c_id, lambda *a, **kw: reply(c_id, bot, *a, **kw), room_type, name)
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def give(bot, update):
-	if str(update.message.chat_id) in config.ADMINS_IDS:
+	if str(update.message.chat_id) in config.MODERS_IDS:
 		cmd, item_type, name = update.message.text.split()
 		usermanager.give_item(update.message.chat_id, item_type, name)
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
+
+def pet(bot, update):
+	if str(update.message.chat_id) in config.MODERS_IDS:
+		cmd, pet, name = update.message.text.split()
+		usermanager.new_pet(update.message.chat_id, pet, name)
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
@@ -138,6 +150,37 @@ def no(bot, update):
 		asked.append(uid)
 
 		save_question()
+
+def update_tornament(bot, job):
+	global uid, msg, image, buttons
+	uid = 0
+	msg = ''
+	image = None
+	buttons = None
+
+	def rep(c_id, txt, btns=None, photo=None):
+		global uid, msg, image, buttons
+
+		if uid != 0 and c_id != uid:
+			reply(uid, bot, msg, buttons, image)
+
+			msg = ''
+			image = None
+			buttons = None
+
+		uid = c_id
+
+		msg += '\n\n'
+		msg += txt
+
+		if btns:
+			buttons = btns
+		if photo:
+			image = photo
+
+	tornamentmanager.update(rep)
+	if len(msg) > 0 or image:
+		reply(uid, bot, msg, buttons, image)
 
 def divine_intervention(bot, job):
 	logger.info('Divine intervention!')
@@ -213,7 +256,7 @@ def msg(bot, update):
 def leaderboard(bot, update):
 	c_id = update.message.chat_id
 
-	lb = databasemanager.RATE_TABLE
+	lb = databasemanager.ROOMS_TABLE
 	cnt = 10
 	if len(update.message.text.split(' ')) >= 2:
 		lb = update.message.text.split(' ')[1]
@@ -256,6 +299,9 @@ def leaderboard(bot, update):
 def stop(bot, update):
 	usermanager.delete(update.message.chat_id)
 
+def cesar(bot, update):
+	v = databasemanager.get_variable('ces', def_val=True)
+	databasemanager.set_variable('ces', not v)
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
@@ -269,35 +315,45 @@ def error_callback(bot, update, error):
 					text='```text\n{0}\n```'.format(error_msg),
 					parse_mode=telegram.ParseMode.MARKDOWN)
 
-if not os.path.isdir(config.USERS_PATH):
-	logger.info('Creating users directory')
-	os.makedirs(config.USERS_PATH)
+if __name__ == '__main__':
+	if os.path.isfile(question_filename):
+		with open(question_filename, 'r') as f:
+			question_yes, question_no = map(int, f.readline().split())
+			asked = f.readline().split()
+			
+	if not os.path.isdir(config.USERS_PATH):
+		logger.info('Creating users directory')
+		os.makedirs(config.USERS_PATH)
 
-logger.info('Creating Updater...')
-updater = Updater(config.TELEGRAM_TOKEN)
+	logger.info('Creating Updater...')
+	updater = Updater(config.TELEGRAM_TOKEN)
 
-updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
-updater.dispatcher.add_handler(CommandHandler('setname', setname))
-updater.dispatcher.add_handler(CommandHandler('notify', notify))
-updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
-updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('stop', stop))
-updater.dispatcher.add_handler(CommandHandler('room', room))
-updater.dispatcher.add_handler(CommandHandler('give', give))
+	updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
+	updater.dispatcher.add_handler(CommandHandler('setname', setname))
+	updater.dispatcher.add_handler(CommandHandler('notify', notify))
+	updater.dispatcher.add_handler(CommandHandler('debug', debug_print))
+	updater.dispatcher.add_handler(CommandHandler('cesar', cesar))
+	updater.dispatcher.add_handler(CommandHandler('start', start))
+	updater.dispatcher.add_handler(CommandHandler('stop', stop))
+	updater.dispatcher.add_handler(CommandHandler('room', room))
+	updater.dispatcher.add_handler(CommandHandler('give', give))
+	updater.dispatcher.add_handler(CommandHandler('pet', pet))
 
 
-updater.dispatcher.add_handler(CommandHandler('question_status', question_status))
-updater.dispatcher.add_handler(CommandHandler('zero', zero))
-updater.dispatcher.add_handler(CommandHandler('yes', yes))
-updater.dispatcher.add_handler(CommandHandler('no', no))
-updater.dispatcher.add_handler(MessageHandler(False, msg))
-updater.dispatcher.add_error_handler(error_callback)
+	updater.dispatcher.add_handler(CommandHandler('question_status', question_status))
+	updater.dispatcher.add_handler(CommandHandler('zero', zero))
+	updater.dispatcher.add_handler(CommandHandler('yes', yes))
+	updater.dispatcher.add_handler(CommandHandler('no', no))
+	updater.dispatcher.add_handler(MessageHandler(False, msg))
+	updater.dispatcher.add_error_handler(error_callback)
 
-intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
-updater.job_queue.put(intervention_job)
+	intervention_job = Job(divine_intervention, 3 * 60 * 60.0)
+	update_tornament_job = Job(update_tornament, 10.0)
+	updater.job_queue.put(intervention_job)
+	updater.job_queue.put(update_tornament_job)
 
-logger.info('Starting polling...')
-updater.start_polling()
+	logger.info('Starting polling...')
+	updater.start_polling()
 
-logger.info('Bot now officially started!')
-updater.idle()
+	logger.info('Bot now officially started!')
+	updater.idle()

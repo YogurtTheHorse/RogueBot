@@ -12,7 +12,7 @@ def get_actions(user):
 
 	for room_type, room_name in rooms:
 		loaded_room = roomloader.load_room(room_name, room_type)
-		actions.append(loaded_room.name)
+		actions.append([loaded_room.name])
 
 	return actions
 
@@ -20,12 +20,16 @@ def enter(user, reply):
 	rooms = [  ]
 
 	while len(rooms) < 3:
-		rm = roomloader.get_next_room()
+		rm = roomloader.get_next_room(user)
+
+		if random.random() < 0.05:
+			rm = ('special', 'rick_astley')
+
 		if rm[1] != 'empty':
 			rooms.append(rm)
 
 
-	user.set_room_temp('rooms', rooms)
+	user.set_room_temp('rooms', list(set(rooms)))
 
 def action(user, reply, text):
 	rooms = user.get_room_temp('rooms')

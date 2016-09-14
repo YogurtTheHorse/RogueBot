@@ -36,10 +36,10 @@ def action(user, reply, text):
 			reply('Они прыгнули в портал и он исчезли')
 			reply('На полу вы нашли полную флягу какого-то крепкого напитка.')
 
-			user.add_item('special', 'whisky')
-			user.leave(reply)
-
 			reply('Из-за запаха алкоголя за тобой пошел какой-то бомж')
+
+			user.add_item('special', 'whisky')
+			user.new_pet(reply, 'homeless')
 		else:
 			reply('Мужик одним ловким движением достал пистолет и... заморозил тебя')
 			reply('Приходи через 2 годика, может, уже и оттаешь')

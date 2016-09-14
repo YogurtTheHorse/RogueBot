@@ -19,4 +19,4 @@ def fight_use(user, reply, room):
 def on_use(user, reply):
 	reply('Ты ничего не видишь')
 
-	user.defence -= 60
+	user.defence -= 20

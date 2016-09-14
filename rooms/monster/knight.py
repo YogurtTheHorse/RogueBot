@@ -12,7 +12,7 @@ loot = [ random.choice(['shield', 'knight_helmet', 'knight_sword', 'knight_knee'
 def enter(user, reply):
 	reply('Весь в доспехах')
 
-	if user.story_level < 3:
+	if user.rooms_count < 100:
 		reply('Я не бью маленьких девочек типа тебя')
 		user.leave(reply)
 

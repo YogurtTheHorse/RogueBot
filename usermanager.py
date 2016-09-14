@@ -9,6 +9,9 @@ def get_fname(uid):
 	return config.USERS_PATH + '/{0}.usr'.format(uid)
 
 def save_user(usr):
+	if usr is None:
+		return
+		
 	with open(get_fname(usr.uid), 'wb') as outfile:
 		pickle.dump(usr, outfile)
 
@@ -84,4 +87,9 @@ def open_room(uid, reply, room_type, name):
 def give_item(uid, item_type, name):
 	usr = get_user(uid)
 	usr.add_item(item_type, name)
+	save_user(usr)
+
+def new_pet(uid, pet, name):
+	usr = get_user(uid)
+	usr.pet = (pet, name)
 	save_user(usr)

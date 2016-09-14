@@ -9,7 +9,7 @@ def enter(user, reply):
 	reply('—А.. Э.. Это же не спортзал.')
 	reply('—Верно, это сюжетная линия. Автор попросил меня постоять здесь.')
 
-	if user.charisma > 10:
+	if user.get_charisma() > 10:
 		reply('В общем-то ты можешь идти дальше')
 		user.new_mission('main', 'third', 15)
 	else:

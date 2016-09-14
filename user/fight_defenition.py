@@ -122,6 +122,7 @@ def won(self, reply, tornament=False, boss=None):
 		return
 
 	self.monsters_killed += 1
+	room.on_won(self, reply)
 
 	items = [ itemloader.load_item(i, 'loot') for i in room.loot ]
 	loot = ', '.join([ item.name for item in items ]) if len(items) > 0 else 'Ничего.'

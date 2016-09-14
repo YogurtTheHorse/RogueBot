@@ -20,7 +20,7 @@ def load_room(name, room_type='usual', user=None):
 	if path.endswith('c'):
 		room_loader = SourcelessFileLoader(name, path)
 	else:
-		room_loader = SourceFileLoader(usual, path)
+		room_loader = SourceFileLoader(name, path)
 
 	room = room_loader.load_module(name)
 
@@ -244,7 +244,7 @@ def check_room(room, name, room_type):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'enter', 'dice', 'on_die', 'skill_preparing', 'skill_success', 'skill_failure' ] ),
+		( lambda *args: None, [ 'enter', 'dice',  'on_death', 'on_leave', 'on_won', 'on_die', 'skill_preparing', 'skill_success', 'skill_failure' ] ),
 		( 0, [ 'coins' ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),

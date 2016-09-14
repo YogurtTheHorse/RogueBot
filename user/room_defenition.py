@@ -141,6 +141,10 @@ def leave(self, reply):
 	self.shop_items = [ ]
 	self.prayed = False
 
+	room = roomloader.load_room(self.room[1], self.room[0])
+	if room is not None:
+		room.on_leave(self, reply)
+
 	if self.hp < self.max_hp / 2:
 		#reply('Ты слегка отдохнул')
 		#self.hp = self.max_hp / 2

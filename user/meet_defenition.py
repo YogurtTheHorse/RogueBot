@@ -47,7 +47,7 @@ def first(self, reply, text):
 	mn = databasemanager.get_variable(str(self.uid) + '_gold')
 
 	if mn is not None and mn:
-		databasemanager.set_variable(str(user.uid) + '_gold', False)
+		databasemanager.set_variable(str(self.uid) + '_gold', False)
 		reply('Вы не помните даже кем вы были в той жизни, а вот мы замечательно помним, что получили от вас ровно тысячу. Да. Точно-точно. Нет, не развод')
 		self.give_gold(1000)
 

@@ -2,7 +2,7 @@ import time
 import random
 import config
 import tweepy
-import constant
+import constants
 import usermanager
 import databasemanager
 

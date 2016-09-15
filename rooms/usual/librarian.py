@@ -24,8 +24,9 @@ def action(user, reply, text):
 		user.leave(reply)
 	else:
 		if user.has_item('necromicrone'):
+			usr_name = user.name.lower()
 			user.leave(reply)
-			reply('{0}? Хм-м-м...\nВ книге посетителей такого имени нет...\nВ этот момент Библиотекарь замечает у вас в руках Некрономикон.\n...\nУбирайся отсюда! Здесь не место для таких как ты!')
+			reply('{0}? Хм-м-м...\nВ книге посетителей такого имени нет...\nВ этот момент Библиотекарь замечает у вас в руках Некрономикон.\n...\nУбирайся отсюда! Здесь не место для таких как ты!'.format(usr_name))
 		else:
 			usr_name = user.name.lower()
 			if ('задрот' in usr_name) or ('book worm' in usr_name) or ('дракон' in usr_name):

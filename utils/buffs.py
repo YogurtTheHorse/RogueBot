@@ -1,3 +1,5 @@
+import random
+
 class Buff(object):
 	def __init__(self, time, name='buff', defence=0, damage_plus=0, mana_damage_plus=0, heal=0, damage=0, charisma=0, gold_bonus=1):
 		super(Buff, self).__init__()
@@ -25,7 +27,15 @@ class Buff(object):
 		
 class RainbowBuff(Buff):
 	def __init__(self):
+		super(RainbowBuff, self).__init__(20, name='negative_rainbow', mana_damage_plus=50)
+		
+class NegativeRainbowBuff(Buff):
+	def __init__(self):
 		super(RainbowBuff, self).__init__(50, name='rainbow', mana_damage_plus=50)
+
+	def on_room(self, user, reply, room):
+		self.time -= 1
+		self.mana_damage_plus = (1.25 * random.random() - 1) * user.get_mana_damage()
 
 class DevilPower(Buff):
 	def __init__(self,):

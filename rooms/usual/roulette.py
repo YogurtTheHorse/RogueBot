@@ -4,7 +4,7 @@ name = 'Казино "Марианская Впадина"'
 
 actions_enter = [ 'Играем', 'Уйти' ]
 actions_choose = [ 'Красное x2', 'Зеленое x12', 'Черное x2' ]
-actions_make_bet = [ '100', '250', '500', '1000' ]
+actions_make_bet = [ '100', '250', '500', '1000', 'Назад' ]
 
 
 def enter(user, reply):
@@ -124,6 +124,17 @@ def action_choose(user, reply, text):
 
 def action_make_bet(user, reply, text):
   bet = 0
+
+  if text == actions_make_bet[4]:
+    msg = (
+      'Слабак!'
+    )
+
+    reply(msg)
+
+    user.set_room_temp('question', 'enter')
+
+    return
 
   try:
     bet = int(text)

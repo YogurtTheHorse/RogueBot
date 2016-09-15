@@ -14,7 +14,6 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text == 'Кашлянуть':
-			cnt = user.get_room_temp('cnt', def_val=0)
 			reply('Это не возымело никакого эффекта')
 		elif text == 'Подойти к столу':
 			reply('Ты подходишь вплотную к столу. Человек отрывается от бумаг, поправляет очки и выжидательно смотрит на тебя')

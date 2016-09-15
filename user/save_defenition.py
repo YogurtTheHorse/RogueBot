@@ -12,5 +12,6 @@ def recover(self, reply):
 
 		self.set_variable('save', False)
 		self.hp = self.max_hp // 2
+		self.gold = self.gold // 2
 		self.dead = False
 		self.open_corridor(reply)

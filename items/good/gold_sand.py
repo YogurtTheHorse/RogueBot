@@ -10,7 +10,7 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Пыщ-пыщ')
+	reply('Пыщ-пыщ.')
 
 	has_gold_buff = False
 
@@ -22,7 +22,7 @@ def on_use(user, reply):
 	gold_bonus = 2
 	if has_gold_buff:
 		gold_bonus = 0
-		reply('Ой, подождите-ка.. У тебя песок попал в глаза и ты не видешь золото в этом блеске. Как жаль :(')
+		reply('Ой, подождите-ка... У тебя песок попал в глаза и ты не видишь золото в этом блеске. Как жаль :(')
 
 	bf = Buff(10, name='gold', gold_bonus=gold_bonus)
 

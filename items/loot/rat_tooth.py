@@ -1,3 +1,3 @@
 name = 'Зуб крысы'
-description = 'Иу'
+description = 'Иу.'
 price = 15

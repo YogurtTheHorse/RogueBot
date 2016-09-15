@@ -7,7 +7,7 @@ def enter(user, reply):
 	tornament = tornamentmanager.get_tornament(user.tornament_id)
 	names = ', '.join(tornament['names'])
 
-	reply('Боги вылечили твои недуги и ниспослали в Колизей')
+	reply('Боги вылечили твои недуги и ниспослали в Колизей.')
 	reply('Вместе с тобой тут находятся: {0}'.format(names))
 
 def get_actions(user):

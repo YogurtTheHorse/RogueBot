@@ -100,7 +100,7 @@ def check_room(room, name, room_type):
 					if boss.get('alive'):
 						msg = (
 							'Густой туман не дает тебе выйти.\n'
-							'У босса осталось {} HP'.format(boss['hp'])
+							'У босса осталось {} HP.'.format(boss['hp'])
 						)
 
 						reply(msg)
@@ -196,7 +196,7 @@ def check_room(room, name, room_type):
 						give_reward(user, reply, boss)
 					else:
 						msg = (
-							'У босса осталось {} HP'.format(boss['hp'])
+							'У босса осталось {} HP.'.format(boss['hp'])
 						)
 
 						reply(msg)

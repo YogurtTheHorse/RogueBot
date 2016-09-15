@@ -25,7 +25,7 @@ def get_actions(user):
 def action(user, reply, text):
 	if not user.get_room_temp('fight', False):
 		if text == actions[2]:
-			reply('Бандиты расстроились, сказали «Ну ты плесень, ты б еще про Штирлица рассказал» и ушли')
+			reply('Бандиты расстроились, сказали «Ну ты плесень, ты б еще про Штирлица рассказал» и ушли.')
 			user.leave(reply)
 		else:
 			reply('Бандиты достали оружие и атакуют вас, крича "Маачи казла!"')

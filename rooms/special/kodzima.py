@@ -35,7 +35,7 @@ def action(user, reply, text):
 
 			reply('—Так же, как и ты, очевидно же. Всё, не занимай линию, там за тобой уже двое в очереди. {0} и {1}, чёрт бы его побрал, уже третий раз за сегодня'.format(name1, name2))
 
-			reply('Тебя выставили за дверь')
+			reply('Тебя выставили за дверь.')
 			user.leave(reply)
 		elif text == ASK:
 			reply('—Только один.', photo='BQADAgAD-QADDLXzAzuWRnAhjRHlAg')
@@ -44,7 +44,7 @@ def action(user, reply, text):
 			reply('От волнения Вы не придумали ничего лучше, как рассказать анекдот собственного сочинения.\n—Заходит как-то геймдизайнер в бар, \n—бодро начинаете Вы, но неожиданно с Вашим лицом резко стыкуется табурет, на котором недавно сидел Хидэо:—Пошёл вон!')
 			user.make_damage(25, 50, reply, False)
 
-			reply('Тебя выставили за дверь')
+			reply('Тебя выставили за дверь.')
 			user.leave(reply)
 	elif question == 'question':
 		if text == ANYTHING_ELSE:

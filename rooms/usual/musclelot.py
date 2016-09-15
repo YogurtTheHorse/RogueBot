@@ -23,7 +23,7 @@ def enter(user, reply):
 	if user.has_tag(EVIL_MUSCLELOT):
 		msg = (
 			'На входе вас встречает Сэр Качколот!\n\n'
-			'Он и его друзья помнят старые обиды'
+			'Он и его друзья помнят старые обиды.'
 		)
 		reply(msg)
 	else:
@@ -73,7 +73,7 @@ def normal_action(user, reply, text):
 		if not user.paid(50):
 			msg = (
 				'Качкам не понравилось, что ты пользовался их спортзалом без денег.\n'
-				'То, что они тебя не выпускали, их не смущает. Тебя побили'
+				'То, что они тебя не выпускали, их не смущает. Тебя побили.'
 			)
 			reply(msg)
 			user.make_damage(40, 60, reply, name=name)
@@ -84,7 +84,7 @@ def normal_action(user, reply, text):
 			user.escape(reply, True)
 			user.add_tag(EVIL_MUSCLELOT)
 		else:
-			reply('Мускулистые качки окружили выход, у тебя ничего не вышло')
+			reply('Мускулистые качки окружили выход, у тебя ничего не вышло.')
 			user.escape(reply, False)
 
 			if user.has_item('laser'):
@@ -93,9 +93,9 @@ def normal_action(user, reply, text):
 def dice(user, reply, result, subject='zhmesh'):
 	if result > DICE_MIDDLE:
 		if subject == 'zhmesh':
-			reply('Это, конечно, не много, но я видел рыцарей и похуже')
+			reply('Это, конечно, не много, но я видел рыцарей и похуже.')
 		elif subject == 'fight':
-			reply('Тебя потрепали, но не смертельно. Все обошлось')
+			reply('Тебя потрепали, но не смертельно. Все обошлось.')
 			user.make_damage(5, 10, reply, False, name=name)
 		else:
 			reply('Ты отбил Сэру Качкалоту руку.\nКрасава!')
@@ -103,10 +103,10 @@ def dice(user, reply, result, subject='zhmesh'):
 		reply('Ты уходишь с миром')
 	else:
 		if subject == 'zhmesh':
-			reply('Слишком мало, поэтому пришлось подкачаться. Ты устал')
+			reply('Слишком мало, поэтому пришлось подкачаться. Ты устал.')
 			user.make_damage(5, 10, reply, name=name)
 		elif subject == 'fight':
-			reply('Тебя в очередной раз хорошенько избили. Не стоило светить в глаза')
+			reply('Тебя в очередной раз хорошенько избили. Не стоило светить в глаза.')
 			user.make_damage(50, 60, reply, name=name)
 		else:
 			reply('Сэру Качкалот отбил тебе руку.\nКрасава!')

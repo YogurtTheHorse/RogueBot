@@ -3,7 +3,7 @@ from constants import *
 name = 'Радужное зелье'
 
 description = (
-	'Пробирка с каким-то зельем. Инетерсно...'
+	'Пробирка с каким-то зельем. Интересно...'
 )
 
 price = 100
@@ -15,5 +15,5 @@ def on_use(user, reply):
 		reply('Теперь ты Крыса.')
 		user.race = RAT_RACE
 	else:
-		reply('ФУХ. ВСЕ БЫЛО ТАКИМ БОЛЬШИМ')
+		reply('ФУХ. ВСЕ БЫЛО ТАКИМ БОЛЬШИМ.')
 		user.race = HUMAN

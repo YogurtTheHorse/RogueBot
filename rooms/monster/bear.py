@@ -8,7 +8,7 @@ coins = 50
 loot = [ ]
 
 def enter(user, reply):
-	reply('Огромный медведь рычит на тебя')
+	reply('Огромный медведь рычит на тебя.')
 
 	if user.has_item('fish') or user.has_item('honey'):
 		user.remove_item('fish')

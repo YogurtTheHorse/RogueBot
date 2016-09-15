@@ -36,7 +36,7 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if gabe_quest == 2:
-			reply('—О, {0}, привет, дружище! Давно не виделись!Прекрасно себя чувствую. Как сам?'.format(user.name))
+			reply('—О, {0}, привет, дружище! Давно не виделись! Прекрасно себя чувствую. Как сам?'.format(user.name))
 			user.set_room_temp('question', 'howareyou')
 		else:
 			reply(
@@ -44,7 +44,7 @@ def action(user, reply, text):
 				'комнате. И все спрашивают одно и то же. Скажи мне лучше, почему '
 				'ты изо дня в день открываешь двери? За ними нет того, кто бы '
 				'поддержал тебя, проникся к тебе тёплыми чувствами. Там лишь те, '
-				'кто желают тебе зла, совершенно омерзительные личностии '
+				'кто желают тебе зла, совершенно омерзительные личности '
 				'отвратительные создания.'
 			)
 			user.set_room_temp('question', 'second')
@@ -103,7 +103,7 @@ def action(user, reply, text):
 		reply('Вы мило побеседовали.')
 		user.leave(reply)
 	elif question == 'chicken':
-		reply('—Глазам не верю! Настоящая! Ароматная! Мой спаситель')
+		reply('—Глазам не верю! Настоящая! Ароматная! Мой спаситель.')
 		user.set_room_temp('question', 'smile')
 	elif question == 'smile':
 		reply(
@@ -132,7 +132,7 @@ def get_actions(user):
 		else:
 			ans = [ HOW_ARE_YOU ]
 	elif question == 'chicken':
-		ans = [ '—Это же я, {0}\n!Принёс курочку, берите, пока горячая.'.format(user.name) ]
+		ans = [ '—Это же я, {0}!\n Принёс курочку, берите, пока горячая.'.format(user.name) ]
 	elif question == 'howareyou':
 		ans = [ '—Крошу мобов пачками!' ]
 	elif question == 'second':

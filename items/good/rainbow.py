@@ -14,5 +14,5 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('О, да')
+	reply('О, да.')
 	user.new_buff(RainbowBuff())

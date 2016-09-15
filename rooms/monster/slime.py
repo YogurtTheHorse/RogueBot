@@ -21,7 +21,7 @@ def get_actions(user):
 
 def action(user, reply, text):
 	if text == 'Раздавить':
-		reply('Ты раздавил его, но запачкал обувь')
+		reply('Ты раздавил его, но запачкал обувь.')
 
 		if user.has_item('intoxicated_shoes'):
 			user.add_tag('dirt')

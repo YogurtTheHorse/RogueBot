@@ -12,7 +12,7 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Ты видишь какого-то странного, грязного и страшного человека'
+		'Ты видишь какого-то странного, грязного и страшного человека.'
 	)
 	reply(msg, photo='BQADAgAD7gADDLXzA9JW2pcRlw5OAg')
 
@@ -21,7 +21,7 @@ def enter(user, reply):
 	ch = user.get_charisma()
 
 	if ch < 0:
-		reply('Оно треснуло')
+		reply('Оно треснуло.')
 		user.won(reply)
 	elif ch > 15:
 		reply('Такой красивый. Иди с миром ;)')
@@ -34,7 +34,7 @@ def make_damage(user, reply, dmg):
 	if hp <= 0:
 		user.won(reply)
 
-		reply('Ты перестарался и оно нанесло тебе немного урона в ответ')
+		reply('Ты перестарался и оно нанесло тебе немного урона в ответ.')
 
 		user.make_damage(0, -hp, reply, defence=False, name=name)
 	else:

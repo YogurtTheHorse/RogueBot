@@ -13,7 +13,7 @@ def new_pet(self, reply, pet):
 	else:
 		self.state = 'pet_name'
 		self.pet = pet
-		reply('Клаас! У тебя новый питомец!\nКак ты его назовешь?', [])
+		reply('Клааас! У тебя новый питомец!\nКак ты его назовешь?', [])
 
 def on_pet(self, reply, text):
 	if self.state == 'pet_confirm':
@@ -31,7 +31,7 @@ def on_pet(self, reply, text):
 			reply('Это же _питомец_! Зачем тебе подчеркивания в его имени?')
 		else:
 			usr = usermanager.random_user()
-			reply('Отличный выбор. Наверное.. Я свою дочь вообще назвал {0}. Нет у меня вкуса'.format(usr.name))
+			reply('Отличный выбор. Наверное... Я свою дочь вообще назвал {0}. Нет у меня вкуса'.format(usr.name))
 			self.pet = (self.pet, text)
 			self.leave(reply)
 

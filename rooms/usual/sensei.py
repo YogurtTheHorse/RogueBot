@@ -20,7 +20,7 @@ def action(user, reply, text):
 
 			user.add_tag(JAPANESE)
 		else:
-			reply('У тебя не хватило денег, чтобы выучить японский, но зато у тебя теперь есть сюриукен и головная боль')
+			reply('У тебя не хватило денег, чтобы выучить японский, но зато у тебя теперь есть сюрикен и головная боль.')
 			user.make_damage(20, 30, reply, death=False)
 		
 		user.leave(reply)

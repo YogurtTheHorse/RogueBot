@@ -87,9 +87,9 @@ def buy(user, reply, name):
 			costs[ind] *= 2
 			user.set_room_temp('trade_items_costs', costs)
 
-			reply('Забирай! Теперь {0} стоит *{1}*'.format(name, costs[ind]))
+			reply('Забирай! Теперь {0} стоит *{1}*.'.format(name, costs[ind]))
 		else:
-			reply('Дварф ехидно улыбается и не отдает тебе вещь.\n«Нет денег — нет товара»')
+			reply('Дварф ехидно улыбается и не отдает тебе вещь.\n«Нет денег — нет товара».')
 
 
 		return True
@@ -157,19 +157,19 @@ def action(user, reply, text):
 			steal(user)
 			leave(user, reply, with_army=True)
 		else:
-			reply('Приятных путешествий! Мы еще встретимся')
+			reply('Приятных путешествий! Мы еще встретимся.')
 			leave(user, reply)
 	elif question == 'order':
 		if text == 'Назад':
 			question = user.set_room_temp('question', 'first')
 		elif order(user, text):
-			reply('Попробуем что-то сделать')
+			reply('Попробуем что-то сделать.')
 		else:
-			reply('Будут накладки')
+			reply('Будут накладки.')
 	else:
 		if text == 'Назад':
 			question = user.set_room_temp('question', 'first')
 		elif not buy(user, reply, text):
-			reply('Таких вещей не привозили')
+			reply('Таких вещей не привозили.')
 
 		reply('Что-то еще?')

@@ -12,7 +12,7 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Это трава в горшке'
+		'Это трава в горшке.'
 	)
 	reply(msg)
 
@@ -21,7 +21,7 @@ def get_actions(user):
 
 def action(user, reply, text):
 	if text == 'Уйти':
-		reply('Ты просто ушел от травы')
+		reply('Ты просто ушел от травы.')
 
 		user.leave(reply)
 	else:

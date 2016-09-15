@@ -12,7 +12,7 @@ disposable = True
 
 
 def can_use(user, reply, room):
-  reply('Ты бросаешь мешочек со спойлерами в врага и..')
+  reply('Ты бросаешь мешочек со спойлерами в врага и...')
 
   return random.random() > 0.66 and room.code_name != 'doctor_who' and room.room_type != 'boss'
 

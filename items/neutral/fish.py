@@ -1,3 +1,3 @@
 name = 'Рыбка'
-description = 'Солененькая'
+description = 'Солененькая.'
 price = 15

@@ -1,6 +1,6 @@
 name = 'Книга тайн №3'
 
-description = 'Красная с золотым оттиском руки и цифрой 3'
+description = 'Красная с золотым оттиском руки и цифрой 3.'
 
 price = 1000
 	
@@ -16,4 +16,4 @@ def on_use(user, reply):
 
 		user.open_room(reply, 'special', 'bill_cypher')
 	else:
-		reply('Чего-то не хватает')
+		reply('Чего-то не хватает.')

@@ -8,224 +8,224 @@ actions_make_bet = [ '100', '250', '500', '1000', 'Назад' ]
 
 
 def enter(user, reply):
-  msg = (
-    'Ты вошел в комнату и увидел множество игральных столов.\n'
-    'Диллер, стоящий за одним из столов зазывает тебя:\n'
-    ' - Ну что, играть будем?'
-  )
+	msg = (
+		'Ты вошел в комнату и увидел множество игральных столов.\n'
+		'Диллер, стоящий за одним из столов зазывает тебя:\n'
+		' - Ну что, играть будем?'
+	)
 
-  user.set_room_temp('gold', user.gold)
+	user.set_room_temp('gold', user.gold)
 
-  reply(msg)
+	reply(msg)
 
 
 def get_actions(user):
-  question = user.get_room_temp('question', def_val='enter')
+	question = user.get_room_temp('question', def_val='enter')
 
-  switcher = {
-    'enter': actions_enter,
-    'choose': actions_choose,
-    'make_bet': actions_make_bet
-  }
+	switcher = {
+		'enter': actions_enter,
+		'choose': actions_choose,
+		'make_bet': actions_make_bet
+	}
 
-  actions = switcher.get(question)
+	actions = switcher.get(question)
 
-  return actions
+	return actions
 
 
 def action(user, reply, text):
-  question = user.get_room_temp('question', def_val='enter')
+	question = user.get_room_temp('question', def_val='enter')
 
-  switcher = {
-    'enter': action_enter,
-    'choose': action_choose,
-    'make_bet': action_make_bet
-  }
+	switcher = {
+		'enter': action_enter,
+		'choose': action_choose,
+		'make_bet': action_make_bet
+	}
 
-  func = switcher.get(question)
+	func = switcher.get(question)
 
-  return func(user, reply, text)
+	return func(user, reply, text)
 
 
 def action_enter(user, reply, text):
-  if text not in actions_enter:
-    msg = (
-      'Что-то?'
-    )
+	if text not in actions_enter:
+		msg = (
+			'Что-то?'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    return
+		return
 
-  if text == actions_enter[1]:
-    msg = (
-      ' - Азартные игры не для меня, - подумал ты и ушел в коридор'
-    )
+	if text == actions_enter[1]:
+		msg = (
+			' - Азартные игры не для меня, - подумал ты и ушел в коридор'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    gold = user.get_room_temp('gold')
+		gold = user.get_room_temp('gold')
 
-    if user.gold > gold:
-      msg = (
-        'Ты в плюсе на {}'
-      )
+		if user.gold > gold:
+			msg = (
+				'Ты в плюсе на {}'
+			)
 
-      reply(msg.format(user.gold - gold))
+			reply(msg.format(user.gold - gold))
 
-    if user.gold < gold:
-      msg = (
-        'Ты в минусе на {}'
-      )
+		if user.gold < gold:
+			msg = (
+				'Ты в минусе на {}'
+			)
 
-      reply(msg.format(gold - user.gold))
+			reply(msg.format(gold - user.gold))
 
-    user.leave(reply)
+		user.leave(reply)
 
-    return
+		return
 
-  msg = (
-    ' - Ну чтож, выбирайте ставки, Господа!, - диллер посмотрел на тебя с ухмылкой'
-  )
+	msg = (
+		' - Ну чтож, выбирайте ставки, Господа!, - диллер посмотрел на тебя с ухмылкой'
+	)
 
-  reply(msg)
+	reply(msg)
 
-  user.set_room_temp('question', 'choose')
+	user.set_room_temp('question', 'choose')
 
 
 def action_choose(user, reply, text):
-  if text not in actions_choose:
-    msg = (
-      'Определись с выбором!'
-    )
+	if text not in actions_choose:
+		msg = (
+			'Определись с выбором!'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    return
+		return
 
-  switcher = {
-    actions_choose[0]: 'red',
-    actions_choose[1]: 'zero',
-    actions_choose[2]: 'black'
-  }
+	switcher = {
+		actions_choose[0]: 'red',
+		actions_choose[1]: 'zero',
+		actions_choose[2]: 'black'
+	}
 
-  choose = switcher.get(text)
-  
-  user.set_room_temp('color', choose)
+	choose = switcher.get(text)
+	
+	user.set_room_temp('color', choose)
 
-  msg = (
-    ' - Твой выбор {}. Какова же твоя ставка?'
-  )
+	msg = (
+		' - Твой выбор {}. Какова же твоя ставка?'
+	)
 
-  reply(msg.format(text))
+	reply(msg.format(text))
 
-  user.set_room_temp('question', 'make_bet')
+	user.set_room_temp('question', 'make_bet')
 
 
 def action_make_bet(user, reply, text):
-  bet = 0
+	bet = 0
 
-  if text == actions_make_bet[4]:
-    msg = (
-      'Слабак!'
-    )
+	if text == actions_make_bet[4]:
+		msg = (
+			'Слабак!'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    user.set_room_temp('question', 'enter')
+		user.set_room_temp('question', 'enter')
 
-    return
+		return
 
-  try:
-    bet = int(text)
-  except:
-    reply('Непонятное число у вас.')
+	try:
+		bet = int(text)
+	except:
+		reply('Непонятное число у вас.')
 
-    return
+		return
 
-  if bet <= 0:
-    msg = (
-      ' - Что ты мямлишь? Говори четче!, - сказал тебе диллер'
-    )
+	if bet <= 0:
+		msg = (
+			' - Что ты мямлишь? Говори четче!, - сказал тебе диллер'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    return
+		return
 
-  if not user.paid(bet):
-    msg = (
-      'У тебя нет столько денег.'
-    )
+	if not user.paid(bet):
+		msg = (
+			'У тебя нет столько денег.'
+		)
 
-    reply(msg)
+		reply(msg)
 
-    return
-
-
-  msg = (
-    'Игрок {} делает ставку {}. '
-    'Ставки сделаны, игра начинается!'
-  )
-
-  reply(msg.format(user.name, bet))
+		return
 
 
-  msg = (
-    'На рулетке выпадает {} - {}'
-  )
+	msg = (
+		'Игрок {} делает ставку {}. '
+		'Ставки сделаны, игра начинается!'
+	)
 
-  number = get_random_number()
-  color = get_color(number)
-
-  switcher = {
-    'red': actions_choose[0],
-    'zero': actions_choose[1],
-    'black': actions_choose[2]
-  }
-
-  color_text = switcher.get(color)
-
-  reply(msg.format(number, color_text))
+	reply(msg.format(user.name, bet))
 
 
-  user_color = user.get_room_temp('color')
+	msg = (
+		'На рулетке выпадает {} - {}'
+	)
 
-  if color == user_color:
-    msg = (
-      ' - Ограбить казино собрался? Держи свои {}\n'
-      '   Посмотрим повезет ли тебе в следующий раз..'
-    )
+	number = get_random_number()
+	color = get_color(number)
 
-    coins = 0
+	switcher = {
+		'red': actions_choose[0],
+		'zero': actions_choose[1],
+		'black': actions_choose[2]
+	}
 
-    if color in ['red', 'black']:
-      coins = bet
-    else:
-      coins = bet * 12
+	color_text = switcher.get(color)
 
-    reply(msg.format(coins))
+	reply(msg.format(number, color_text))
 
-    user.give_gold(coins + bet)
 
-  else:
-    msg = (
-      ' - Сегодня удача не на твоей стороне, дружище!'
-    )
+	user_color = user.get_room_temp('color')
 
-    reply(msg)
+	if color == user_color:
+		msg = (
+			' - Ограбить казино собрался? Держи свои {}\n'
+			'   Посмотрим повезет ли тебе в следующий раз..'
+		)
 
-  user.set_room_temp('question', 'enter')
+		coins = 0
+
+		if color in ['red', 'black']:
+			coins = bet
+		else:
+			coins = bet * 12
+
+		reply(msg.format(coins))
+
+		user.give_gold(coins + bet)
+
+	else:
+		msg = (
+			' - Сегодня удача не на твоей стороне, дружище!'
+		)
+
+		reply(msg)
+
+	user.set_room_temp('question', 'enter')
 
 
 def get_random_number(min = 0, max = 12):
 
-  return random.randrange(min, max + 1, 1)
+	return random.randrange(min, max + 1, 1)
 
 
 def get_color(number):
-  if number == 0:
-    return 'zero'
-  elif number % 2:
-    return 'black'
-  else:
-    return 'red'
+	if number == 0:
+		return 'zero'
+	elif number % 2:
+		return 'black'
+	else:
+		return 'red'

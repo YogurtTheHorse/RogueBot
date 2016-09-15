@@ -79,6 +79,8 @@ def action_enter(user, reply, text):
 				'Ты в минусе на {}'
 			)
 
+			databasemanager.add_to_leaderboard(user, gold - user.gold, databasemanager.ROULETTE_TABLE)
+
 			reply(msg.format(gold - user.gold))
 
 		user.leave(reply)
@@ -161,8 +163,6 @@ def action_make_bet(user, reply, text):
 		reply(msg)
 
 		return
-
-	databasemanager.add_to_leaderboard(user, bet, databasemanager.ROULETTE_TABLE)
 
 	msg = (
 		'Игрок {} делает ставку {}. '

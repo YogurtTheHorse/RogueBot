@@ -33,7 +33,7 @@ class User(object):
 		self.active_items = [ ]
 		self.inventory_page = 0
 
-		self.gods = [ locale_manager.get('BUDDHA'), locale_manager.get('JESUS'), locale_manager.get('ALLAH'), locale_manager.get('AUTHOR') ]
+		self.gods = [ locale_manager.get('BUDDHA'), locale_manager.get('JESUS'), locale_manager.get('ALLAH'), locale_manager.get('AUTHOR'), locale_manager.get('EMPEROR') ]
 		self.gods_level = [ 0 for g in self.gods ]
 		self.last_god = ''
 		self.prayed = False

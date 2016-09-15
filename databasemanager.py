@@ -9,6 +9,7 @@ from tinyrecord import transaction
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
 GNOME_TABLE = 'gnome'
+ROULETTE_TABLE = 'roulette'
 RATE_TABLE = 'rate'
 
 VAR_TABLE = 'vars'

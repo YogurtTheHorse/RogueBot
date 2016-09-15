@@ -1,4 +1,5 @@
 import random
+import databasemanager
 
 name = 'Казино "Марианская Впадина"'
 
@@ -161,6 +162,7 @@ def action_make_bet(user, reply, text):
 
 		return
 
+	databasemanager.add_to_leaderboard(user, integer, databasemanager.ROULETTE_TABLE)
 
 	msg = (
 		'Игрок {} делает ставку {}. '

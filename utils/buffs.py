@@ -1,4 +1,4 @@
-8class Buff(object):
+class Buff(object):
 	def __init__(self, time, name='buff', defence=0, damage_plus=0, mana_damage_plus=0, heal=0, damage=0, charisma=0, gold_bonus=1):
 		super(Buff, self).__init__()
 		self.time = time

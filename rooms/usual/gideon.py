@@ -12,7 +12,7 @@ def dice(user, reply, result, subject=None):
 	if result > DICE_MAX:
 		reply('Что-о-о? Как ты это сделал?')
 		if not user.has_item('mystery_book_2'):
-			reply('От шока Гидеон выронил дневник из рук')
+			reply('От шока Гидеон выронил дневник из рук.')
 			user.add_item('special', 'mystery_book_2')
 		user.leave(reply)
 	else:

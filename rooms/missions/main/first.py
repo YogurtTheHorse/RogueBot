@@ -6,7 +6,7 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('_Какой-то сверток..\nПосмотрю потом, как выйду отсюда. Этот старик подозрительно молчит_')
+	reply('_Какой-то сверток..\nПосмотрю потом, как выйду отсюда. Этот старик подозрительно молчит._')
 
 	user.add_item('story', 'gun')
 	user.add_item('story', 'map')

@@ -13,7 +13,7 @@ def new_pet(self, reply, pet):
 	else:
 		self.state = 'pet_name'
 		self.pet = pet
-		reply('Клаас! У тебя новый питомец!\nКак ты его назовешь?', [])
+		reply('Класс! У тебя новый питомец!\nКак ты его назовешь?', [])
 
 def on_pet(self, reply, text):
 	if self.state == 'pet_confirm':

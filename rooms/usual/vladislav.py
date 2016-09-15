@@ -29,7 +29,7 @@ def action(user, reply, text):
 			else:
 				user.open_room(reply, 'special', 'bill_gates')
 		elif text == SPINE:
-			reply('Начав движение, из-за спины Вы слышите голос с небольшим восточным акцентом:—Ты что, идиот?')
+			reply('Начав движение, из-за спины Вы слышите голос с небольшим восточным акцентом: — Ты что, идиот?')
 			user.set_room_temp('question', 'spine')
 	elif question == 'spine':
 		reply('Вы испытываете сильный стыд и так краснеете, что на лице лопается капилляр.')

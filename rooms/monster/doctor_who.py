@@ -32,7 +32,7 @@ def make_damage(user, reply, dmg):
 
 def action(user, reply, text):
 	if text == 'Сдаться':
-		reply('Доктор с ухмылкой сует Лазерную отвертку тебе в нос')
+		reply('Доктор с ухмылкой сует Лазерную отвертку тебе в нос.')
 
 		user.leave(reply)
 	else:

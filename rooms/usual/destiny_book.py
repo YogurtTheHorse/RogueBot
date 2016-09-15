@@ -1,7 +1,7 @@
 name = 'Книга судьбы'
 
 def enter(user, reply):
-	reply('Потрёпанная книга посреди комнаты.\nОна лежит в луже воды')
+	reply('Потрёпанная книга посреди комнаты.\nОна лежит в луже воды.')
 	user.set_room_temp('question', 'first')
 
 def action(user, reply, text):

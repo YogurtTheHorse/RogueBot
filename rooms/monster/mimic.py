@@ -19,7 +19,7 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук')
+	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук.')
 
 	user.set_room_temp(ACTIVATED, False)
 

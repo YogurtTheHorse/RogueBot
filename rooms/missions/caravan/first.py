@@ -103,16 +103,16 @@ def action(user, reply, text):
 
 			reply(get_message(user))
 		else:
-			reply('Приятных путешествий! Мы еще встретимся')
+			reply('Приятных путешествий! Мы еще встретимся.')
 			leave(user, reply)
 	else:
 		if text == 'Выйти' or len(user.get_room_temp('names')) == 0:
-			reply('До новых встреч! Мы еще вернемся')
+			reply('До новых встреч! Мы еще вернемся.')
 			leave(user, reply)
 		elif order(user, text):
-			reply('Постараемся привезти в кратчайшие сроки')
+			reply('Постараемся привезти в кратчайшие сроки.')
 		else:
-			reply('Могут возникнуть проблемы с доставкой')
+			reply('Могут возникнуть проблемы с доставкой.')
 
 
 		reply('Что-то еще?')

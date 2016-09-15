@@ -1,6 +1,6 @@
 import databasemanager
 
-name = 'Банкиры Люйифера'
+name = 'Банкиры Люцифера'
 
 def get_actions(user):
 	return [ 'Отдать', 'Придержать у себя' ]
@@ -17,12 +17,12 @@ def enter(user, reply):
 def action(user, reply, text):
 	if text == 'Отдать':
 		if user.gold < 5000:
-			reply('Малова-то будет. Даже на комиссию не потянет')
+			reply('Малова-то будет. Даже на комиссию не потянет.')
 		else:
 			user.gold = 0
 			databasemanager.set_variable(str(user.uid) + '_gold', True)
 			reply('С вами приятно иметь дело!')
 	else:
-		reply('Как знаешь')
+		reply('Как знаешь.')
 
 	user.leave(reply)

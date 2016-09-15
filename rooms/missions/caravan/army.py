@@ -10,7 +10,7 @@ is_monster = True
 
 def enter(user, reply):
 	msg = (
-		'Перед тобой 1337 война. Мне кажется у кого-то большие проблемы'
+		'Перед тобой 1337 война. Мне кажется у кого-то большие проблемы.'
 	)
 	reply(msg)
 
@@ -19,7 +19,7 @@ def make_damage(user, reply, dmg):
 	hp -= max(1, dmg - user.rooms_count // 10)
 
 	if hp <= 0:
-		reply('Ты победил, но мы еще вернемся')
+		reply('Ты победил, но мы еще вернемся.')
 		user.new_mission('caravan', 'army', path_len=75)
 		user.won(reply)
 	else:

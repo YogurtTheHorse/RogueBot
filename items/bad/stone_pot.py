@@ -3,7 +3,7 @@ from constants import *
 name = 'Белое зелье'
 
 description = (
-	'Пробирка с каким-то зельем'
+	'Пробирка с каким-то зельем.'
 )
 
 price = 100

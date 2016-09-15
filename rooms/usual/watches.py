@@ -33,7 +33,7 @@ def enter(user, reply):
 			'Но однажды на пути воинов Света встали воины Тьмы. '
 			'И никто не хотел уступить. И начался бой кровавый и беспощадный. '
 			'И когда битва дошла до Небес великий Гесер увидел что силы равны. '
-			'И если не остановить бой - погибнут все... \n'
+			'И если не остановить бой — погибнут все... \n'
 			)
 
 
@@ -41,11 +41,11 @@ def action(user, reply, text):
 
 	if user.has_tag('watches_escape'):
 		if text == actions_state_1[0]:
-			reply('Тут больше нечего делать')
+			reply('Тут больше нечего делать.')
 
 	elif user.has_tag('watches_stop'):
 		if text == actions_state_2[0]:
-			reply('Возможно, скоро что-то случится, а пока пойдем дальше')
+			reply('Возможно, скоро что-то случится, а пока пойдем дальше.')
 
 	else:
 		if text == actions_state_0[0]:
@@ -58,7 +58,7 @@ def action(user, reply, text):
 			user.add_tag('watches_stop')
 
 		else:
-			reply('Правильно! Нечего вмешиватся в чужие разборки')
+			reply('Правильно! Нечего вмешиватся в чужие разборки.')
 			user.add_tag('watches_escape')
 
 	user.leave(reply)

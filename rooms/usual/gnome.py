@@ -28,7 +28,7 @@ def action(user, reply, text):
 			user.add_item('special', 'spoon')
 			databasemanager.add_to_leaderboard(user, integer, databasemanager.GNOME_TABLE)
 		else:
-			reply('Вы ничего не поняли, но у вас исчезли деньги, а под глазом образовался синяк')
+			reply('Вы ничего не поняли, но у вас исчезли деньги, а под глазом образовался синяк.')
 			user.gold = 0
 
 		user.leave(reply)

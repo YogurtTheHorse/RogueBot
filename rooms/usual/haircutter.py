@@ -10,7 +10,7 @@ def get_actions(user):
 
 def dice(user, reply, result, subject=None):
 	if result > DICE_MIDDLE:
-		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще')
+		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще.')
 	else:
 		reply('Мда. Тебя избили битой за то, что ты сломал ножницы.')
 
@@ -41,7 +41,7 @@ def action(user, reply, text):
 		
 		user.leave(reply)
 	elif text == actions[1]:
-		reply('Ну покажи на что способен')
+		reply('Ну, покажи на что способен.')
 		user.throw_dice(reply)
 	else:
 		user.leave(reply)

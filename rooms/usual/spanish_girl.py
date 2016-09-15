@@ -9,7 +9,7 @@ name = 'Красотка'
 def enter(user, reply):
 	msg = ( 
 		'Ты видишь огненную красотку\n'
-		'Она улыбнулась тебе и поманила пальчиком к себе'
+		'Она улыбнулась тебе и поманила пальчиком к себе.'
 	)
 	reply(msg)
 	user.set_room_temp('question', 'first')
@@ -19,10 +19,10 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text  == READY:
-			reply('Вы подходите ближе, а красотка начинает раздеваться')
+			reply('Вы подходите ближе, а красотка начинает раздеваться.')
 			user.set_room_temp('question', 'undress')
 		else:
-			reply('Красотка обиженно на вас смотрит')
+			reply('Красотка обиженно на вас смотрит.')
 			user.leave(reply)
 	elif question == 'undress':
 		if text == CLOSER:
@@ -33,7 +33,7 @@ def action(user, reply, text):
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАН...\n'
 					'А, так ты из наших, держи, это тебе. Да хранит тебя Господь!\n'
-					'Протягивает Винцо'
+					'Протягивает Винцо.'
 				)
 				user.add_item('special', 'wine')
 				user.leave(reply)
@@ -47,7 +47,7 @@ def action(user, reply, text):
 				reply(msg)
 				user.throw_dice(reply, 'burn')
 		else:
-			reply('Красотка обиженно на вас смотрит')
+			reply('Красотка обиженно на вас смотрит.')
 			user.leave(reply)
 
 def get_actions(user):

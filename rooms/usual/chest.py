@@ -33,7 +33,7 @@ def action(user, reply, text):
 		random_number = random.random();
 
 		if random_number < 0.33:
-			reply('Пусто\nОчень жаль. Повезет в следующий раз.')
+			reply('Пусто.\nОчень жаль. Повезет в следующий раз.')
 
 		elif random_number < 0.66:
 			coins = random.randrange(2, 5, 1)

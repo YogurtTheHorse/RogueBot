@@ -1,5 +1,5 @@
 name = 'Наколенники'
-description = 'Колючие'
+description = 'Колючие.'
 price = 120
 
 defence = 7

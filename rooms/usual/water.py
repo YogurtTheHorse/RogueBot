@@ -13,7 +13,7 @@ def get_actions(user):
 
 def dice(user, reply, result, subject=None):
 	if result > DICE_MIDDLE:
-		reply('Ты все таки доплыл! Там лежал трезубец')
+		reply('Ты все таки доплыл! Там лежал трезубец.')
 		
 		user.add_tag('wet')
 		user.add_item('special', 'trident')
@@ -28,7 +28,7 @@ def enter(user, reply):
 	msg = (
 		'_Чувак_, тут полная комната _воды!_\n'
 		'По непонятным причинам вода стоит стеной, но это ненадолго.\n'
-		'Думай *быстрее*'
+		'Думай *быстрее*.'
 	)
 
 	user.set_room_temp('time', time())
@@ -42,7 +42,7 @@ def action(user, reply, text):
 	if delta > DELTA_TIME_MAX:
 		msg = (
 			'За {0:.2f} секунд можно было определиться!\n'
-			'Тебя смыло большой волной в коридор и ударило об стены'
+			'Тебя смыло большой волной в коридор и ударило об стены.'
 		).format(delta)
 
 		user.add_tag('wet')
@@ -53,7 +53,7 @@ def action(user, reply, text):
 	elif text == CHEST:
 		user.throw_dice(reply, text)
 	elif text == FAST:
-		reply('Ели успел. Ух')
+		reply('Ели успел. Ух.')
 
 		user.leave(reply)
 	else:

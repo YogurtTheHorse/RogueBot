@@ -3,8 +3,8 @@ import random
 name = 'Свиток вспышки'
 
 description = (
-  'Вспыхивает все что рядом.\n'
-  'Надпись на обороте: применять осторожно.'
+	'Вспыхивает все что рядом.\n'
+	'Надпись на обороте: применять осторожно.'
 )
 
 price = 9990
@@ -13,37 +13,37 @@ disposable = True
 
 
 def success(user, reply, room):
-  msg = (
-    'Яркий свет ослепил всех вокруг, '
-    'у тебя появилась возможность убежать и ты убег!'
-  )
+	msg = (
+		'Яркий свет ослепил всех вокруг, '
+		'у тебя появилась возможность убежать и ты убег!'
+	)
 
-  reply(msg)
+	reply(msg)
 
 
-  if user.gold > 0:
-    msg = (
-      'Ты бежал насколько быстро, что растрес все свои денюшки.\n'
-      'Ты потерял {}.'
-    )
+	if user.gold > 0:
+		msg = (
+			'Ты бежал насколько быстро, что растрес все свои денюшки.\n'
+			'Ты потерял {}.'
+		)
 
-    coins = user.gold // 2
+		coins = user.gold // 2
 
-    user.steal(coins)
+		user.steal(coins)
 
-    reply(msg.format(coins))
+		reply(msg.format(coins))
 
-  user_items = user.get_items()
+	user_items = user.get_items()
 
-  item = random.choice(user_items)
+	item = random.choice(user_items)
 
-  if user_items and item.name is not name:
-    msg = (
-      'А еще ты потерял {}'
-    )
+	if user_items and item.name is not name:
+		msg = (
+			'А еще ты потерял {}'
+		)
 
-    user.remove_item_by_name(item.name)
+		user.remove_item_by_name(item.name)
 
-    reply(msg.format(item.name))
+		reply(msg.format(item.name))
 
-  user.leave(reply)
+	user.leave(reply)

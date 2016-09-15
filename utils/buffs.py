@@ -32,18 +32,21 @@ class DevilPower(Buff):
 		super(DevilPower, self).__init__(8, name='devilpow', damage_plus=3000000)
 	def on_end(self, user, reply, room):
 		user.death(reply, reason='Сделка с дьяволом')
+		reply('Контракт истёк.')
 
 class DevilInt(Buff):
 	def __init__(self,):
 		super(DevilInt, self).__init__(8, name='devilint', mana_damage_plus=3000000)
 	def on_end(self, user, reply, room):
 		user.death(reply, reason='Сделка с дьяволом')
+		reply('Контракт истёк.')
 
 class DevilMoney(Buff):
 	def __init__(self,):
 		super(DevilMoney, self).__init__(8, name='devilmon', mana_damage_plus=0)
 	def on_end(self, user, reply, room):
 		user.death(reply, reason='Сделка с дьяволом')
+		reply('Контракт истёк.')
 		user.remove_item('lepergold')
 
 class DevilEntity(Buff):
@@ -51,4 +54,5 @@ class DevilEntity(Buff):
 		super(DevilEntity, self).__init__(8, name='devilent', damage_plus=3000000, mana_damage_plus=3000000)
 	def on_end(self, user, reply, room):
 		user.death(reply, reason='Сделка с дьяволом')
+		reply('Контракт истёк.')
 		user.remove_item('lepergold')

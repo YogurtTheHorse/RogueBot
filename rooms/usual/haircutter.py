@@ -41,7 +41,7 @@ def action(user, reply, text):
 		
 		user.leave(reply)
 	elif text == actions[1]:
-		reply('Ну, покажи на что способен')
+		reply('Ну, покажи на что способен.')
 		user.throw_dice(reply)
 	else:
 		user.leave(reply)

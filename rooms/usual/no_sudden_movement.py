@@ -33,10 +33,10 @@ def action(user, reply, text):
 		elif delta > DELTA_TIME_MAX:
 			if user.has_tag(INJURED):
 				user.remove_tag(INJURED)
-			reply('-Вали отсюда! Быстро!')
+			reply('— Вали отсюда! Быстро!')
 			user.leave(reply)
 	elif text == WAIT:
 		if delta < DELTA_TIME_MAX:
 			reply('В комнате очень тихо. Настолько что ты слышишь своё собственное сердцебиение.\nЕще бы его не услышать, ведь на вас направлен дробовик!')	
 		else:
-			reply('-Иди!')
+			reply(' — Иди!')

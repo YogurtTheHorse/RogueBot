@@ -39,7 +39,7 @@ def get_room_temp(self, name, def_val=None):
 
 def open_room(self, reply, room_type=None, room_name=None):
 	if self.race == RAT_RACE:
-		reply('Ты - крыса, у тебя не хватило сил сдвинуть дверь с места :(')
+		reply('Ты — крыса, у тебя не хватило сил сдвинуть дверь с места :(')
 		self.open_corridor(reply)
 		return
 

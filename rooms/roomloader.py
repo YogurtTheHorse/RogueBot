@@ -109,7 +109,7 @@ def check_room(room, name, room_type):
 						if user.get_room_temp('was_received_reward', def_val=False) is False:
 							msg = (
 								'Ты ушел, но на мгновение тебе показалось, что ты не забрал свой трофей.\n'
-								' - Да не, бред какой-то, - и ты продолжил свой путь к коридору.'
+								' — Да не, бред какой-то, — и ты продолжил свой путь к коридору.'
 							)
 
 							reply(msg)

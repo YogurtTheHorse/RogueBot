@@ -15,7 +15,7 @@ def on_won(user, reply):
 
 def on_leave(user, reply):
 	if not (user.get_room_temp('won') is True):
-		reply('Мы еще догоним тебя.. Потом')
+		reply('Мы еще догоним тебя.. Потом.')
 		user.new_mission('caravan', 'army', path_len=150)
 
 def enter(user, reply):

@@ -66,3 +66,15 @@ class DevilEntity(Buff):
 		reply('Контракт истёк.')
 		user.death(reply, reason='Сделка с дьяволом')
 		user.remove_item('lepergold')
+
+class EmperorDefence(Buff):
+	def __init__(self):
+		super(EmperorDefence, self).__init__(5, name='emperordef', defence=25)
+
+class EmperorBurn(Buff):
+	def __init__(self):
+		super(EmperorBurn, self).__init__(3, name='emperorburn')
+	def on_room(self, user, reply, room):
+		self.time -= 1
+		user.make_damage(10, 20, reply, death=True, name='Праведный огонь')
+		reply('У тебя кожа горит.')	

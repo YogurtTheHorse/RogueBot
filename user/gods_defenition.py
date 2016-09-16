@@ -1,5 +1,7 @@
 import random
 from datetime import datetime
+from utils.buffs import EmperorBurn
+from utils.buffs import EmperorDefence
 
 import logging
 from constants import *
@@ -21,8 +23,10 @@ def evilgod(self, reply, god):
 		reply(locale_manager.get('EVIL_ALLAH'))
 	elif god == self.gods[3]: # Author
 		self.add_item('special', 'intoxicated_shoes')
-		
 		reply(locale_manager.get('EVIL_AUTHOR'))
+	elif god == self.gods[4]: # Emperor
+		self.new_buff(EmperorBurn())
+		reply(locale_manager.get('EVIL_EMPEROR'))	
 
 def god_love(self, reply, god):
 	if god == BUDDHA_NUM: # Buddha
@@ -37,6 +41,9 @@ def god_love(self, reply, god):
 	elif god == AUTHOR_NUM: # Author
 		reply(locale_manager.get('AUTHOR_LOVE'))
 		self.open_room(reply, 'special', 'icecream')
+	elif god == EMPEROR_NUM: # Emperor
+		reply(locale_manager.get('EMPEROR_LOVE'))
+		self.new_buff(EmperorDefence())	
 
 def prayto(self, reply, god):
 	god_num = -1
@@ -53,6 +60,9 @@ def prayto(self, reply, god):
 	elif god == self.gods[AUTHOR_NUM]: # Author
 		reply(locale_manager.get('AUTHOR_PRAYED'))
 		god_num = AUTHOR_NUM
+	elif god == self.gods[EMPEROR_NUM]: # Emperor
+		reply(locale_manager.get('EMPEROR_PRAYED'))
+		god_num = EMPEROR_NUM	
 	else:
 		reply(locale_manager.get('NO_GOD'))
 

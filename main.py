@@ -80,7 +80,7 @@ def give(bot, update):
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
-def give(bot, update):
+def gold(bot, update):
 	if str(update.message.chat_id) in config.MODERS_IDS:
 		cmd, integer = update.message.text.split()
 		integer = int(integer)

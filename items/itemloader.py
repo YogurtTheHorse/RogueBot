@@ -37,7 +37,7 @@ def check_item(item, name, buff):
 		( '', [ 'aura' ] ), # eeeh. meh
 		( [ ], [ 'tags', 'loot' ] ), # some arrays?
 		( False, [ 'usable', 'fightable', 'iscursed', 'disposable' ]),
-		( 1, [ 'gold_bonus' ] )
+		( 1, [ 'gold_bonus', 'shop_count' ] )
 	]
 
 	for def_val, names in defaults:

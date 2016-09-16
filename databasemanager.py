@@ -11,6 +11,7 @@ KILLS_TABLE = 'kills'
 GNOME_TABLE = 'gnome'
 ROULETTE_TABLE = 'roulette'
 RATE_TABLE = 'rate'
+DOCTOR_TABLE = 'doctor'
 
 VAR_TABLE = 'vars'
 LIST_TABLE = '__list'

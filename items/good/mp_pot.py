@@ -1,9 +1,9 @@
 from constants import *
 
-name = 'Черное зелье'
+name = 'Красное зелье'
 
 description = (
-	'Пробирка с каким-то черным зельем.'
+	'Пробирка с каким-то красным зельем.'
 )
 
 price = 100
@@ -15,7 +15,7 @@ disposable = True
 def on_use(user, reply):
 	reply('Это оказалось зелье жизни. Теперь ты полностью здоров.')
 
-	user.heal(user.max_hp // 2)
+	user.mana(user.max_mp // 2)
 
 fightable = True
 def fight_use(user, reply, room):

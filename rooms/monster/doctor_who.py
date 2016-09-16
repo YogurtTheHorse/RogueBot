@@ -21,12 +21,12 @@ def enter(user, reply):
 	reply('Я — _{0}_й Доктор!'.format(number))
 
 	if name is not None:
-		time = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)
+		t = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)
 
 		reply('Я реинкарнация после убийства доктора от руки игрока {0}'.format(name))
 
-		if time > 0:
-			reply('Моя новая реинкарнация длится уже {0:.2f} минут!'.format(time / 60))
+		if t > 0:
+			reply('Моя новая реинкарнация длится уже {0:.2f} минут!'.format(t / 60))
 
 def get_actions(user):
 	return user.get_fight_actions() + [ 'Сдаться' ]

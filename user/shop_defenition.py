@@ -45,7 +45,8 @@ def buy(self, item, reply):
 
 		check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
 
-		self.items.append((item.buff, item.code_name))
+		for i in range(item.shop_count):
+			self.items.append((item.buff, item.code_name))
 		item.on_buy(self, reply)
 		reply(check)
 

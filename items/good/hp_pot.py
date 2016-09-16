@@ -13,7 +13,7 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Это оказалось зелье жизни. Теперь ты полностью здоров.')
+	reply('Это оказалось зелье жизни. Теперь ты здоровее чем мог бы быть.')
 
 	user.heal(user.max_hp // 2)
 

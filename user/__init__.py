@@ -1,3 +1,4 @@
+import time
 import random
 from datetime import datetime
 
@@ -17,6 +18,7 @@ class User(object):
 		super(User, self).__init__()
 
 		self.uid = uid
+		self.session = time.time()
 
 		self.name = 'none'
 		self.hp = 100

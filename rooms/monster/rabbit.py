@@ -11,4 +11,4 @@ coins = 3
 loot = [ ]
 
 def enter(user, reply):
-	reply('Его зубы в крови своих жертв')
+	reply('Его зубы в крови своих жертв.')

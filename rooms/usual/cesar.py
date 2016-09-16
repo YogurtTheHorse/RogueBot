@@ -22,11 +22,11 @@ def action(user, reply, text):
 		if user.get_damage() > 100:
 			reply('Ты слишком силен для всего этого, я не могу пустить тебя к ним.')
 		elif databasemanager.get_variable('ces', def_val=False) is False:
-			reply('На сегодня запись закрыта. Приходите завтра')
+			reply('На сегодня запись закрыта. Приходите завтра.')
 		else:
 			reply('Тебе сообщат о начале турнира.')
 			if tornamentmanager.add_to_list('cesar', user.uid) < 0:
-				reply('Подожди-ка.. Ты уже в списках')
+				reply('Подожди-ка... Ты уже в списках')
 	else:
 		reply('Так и быть. Ступай')
 	user.leave(reply)

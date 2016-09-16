@@ -8,3 +8,6 @@ def paid(self, costs):
 
 def steal(self, price):
 	self.gold = max(0, self.gold - price)
+
+def give_gold(self, gold):
+	self.gold += gold * self.get_gold_bonus()

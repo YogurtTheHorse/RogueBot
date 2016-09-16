@@ -25,10 +25,11 @@ def open_inventory(self, reply):
 
 	for i in selected_items[begin:end]:
 		if i is not None:
+			acts = [ ]
 			is_atcive = ''#'(Надето: {0} шт.)'.format(active_items.count(i)) if i in active_items else ''
 			msg += '{0} ({2} шт.) {1}:\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description)
 			if i.usable:
-				actions.append(i.name)
+				acts.append(i.name)
 
 			if active_items.count(i) > 0:
 				pass#actions.append(locale_manager.get('DEACTIVATE') + i.name)
@@ -36,7 +37,9 @@ def open_inventory(self, reply):
 			if active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
 				pass#actions.append(locale_manager.get('ACTIVATE') + i.name)
 
-			actions.append(locale_manager.get('THROW_AWAY') + i.name)
+			acts.append(locale_manager.get('THROW_AWAY') + i.name)
+
+			actions.append(acts)
 
 	if begin > 0:
 		actions.append(locale_manager.get('BACK'))

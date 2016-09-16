@@ -12,6 +12,6 @@ fightable = True
 disposable = True
 
 def fight_use(user, reply, room):
-	reply('Ты Выкинул пулю в противника. И зачем?')
+	reply('Ты выкинул пулю в противника. И зачем?')
 	
 	return 0

@@ -91,7 +91,7 @@ def update_tornament(reply, tid):
 		gold = random.randint(10000, 20000)
 
 		rep('Это победа! Цезарь дарует тебе *{0}* злт.'.format(gold))
-		user.gold += gold
+		user.give_gold(gold)
 		user.open_corridor(rep)
 
 		usermanager.save_user(user)
@@ -129,7 +129,7 @@ def update_tornament(reply, tid):
 
 def make_damage(user, reply, dmg):
 	if user.get_room_temp('attacked', def_val=False):
-		reply('Ты уже атаковал. Подожди какое-то время')
+		reply('Ты уже атаковал. Подожди какое-то время.')
 	else:
 		user.set_room_temp('attacked', True)
 		user.set_room_temp('damage', dmg)

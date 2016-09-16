@@ -5,21 +5,21 @@ def debug_info(self):
 	msg += 'name: ' + str(self.name) + '\n'
 	msg += 'hp: ' + str(self.hp) + '\n'
 	msg += 'mp: ' + str(self.mp) + '\n'
+	msg += 'pet: ' + str(self.pet) + '\n'
 	msg += 'gold: ' + str(self.gold) + '\n'
 	msg += 'max_hp: ' + str(self.max_hp) + '\n'
 	msg += 'max_mp: ' + str(self.max_mp) + '\n'
 	msg += 'state: ' + str(self.state) + '\n'
-	msg += 'items: ' + str(self.items) + '\n'
 	msg += 'inventory_page: ' + str(self.inventory_page) + '\n'
 	msg += 'gods: ' + str(self.gods) + '\n'
 	msg += 'gods_level: ' + str(self.gods_level) + '\n'
 	msg += 'gods: ' + str(self.gods) + '\n'
 	msg += 'last_god: ' + str(self.last_god) + '\n'
 	msg += 'prayed: ' + str(self.prayed) + '\n'
-	msg += 'damage: ' + str(self.damage) + ' ({0})'.format(self.get_damage()) + '\n'
-	msg += 'defence: ' + str(self.defence) + ' ({0})'.format(self.get_defence()) + '\n'
-	msg += 'charisma: ' + str(self.charisma) + ' ({0})'.format(self.get_charisma()) + '\n'
-	msg += 'mana_damage: ' + str(self.mana_damage) + ' ({0})'.format(self.get_mana_damage()) + '\n'
+	msg += 'damage: ' + str(self.damage) + '\n'
+	msg += 'defence: ' + str(self.defence) + '\n'
+	msg += 'charisma: ' + str(self.charisma) + '\n'
+	msg += 'mana_damage: ' + str(self.mana_damage) + '\n'
 	msg += 'visited_shop: ' + str(self.visited_shop) + '\n'
 	msg += 'shop_items: ' + str(self.shop_items) + '\n'
 	msg += 'shop_names: ' + str(self.shop_names) + '\n'
@@ -28,16 +28,33 @@ def debug_info(self):
 	msg += 'room_temp: ' + str(self.room_temp) + '\n'
 	msg += 'reborn_answer: ' + str(self.reborn_answer) + '\n'
 	msg += 'dead: ' + str(self.dead) + '\n'
-	msg += 'rooms_to_story: ' + str(self.rooms_to_story) + '\n'
-	msg += 'next_story_room: ' + str(self.next_story_room) + '\n'
-	msg += 'subject: ' + str(self.subject)
+	msg += 'subject: ' + str(self.subject) + '\n'
+	msg += 'variables: ' + str(self.variables) + '\n'
+	msg += 'buffs: ' + str(self.buffs) + '\n'
+	msg += 'missions: ' + str(self.missions)
 
 	return msg
+
+def get_gold_bonus(self):
+	res = 1
+	for i in self.get_active_items():
+		res *= i.gold_bonus
+
+	for b in self.buffs:
+		res *= b.gold_bonus
+
+	if self.pet:
+		res *= self.get_pet().gold_bonus
+
+	return res
 
 def get_damage(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.damage
+
+	if self.pet:
+		res += self.get_pet().damage
 
 	return res + self.damage
 
@@ -46,12 +63,24 @@ def get_damage_bonus(self, reply):
 	for i in self.get_active_items():
 		res += i.get_damage_bonus(self, reply)
 
+	for b in self.buffs:
+		res += b.damage_plus
+
+	if self.pet:
+		res += self.get_pet().get_damage_bonus(self, reply)
+
 	return res
 
 def get_defence(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.defence
+
+	for b in self.buffs:
+		res += b.defence
+
+	if self.pet:
+		res += self.get_pet().defence
 
 	return res + self.defence
 
@@ -60,12 +89,24 @@ def get_charisma(self):
 	for i in self.get_active_items():
 		res += i.charisma
 
+	for b in self.buffs:
+		res += b.charisma
+
+	if self.pet:
+		res += self.get_pet().charisma
+
 	return res + self.charisma
 
 def get_mana_damage(self):
 	res = 0
 	for i in self.get_active_items():
 		res += i.mana_damage
+
+	for b in self.buffs:
+		res += b.mana_damage_plus
+
+	if self.pet:
+		res += self.get_pet().mana_damage
 
 	return res + self.mana_damage
 
@@ -122,3 +163,6 @@ def get_variable(self, name, def_val=None):
 		return self.variables[name]
 	else:
 		return def_val
+
+def new_buff(self, buff):
+	self.buffs.append(buff)

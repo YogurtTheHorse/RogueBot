@@ -19,7 +19,7 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук')
+	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук.')
 
 	user.set_room_temp(ACTIVATED, False)
 
@@ -29,7 +29,7 @@ def action(user, reply, text):
 		user.fight_action(reply, text)
 	else:
 		if text == actions[0]:
-			if user.story_level < 1:
+			if user.rooms_count < 25:
 				reply('Не открывается')
 				user.leave(reply)
 			else:

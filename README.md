@@ -1,4 +1,4 @@
-# RogueBot
+# RogueBot [![Build Status](https://travis-ci.org/yegorf1/RogueBot.svg?branch=master)](https://travis-ci.org/yegorf1/RogueBot)
 My simple rogue-like game for Telegram and VK (in dev)
 
 # Requirements
@@ -18,9 +18,10 @@ TELEGRAM_TOKEN = '123456789:AAHdqTcvCH1vGWJxfSeofSAs0K5PALDsaw '
 VK_LOGIN = 'bot@bot.ry'
 VK_PASS = 'bot_password'
 
-# List of admins ids
+# List of admins and moders
 # Example: [ '66303244', 'vk1' ]
 ADMINS_IDS = [  ]
+MODERS_IDS = ADMINS_IDS + [  ]
 
 DATABASE_PATH = 'db.json'
 USERS_PATH = 'users'

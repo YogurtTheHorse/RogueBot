@@ -2,10 +2,12 @@ import random
 
 import rooms.roomloader as roomloader
 
-import logging
 from constants import *
 
 from localizations import locale_manager
+
+import logging
+logger = logging.getLogger('rg')
 
 def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 	old_hp = self.hp
@@ -37,35 +39,48 @@ def get_room_temp(self, name, def_val=None):
 
 def open_room(self, reply, room_type=None, room_name=None):
 	if self.race == RAT_RACE:
-		reply('Ты крыса, у тебя не хватило сил сдвинуть дверь с места :(')
+		reply('Ты — крыса, у тебя не хватило сил сдвинуть дверь с места :(')
 		self.open_corridor(reply)
 		return
 
 	self.state = 'room'
 
 	self.rooms_count += 1
-	self.rooms_to_story -= 1
+	for m in self.missions:
+		m.room_opened()
 
 	if not (room_type and room_name):
-		if self.rooms_to_story < 1:
-			room_type, room_name = 'story', self.next_story_room
-		else:
-			room_type, room_name = roomloader.get_next_room()
+		room_type, room_name = roomloader.get_next_room(self)
+
+	logger.info('room_opened ' + room_name)
+
+	last_mission = self.get_last_mission()
+	if last_mission.get_room_type() == room_type and last_mission.get_room_name() == room_name:
+		self.pop_mission()
 
 	self.room = (room_type, room_name)
 	self.room_temp = { }
 
 	room = roomloader.load_room(self.room[1], self.room[0])
 
-	if room_type == 'story':
-		self.story_level += 1
-		self.next_story_room = room.next_story_room
-
-		mn, mx = room.next_story_room_range
-		self.rooms_to_story = random.randint(mn, mx)
-
 	for i in self.get_items():
 		i.on_room(self, reply, room)
+
+	to_delete = [ ]
+	for i, b in enumerate(self.buffs):
+		try:
+			b.on_room(self, reply, room)
+			if b.time <= 0:
+				to_delete.append(i)
+		except:
+			pass
+
+	for i in reversed(to_delete):
+		self.buffs[i].on_end(self, reply, room)
+		del self.buffs[i]
+
+	if self.pet:
+		self.get_pet().on_room(self, reply, room)
 
 	if room.room_type == 'monster':
 		self.set_room_temp('hp', room.hp)
@@ -99,6 +114,9 @@ def get_dice_bonus(self, reply):
 	for i in self.get_items():
 		res += i.get_dice_bonus(self, reply)
 
+	if self.pet:
+		res += self.get_pet().get_dice_bonus(self, reply)
+
 	return res
 
 
@@ -120,7 +138,12 @@ def dice(self, reply, text):
 
 def leave(self, reply):
 	self.visited_shop = False
+	self.shop_items = [ ]
 	self.prayed = False
+
+	room = roomloader.load_room(self.room[1], self.room[0])
+	if room is not None:
+		room.on_leave(self, reply)
 
 	if self.hp < self.max_hp / 2:
 		#reply('Ты слегка отдохнул')
@@ -128,3 +151,7 @@ def leave(self, reply):
 		pass
 
 	self.open_corridor(reply)
+
+def start_tornament(self, tid, reply):
+	self.tornament_id = tid
+	self.open_room(reply, 'special', 'tornament')

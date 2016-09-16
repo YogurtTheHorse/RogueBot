@@ -9,7 +9,7 @@ def enter(user, reply):
 
 def action(user, reply, text):
 	if user.has_item('mystery_book_1'):
-		reply('А. Такой у тебя уже есть')
+		reply('А. Такой у тебя уже есть.')
 	else:
 		user.add_item('special', 'mystery_book_1')
 

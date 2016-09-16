@@ -30,12 +30,14 @@ def check_item(item, name, buff):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use' ] ), # callbacks
+		( lambda *args: None, [ 'on_room', 'on_enemy', 'on_escape', 'on_corridor', 'on_shop', 'on_pray', 'on_buy', 'on_dice', 'on_use', 'failure', 'success' ] ), # callbacks
 		( lambda *args: 0, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
+		( lambda *args: True, [ 'can_use' ]),
 		( 0, [ 'damage', 'mana_damage', 'charisma', 'defence' ] ), # buffs
 		( '', [ 'aura' ] ), # eeeh. meh
 		( [ ], [ 'tags', 'loot' ] ), # some arrays?
-		( False, [ 'usable', 'fightable', 'iscursed', 'disposable' ])
+		( False, [ 'usable', 'fightable', 'iscursed', 'disposable' ]),
+		( 1, [ 'gold_bonus' ] )
 	]
 
 	for def_val, names in defaults:
@@ -45,12 +47,17 @@ def check_item(item, name, buff):
 
 	return item
 
-def load_random_item(buff):
+def get_all_items(buff):
 	pth = 'items/' + buff + '/'
 	items =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
 	comp_items =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
-	return (buff, random.choice(items + comp_items))
+	return items + comp_items
+
+def load_random_item(buff):
+	items = get_all_items(buff)
+
+	return (buff, random.choice(items))
 
 def load_shop_items():
 	items = [
@@ -58,6 +65,12 @@ def load_shop_items():
 		load_random_item('good'),
 		load_random_item('neutral')
 	]
+
+	it = load_random_item('good')
+	while it in items:
+		it = load_random_item('good')
+
+	items.append(it)
 
 	random.shuffle(items)
 

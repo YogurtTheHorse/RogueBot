@@ -19,5 +19,5 @@ def action(user, reply, text):
 			user.death(reply, reason='Столкновение с дверью')
 		reply('_тишина_')
 	else:
-		reply('Ты открываешь дверь, а за ней.. Коридор!')
+		reply('Ты открываешь дверь, а за ней... Коридор!')
 		user.leave(reply)

@@ -8,8 +8,8 @@ coins = 300
 loot = [ 'dragon_sword' ]
 
 def enter(user, reply):
-	reply('Большой и красный, как в сказке')
+	reply('Большой и красный, как в сказке.')
 
-	if user.story_level < 1:
+	if user.rooms_count < 50:
 		reply('Он не заметил тебя и прошел мимо. Мелкий еще.')
 		user.leave(reply)

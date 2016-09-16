@@ -1,3 +1,5 @@
+from constants import *
+
 READY = 'Подойти ближе'
 ESCAPE = 'Уйти'
 CLOSER = 'Подойти еще ближе'
@@ -7,7 +9,7 @@ name = 'Красотка'
 def enter(user, reply):
 	msg = ( 
 		'Ты видишь огненную красотку\n'
-		'Она улыбнулась тебе и поманила пальчиком к себе'
+		'Она улыбнулась тебе и поманила пальчиком к себе.'
 	)
 	reply(msg)
 	user.set_room_temp('question', 'first')
@@ -17,10 +19,10 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text  == READY:
-			reply('Вы подходите ближе, а красотка начинает раздеваться')
+			reply('Вы подходите ближе, а красотка начинает раздеваться.')
 			user.set_room_temp('question', 'undress')
 		else:
-			reply('Красотка обиженно на вас смотрит')
+			reply('Красотка обиженно на вас смотрит.')
 			user.leave(reply)
 	elif question == 'undress':
 		if text == CLOSER:
@@ -30,8 +32,8 @@ def action(user, reply, text):
 					'Вместо нее появляются три мужика в красном\n'
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАН...\n'
-					'А, так ты из наших, держи, это тебе.\n'
-					'Протягивает Винцо'
+					'А, так ты из наших, держи, это тебе. Да хранит тебя Господь!\n'
+					'Протягивает Винцо.'
 				)
 				user.add_item('special', 'wine')
 				user.leave(reply)
@@ -41,12 +43,11 @@ def action(user, reply, text):
 					'Вместо нее появляются три мужика в красном\n'
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАНСКУЮ ИНКВИЗИЦИЮ!\n'
-					'На костёр неверного!'
 				)
 				reply(msg)
-				user.death(reply, reason='Инквизиция')
+				user.throw_dice(reply, 'burn')
 		else:
-			reply('Красотка обиженно на вас смотрит')
+			reply('Красотка обиженно на вас смотрит.')
 			user.leave(reply)
 
 def get_actions(user):
@@ -59,3 +60,11 @@ def get_actions(user):
 		ans = [ CLOSER, ESCAPE]
 
 	return ans
+
+def dice(user, reply, result, subject='burn'):
+	if result > DICE_MIDDLE:
+		reply('Инквизиция злобно на тебя смотрит.\nВ другой раз ты не уйдешь!')
+		user.leave(reply)
+	else:
+		reply('На костёр неверного!')
+		user.death(reply, reason='Инквизиция')	

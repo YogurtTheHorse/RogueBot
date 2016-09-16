@@ -27,7 +27,7 @@ def enter(user, reply):
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply('Держи рожок мороженного')
+		reply('Держи рожок мороженого')
 
 		user.add_item('special', 'icecream')
 	elif text == actions[1]:

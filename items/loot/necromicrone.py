@@ -1,5 +1,5 @@
 name = 'Некрономикон'
-description = 'Книжечка'
+description = 'Книжечка.'
 price = 150
 
 usable = True

@@ -8,4 +8,4 @@ coins = 17
 loot = [ ]
 
 def enter(user, reply):
-	reply('Кря')
+	reply('Кря.')

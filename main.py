@@ -21,6 +21,8 @@ question_yes = 0
 question_no = 0
 asked = [ ]
 
+updater = Updater(config.TELEGRAM_TOKEN)
+
 def reply_job(bot, job):
 	c_id, bot, txt, buttons, photo = job.context
 	reply(c_id, bot, txt, buttons, photo)
@@ -39,11 +41,15 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 				custom_keyboard.append([b])
 
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
-		bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
+		try:
+			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
+		except Exception as e:
+			if '429' in str(e):
+				send_job = Job(reply_job, 0.040, repeat=False, context=(c_id, bot, txt, buttons, photo))
+				updater.job_queue.put(send_job)
+
 	elif len(txt) > 0:
-		bot.sendMessage(c_id,
-						text=txt, 
-						parse_mode=telegram.ParseMode.MARKDOWN)
+		bot.sendMessage(c_id, text=txt, parse_mode=telegram.ParseMode.MARKDOWN)
 
 	if photo:
 		bot.sendSticker(c_id, sticker=photo)
@@ -258,10 +264,6 @@ def msg(bot, update):
 	if len(msg) > 0 or image:
 		global updater
 
-		send_job = Job(reply_job,
-						0.040,
-						repeat=False,
-						context=(c_id, bot, msg, buttons, image))
 		reply(c_id, bot, msg, buttons, image)
 
 def leaderboard(bot, update):
@@ -337,7 +339,6 @@ if __name__ == '__main__':
 		os.makedirs(config.USERS_PATH)
 
 	logger.info('Creating Updater...')
-	updater = Updater(config.TELEGRAM_TOKEN)
 
 	updater.dispatcher.add_handler(CommandHandler('leaderboard', leaderboard))
 	updater.dispatcher.add_handler(CommandHandler('setname', setname))

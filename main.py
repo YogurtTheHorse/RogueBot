@@ -80,6 +80,17 @@ def give(bot, update):
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
+def give(bot, update):
+	if str(update.message.chat_id) in config.MODERS_IDS:
+		cmd, integer = update.message.text.split()
+		integer = int(integer)
+
+		user = usermanager.get_user(update.message.chat_id)
+		user.gold += integer
+		usermanager.save_user(user)
+	else:
+		bot.sendMessage(update.message.chat_id, text='NO.')
+
 def pet(bot, update):
 	if str(update.message.chat_id) in config.MODERS_IDS:
 		cmd, pet, name = update.message.text.split()
@@ -337,6 +348,7 @@ if __name__ == '__main__':
 	updater.dispatcher.add_handler(CommandHandler('stop', stop))
 	updater.dispatcher.add_handler(CommandHandler('room', room))
 	updater.dispatcher.add_handler(CommandHandler('give', give))
+	updater.dispatcher.add_handler(CommandHandler('gold', gold))
 	updater.dispatcher.add_handler(CommandHandler('pet', pet))
 
 

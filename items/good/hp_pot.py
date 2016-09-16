@@ -7,7 +7,7 @@ description = (
 )
 
 price = 100
-shop_count = 3
+shop_count = 2
 
 usable = True
 disposable = True
@@ -15,7 +15,7 @@ disposable = True
 def on_use(user, reply):
 	reply('Это оказалось зелье жизни. Теперь ты здоровее чем мог бы быть.')
 
-	user.heal(user.max_hp // 2)
+	user.hp = user.max_hp
 
 fightable = True
 def fight_use(user, reply, room):

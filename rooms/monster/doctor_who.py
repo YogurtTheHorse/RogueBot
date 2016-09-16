@@ -2,7 +2,7 @@ import databasemanager
 
 name = 'Доктор кто'
 
-hp = 100000 ** databasemanager.get_variable('doctor_num', 1)
+hp = 100000 * 2 ** (databasemanager.get_variable('doctor_num', 1) - 1)
 damage_range =  ( 0, 50 )
 
 coins = 0

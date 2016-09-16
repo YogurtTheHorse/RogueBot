@@ -1,3 +1,4 @@
+import time
 import databasemanager
 
 name = 'Доктор кто'
@@ -20,7 +21,12 @@ def enter(user, reply):
 	reply('Я — _{0}_й Доктор!'.format(number))
 
 	if name is not None:
+		time = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)
+
 		reply('Я реинкарнация после убийства доктора от руки игрока {0}'.format(name))
+
+		if time > 0:
+			reply('Моя новая реинкарнация длится уже {0:.2f} минут!'.format(time / 60))
 
 def get_actions(user):
 	return user.get_fight_actions() + [ 'Сдаться' ]
@@ -33,6 +39,7 @@ def make_damage(user, reply, dmg):
 		number = databasemanager.get_variable('doctor_num', 1)
 		databasemanager.set_variable('doctor_num', number + 1)
 		databasemanager.set_variable('doctor_killer', user.name)
+		databasemanager.set_variable('doctor_kill_time', time.time())
 
 		databasemanager.add_to_leaderboard(user, user.get_room_temp('hp_max', 10 ** 5), databasemanager.DOCTOR_TABLE)
 		user.won(reply)

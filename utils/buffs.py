@@ -69,7 +69,7 @@ class DevilEntity(Buff):
 
 class EmperorDefence(Buff):
 	def __init__(self):
-		super(EmperorDefence, self).__init__(1, name='emperordef', defence=25)
+		super(EmperorDefence, self).__init__(5, name='emperordef', defence=25)
 
 class EmperorBurn(Buff):
 	def __init__(self):

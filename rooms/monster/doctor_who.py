@@ -15,6 +15,8 @@ def enter(user, reply):
 	number = databasemanager.get_variable('doctor_num', 1)
 	name = databasemanager.get_variable('doctor_killer')
 
+	user.set_room_temp('hp_max', hp)
+
 	reply('Я — _{0}_й Доктор!'.format(number))
 
 	if name is not None:
@@ -32,7 +34,7 @@ def make_damage(user, reply, dmg):
 		databasemanager.set_variable('doctor_num', number + 1)
 		databasemanager.set_variable('doctor_killer', user.name)
 
-		databasemanager.add_to_leaderboard(user, hp, databasemanager.DOCTOR_TABLE)
+		databasemanager.add_to_leaderboard(user, user.get_room_temp('hp_max', 10 ** 5), databasemanager.DOCTOR_TABLE)
 		user.won(reply)
 	else:
 		user.set_room_temp('hp', hp)

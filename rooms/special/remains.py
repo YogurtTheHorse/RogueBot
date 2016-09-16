@@ -1,5 +1,8 @@
 import random
 import usermanager
+import items.itemloader as itemloader
+
+from collections import Counter
 
 name = 'Останки'
 
@@ -36,9 +39,24 @@ def action(user, reply, text):
 		if len(items) == 0:
 			reply('У него ничего не было.')
 		else:
-			reply('Ты забрал его вещи.')
+			reply('Ты забрал его вещи, золотишко и парочку сохранившихся зубов.')
+
+			user.give_gold(random.randrange(12, 72))
+
+			items.append(('loot', 'tooth'))
+			items.append(('loot', 'tooth'))
+
 			for it in items:
 				user.add_item(it[0], it[1])
+
+			counter_items = Counter(items)
+			items_str = [ ]
+			for it, cnt in counter_items.most_common():
+				loaded_item = itemloader.load_item(it[1], it[0])
+				items_str.append('*{0}* ({1} шт.)'.format(load_item.name, cnt))
+
+			reply('Его рюкзак вмещал в себя следующие вещи: {0}'.format(', '.join(items_str)))
+
 	else:
 		reply('Ты уходишь отсюда.')
 		

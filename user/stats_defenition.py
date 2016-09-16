@@ -117,6 +117,13 @@ def has_aura(self, aura):
 			
 	return False
 
+def use_mana(self, mp):	
+	if self.mp >= mp:
+		self.mp -= mp
+		return True
+	
+	return False
+
 def heal(self, hp):
 	self.hp = min(self.hp + hp, self.max_hp)
 

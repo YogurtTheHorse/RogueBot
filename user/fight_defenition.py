@@ -47,9 +47,12 @@ def fight_action(self, reply, text):
 	elif text == locale_manager.get('KICK_MAGIC'):
 		dmg = self.get_mana_damage()
 
-		reply(locale_manager.get('MAGIC_KICKED').format(dmg))
+		if self.use_mana(5):
+			reply(locale_manager.get('MAGIC_KICKED').format(dmg))
 
-		room.make_damage(self, reply, dmg)
+			room.make_damage(self, reply, dmg)
+		else:
+			reply('Маны то не хватает :(')
 	elif text.startswith(locale_manager.get('USE')):
 		name = text[len(locale_manager.get('USE')):]
 		item = None

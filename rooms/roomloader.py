@@ -121,11 +121,13 @@ def check_room(room, name, room_type):
 
 				user.fight_action(reply, text)
 
-				if user_damage > 0 and boss.get('alive') and boss.get('id') is user_boss_id and boss.get('max_hp') // user_damage < 10:
-					skill_damage = room.skill(user, reply, boss)
+				if user.state == 'room':
 
-					if skill_damage > 0:
-						user.make_damage(skill_damage, skill_damage, reply, defence=False, name=room.name)
+					if user_damage > 0 and boss.get('alive') and boss.get('id') is user_boss_id and boss.get('max_hp') // user_damage < 10:
+						skill_damage = room.skill(user, reply, boss)
+
+						if skill_damage > 0:
+							user.make_damage(skill_damage, skill_damage, reply, defence=False, name=room.name)
 
 		def give_reward(user, reply, boss):
 			if user.get_room_temp('was_received_reward', def_val=False) is False:

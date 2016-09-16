@@ -5,6 +5,7 @@ import bossmanager
 import logging
 from constants import *
 
+from collections import Counter
 from localizations import locale_manager
 
 def get_fight_actions(self):
@@ -14,9 +15,11 @@ def get_fight_actions(self):
 		locale_manager.get('USE') + locale_manager.get('IMAGINATION')
 	]
 
-	for i in self.get_items():
+	items = self.get_items()
+	counter_items = Counter(items)
+	for i, cnt in counter_items.most_common():
 		if i.fightable:
-			act = locale_manager.get('USE') + i.name
+			act = locale_manager.get('USE') + i.name + ' ({0} шт.)'.format(cnt)
 			if act not in actions:
 				actions.append(act)
 
@@ -54,8 +57,12 @@ def fight_action(self, reply, text):
 		else:
 			reply('Маны то не хватает :(')
 	elif text.startswith(locale_manager.get('USE')):
-		name = text[len(locale_manager.get('USE')):]
+		name = 'foo'
 		item = None
+
+		if '(' in text:
+			name = text[len(locale_manager.get('USE')):]
+			name = name[:name.rindex('(')-1]
 
 		for i in self.get_items():
 			if i.name == name:

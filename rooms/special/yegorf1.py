@@ -233,17 +233,20 @@ def action_choose_door_04(user, reply, text):
 
 		if user.get_room_temp('opened:choose_door_04', def_val=False):
 			user.set_room_temp(actions_pray[0], 'opened')
+			user.set_room_temp(actions_pray[1], 'not-opened')
 			user.set_room_temp('question', 'pray')
 
 	return True
 
 
 def action_pray(user, reply, text):
+	user.set_room_temp(actions_pray[1], 'not-opened')
+
 	if text == actions_pray[0]:
 		msg = (
 			'Что? Нужна помощь?\n'
 			'На этот раз я тебя прощу, но впредь будь послушным.\n'
-			'@yegorf1 ударят тебя тростью и ты вылетаешь в коридор через открывшуюся дверь.'
+			'@yegorf1 ударил тебя тростью и ты вылетаешь в коридор через открывшуюся дверь.'
 		)
 
 		reply(msg, photo=STICKER_YEGORF1)

@@ -24,6 +24,24 @@ def get_model(db):
 
 	@Scores.class_method
 	def get_leaderboard(cls, leaderboard, count=10):
+		if leaderboard_name == 'death':
+			res = list(cls.find({"leaderboard": 'rooms'}))
+
+			for r in res:
+				if 'death_reason' in r and str(r['death_reason']) != 'None':
+					counter.update([r['death_reason']])
+
+			return counter.most_common(count)
+		else:
+			def sort_by_score(doc):
+				return doc['score']
+
+			table = db.table(leaderboard_name)
+
+			res = list(cls.find({"leaderboard": leaderboard}))
+			res.sort(key=sort_by_score, reverse=True)
+
+			return res[:count]
 		return list(cls.find({"leaderboard": leaderboard}))[:count]
 
 	@Scores.class_method

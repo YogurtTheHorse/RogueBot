@@ -24,7 +24,7 @@ def get_model(db):
 
 	@Scores.class_method
 	def get_leaderboard(cls, leaderboard, count=10):
-		if leaderboard_name == 'death':
+		if leaderboard == 'death':
 			res = list(cls.find({"leaderboard": 'rooms'}))
 
 			for r in res:
@@ -35,8 +35,6 @@ def get_model(db):
 		else:
 			def sort_by_score(doc):
 				return doc['score']
-
-			table = db.table(leaderboard_name)
 
 			res = list(cls.find({"leaderboard": leaderboard}))
 			res.sort(key=sort_by_score, reverse=True)

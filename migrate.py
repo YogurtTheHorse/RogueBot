@@ -169,9 +169,9 @@ def get_leaderboard(leaderboard_name='rooms', count=10):
 			return res[:count]
 
 import databasemanager
-from pymongo import Connection
-c = Connection()
-c.drop_database('rogbot')
+#from pymongo import Connection
+#c = Connection()
+#c.drop_database('rogbot')
 
 print('Moving variables..')
 for variable in db.table(VAR_TABLE).all():

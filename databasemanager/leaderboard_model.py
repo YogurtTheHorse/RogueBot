@@ -1,3 +1,7 @@
+import pymongo
+
+from collections import Counter
+
 from mongothon import Schema
 from mongothon import create_model
 from mongothon.validators import one_of
@@ -27,6 +31,8 @@ def get_model(db):
 		if leaderboard == 'death':
 			res = list(cls.find({"leaderboard": 'rooms'}))
 
+			counter = Counter()
+
 			for r in res:
 				if 'death_reason' in r and str(r['death_reason']) != 'None':
 					counter.update([r['death_reason']])
@@ -36,8 +42,9 @@ def get_model(db):
 			def sort_by_score(doc):
 				return doc['score']
 
-			res = list(cls.find({"leaderboard": leaderboard}))
-			res.sort(key=sort_by_score, reverse=True)
+			cursor = cls.find({"leaderboard": leaderboard})
+			sorted = cursor.sort('score', pymongo.DESCENDING)
+			res = list(sorted.limit(count))
 
 			return res[:count]
 		return list(cls.find({"leaderboard": leaderboard}))[:count]

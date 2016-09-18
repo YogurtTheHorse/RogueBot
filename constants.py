@@ -26,12 +26,13 @@ EVIL_MUSCLELOT = 'evil_musclelot'
 JAPANESE = 'japanese'
 
 SLIME_STICKER = 'BQADAgAD7AADDLXzAxPOv_f69TwOAg'
+KODZIMA_STICKER = 'BQADAgAD-QADDLXzAzuWRnAhjRHlAg'
 
 HUMAN = 'human'
 RAT_RACE = 'rat'
 
 twi_prhrases = {
-	'dead': [ 
+	'dead': [
 		'Ха-ха, {0} умер от моей красоты. УХУХУХУ!',
 		'Слабаак, {0}, не смог одолеть даже дрыща! НЕ-У-ДАЧ-НИК!'
 	],

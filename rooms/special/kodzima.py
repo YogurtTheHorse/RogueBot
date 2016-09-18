@@ -38,7 +38,7 @@ def action(user, reply, text):
 			reply('Тебя выставили за дверь.')
 			user.leave(reply)
 		elif text == ASK:
-			reply('—Только один.', photo='BQADAgAD-QADDLXzAzuWRnAhjRHlAg')
+			reply('—Только один.', photo=KODZIMA_STICKER)
 			user.set_room_temp('question', 'question')
 		else:
 			reply('От волнения Вы не придумали ничего лучше, как рассказать анекдот собственного сочинения.\n—Заходит как-то геймдизайнер в бар, \n—бодро начинаете Вы, но неожиданно с Вашим лицом резко стыкуется табурет, на котором недавно сидел Хидэо:—Пошёл вон!')

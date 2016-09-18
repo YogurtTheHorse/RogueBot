@@ -10,7 +10,7 @@ actions_choose_door_01 = [ 'Зайти в дверь слева', 'Зайти в
 actions_choose_door_02 = [ 'Зайти в эту дверь', 'Постоять' ]
 actions_choose_door_03 = [ 'Зайти в дверь синего цвета', 'Зайти в дверь красного цвета' ]
 actions_choose_door_04 = [ 'Зайти в дверь #308', 'Зайти в дверь #402', 'Зайти в дверь #253', 'Зайти в дверь #620', 'Зайти в дверь #636', 'Зайти в дверь #564' ]
-actions_pray = [ 'Молить рассказчика о выходе', 'Постоять' ]
+actions_pray = [ 'Молить рассказчика о выходе', 'Постоять', 'Сесть', 'Посидеть', 'Лечь', 'Полежать', 'Умереть' ]
 
 def doors_filter(user, doors):
 	doors_filtered = filter(lambda room: user.get_room_temp(room, def_val='not-opened') == 'not-opened', doors)
@@ -234,14 +234,17 @@ def action_choose_door_04(user, reply, text):
 		if user.get_room_temp('opened:choose_door_04', def_val=False):
 			user.set_room_temp(actions_pray[0], 'opened')
 			user.set_room_temp(actions_pray[1], 'not-opened')
+			user.set_room_temp(actions_pray[2], 'opened')
+			user.set_room_temp(actions_pray[3], 'opened')
+			user.set_room_temp(actions_pray[4], 'opened')
+			user.set_room_temp(actions_pray[5], 'opened')
+			user.set_room_temp(actions_pray[6], 'opened')
 			user.set_room_temp('question', 'pray')
 
 	return True
 
 
 def action_pray(user, reply, text):
-	user.set_room_temp(actions_pray[1], 'not-opened')
-
 	if text == actions_pray[0]:
 		msg = (
 			'Что? Нужна помощь?\n'
@@ -262,8 +265,39 @@ def action_pray(user, reply, text):
 
 		if stay_count > 3:
 			user.set_room_temp(actions_pray[0], 'not-opened')
+			user.set_room_temp(actions_pray[1], 'opened')
+			user.set_room_temp(actions_pray[2], 'not-opened')
 
 		user.set_room_temp('stay', stay_count + 1)
+
+		return True
+
+	if text == actions_pray[2]:
+		user.set_room_temp(actions_pray[2], 'opened')
+		user.set_room_temp(actions_pray[3], 'not-opened')
+
+		return True
+
+	if text == actions_pray[3]:
+		user.set_room_temp(actions_pray[3], 'opened')
+		user.set_room_temp(actions_pray[4], 'not-opened')
+
+		return True
+
+	if text == actions_pray[4]:
+		user.set_room_temp(actions_pray[4], 'opened')
+		user.set_room_temp(actions_pray[5], 'not-opened')
+
+		return True
+
+	if text == actions_pray[5]:
+		user.set_room_temp(actions_pray[5], 'opened')
+		user.set_room_temp(actions_pray[6], 'not-opened')
+
+		return True
+
+	if text == actions_pray[6]:
+		user.death(reply, reason='По собственному желанию')
 
 		return True
 

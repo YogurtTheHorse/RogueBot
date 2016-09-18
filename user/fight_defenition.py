@@ -77,7 +77,7 @@ def fight_action(self, reply, text):
 			else:
 				item.failure(self, reply, room)
 
-			if dmg != 0:
+			if dmg != 0 and item.strengthoff is False:
 				dmg += self.get_damage() + self.get_damage_bonus(reply)
 
 			if item.disposable:

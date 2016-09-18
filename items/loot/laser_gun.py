@@ -7,6 +7,8 @@ price = 300
 
 fightable = True
 
+strengthoff = True
+
 def fight_use(user, reply, room):
 	res = 0
 	while user.has_item('laser_bullet') and res // 60 < 10:

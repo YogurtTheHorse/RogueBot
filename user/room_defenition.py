@@ -124,7 +124,7 @@ def dice(self, reply, text):
 	if text == locale_manager.get('THOW_DICE'):
 		self.state = 'room'
 
-		res = random.randint(1, DICE_MAX)
+		res = sum(random.randint(1, 8) for n in range(0, DICE_MAX // 8))
 		res += self.get_dice_bonus(reply)
 		reply(locale_manager.get('DICE_RESULT').format(res))
 		

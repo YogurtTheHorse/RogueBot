@@ -17,7 +17,7 @@ def add_to_list(tornament_name, uid):
 
 def get_tornament(tid):
 	def_val = get_tornament_dict(tid, [ ])
-	return databasemanager.get_variable(tid, def_val=def_val, table=databasemanager.TORNAMENTS_TABLE)
+	return databasemanager.get_variable(tid, def_val=def_val)
 
 def get_tornament_dict(tid, uids):
 	names = [ ]
@@ -34,7 +34,7 @@ def get_tornament_dict(tid, uids):
 
 def save_tornament(tid, uids):
 	val = get_tornament_dict(tid, uids)
-	databasemanager.set_variable(tid, val, table=databasemanager.TORNAMENTS_TABLE)
+	databasemanager.set_variable(tid, val)
 
 def start_tornament(tornament_name, reply):
 	uids = databasemanager.get_list(tornament_name)

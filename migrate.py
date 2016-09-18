@@ -167,3 +167,27 @@ def get_leaderboard(leaderboard_name='rooms', count=10):
 			res.sort(key=sort_by_score, reverse=True)
 
 			return res[:count]
+
+import databasemanager
+from pymongo import Connection
+c = Connection()
+c.drop_database('rogbot')
+
+print('Moving variables..')
+for variable in db.table(VAR_TABLE).all():
+	databasemanager.set_variable(variable['name'], variable['value'])
+	print('\tMoved "{0}" = {1}.'.format(variable['name'], variable['value']))
+	
+print('We don\'t migrate lists..')
+
+new_leaderboards = databasemanager.Leaderboards
+
+for leaderboard_name in [ ROOMS_TABLE, KILLS_TABLE, GNOME_TABLE, ROULETTE_TABLE, RATE_TABLE, DOCTOR_TABLE ]:
+	print('\tMigrating "{0}" leaderboard...'.format(leaderboard_name))
+	lst = db.table(leaderboard_name).all()
+	len_lst = len(lst)
+	for ind, res in enumerate(lst):
+		print('\t\t{0}%'.format(100 * ind / len_lst))
+		res['leaderboard'] = leaderboard_name
+		new_leaderboards.insert(res)
+	print('\tDone!')

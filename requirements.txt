@@ -5,3 +5,5 @@ tinydb
 tinyrecord
 codecov
 tweepy
+mongothon3
+pymongo

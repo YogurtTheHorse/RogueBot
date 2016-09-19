@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import config
 
 from telegram.ext.dispatcher import run_async

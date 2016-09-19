@@ -82,7 +82,8 @@ def start(bot, update):
 		if photo:
 			image = photo
 
-	usermanager.new_user(c_id, rep)
+	username = bot.getChat(uid)['username']
+	usermanager.new_user(c_id, username if len(username) > 0 else None, rep)
 	if len(msg) > 0 or image:
 		reply(c_id, bot, msg, buttons, image)
 

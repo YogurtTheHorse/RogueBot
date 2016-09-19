@@ -15,11 +15,13 @@ def save_user(usr):
 	with open(get_fname(usr.uid), 'wb') as outfile:
 		pickle.dump(usr, outfile)
 
-def new_user(uid, reply=lambda *x, **y: None):
+def new_user(uid, nickname=None, reply=lambda *x, **y: None):
 	usr = get_user(uid)
 
 	if usr is None or usr.confirm_restart(reply):
 		usr = User(uid)
+		if nickname is not None:
+			usr.nickname = nickname
 		reply('Теперь скажи мне свое имя.')
 
 	save_user(usr)

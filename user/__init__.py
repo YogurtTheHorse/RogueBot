@@ -4,7 +4,6 @@ from datetime import datetime
 
 import logging
 from constants import *
-from utils.names import names
 
 from collections import Counter
 from localizations import locale_manager

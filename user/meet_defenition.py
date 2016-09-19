@@ -1,6 +1,8 @@
 import re
 import random
 
+from utils.names import antimat
+
 import logging
 from constants import *
 
@@ -37,7 +39,7 @@ def name_given(self, reply, name):
 		buttons = [ locale_manager.get('NAME_AGREE'), locale_manager.get('NAME_DISMISS') ]
 			
 		self.state = 'name_confirm'
-		self.name = name
+		self.name = antimat(name)
 
 		reply(msg, buttons)
 

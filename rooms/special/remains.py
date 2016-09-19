@@ -53,7 +53,8 @@ def action(user, reply, text):
 			items_str = [ ]
 			for it, cnt in counter_items.most_common():
 				loaded_item = itemloader.load_item(it[1], it[0])
-				items_str.append('*{0}* ({1} шт.)'.format(loaded_item.name, cnt))
+				if loaded_item is not None:
+					items_str.append('*{0}* ({1} шт.)'.format(loaded_item.name, cnt))
 
 			reply('Его рюкзак вмещал в себя следующие вещи: {0}'.format(', '.join(items_str)))
 

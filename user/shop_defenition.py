@@ -43,7 +43,7 @@ def buy(self, item, reply):
 		else:
 			reply(locale_manager.get('NEUTRAL_BUYED'))
 
-		check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.price,)
+		check = locale_manager.get('SHOP_CHECK').format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()), item.name, item.shop_count, item.price, item.price)
 
 		for i in range(item.shop_count):
 			self.items.append((item.buff, item.code_name))

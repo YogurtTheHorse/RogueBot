@@ -109,6 +109,6 @@ def dice(user, reply, result, subject='zhmesh'):
 			reply('Тебя в очередной раз хорошенько избили. Не стоило светить в глаза.')
 			user.make_damage(50, 60, reply, name=name)
 		else:
-			reply('Сэру Качкалот отбил тебе руку.\nКрасава!')
+			reply('Сэр Качкалот отбил тебе руку.\nКрасава!')
 			user.make_damage(5, 10, reply, name=name)
 	user.leave(reply)

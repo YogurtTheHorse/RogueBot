@@ -1,3 +1,4 @@
+from constants import *
 import databasemanager
 
 name = 'Гном в красной шапке'

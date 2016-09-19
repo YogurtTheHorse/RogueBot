@@ -66,12 +66,6 @@ def open_room(self, reply, room_type=None, room_name=None):
 	for i in self.get_items():
 		i.on_room(self, reply, room)
 
-	if not room.can_open(user, reply):
-		room.open_failure(user, reply)
-
-		self.open_corridor(reply)
-		return
-
 	to_delete = [ ]
 	for i, b in enumerate(self.buffs):
 		try:
@@ -98,6 +92,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 
 	if self.state == 'room':
 		reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
+
+	if not room.can_open(self, reply):
+		room.open_failure(self, reply)
+
+		self.open_corridor(reply)
+		return
 
 def in_room(self, reply, text):
 	room = roomloader.load_room(self.room[1], self.room[0])

@@ -1,3 +1,4 @@
+from constants import *
 from utils.buffs import DevilPower
 from utils.buffs import DevilInt
 from utils.buffs import DevilMoney
@@ -54,24 +55,24 @@ def action(user, reply, text):
 		if text == 'Силу!':
 			reply(MADE_SOLUTION_TEXT)
 			user.new_buff(DevilPower())
-			user.add_item('special', 'lepergold')
+			user.add_tag(DEVIL)
 			user.set_room_temp('question', 'sixth')
 		elif text == 'Знания!':
 			reply(MADE_SOLUTION_TEXT)
 			user.new_buff(DevilInt())
-			user.add_item('special', 'lepergold')
+			user.add_tag(DEVIL)
 			user.set_room_temp('question', 'sixth')
 		elif text == 'Деньги!':
 			reply(MADE_SOLUTION_TEXT)
 			user.new_buff(DevilMoney())
 			user.gold += 100000
-			user.add_item('special', 'lepergold')
+			user.add_tag(DEVIL)
 			user.set_room_temp('question', 'sixth')
 		else:
 			reply(' — Вот это жадность. Ты напоминаешь мне меня в молодости, я тогда тоже был ненасытен...\nДьявол улыбнулся своим воспоминаниям.\n — Вернемся к делу! Подпиши здесь и здесь.\nПеред вами возник исписанный на непонятном языке пергамент с двумя галочками.\n — Ну же, условия стандартные: когда умрешь я заберу твою душу.')
 			user.new_buff(DevilEntity())
 			user.gold += 100000
-			user.add_item('special', 'lepergold')
+			user.add_tag(DEVIL)
 			user.set_room_temp('question', 'sixth')
 	elif question == 'sixth':
 		if text == 'А когда я умру?':

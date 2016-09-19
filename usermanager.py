@@ -15,8 +15,12 @@ def save_user(usr):
 	with open(get_fname(usr.uid), 'wb') as outfile:
 		pickle.dump(usr, outfile)
 
-def new_user(uid):
-	usr = User(uid)
+def new_user(uid, reply=lambda *x, **y: None):
+	usr = get_user(uid)
+
+	if usr is None or usr.confirm_restart(reply):
+		usr = User(uid)
+		reply('Теперь скажи мне свое имя.')
 
 	save_user(usr)
 
@@ -55,8 +59,8 @@ def message(uid, reply, text):
 
 	if not usr:
 		reply('Что-то пошло не так. Попробуй /start')
-	else:
-		usr.message(reply, text)
+	elif usr.message(reply, text):
+		usr = User(uid)
 
 	save_user(usr)
 

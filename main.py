@@ -55,8 +55,34 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 		bot.sendSticker(c_id, sticker=photo)
 
 def start(bot, update):
-	bot.sendMessage(update.message.chat_id, text='Теперь скажи мне свое имя.')
-	usermanager.new_user(update.message.chat_id)
+	c_id = update.message.chat_id
+	global msg, image, buttons
+	msg = ''
+	image = None
+	buttons = None
+
+	def rep(txt, btns=None, photo=None):
+		global msg, image, buttons
+
+		if len(msg) + len(txt) + 2 >= 4096:
+			reply(c_id, bot, msg, buttons, image)
+
+			msg = ''
+			image = None
+			buttons = None
+
+
+		msg += '\n\n'
+		msg += txt
+
+		if btns:
+			buttons = btns
+		if photo:
+			image = photo
+
+	usermanager.new_user(c_id, rep)
+	if len(msg) > 0 or image:
+		reply(c_id, bot, msg, buttons, image)
 
 def setname(bot, update):
 	txt = update.message.text.split()

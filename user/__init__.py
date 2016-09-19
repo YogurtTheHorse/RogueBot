@@ -73,6 +73,21 @@ class User(object):
 		self.new_mission('main')
 		self.new_mission('caravan', path_len=20)
 
+	def confirm_restart(self, reply):
+		if self.dead or self.state == 'reborned':
+			return True
+
+		self.state = 'restart ' + self.state
+
+		msg = (
+			'Если ты действительно хочешь начать игру заново, то тебе '
+			'нужно написать вручную *Начать новую игру* и отправить.\n'
+			'*Это необратимо*'
+		)
+		reply(msg, [ 'Отменить удаление персонажа' ])
+
+		return False
+
 	def message(self, reply, text):
 		self.last_message = datetime.now()
 		logger.info('msg from {0}'.format(self.uid))
@@ -101,6 +116,15 @@ class User(object):
 			self.on_pet(reply, text)
 		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
+		elif self.state.startswith('restart'):
+			if text == 'Начать новую игру':
+				reply('Приговор приведен в исполнение.\nТеперь скажи мне свое новое имя')
+				return True
+			else:
+				reply('Не в этот раз.')
+				self.state = self.state.split()[1]
+
+		return False
 			
 	from user.corridor_defenition import open_corridor, corridor
 	from user.death_defenition import update_leaderbord, death, reborn

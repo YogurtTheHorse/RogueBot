@@ -49,7 +49,8 @@ def create(old_boss=None):
 		('hellkite_dragon', 175500, 71000),
 		('moonlight_butterfly', 49500, 21000),
 		('naping_dragon', 77500, 31000),
-		('cthulhu', 575900, 251000)
+		('cthulhu', 575900, 251000),
+		('lich_king', 325000, 141000)
 	])
 	new_boss = {
 		'id': boss_id + 1,

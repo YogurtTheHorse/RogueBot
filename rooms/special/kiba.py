@@ -104,7 +104,7 @@ def action(user, reply, text):
 
 	if result is False or result is None:
 		msg = (
-			'Я тебя не слышу!!! Прошу говори громче.'
+			'Я тебя не слышу!!! Прошу, говори громче.'
 		)
 
 		reply(msg)
@@ -128,7 +128,7 @@ def action_enter(user, reply, text):
 		msg = (
 			'И тебе привет!\n'
 			'Ты ведь можешь помочь мне закончить зелье?\n'
-			'Остался последний ингридиент, но я не знаю какой.'
+			'Остался последний ингредиент, но я не знаю какой.'
 		)
 
 		user.set_room_temp('question', 'ask_help')
@@ -199,7 +199,7 @@ def action_ask_help(user, reply, text):
 	if text == actions_ask_help[0]:
 		msg = (
 			'*Ура!* Смотри, вот мой котел. В нем я готовлю вкусное зелье.\n'
-			'Но к сожалению я забыл последний ингридиент для него.\n'
+			'Но к сожалению я забыл последний ингредиент для него.\n'
 			'У тебя есть идеи?'
 		)
 
@@ -212,7 +212,7 @@ def action_ask_help(user, reply, text):
 	if text == actions_ask_help[1]:
 		msg = (
 			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи комне еще..'
+			'Заходи ко мне еще..'
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -226,7 +226,7 @@ def action_give_ingredient(user, reply, text):
 	if text == HAVE_NOTHING:
 		msg = (
 			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи комне еще..'
+			'Заходи ко мне еще..'
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -261,7 +261,7 @@ def action_give_stir(user, reply, text):
 	if text == HAVE_NOTHING:
 		msg = (
 			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи комне еще..'
+			'Заходи ко мне еще..'
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -279,7 +279,7 @@ def action_give_stir(user, reply, text):
 		return False
 
 	msg = (
-		'Твоя {} ты и мешай!'
+		'Твоя {}, ты и мешай!'
 	)
 
 	reply(msg.format(item_name), photo=STICKER_HIDDING)
@@ -325,7 +325,7 @@ def action_make_potion(user, reply, text):
 
 	if text == actions_make_potion[1]:
 		msg = (
-			'Я тоже не буду это мешать. Что же, придется вылить и готовить зелье заного.\n'
+			'Я тоже не буду это мешать. Что же, придется вылить и готовить зелье заново.\n'
 			'Но позже, я потопал.. спа...'
 		)
 
@@ -340,7 +340,7 @@ def action_make_potion_success(user, reply, text):
 	if user.get_room_temp('potion') == 'success':
 		msg = (
 			'*Ура!* Похоже у нас получилось сделать его.\n'
-			'Вот то зелье которое ты приготовил, будешь его пить?'
+			'Вот то зелье, которое ты приготовил, будешь его пить?'
 		)
 
 		reply(msg, photo=STICKER_GOOD_POTION)
@@ -377,7 +377,7 @@ def action_drink(user, reply, text):
 			msg = (
 				'Похоже это было зелье маны! Твоя максимальная мана увеличена на 10!\n'
 				'Я был очень рад тебя видеть!\n'
-				'Заходи комне еще..'
+				'Заходи ко мне еще..'
 			)
 
 			reply(msg, photo=STICKER_SLEEP)

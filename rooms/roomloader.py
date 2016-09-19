@@ -248,11 +248,12 @@ def check_room(room, name, room_type):
 			return None
 
 	defaults = [
-		( lambda *args: None, [ 'enter', 'dice',  'on_death', 'on_leave', 'on_won', 'on_die', 'skill_preparing', 'skill_success', 'skill_failure' ] ),
+		( lambda *args: None, [ 'enter', 'dice',  'on_death', 'on_leave', 'on_won', 'on_die', 'skill_preparing', 'skill_success', 'skill_failure', 'open_failure' ] ),
 		( 0, [ 'coins' ] ),
 		( 'none', [ ] ), 
 		( NONE, [ 'element' ]),
 		( [ ], [ 'loot' ] ),
+		( lambda *args: True, [ 'can_open' ] )
 		( False, [ ])
 	]
 

@@ -10,11 +10,14 @@ coins = 0
 
 loot = [ 'fez', 'laser_screwdriver' ]
 
+def can_open(user, reply):
+	return not user.has_tag(DEVIL)
+
+def open_failure(user, reply):
+	reply('Здесь не рады проклятым!')
+
 def enter(user, reply):
 	reply('Кто-кто?..')
-	if user.has_item('lepergold'):
-		reply('Доктор молча и не медля засунул тебе отвертку в нос, после чего выставил тебя за дверь.')
-		user.leave(reply)
 
 	number = databasemanager.get_variable('doctor_num', 1)
 	name = databasemanager.get_variable('doctor_killer')

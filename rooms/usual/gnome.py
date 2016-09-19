@@ -11,12 +11,14 @@ def get_actions(user):
 
 	return actions[:min(10, len(actions))]
 
+def can_open(user, reply):
+	return not user.has_tag(DEVIL)
+
+def open_failure(user, reply):
+	reply('Здесь не рады проклятым!')
 
 def enter(user, reply):
 	reply('Выглядит порядочным и приятным молодым гномом.\n-Я могу обменять деньги на сильный и мощный артефакт. Чем больше ты отдашь, тем лучше будут его качества!')
-	if user.has_item('lepergold'):
-		reply('Гном, заметив красную метку, прожигающую твой карман, поклонился и выставил тебя за дверь.')
-		user.leave(reply)
 
 def action(user, reply, text):
 	try:

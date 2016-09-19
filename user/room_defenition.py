@@ -66,6 +66,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 	for i in self.get_items():
 		i.on_room(self, reply, room)
 
+	if not room.can_open(user, reply):
+		room.open_failure(user, reply)
+
+		self.open_corridor(reply)
+		return
+
 	to_delete = [ ]
 	for i, b in enumerate(self.buffs):
 		try:

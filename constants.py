@@ -23,6 +23,7 @@ DEAD = 'мертвец'
 NONE = 'нет'
 
 EVIL_MUSCLELOT = 'evil_musclelot'
+DEVIL = 'devil'
 JAPANESE = 'japanese'
 
 SLIME_STICKER = 'BQADAgAD7AADDLXzAxPOv_f69TwOAg'

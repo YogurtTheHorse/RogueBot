@@ -1,14 +1,21 @@
+from constants import *
 import time
 import databasemanager
 
 name = 'Доктор кто'
 
-hp = 100000 * 2 ** (databasemanager.get_variable('doctor_num', 1) - 1)
+hp = 25 * 1.01 ** (databasemanager.get_variable('doctor_num', 1) - 1)
 damage_range =  ( 0, 50 )
 
 coins = 0
 
 loot = [ 'fez', 'laser_screwdriver' ]
+
+def can_open(user, reply):
+	return not user.has_tag(DEVIL)
+
+def open_failure(user, reply):
+	reply('Здесь не рады проклятым!')
 
 def enter(user, reply):
 	reply('Кто-кто?..')

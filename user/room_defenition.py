@@ -93,6 +93,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 	if self.state == 'room':
 		reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
 
+	if not room.can_open(self, reply):
+		room.open_failure(self, reply)
+
+		self.open_corridor(reply)
+		return
+
 def in_room(self, reply, text):
 	room = roomloader.load_room(self.room[1], self.room[0])
 	room.action(self, reply, text)

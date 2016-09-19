@@ -354,7 +354,7 @@ def error_callback(bot, update, error):
 					text='```text\n{0}\n```'.format(error_msg),
 					parse_mode=telegram.ParseMode.MARKDOWN)
 
-if __name__ == '__main__':
+def main():
 	if os.path.isfile(question_filename):
 		with open(question_filename, 'r') as f:
 			question_yes, question_no = map(int, f.readline().split())
@@ -396,3 +396,6 @@ if __name__ == '__main__':
 
 	logger.info('Bot now officially started!')
 	updater.idle()
+
+if __name__ == '__main__':
+	main()

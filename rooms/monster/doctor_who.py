@@ -4,7 +4,7 @@ import databasemanager
 
 name = 'Доктор кто'
 
-hp = 25 * 1.01 ** (databasemanager.get_variable('doctor_num', 1) - 1)
+hp = 25 * 1.01 ** (databasemanager.get_variable('_doctor_num', 1) - 1)
 damage_range =  ( 0, 50 )
 
 coins = 0
@@ -20,15 +20,15 @@ def open_failure(user, reply):
 def enter(user, reply):
 	reply('Кто-кто?..')
 
-	number = databasemanager.get_variable('doctor_num', 1)
-	name = databasemanager.get_variable('doctor_killer')
+	number = databasemanager.get_variable('_doctor_num', 1)
+	name = databasemanager.get_variable('_doctor_killer')
 
 	user.set_room_temp('hp_max', hp)
 
 	reply('Я — _{0}_й Доктор!'.format(number))
 
 	if name is not None:
-		t = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)
+		t = time.time() - databasemanager.get_variable('_doctor_kill_time', time.time()+1000)
 
 		reply('Я реинкарнация после убийства доктора от руки игрока {0}'.format(name))
 
@@ -43,10 +43,10 @@ def make_damage(user, reply, dmg):
 	hp -= max(1, dmg - user.rooms_count // 10)
 
 	if hp <= 0:
-		number = databasemanager.get_variable('doctor_num', 1)
-		databasemanager.set_variable('doctor_num', number + 1)
-		databasemanager.set_variable('doctor_killer', user.name)
-		databasemanager.set_variable('doctor_kill_time', time.time())
+		number = databasemanager.get_variable('_doctor_num', 1)
+		databasemanager.set_variable('_doctor_num', number + 1)
+		databasemanager.set_variable('_doctor_killer', user.name)
+		databasemanager.set_variable('_doctor_kill_time', time.time())
 
 		databasemanager.add_to_leaderboard(user, user.get_room_temp('hp_max', 10 ** 5), databasemanager.DOCTOR_TABLE)
 		user.won(reply)

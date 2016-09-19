@@ -7,6 +7,8 @@ price = 300
 
 fightable = True
 
+strengthoff = True
+
 def fight_use(user, reply, room):
 	if user.has_item('bullet'):
 		reply('БАХ! Выстрел!')

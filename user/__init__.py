@@ -99,7 +99,7 @@ class User(object):
 			self.dice(reply, text)
 		elif self.state.startswith('pet'):
 			self.on_pet(reply, text)
-		elif self.state == 'rebornd':
+		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
 			
 	from user.corridor_defenition import open_corridor, corridor

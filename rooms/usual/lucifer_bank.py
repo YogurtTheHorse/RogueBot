@@ -17,7 +17,7 @@ def enter(user, reply):
 def action(user, reply, text):
 	if text == 'Отдать':
 		if user.gold < 5000:
-			reply('Малова-то будет. Даже на комиссию не потянет.')
+			reply('Маловато будет. Даже на комиссию не потянет.')
 		else:
 			user.gold = 0
 			databasemanager.set_variable(str(user.uid) + '_gold', True)

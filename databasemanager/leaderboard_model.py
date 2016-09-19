@@ -1,5 +1,7 @@
 import pymongo
 
+from bson.code import Code
+
 from collections import Counter
 
 from mongothon import Schema
@@ -31,13 +33,20 @@ def get_model(db):
 		if leaderboard == 'death':
 			res = list(cls.find({"leaderboard": 'rooms'}))
 
-			counter = Counter()
+			keyf = Code("function(doc) {return{\"death_reason\": doc.death_reason}}")
+			reducer = Code("function(curr, result) { result.count++; }")
+			
+			res = cls.get_collection().group( 
+				key = keyf, 
+				condition = {
+					"death_reason": { "$exists": True },
+					"leaderboard": "rate"
+				}, 
+				reduce = reducer, 
+				initial = { "count": 0}
+			)
 
-			for r in res:
-				if 'death_reason' in r and str(r['death_reason']) != 'None':
-					counter.update([r['death_reason']])
-
-			return counter.most_common(count)
+			return list(res)
 		else:
 			def sort_by_score(doc):
 				return doc['score']

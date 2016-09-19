@@ -3,7 +3,7 @@ import databasemanager
 
 name = 'Доктор кто'
 
-hp = 100000 * 2 ** (databasemanager.get_variable('doctor_num', 1) - 1)
+hp = 25 * 1.01 ** (databasemanager.get_variable('doctor_num', 1) - 1)
 damage_range =  ( 0, 50 )
 
 coins = 0
@@ -12,6 +12,9 @@ loot = [ 'fez', 'laser_screwdriver' ]
 
 def enter(user, reply):
 	reply('Кто-кто?..')
+	if user.has_item('lepergold'):
+		reply('Доктор молча и не медля засунул тебе отвертку в нос, после чего выставил тебя за дверь.')
+		user.leave(reply)
 
 	number = databasemanager.get_variable('doctor_num', 1)
 	name = databasemanager.get_variable('doctor_killer')

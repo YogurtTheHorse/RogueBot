@@ -54,10 +54,12 @@ def action(user, reply, text):
 		if text == 'Силу!':
 			reply(MADE_SOLUTION_TEXT)
 			user.new_buff(DevilPower())
+			user.add_item('special', 'lepergold')
 			user.set_room_temp('question', 'sixth')
 		elif text == 'Знания!':
 			reply(MADE_SOLUTION_TEXT)
 			user.new_buff(DevilInt())
+			user.add_item('special', 'lepergold')
 			user.set_room_temp('question', 'sixth')
 		elif text == 'Деньги!':
 			reply(MADE_SOLUTION_TEXT)

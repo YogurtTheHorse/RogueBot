@@ -317,7 +317,7 @@ def leaderboard(bot, update):
 		for i, r in enumerate(res):
 			uid = r['uid']
 			name = r['name']
-			score = r['score']
+			score = round(r['score'])
 			username = bot.getChat(uid)['username']
 			death_reason = None
 			if 'death_reason' in r:
@@ -327,9 +327,9 @@ def leaderboard(bot, update):
 			if len(username) > 0:
 				table_name += ' (@{0})'.format(username)
 				
-			msg += '{0}. {1}: {2}\n'.format(i + 1, table_name, score)
+			msg += '{0}. {1}: {2}'.format(i + 1, table_name, score)
 			if death_reason is not None:
-				msg += 'Причина смерти: ' + death_reason
+				msg += '\nПричина смерти: ' + death_reason
 
 			msg += '\n'
 

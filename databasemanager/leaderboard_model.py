@@ -36,7 +36,7 @@ def get_model(db):
 			keyf = Code("function(doc) {return{\"death_reason\": doc.death_reason}}")
 			reducer = Code("function(curr, result) { result.count++; }")
 			
-			res = cls.get_collection().group( 
+			res = list(cls.get_collection().group( 
 				key = keyf, 
 				condition = {
 					"death_reason": { "$exists": True },
@@ -44,9 +44,14 @@ def get_model(db):
 				}, 
 				reduce = reducer, 
 				initial = { "count": 0}
-			)
+			))
 
-			return list(res)
+			def sort_death(doc):
+				return -doc['count']
+
+			res.sort(key=sort_death)
+
+			return res[:count]
 		else:
 			def sort_by_score(doc):
 				return doc['score']

@@ -49,6 +49,8 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 			if '429' in str(e):
 				send_job = Job(reply_job, 0.040, repeat=False, context=(c_id, bot, txt, buttons, photo))
 				updater.job_queue.put(send_job)
+			else:
+				raise e
 
 	elif len(txt) > 0:
 		bot.sendMessage(c_id, text=txt, parse_mode=telegram.ParseMode.MARKDOWN)

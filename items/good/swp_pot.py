@@ -16,8 +16,8 @@ def on_use(user, reply):
 	reply('Это оказалось зелье ПЕРЕМЕН. Ты поменял местами ману и жизнь.')
 
 	user.hp, user.mp = user.mp, user.hp
-	user.heal(1)
-	user.mana(1)
+	user.heal(0)
+	user.mana(0)
 
 fightable = True
 def fight_use(user, reply, room):

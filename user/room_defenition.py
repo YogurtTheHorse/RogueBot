@@ -16,7 +16,9 @@ def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 	if defence:
 		defe = self.get_defence()
 
-		dmg = max(dmg + self.rooms_count // 20 - defe, 1)
+		# Пока не удаляю, так как надо подумать как это поменять
+		# dmg = max(dmg + self.rooms_count // 20 - defe, 1)
+		dmg *= 1 - (defe / ( 300 + defe))
 
 	self.hp -= round(dmg)
 

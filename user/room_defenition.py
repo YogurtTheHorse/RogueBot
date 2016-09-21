@@ -17,7 +17,7 @@ def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 		#defence=
 
 		dmg = max(dmg + self.rooms_count // 20, 1)
-		dmg *= 1 - 
+		#dmg *= 1 - 
 
 	self.hp -= dmg
 

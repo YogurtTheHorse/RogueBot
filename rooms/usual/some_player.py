@@ -62,7 +62,7 @@ def dice(user, reply, result, subject=None):
 	p = 1 - 0.5 * (0.9 ** steal_tries)
 
 	steal_user = usermanager.get_user(user.get_room_temp('uid'))
-	if result > DICE_MAX * p:
+	if result >= DICE_MAX * p:
 		reply('Ворюга ты конечно первоклассный.')
 		steal(user, steal_user, result > DICE_MAX, reply)
 	else:

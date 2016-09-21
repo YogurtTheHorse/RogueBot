@@ -1,3 +1,4 @@
+from constants import *
 import bossmanager
 import random
 

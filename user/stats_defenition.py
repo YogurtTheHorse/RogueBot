@@ -44,7 +44,7 @@ def get_gold_bonus(self):
 	res = 1
 
 	for i, cnt in self.get_counted_items():
-		res *= i.gold_bonus * cnt
+		res *= i.gold_bonus ** cnt
 
 	for b in self.buffs:
 		res *= b.gold_bonus

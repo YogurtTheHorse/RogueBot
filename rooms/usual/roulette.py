@@ -1,3 +1,4 @@
+from constants import *
 import random
 import databasemanager
 
@@ -6,6 +7,7 @@ name = 'Казино "Марианская Впадина"'
 actions_enter = [ 'Играем', 'Уйти' ]
 actions_choose = [ 'Красное x2', 'Зеленое x12', 'Черное x2' ]
 actions_make_bet = [ '100', '250', '500', '1000', 'Назад' ]
+
 
 def can_open(user, reply):
 	return not user.has_tag(DEVIL)

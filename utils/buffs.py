@@ -1,3 +1,4 @@
+from constants import *
 import random
 
 class Buff(object):

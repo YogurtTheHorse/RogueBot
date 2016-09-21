@@ -63,6 +63,12 @@ def get_items(self):
 def get_active_items(self):
 	return self.get_items()
 
+def get_counted_items(self):
+	items = self.get_active_items()
+	counter = Counter(items)
+
+	return counter.most_common()
+
 def get_active_slots_len(self):
 	return 10 + self.rooms_count // 15
 

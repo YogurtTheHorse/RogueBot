@@ -132,7 +132,7 @@ class User(object):
 	from user.inventory_defenition import open_inventory, inventory
 	from user.items_defenition import remove_item, remove_items_with_tag, deactivate_item_by_name
 	from user.items_defenition import remove_item_by_name, get_item_by_name, get_items, get_active_items
-	from user.items_defenition import add_item, get_active_slots_len, has_item
+	from user.items_defenition import add_item, get_active_slots_len, has_item, get_counted_items
 	from user.meet_defenition import name_confirm, name_given, first
 	from user.money_defenition import paid, steal, give_gold
 	from user.room_defenition import make_damage, set_room_temp, get_room_temp, open_room, in_room

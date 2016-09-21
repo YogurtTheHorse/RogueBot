@@ -1,3 +1,5 @@
+import math
+from collections import Counter
 from localizations import locale_manager
 
 def debug_info(self):
@@ -35,10 +37,15 @@ def debug_info(self):
 
 	return msg
 
+def calc_bonus(b, cnt):
+	K = 0.79
+	return b * (1 + (math.log(cnt) / K))
+
 def get_gold_bonus(self):
 	res = 1
-	for i in self.get_active_items():
-		res *= i.gold_bonus
+
+	for i, cnt in self.get_counted_items():
+		res *= i.gold_bonus * cnt
 
 	for b in self.buffs:
 		res *= b.gold_bonus
@@ -46,22 +53,22 @@ def get_gold_bonus(self):
 	if self.pet:
 		res *= self.get_pet().gold_bonus
 
-	return res
+	return round(res)
 
 def get_damage(self):
 	res = 0
-	for i in self.get_active_items():
-		res += i.damage
+	for i, cnt in self.get_counted_items():
+		res += calc_bonus(i.damage, cnt)
 
 	if self.pet:
 		res += self.get_pet().damage
 
-	return res + self.damage
+	return round(res) + self.damage
 
 def get_damage_bonus(self, reply):
 	res = 0
-	for i in self.get_active_items():
-		res += i.get_damage_bonus(self, reply)
+	for i, cnt in self.get_counted_items():
+		res += calc_bonus(i.get_damage_bonus(self, reply), cnt)
 
 	for b in self.buffs:
 		res += b.damage_plus
@@ -69,12 +76,12 @@ def get_damage_bonus(self, reply):
 	if self.pet:
 		res += self.get_pet().get_damage_bonus(self, reply)
 
-	return res
+	return round(res)
 
 def get_defence(self):
 	res = 0
-	for i in self.get_active_items():
-		res += i.defence
+	for i, cnt in self.get_counted_items():
+		res += calc_bonus(i.defence, cnt)
 
 	for b in self.buffs:
 		res += b.defence
@@ -82,12 +89,12 @@ def get_defence(self):
 	if self.pet:
 		res += self.get_pet().defence
 
-	return res + self.defence
+	return round(res) + self.defence
 
 def get_charisma(self):
 	res = 0
-	for i in self.get_active_items():
-		res += i.charisma
+	for i, cnt in self.get_counted_items():
+		res += calc_bonus(i.charisma, cnt)
 
 	for b in self.buffs:
 		res += b.charisma
@@ -95,12 +102,12 @@ def get_charisma(self):
 	if self.pet:
 		res += self.get_pet().charisma
 
-	return res + self.charisma
+	return round(res) + self.charisma
 
 def get_mana_damage(self):
 	res = 0
-	for i in self.get_active_items():
-		res += i.mana_damage
+	for i, cnt in self.get_counted_items():
+		res += calc_bonus(i.mana_damage, cnt)
 
 	for b in self.buffs:
 		res += b.mana_damage_plus
@@ -108,7 +115,7 @@ def get_mana_damage(self):
 	if self.pet:
 		res += self.get_pet().mana_damage
 
-	return res + self.mana_damage
+	return round(res) + self.mana_damage
 
 def has_aura(self, aura):
 	for i in self.get_active_items():

@@ -27,10 +27,10 @@ updater = Updater(config.TELEGRAM_TOKEN)
 
 def reply_job(bot, job):
 	c_id, bot, txt, buttons, photo = job.context
-	reply(c_id, bot, txt, buttons, photo)
+	reply(c_id, bot, txt, buttons, photo, repeat=False)
 
 @run_async
-def reply(c_id, bot, txt, buttons=None, photo=None):
+def reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 	if c_id == 0:
 		return
 	if buttons:
@@ -46,8 +46,11 @@ def reply(c_id, bot, txt, buttons=None, photo=None):
 		try:
 			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
 		except Exception as e:
+			if not repeat:
+				raise e
+
 			if '429' in str(e):
-				send_job = Job(reply_job, 0.040, repeat=False, context=(c_id, bot, txt, buttons, photo))
+				send_job = Job(reply_job, 1, repeat=False, context=(c_id, bot, txt, buttons, photo))
 				updater.job_queue.put(send_job)
 			else:
 				raise e

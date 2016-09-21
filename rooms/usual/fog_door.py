@@ -7,6 +7,11 @@ actions_enter =  [ 'Пойти дальше', 'Уйти' ]
 actions_try_to_see = [ 'Посмотреть сквозь туман', 'Развернуться и уйти' ]
 actions_pass_throw_fog = [ 'Пройти сквозь туман', 'Убежать прочь' ]
 
+def can_open(user, reply):
+	return not user.has_tag(DEVIL)
+
+def open_failure(user, reply):
+	reply('Здесь не рады проклятым!')
 
 def enter(user, reply):
 	msg = (

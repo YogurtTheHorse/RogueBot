@@ -14,8 +14,12 @@ def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 
 	dmg = random.randint(mn, mx)
 	if defence:
-		dmg = max(dmg + self.rooms_count // 20 - self.get_defence(), 1)
-	self.hp -= dmg
+		defe = self.get_defence()
+
+		dmg = max(dmg + self.rooms_count // 20, 1)
+		dmg *= 1 - (defe / ( 300 + defe))
+
+	self.hp -= round(dmg)
 
 	if not death:
 		self.hp = max(self.hp, 1)

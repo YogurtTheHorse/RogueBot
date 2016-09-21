@@ -4,7 +4,7 @@ import items.itemloader as itemloader
 logger = logging.getLogger('rg')
 
 def new_pet(self, reply, pet):
-	if self.pet and self.pet[0] != pet:
+	if self.pet:
 		self.state = 'pet_confirm'
 		name = self.pet[1]
 

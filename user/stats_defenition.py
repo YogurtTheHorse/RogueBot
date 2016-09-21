@@ -1,5 +1,4 @@
 import math
-from collections import Counter
 from localizations import locale_manager
 
 def debug_info(self):

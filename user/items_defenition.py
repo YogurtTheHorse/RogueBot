@@ -1,3 +1,4 @@
+from collections import Counter
 import items.itemloader as itemloader
 
 def remove_item(self, code_name):

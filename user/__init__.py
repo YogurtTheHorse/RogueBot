@@ -72,6 +72,12 @@ class User(object):
 		self.new_mission('main')
 		self.new_mission('caravan', path_len=20)
 
+	def get_time_from_last_message(self):
+		try:
+			return (datetime.now() - self.last_message).seconds
+		except:
+			return 10 ** 6
+
 	def confirm_restart(self, reply):
 		if self.dead or self.state == 'reborned':
 			return True

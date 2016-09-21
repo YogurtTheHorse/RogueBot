@@ -38,6 +38,7 @@ def open_inventory(self, reply):
 				pass#actions.append(locale_manager.get('ACTIVATE') + i.name)
 
 			acts.append(locale_manager.get('THROW_AWAY') + i.name)
+			acts.append(locale_manager.get('SELL') + i.name)
 
 			actions.append(acts)
 
@@ -81,6 +82,17 @@ def inventory(self, reply, text):
 			reply(locale_manager.get('CANT_THROW'))
 			self.open_inventory(reply)			
 		else:
+			self.open_inventory(reply)
+	elif text.startswith(locale_manager.get('SELL')):
+		name = text[len(locale_manager.get('SELL')):]
+
+		item = self.get_item_by_name(name)
+		if not self.remove_item_by_name(name):
+			reply('Не продается')
+			self.open_inventory(reply)
+		else:
+			reply('Золотишко-то.. Звенит!')
+			self.give_gold(round(item.price * 0.7))
 			self.open_inventory(reply)
 	elif text == locale_manager.get('BACK'):
 		self.inventory_page = max(self.inventory_page - 1, 0)

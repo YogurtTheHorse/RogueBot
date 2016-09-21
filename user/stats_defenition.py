@@ -149,6 +149,9 @@ def has_tag(self, tag):
 def remove_tag(self, tag):
 	self.tags.remove(tag)
 
+def remove_tags(self, tag):
+	self.tags = list(filter((tag).__ne__, self.tags))
+
 def show_characteristics(self, reply):
 	msg = locale_manager.get('CHARACTERISTICS').format(
 		self.get_damage(), 

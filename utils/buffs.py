@@ -43,6 +43,7 @@ class DevilPower(Buff):
 	def on_end(self, user, reply, room):
 		reply('Контракт истёк.')
 		user.remove_item('lepergold')
+		user.remove_tag(DEVIL)
 		user.death(reply, reason='Сделка с дьяволом')
 
 class DevilInt(Buff):
@@ -51,6 +52,7 @@ class DevilInt(Buff):
 	def on_end(self, user, reply, room):
 		reply('Контракт истёк.')
 		user.remove_item('lepergold')
+		user.remove_tag(DEVIL)
 		user.death(reply, reason='Сделка с дьяволом')
 
 class DevilMoney(Buff):
@@ -59,6 +61,7 @@ class DevilMoney(Buff):
 	def on_end(self, user, reply, room):
 		reply('Контракт истёк.')
 		user.remove_item('lepergold')
+		user.remove_tag(DEVIL)
 		user.death(reply, reason='Сделка с дьяволом')
 
 class DevilEntity(Buff):
@@ -67,6 +70,7 @@ class DevilEntity(Buff):
 	def on_end(self, user, reply, room):
 		reply('Контракт истёк.')
 		user.remove_item('lepergold')
+		user.remove_tag(DEVIL)
 		user.death(reply, reason='Сделка с дьяволом')
 
 class EmperorDefence(Buff):

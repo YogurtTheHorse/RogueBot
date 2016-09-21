@@ -7,6 +7,11 @@ actions_enter = [ 'Играем', 'Уйти' ]
 actions_choose = [ 'Красное x2', 'Зеленое x12', 'Черное x2' ]
 actions_make_bet = [ '100', '250', '500', '1000', 'Назад' ]
 
+def can_open(user, reply):
+	return not user.has_tag(DEVIL)
+
+def open_failure(user, reply):
+	reply('Здесь не рады проклятым!')
 
 def enter(user, reply):
 	msg = (

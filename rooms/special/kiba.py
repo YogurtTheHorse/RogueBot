@@ -13,8 +13,11 @@ STICKER_WHO_ARE_YOU = 'BQADAgADlwADR_sJDPezoGBvDAf8Ag'
 STICKER_HIDDING = 'BQADAgADYAADR_sJDMcKS6xl6CpAAg'
 STICKER_UNCERTAIN = 'BQADAgADkwADR_sJDJ5FA78SkL5OAg'
 STICKER_GOOD_POTION = 'BQADAgADggADR_sJDGGwawbbnxyIAg'
+STICKER_WONDER = 'BQADAgADZAADR_sJDBlEjbjLhUyVAg'
 
-actions_enter = [ 'Привет キバ！', 'Ты кто?', 'Уйти' ]
+actions_enter = [ 'Привет キバ！', 'Попросить лису', 'Ты привез мне лису?', 'Ты кто?', 'Уйти' ]
+actions_fox_01 = [ 'Да, можно мне лису?', 'А.. нет, я оговорился' ]
+actions_fox_02 = [ 'Хорошо, вот мои деньги', 'Слишком дорого' ]
 actions_chat = [ 'Каком чате?', 'Ага, я понял кто ты', 'Уйти' ]
 actions_ask_help = [ 'Конечно, чем тебе помочь?', 'Извини, но у меня нет времени.' ]
 actions_make_potion = [ 'Размешать', 'Не размешавать' ]
@@ -23,6 +26,8 @@ actions_drink = [ 'Выпить', 'Не пить' ]
 
 HAVE_NOTHING = 'У меня ничего нет'
 GIVE_ITEM = 'Дать '
+
+FOX_COSTS = 10000
 
 def actions_add_item(user): 
 	actions = [
@@ -62,6 +67,8 @@ def get_actions(user):
 
 	switcher = {
 		'enter': actions_enter,
+		'fox_01': actions_fox_01,
+		'fox_02': actions_fox_02,
 		'chat': actions_chat,
 		'ask_help': actions_ask_help,
 		'give_ingredient': actions_add_item,
@@ -77,8 +84,19 @@ def get_actions(user):
 	if callable(actions):
 		actions = actions(user)
 
-	if question == 'enter' and not user.has_tag('know_kiba'):
-		actions = filter(lambda q: q is not actions_enter[0], actions)
+	if question == 'enter':
+		if not user.has_tag('know_kiba'):
+			actions = filter(lambda q: q not in [ actions_enter[0], actions_enter[1] ], actions)
+
+		if not user.has_tag('fox_payed'):
+			actions = filter(lambda q: q is not actions_enter[2], actions)
+
+		if user.has_tag('fox_payed'):
+			actions = filter(lambda q: q is not actions_enter[1], actions)
+
+	if question == 'fox_02':
+		if user.gold < FOX_COSTS:
+			actions = filter(lambda q: q is not actions_fox_02[0], actions)
 
 	return actions
 
@@ -88,6 +106,8 @@ def action(user, reply, text):
 
 	switcher = {
 		'enter': action_enter,
+		'fox_01': action_fox_01,
+		'fox_02': action_fox_02,
 		'chat': action_chat,
 		'ask_help': action_ask_help,
 		'give_ingredient': action_give_ingredient,
@@ -113,7 +133,7 @@ def action(user, reply, text):
 ## ACTIONS
 
 def action_enter(user, reply, text):
-	if text == actions_enter[1]:
+	if text == actions_enter[3]:
 		msg = (
 			'*Опашки-опашки* Неужели ты меня не знаешь? Я часто бываю в чате.\n'
 		)
@@ -137,11 +157,91 @@ def action_enter(user, reply, text):
 
 		return True
 
+	if text == actions_enter[1]:
+		msg = (
+			'*Лису?* Ты хочешь лису??'
+		)
+
+		user.set_room_temp('question', 'fox_01')
+
+		reply(msg, photo=STICKER_WONDER)
+
+		return True
+
 	if text == actions_enter[2]:
+		msg = (
+			'Конечно, вот она!\n'
+			'Заходи ко мне еще..'
+		)
+
+		user.remove_tag('fox_payed')
+
+		reply(msg, photo=STICKER_SLEEP)
+
+		user.new_pet(reply, 'fox')
+
+		return True
+
+	if text == actions_enter[4]:
 		msg = (
 			'Когда ты уходил, на секунду тебе показалось, что キバ расстроился.\n'
 			'Ты обернулся и увидел, что он спит.\n'
 			' — Вот же соня!, — подумал ты'
+		)
+
+		reply(msg, photo=STICKER_SLEEP)
+
+		user.leave(reply)
+
+		return True
+
+
+def action_fox_01(user, reply, text):
+	if text == actions_fox_01[0]:
+		msg = (
+			'Дай подумать..\n'
+			'Думаю я мог бы достать одну лису, это будет стоить {} золотых.\n'
+			'Что думаешь?'
+		)
+
+		reply(msg.format(FOX_COSTS), photo=STICKER_FORGOT)
+
+		user.set_room_temp('question', 'fox_02')
+
+		return True
+
+	if text == actions_fox_01[1]:
+		msg = (
+			'Нет? Ну ладно. Я просто знаю где достать одну лису.\n'
+			'Если понадобится, то заходи..'
+		)
+
+		reply(msg, photo=STICKER_SLEEP)
+
+		user.leave(reply)
+
+		return True
+
+
+def action_fox_02(user, reply, text):
+	if text == actions_fox_02[0]:
+		if user.paid(FOX_COSTS):
+			msg = (
+				'Отлично! Заходи через неделю, я привезу лису.'
+			)
+
+			user.add_tag('fox_payed')
+
+			reply(msg, photo=STICKER_SLEEP)
+
+			user.leave(reply)
+
+			return True
+
+	if text == actions_fox_02[1]:
+		msg = (
+			'Нет? Ну ладно. Я просто знаю где достать одну лису.\n'
+			'Если понадобится, то заходи..'
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -181,7 +281,7 @@ def action_chat(user, reply, text):
 
 		return True
 
-	if text == actions_enter[2]:
+	if text == actions_chat[2]:
 		msg = (
 			'Когда ты уходил, на секунду тебе показалось, что キバ расстроился.\n'
 			'Ты обернулся и увидел, что он спит.\n'

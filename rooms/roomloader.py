@@ -254,7 +254,7 @@ def check_room(room, name, room_type):
 		( NONE, [ 'element' ] ),
 		( [ ], [ 'loot' ] ),
 		( lambda *args: True, [ 'can_open' ] ),
-		( False, [ ] )
+		( False, [ 'not_for_sign' ] )
 	]
 
 	for def_val, names in defaults:

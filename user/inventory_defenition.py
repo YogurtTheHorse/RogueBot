@@ -80,9 +80,8 @@ def inventory(self, reply, text):
 
 		if not self.remove_item_by_name(name):
 			reply(locale_manager.get('CANT_THROW'))
-			self.open_inventory(reply)			
-		else:
-			self.open_inventory(reply)
+			
+		self.open_inventory(reply)
 	elif text.startswith(locale_manager.get('SELL')):
 		name = text[len(locale_manager.get('SELL')):]
 

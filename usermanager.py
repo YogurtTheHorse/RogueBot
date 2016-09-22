@@ -77,8 +77,7 @@ def debug_info(uid):
 def setname(uid, name):
 	usr = get_user(uid)
 	usr.name = name
-	save_user(uid)
-
+	save_user(usr)
 
 def open_room(uid, reply, room_type, name):
 	usr = get_user(uid)

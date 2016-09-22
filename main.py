@@ -98,8 +98,8 @@ def start(bot, update):
 
 def setname(bot, update):
 	txt = update.message.text.split()
-	if len(txt) > 9:
-		name = update.message.text[10:]
+	if len(txt) > len('/setname'):
+		name = update.message.text[len('/setname'):]
 		usermanager.setname(update.message.chat_id, name)
 
 		bot.sendMessage(update.message.chat_id, text='Ну хорошо')

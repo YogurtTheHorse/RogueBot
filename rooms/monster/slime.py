@@ -28,7 +28,7 @@ def action(user, reply, text):
 
 			if user.tags.count('dirt') > 10:
 				user.remove_item('intoxicated_shoes')
-				user.tags.remove('dirt')
+				user.tags = list(filter(('dirt').__ne__, user.tags))
 
 		user.won(reply)
 	else:

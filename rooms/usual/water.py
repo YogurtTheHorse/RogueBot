@@ -53,7 +53,7 @@ def action(user, reply, text):
 	elif text == CHEST:
 		user.throw_dice(reply, text)
 	elif text == FAST:
-		reply('Ели успел. Ух.')
+		reply('Еле успел. Ух.')
 
 		user.leave(reply)
 	else:

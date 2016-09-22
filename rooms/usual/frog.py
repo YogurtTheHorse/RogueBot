@@ -22,6 +22,8 @@ def action(user, reply, text):
 		)
 
 		reply(msg)
+
+		user.leave(reply)
 	else:
 		msg = (
 			'Вы рассказываете заезжаную хохму, что услышали от алхимика. '
@@ -33,5 +35,3 @@ def action(user, reply, text):
 
 		user.add_item('good', 'fork')
 		user.new_pet(reply, 'frog')
-
-	user.leave(reply)

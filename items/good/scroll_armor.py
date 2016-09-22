@@ -14,7 +14,7 @@ fightable = True
 disposable = True
 
 def fight_use(user, reply, room):
-	if 	user.use_mana(50):
+	if user.use_mana(50):
 		reply('Ты читаешь заклинание и твои руки начинают трястись.\nТы не в состоянии их больше сдерживать\nОни начинают описывать круги. Твоя броня увеличилась на 1000 очков.')
 		user.new_buff(ScrollBuff_armor())
 	else:

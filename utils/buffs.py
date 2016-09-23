@@ -85,3 +85,7 @@ class EmperorBurn(Buff):
 		self.time -= 1
 		user.make_damage(10, 20, reply, death=True, name='Праведный огонь')
 		reply('У тебя кожа горит.')	
+
+class ScrollBuff_armor(Buff):
+	def __init__(self):
+		super(ScrollBuff_armor, self).__init__(2, name='scrolldef', defence=1000)

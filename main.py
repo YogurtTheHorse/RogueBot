@@ -40,7 +40,7 @@ def queue_reply(bot, job):
 	except:
 		pass
 
-
+@run_async
 def _reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 	if c_id == 0:
 		return

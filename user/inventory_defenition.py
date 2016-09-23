@@ -27,7 +27,7 @@ def open_inventory(self, reply):
 		if i is not None:
 			acts = [ ]
 			is_atcive = ''#'(Надето: {0} шт.)'.format(active_items.count(i)) if i in active_items else ''
-			msg += '{0} ({2} шт.) {1}:\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description)
+			msg += '{0} ({2} шт. ценой {4} злт.) {1}:\n{3}\n\n'.format(i.name, is_atcive, counter_items[i], i.description, round(i.price * 0.7))
 			if i.usable:
 				acts.append(i.name)
 
@@ -80,7 +80,7 @@ def inventory(self, reply, text):
 
 		if not self.remove_item_by_name(name):
 			reply(locale_manager.get('CANT_THROW'))
-			
+
 		self.open_inventory(reply)
 	elif text.startswith(locale_manager.get('SELL')):
 		name = text[len(locale_manager.get('SELL')):]

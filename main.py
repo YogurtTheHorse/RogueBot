@@ -385,27 +385,11 @@ def cesar(bot, update):
 	v = databasemanager.get_variable('ces', def_val=True)
 	databasemanager.set_variable('ces', not v)
 
+@run_async
 def rate(bot, update):
-	if str(update.message.chat_id) in config.ADMINS_IDS:
-		msg = (
-			'Мы очень волнуемся о том, чтобы наш бот всегда нравился нашим '
-			'игрокам, поэтому собираем фидбэк и оценки.\n\n'
-			'Будет невообразимо круто, если ты откроешь вот эту ссылку '
-			'(мы не попросим у тебя никаких паролей, не переживай) и оценишь игру:\n\n'
-			'{0}\n\n'
-			'Это поможет нам собрать статистику об игроках и услышать ваши пожелания'
-			', которые мы все читаем и стараемся учитывать (:'
-		)
-
-		for uid in usermanager.get_telegram_users():
-			link = statistics.get_link(uid)
-			
-			try:
-				reply(uid, bot, msg.format(link))
-			except:
-				logger.info('Couldn\'t send message to {0}'.format(user_id))
-	else:
-		bot.sendMessage(update.message.chat_id, text='NO')
+	c_id = update.message.chat_id
+	link = statistics.get_link(c_id)
+	bot.sendMessage(update.message.chat_id, text='Держи ссылку ;)\n\n{0}'.format(link))
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

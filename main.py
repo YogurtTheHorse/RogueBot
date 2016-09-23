@@ -399,8 +399,11 @@ def rate(bot, update):
 
 		for uid in usermanager.get_telegram_users():
 			link = statistics.get_link(uid)
-
-			bot.sendMessage(uid, text=msg.format(link))
+			
+			try:
+				reply(uid, bot, msg.format(link))
+			except:
+				logger.info('Couldn\'t send message to {0}'.format(user_id))
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO')
 

@@ -34,6 +34,11 @@ def open_corridor(self, reply):
 	reply(locale_manager.get('WHAT_WILL_WE_DO'), buttons)
 
 def corridor(self, reply, text):
+	if self.has_tag('wet'):
+		self.remove_tag('wet')
+	if self.has_tag('wet_enemy'):
+		self.remove_tag('wet_enemy')
+
 	if text.startswith(locale_manager.get('OPEN_NEXT_DOOR').split()[0]):
 		self.open_room(reply)
 	elif text == locale_manager.get('USE_SIGN'):

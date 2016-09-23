@@ -19,7 +19,7 @@ def get_actions(user):
 def enter(user, reply):
 	rooms = [  ]
 
-	while len(rooms) < 3:
+	while len(rooms) < 4:
 		rm = roomloader.get_next_room(user)
 		loaded_room = roomloader.load_room(rm[1], rm[0])
 

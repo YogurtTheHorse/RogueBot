@@ -40,7 +40,7 @@ def get_actions(user):
 
 def make_damage(user, reply, dmg):
 	hp = user.get_room_temp('hp', 0)
-	hp -= max(1, dmg - user.rooms_count // 10)
+	hp -= max(1, dmg)
 
 	if hp <= 0:
 		number = databasemanager.get_variable('doctor_num', 1)

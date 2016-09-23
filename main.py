@@ -2,6 +2,8 @@
 
 import config
 
+import statistics
+
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
@@ -90,6 +92,8 @@ def start(bot, update):
 	image = None
 	buttons = None
 
+	statistics.track(c_id, update.message.text, 'Start')
+
 	def rep(txt, btns=None, photo=None):
 		global msg, image, buttons
 
@@ -119,8 +123,11 @@ def start(bot, update):
 		reply(c_id, bot, msg, buttons, image)
 
 def setname(bot, update):
+
 	txt = update.message.text
 	if len(txt) > len('/setname'):
+		statistics.track(update.message.chat_id, update.message.text, 'Setname')
+		
 		name = txt[len('/setname')+1:]
 		usermanager.setname(update.message.chat_id, name)
 
@@ -294,6 +301,7 @@ def divine_intervention(bot, job):
 
 def msg(bot, update):
 	c_id = update.message.chat_id
+	statistics.track(c_id, update.message.text)
 
 	global msg, image, buttons
 	msg = ''
@@ -370,6 +378,7 @@ def leaderboard(bot, update):
 	bot.sendMessage(update.message.chat_id, text=msg)
 
 def stop(bot, update):
+	statistics.track(update.message.chat_id, update.message.text, 'Stop')
 	usermanager.delete(update.message.chat_id)
 
 def cesar(bot, update):

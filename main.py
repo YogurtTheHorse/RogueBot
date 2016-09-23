@@ -5,6 +5,7 @@ import config
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
+from collections import deque
 
 import tornamentmanager
 import databasemanager
@@ -22,15 +23,23 @@ question_filename = 'question.int'
 question_yes = 0
 question_no = 0
 asked = [ ]
+queue = deque([])
 
 updater = Updater(config.TELEGRAM_TOKEN)
 
-def reply_job(bot, job):
-	c_id, bot, txt, buttons, photo = job.context
-	reply(c_id, bot, txt, buttons, photo, repeat=False)
+def queue_reply(bot, job):
+	try:
+		message = queue.popleft()
 
-@run_async
-def reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
+		if message:
+			c_id, bot, txt, buttons, photo, repeat = message
+			_reply(c_id, bot, txt, buttons, photo, repeat)
+
+	except:
+		pass
+
+
+def _reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 	if c_id == 0:
 		return
 	if buttons:
@@ -60,6 +69,19 @@ def reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 
 	if photo:
 		bot.sendSticker(c_id, sticker=photo)
+
+
+def reply_job(bot, job):
+	c_id, bot, txt, buttons, photo = job.context
+	reply(c_id, bot, txt, buttons, photo, repeat=False)
+
+
+def reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
+	if c_id == 0:
+		return
+
+	queue.append([ c_id, bot, txt, buttons, photo, repeat ])
+
 
 def start(bot, update):
 	c_id = update.message.chat_id
@@ -402,6 +424,9 @@ def main():
 	update_tornament_job = Job(update_tornament, 10.0)
 	updater.job_queue.put(intervention_job)
 	updater.job_queue.put(update_tornament_job)
+
+	queue_job = Job(queue_reply, 0.035)
+	updater.job_queue.put(queue_job)
 
 	logger.info('Starting polling...')
 	updater.start_polling()

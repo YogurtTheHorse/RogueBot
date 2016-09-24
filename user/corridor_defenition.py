@@ -1,4 +1,5 @@
 import logging
+
 from constants import *
 
 from localizations import locale_manager

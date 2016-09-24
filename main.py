@@ -92,7 +92,7 @@ def start(bot, update):
 	image = None
 	buttons = None
 
-	statistics.track(c_id, update.message.text, 'Start')
+	statistics.track(c_id, update.message, 'Start')
 
 	def rep(txt, btns=None, photo=None):
 		global msg, image, buttons
@@ -126,7 +126,7 @@ def setname(bot, update):
 
 	txt = update.message.text
 	if len(txt) > len('/setname'):
-		statistics.track(update.message.chat_id, update.message.text, 'Setname')
+		statistics.track(update.message.chat_id, update.message, 'Setname')
 		
 		name = txt[len('/setname')+1:]
 		usermanager.setname(update.message.chat_id, name)
@@ -301,7 +301,7 @@ def divine_intervention(bot, job):
 
 def msg(bot, update):
 	c_id = update.message.chat_id
-	statistics.track(c_id, update.message.text)
+	statistics.track(c_id, update.message)
 
 	global msg, image, buttons
 	msg = ''
@@ -378,7 +378,7 @@ def leaderboard(bot, update):
 	bot.sendMessage(update.message.chat_id, text=msg)
 
 def stop(bot, update):
-	statistics.track(update.message.chat_id, update.message.text, 'Stop')
+	statistics.track(update.message.chat_id, update.message, 'Stop')
 	usermanager.delete(update.message.chat_id)
 
 def cesar(bot, update):

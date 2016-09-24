@@ -10,7 +10,7 @@ def track(uid, message, name='Message'):
 	if tkn is not None:
 		arg = { 
 			'text': message.text,
-			'from_user': str(message.from_user)
+			'from_user': message.from_user
 		}
 		botan.track(tkn, uid, arg, name)
 

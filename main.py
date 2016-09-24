@@ -179,7 +179,7 @@ def notify(bot, update):
 
 		for user_id in usermanager.get_telegram_users():
 			try:
-				reply(user_id, bot, msg)
+				bot.sendMessage(user_id, text=msg)
 			except:
 				logger.info('Couldn\'t send message to {0}'.format(user_id))
 	else:

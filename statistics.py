@@ -8,9 +8,10 @@ if hasattr(config, 'BOTANIO_TOKEN'):
 
 def track(uid, message, name='Message'):
 	if tkn is not None:
-		arg = { 
+		arg = {
 			'text': message.text,
-			'from_user': message.from_user
+			'date': message.date.isoformat(),
+			'from_user': str(message.from_user)
 		}
 		botan.track(tkn, uid, arg, name)
 

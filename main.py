@@ -301,7 +301,6 @@ def divine_intervention(bot, job):
 
 def msg(bot, update):
 	c_id = update.message.chat_id
-	logger.info(str(update.message.__dict__))
 	statistics.track(c_id, update.message)
 
 	global msg, image, buttons

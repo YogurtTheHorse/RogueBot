@@ -17,7 +17,7 @@ def open_shop(self, reply):
 	if self.shop_names is None or len(self.shop_items) != 4:
 		self.shop_items = itemloader.load_shop_items()
 
-	items =  [ itemloader.load_item(i[1], i[0]) for i in self.shop_items ]
+	items =  [ itemloader.load_item(i[1], i[0], usr=self) for i in self.shop_items ]
 	self.shop_names = [ i.name for i in items ]
 
 	for item in self.get_items():

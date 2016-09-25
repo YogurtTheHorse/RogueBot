@@ -1,6 +1,6 @@
 import items.itemloader as itemloader
 
-сontext = itemloader.get_context()
+context = itemloader.get_context()
 
 name = 'Записка'
 price = 1

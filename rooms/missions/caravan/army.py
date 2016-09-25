@@ -13,6 +13,9 @@ def on_won(user, reply):
 	user.new_mission('caravan', 'caravan', path_len=75)
 	user.set_room_temp('won', True)
 
+def on_die(user, reply):
+	user.new_mission('caravan', 'army', path_len=150)
+
 def on_leave(user, reply):
 	if not (user.get_room_temp('won') is True):
 		reply('Мы еще догоним тебя.. Потом.')

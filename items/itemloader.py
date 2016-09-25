@@ -57,7 +57,7 @@ def check_item(item, name, buff):
 		( lambda *args: 0, [ 'get_dice_bonus', 'get_damage_bonus', 'fight_use' ]),
 		( lambda *args: True, [ 'can_use' ]),
 		( 0, [ 'damage', 'mana_damage', 'charisma', 'defence' ] ), # buffs
-		( '', [ 'aura' ] ), # eeeh. meh
+		( '', [ 'aura', 'secret_desciption' ] ), # eeeh. meh
 		( [ ], [ 'tags', 'loot' ] ), # some arrays?
 		( False, [ 'usable', 'fightable', 'iscursed', 'disposable', 'strengthoff' ]),
 		( 1, [ 'gold_bonus', 'shop_count' ] )

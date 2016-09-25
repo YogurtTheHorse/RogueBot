@@ -1,10 +1,10 @@
-from constants import *
+import items.itemloader as itemloader
+from utils.potions import get_potion_color
+from utils.potions import HOMELESS_POT
 
-name = 'Желтое зелье'
+name = get_potion_color(itemloader.get_user(), HOMELESS_POT) + ' зелье'
 
-description = (
-	'Пробирка с каким-то зельем. Какой-то подозрительный цвет...'
-)
+description = 'Пробирка с каким-то зельем.'
 
 price = 100
 usable = True

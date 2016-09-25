@@ -171,6 +171,7 @@ def pet(bot, update):
 	else:
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
+@run_async
 def notify(bot, update):
 	if str(update.message.chat_id) in config.ADMINS_IDS:
 		msg = update.message.text[len('/notify'):]

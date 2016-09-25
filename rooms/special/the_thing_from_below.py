@@ -17,3 +17,6 @@ def enter(user, reply):
 
 def get_actions(user):
 	return user.get_fight_actions()
+
+def action(user, reply, text):
+	user.fight_action(reply, text)	

@@ -9,6 +9,9 @@ TREE_POT = 5
 DALTONISM_POT = 6
 
 def get_potion_color(user, pot_num):
+	if user is None:
+		return COLORS[0]
+
 	if user.has_tag('daltonism') or pot_num >= len(COLORS):
 		return COLORS[0]
 

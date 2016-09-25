@@ -5,6 +5,7 @@ damage_range = ( 40, 80 )
 
 coins = 900
 loot = [ 'puzzle' ]
+is_monster = True
 
 def enter(user, reply):
 	reply('Ужас забирается в твоё сознание...')

@@ -4,17 +4,20 @@ name = '先生'
 
 room_type = 'other'
 
-# 			Выучить японский, Сказать, что уже знаешь,  Молча стоять
-actions = [ '日本語を学びます', 'すでに日本語を知っていると言うこと', '静かに立ちます' ]
-
 def get_actions(user):
-	return actions
+	if user.has_tag(JAPANESE):
+		return [ 'Выучить японский', 'Сказать, что уже знаешь', 'Молча стоять' ]
+	else:
+		return [ '日本語を学びます', 'すでに日本語を知っていると言うこと', '静かに立ちます' ]
 
 def enter(user, reply):
-	reply('ようこそ！\n私はトトロです')
+	if user.has_tag(JAPANESE):
+		reply('Привет!')
+	else:
+		reply('ようこそ！\n私はトトロです')
 
 def action(user, reply, text):
-	if text == actions[0]:		
+	if text == get_actions(user)[0]:		
 		if user.paid(50):
 			reply('Теперь ты знаешь японский! おめでとうございます!')
 
@@ -24,11 +27,14 @@ def action(user, reply, text):
 			user.make_damage(20, 30, reply, death=False)
 		
 		user.leave(reply)
-	elif text == actions[1]:
+	elif text == get_actions(user)[1]:
 		if user.has_tag(JAPANESE):
-			reply('そう。\nМастер попрощался с тобой')
+			reply('Мастер попрощался с тобой')
 			user.leave(reply)
 		else:
 			reply('私はトトロです')
 	else:
-		reply('私はトトロです')
+		if user.has_tag(JAPANESE):
+			reply('Я — сенсей!')
+		else:
+			reply('私はトトロです')

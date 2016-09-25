@@ -64,7 +64,7 @@ def shop(self, reply, text):
 		for ind, name in enumerate(self.shop_names):
 			if name == text:
 				buff, name = self.shop_items[ind]
-				item = itemloader.load_item(name, buff)
+				item = itemloader.load_item(name, buff, usr=self)
 				self.buy(item, reply)
 				return
 

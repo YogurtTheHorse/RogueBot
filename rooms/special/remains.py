@@ -43,16 +43,16 @@ def action(user, reply, text):
 
 			user.give_gold(random.randrange(12, 72))
 
-			items.append(('loot', 'tooth'))
-			items.append(('loot', 'tooth'))
+			items.append(('loot', 'tooth', { }))
+			items.append(('loot', 'tooth', { }))
 
 			for it in items:
-				user.add_item(it[0], it[1])
+				user.add_item(it[0], it[1], it[2])
 
 			counter_items = Counter(items)
 			items_str = [ ]
 			for it, cnt in counter_items.most_common():
-				loaded_item = itemloader.load_item(it[1], it[0])
+				loaded_item = itemloader.load_item(it[1], it[0], it[2])
 				if loaded_item is not None:
 					items_str.append('*{0}* ({1} шт.)'.format(loaded_item.name, cnt))
 

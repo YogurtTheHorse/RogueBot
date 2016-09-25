@@ -59,7 +59,13 @@ def get_item_by_name(self, name):
 	return None	
 
 def get_items(self):
-	return [ i for i in [ itemloader.load_item(i[1], i[0]) for i in self.items ] if i is not None ]
+	def load_item(i):
+		if len(i) >= 3:
+			return itemloader.load_item(i[1], i[0], i[2], self)
+		else:
+			return itemloader.load_item(i[1], i[0], { }, self)
+
+	return [ i for i in [ load_item(i) for i in self.items ] if i is not None ]
 
 def get_active_items(self):
 	return self.get_items()
@@ -80,5 +86,5 @@ def has_item(self, code_name):
 
 	return False
 
-def add_item(self, buff, name):
-	self.items.append( (buff, name) )
+def add_item(self, buff, name, context={}):
+	self.items.append( (buff, name, context) )

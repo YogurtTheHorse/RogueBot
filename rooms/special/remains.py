@@ -47,7 +47,7 @@ def action(user, reply, text):
 			items.append(('loot', 'tooth', { }))
 
 			for it in items:
-				user.add_item(it[0], it[1], it[2])
+				user.add_item(it[0], it[1], it[2] if len(it) >= 3 else { })
 
 			counter_items = Counter(items)
 			items_str = [ ]

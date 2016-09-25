@@ -34,7 +34,7 @@ def god_love(self, reply, god):
 		self.mp = self.max_mp
 	elif god == JESUS_NUM: # Jesus
 		reply(locale_manager.get('JESUS_LOVE'))
-		self.items.append(('special', 'wine'))
+		self.add_item('special', 'wine')
 	elif god == ALLAH_NUM: # Allah
 		reply(locale_manager.get('ALLAH_LOVE'))
 		self.hp = self.max_hp

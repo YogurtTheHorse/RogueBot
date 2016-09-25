@@ -47,7 +47,7 @@ def steal(user, steal_user, is_last, reply):
 
 	user.add_item(item_to_steal.buff, item_to_steal.code_name)
 	steal_user.remove_item(item_to_steal.code_name)
-	steal_user.add_item('special', 'steal_note')
+	steal_user.add_item('special', 'steal_note', {'stealer': user.name, 'item_name': item_to_steal.name})
 	steal_user.set_variable('stealer', user.name)
 	usermanager.save_user(steal_user)
 

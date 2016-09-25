@@ -1,26 +1,49 @@
 import os
+import imp
 import random
 import logging
-from importlib.machinery import SourceFileLoader
 
 logger = logging.getLogger('rg')
 
-def load_item(name, buff):
+global user, context
+user = None
+context = { }
+
+def get_user():
+	global user
+	return user
+
+def get_context():
+	global context
+	return context
+
+def load_item(name, buff, cntxt={}, usr=None):
 	path = 'items/{0}/{1}.py'.format(buff, name)
+	is_compiled = False
 
 	if not os.path.exists(path):
 		path += 'c'
+		is_compiled = True
 		if not os.path.exists(path):
 			return None
 
-	item_loader = SourceFileLoader(name, path)
-	item = item_loader.load_module()
+	global user, context
+	context = cntxt
+	user = usr
 
-	return check_item(item, name, buff)
+	item = None
+	if is_compiled:
+		item = imp.load_compiled(name, path)
+	else:
+		item = imp.load_source(name, path)
+
+	return check_item(item, name, buff) if item is not None else None
 
 def check_item(item, name, buff):
 	item.code_name = name
 	item.buff = buff
+	item.user = get_user()
+	item.contex = get_context()
 
 	required = [ 'name', 'description', 'price' ]
 

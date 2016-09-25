@@ -38,7 +38,7 @@ def action(user, reply, text):
 			reply('«Нет зубов — нет товара» — хотел сказать орк, но просто ударил тебя по лицу.')
 			user.make_damage(1, 10, reply, death=False)
 	elif text == 'Палка':
-		if user.items.count(('loot', 'tooth')) >= 5:
+		if user.items.count(('loot', 'tooth', {})) >= 5:
 			reply('Забирай')
 			user.add_item('good', 'mage_stick')
 
@@ -48,7 +48,7 @@ def action(user, reply, text):
 			reply('«Нет зубов — нет товара» — хотел сказать орк, но просто ударил тебя по лицу.')
 			user.make_damage(1, 10, reply, death=False)
 	elif text == 'Парашок':
-		if user.items.count(('loot', 'tooth')) >= 5:
+		if user.items.count(('loot', 'tooth', {})) >= 5:
 			reply('Забирай')
 			user.add_item('neutral', 'protein')
 

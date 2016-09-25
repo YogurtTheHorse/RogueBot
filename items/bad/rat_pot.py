@@ -11,9 +11,9 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	if user.race != RAT_RACE:
+	if user.race != 'rat':
 		reply('Теперь ты Крыса.')
-		user.race = RAT_RACE
+		user.race = 'rat'
 	else:
 		reply('ФУХ. ВСЕ БЫЛО ТАКИМ БОЛЬШИМ.')
 		user.race = HUMAN

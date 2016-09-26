@@ -1,4 +1,5 @@
 import logging
+import rooms.roomloader as roomloader
 
 from constants import *
 
@@ -20,6 +21,16 @@ def open_corridor(self, reply):
 	if self.has_item('sign'):
 		buttons.append(locale_manager.get('USE_SIGN'))
 
+	levels_acts = [ ]
+	if self.get_next_level() is not None:
+		levels_acts.append(locale_manager.get('GO_DOWN'))
+
+	if self.get_prev_level() is not None:
+		levels_acts.append(locale_manager.get('GO_UP'))
+
+	if len(levels_acts) > 0:
+		buttons.append(levels_acts)
+
 	if not self.prayed:
 		buttons.append(locale_manager.get('PRAY_TO_GOD'))
 
@@ -31,16 +42,6 @@ def open_corridor(self, reply):
 
 	if len(self.items) > 0:
 		buttons.append(locale_manager.get('SHOW_INVENTORY'))
-
-	levels_acts = [ ]
-	if self.get_next_level() is not None:
-		levels_acts.append(locale_manager.get('GO_DOWN'))
-
-	if self.get_prev_level() is not None:
-		levels_acts.append(locale_manager.get('GO_UP'))
-
-	if len(levels_acts) > 0:
-		buttons.append(levels_acts)
 
 	reply(locale_manager.get('WHAT_WILL_WE_DO'), buttons)
 
@@ -69,11 +70,25 @@ def corridor(self, reply, text):
 		self.open_room(reply, 'usual', 'cesar')
 	elif self.get_prev_level() is not None and text == locale_manager.get('GO_UP'):
 		self.level = self.get_prev_level()
-		reply('Поднимаясь выше по лестнице, ты заметил, что кто-то написал, какие комнаты есть на этом этаже, но не все было разборчиво..')
+		reply('Поднимаясь выше по лестнице, ты заметил, что кто-то написал, какие монстры есть на этом этаже, но не все было разборчиво..')
+
+		msg = ''
+		for ind, name in enumerate(roomloader.get_level_rooms(self, self.level)):
+			msg += '{0}. {1}\n'.format(ind + 1, name)
+
+		reply(msg)
+
 		self.open_corridor(reply)
 	elif self.get_next_level() is not None and text == locale_manager.get('GO_DOWN'):
 		self.level = self.get_next_level()
-		reply('Спускаясь, ты заметил, что кто-то написал, какие комнаты есть на этом этаже, но не все было разборчиво..')
+		reply('Спускаясь, ты заметил, что кто-то написал, какие монстры есть на этом этаже, но не все было разборчиво..')
+
+		msg = ''
+		for ind, name in enumerate(roomloader.get_level_rooms(self, self.level)):
+			msg += '{0}. {1}\n'.format(ind + 1, name)
+
+		reply(msg)
+
 		self.open_corridor(reply)
 	else:
 		self.open_corridor(reply)

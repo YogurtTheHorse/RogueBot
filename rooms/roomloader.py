@@ -286,6 +286,20 @@ def get_all_rooms(room_type):
 
 	return rooms + comp_rooms
 
+def get_level_rooms(user, level):
+	all_visited_rooms = user.get_perma_variable('visited_rooms', [ ])
+	names = [ ]
+	rm_type = 'monster/' + str(level)
+
+	for rm in get_all_rooms(rm_type):
+		if rm in all_visited_rooms:
+			room = load_room(rm, rm_type, user)
+			names.append(room.name)
+		else:
+			names.append('?' * 5)
+
+	return names
+
 def get_random_room(room_type, user):
 	rooms = get_all_rooms(room_type)
 

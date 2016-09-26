@@ -33,7 +33,9 @@ def debug_info(self):
 	msg += 'subject: ' + str(self.subject) + '\n'
 	msg += 'variables: ' + str(self.variables) + '\n'
 	msg += 'buffs: ' + str(self.buffs) + '\n'
-	msg += 'missions: ' + str(self.missions)
+	msg += 'missions: ' + str(self.missions) + '\n'
+	msg += 'level: ' + str(self.level) + '\n'
+	msg += 'levels: ' + str(self.levels) 
 
 	return msg
 

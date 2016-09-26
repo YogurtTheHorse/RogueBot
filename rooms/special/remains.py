@@ -53,7 +53,7 @@ def action(user, reply, text):
 			counter_items = Counter(items)
 			items_str = [ ]
 			for it, cnt in counter_items.most_common():
-				loaded_item = itemloader.load_item(it[1], it[0], usr=self)
+				loaded_item = itemloader.load_item(it[1], it[0], usr=user)
 				if loaded_item is not None:
 					items_str.append('*{0}* ({1} шт.)'.format(loaded_item.name, cnt))
 

@@ -16,4 +16,4 @@ def on_use(user, reply):
 		user.race = 'rat'
 	else:
 		reply('ФУХ. ВСЕ БЫЛО ТАКИМ БОЛЬШИМ.')
-		user.race = HUMAN
+		user.race = 'human'

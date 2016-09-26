@@ -12,7 +12,7 @@ def get_actions(user):
 	actions = [ ]
 
 	for room_type, room_name in rooms:
-		if room_name in all_visited_rooms:
+		if room_name in all_visited_rooms or not room_type.startswith('monster'):
 			loaded_room = roomloader.load_room(room_name, room_type)
 			actions.append([loaded_room.name])
 		else:

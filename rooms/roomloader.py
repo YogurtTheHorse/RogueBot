@@ -34,7 +34,7 @@ def check_room(room, name, room_type):
 
 	required = [ 'name', 'get_actions', 'action' ]
 
-	if room_type == 'monster' or (hasattr(room, 'is_monster') and room.is_monster):
+	if room_type.startswith('monster') or (hasattr(room, 'is_monster') and room.is_monster):
 		room.room_type = 'monster'
 		required.append('damage_range')
 
@@ -264,7 +264,7 @@ def check_room(room, name, room_type):
 
 	return room
 
-def get_next_room(user=None):
+def get_next_room(user):
 	if user is not None:
 		if user.get_last_mission().is_ready():
 			mission = user.get_last_mission()
@@ -275,18 +275,44 @@ def get_next_room(user=None):
 	if p < 1 / 100:
 		return ('special', 'remains')
 	elif p <= 0.5:
-		return get_random_room('monster')
+		return get_random_room('monster/' + user.level, user)
 	else:
-		return get_random_room('usual')
+		return get_random_room('usual', user)
 
-def get_all_rooms(room_type='usual'):
+def get_all_rooms(room_type):
 	pth = 'rooms/' + room_type + '/'
 	rooms =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
 	comp_rooms =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
 	return rooms + comp_rooms
 
-def get_random_room(room_type='usual'):
+def get_random_room(room_type, user):
 	rooms = get_all_rooms(room_type)
 
-	return (room_type, random.choice(rooms))
+	all_visited_rooms = user.get_perma_variable('visited_rooms', [ ])
+
+	not_visited_rooms = [ ]
+	visited_rooms = [ ]
+
+	for rm in rooms:
+		if rm in all_visited_rooms:
+			visited_rooms.append(rm)
+		else:
+			not_visited_rooms.append(rm)
+	
+	visited_rooms_proc = len(visited_rooms) / len(rooms)
+
+	if visited_rooms_proc < 1:
+		visit_new_p = 1 - visited_rooms_proc / 2
+
+		name = ''
+
+		if random.random() < visit_new_p:
+			name = random.choice(not_visited_rooms)
+		else:
+			name = random.choice(visited_rooms)
+	else:
+		user.prepare_boss()
+		name = random.choice(rooms)
+
+	return (room_type, name)

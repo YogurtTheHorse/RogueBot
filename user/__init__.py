@@ -157,6 +157,8 @@ class User(object):
 	from user.stats_defenition import debug_info, get_damage, get_damage_bonus, get_defence, get_charisma, get_gold_bonus
 	from user.stats_defenition import get_mana_damage, has_aura, use_mana, heal, mana, get_stats, add_tag, has_tag, remove_tag, remove_tags
 	from user.stats_defenition import show_characteristics, set_variable, get_variable, new_buff
+	from user.stats_defenition import set_perma_variable, get_perma_variable, set_perma_variables_dict, get_perma_variables_dict
 	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
 	from user.missions_defenition import new_mission, get_last_mission, pop_mission
+	from user.levels_defenition import prepare_boss, get_next_level, get_prev_level
 	

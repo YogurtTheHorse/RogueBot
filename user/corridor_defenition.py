@@ -32,6 +32,16 @@ def open_corridor(self, reply):
 	if len(self.items) > 0:
 		buttons.append(locale_manager.get('SHOW_INVENTORY'))
 
+	levels_acts = [ ]
+	if self.get_next_level() is not None:
+		levels_acts.append(locale_manager.get('GO_DOWN'))
+
+	if self.get_prev_level() is not None:
+		levels_acts.append(locale_manager.get('GO_UP'))
+
+	if len(levels_acts) > 0:
+		buttons.append(levels_acts)
+
 	reply(locale_manager.get('WHAT_WILL_WE_DO'), buttons)
 
 def corridor(self, reply, text):
@@ -57,5 +67,13 @@ def corridor(self, reply, text):
 		self.death(reply, reason='Суицид')
 	elif text == locale_manager.get('JOIN_TORNAMENT'):
 		self.open_room(reply, 'usual', 'cesar')
+	elif self.get_prev_level() is not None and text == locale_manager.get('GO_UP'):
+		self.level = self.get_prev_level()
+		reply('Поднимаясь выше по лестнице, ты заметил, что кто-то написал, какие комнаты есть на этом этаже, но не все было разборчиво..')
+		self.open_corridor(reply)
+	elif self.get_next_level() is not None and text == locale_manager.get('GO_DOWN'):
+		self.level = self.get_next_level()
+		reply('Спускаясь, ты заметил, что кто-то написал, какие комнаты есть на этом этаже, но не все было разборчиво..')
+		self.open_corridor(reply)
 	else:
 		self.open_corridor(reply)

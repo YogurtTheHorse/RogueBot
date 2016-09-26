@@ -1,4 +1,5 @@
 import math
+import databasemanager
 from localizations import locale_manager
 
 def debug_info(self):
@@ -170,6 +171,24 @@ def show_characteristics(self, reply):
 
 	reply(msg)
 	self.open_corridor(reply)
+
+def get_perma_variables_dict(self):
+	return databasemanager.get_variable(str(self.uid) + '_vars', def_val={})
+
+def set_perma_variables_dict(self, d):
+	databasemanager.set_variable(str(self.uid) + '_vars', d)
+
+def set_perma_variable(self, name, val):
+	d = self.get_perma_variables_dict()
+	d[name] = val
+	self.set_perma_variables_dict(d)
+
+def get_perma_variable(self, name, def_val=None):
+	d = self.get_perma_variables_dict()
+	if name in d:
+		return d[name]
+	else:
+		return def_val
 
 def set_variable(self, name, val=None):
 	self.variables[name] = val

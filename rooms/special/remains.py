@@ -35,7 +35,8 @@ def enter(user, reply):
 
 def action(user, reply, text):
 	if text == actions[0]:
-		items = user.get_room_temp('items', def_val=[])
+		items = [ (it[0], it[1]) for it in user.get_room_temp('items', def_val=[]) if len(it) < 3 or len(it[2]) == 0 ]
+
 		if len(items) == 0:
 			reply('У него ничего не было.')
 		else:
@@ -47,8 +48,7 @@ def action(user, reply, text):
 			items.append(('loot', 'tooth'))
 
 			for it in items:
-				if len(it) < 3 or len(it[2]) > 0:
-					user.add_item(it[0], it[1])
+				user.add_item(it[0], it[1])
 
 			counter_items = Counter(items)
 			items_str = [ ]

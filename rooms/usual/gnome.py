@@ -4,13 +4,9 @@ import databasemanager
 name = 'Гном в красной шапке'
 
 def get_actions(user):
-	actions = [ '10' ]
-	g = 50
-	while g < user.gold:
-		actions.append(str(g))
-		g += 50
+	actions = [ '10' ] + [ str((g + 1) * 50) for g in range(min(user.gold // 50, 9)) ]
 
-	return actions[:min(10, len(actions))]
+	return actions
 
 def can_open(user, reply):
 	return not user.has_tag(DEVIL)

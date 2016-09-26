@@ -50,6 +50,7 @@ class User(object):
 
 		self.tags = [ ]
 
+		self.levels = [ 'easy' ]
 		self.room = ('', '')
 		self.room_temp = { }
 

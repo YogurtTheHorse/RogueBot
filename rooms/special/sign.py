@@ -6,13 +6,17 @@ name = 'Распутье'
 room_type = 'other'
 
 def get_actions(user):
+	all_visited_rooms = user.get_perma_variable('visited_rooms', [ ])
 	rooms = user.get_room_temp('rooms')
 
 	actions = [ ]
 
 	for room_type, room_name in rooms:
-		loaded_room = roomloader.load_room(room_name, room_type)
-		actions.append([loaded_room.name])
+		if room_name in all_visited_rooms:
+			loaded_room = roomloader.load_room(room_name, room_type)
+			actions.append([loaded_room.name])
+		else:
+			actions.append(['?????'])
 
 	return actions
 

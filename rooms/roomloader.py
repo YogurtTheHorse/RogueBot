@@ -274,7 +274,7 @@ def get_next_room(user):
 
 	if p < 1 / 100:
 		return ('special', 'remains')
-	elif p <= 0.5:
+	elif p <= 0.7:
 		return get_random_room('monster/' + user.level, user)
 	else:
 		return get_random_room('usual', user)
@@ -317,7 +317,7 @@ def get_random_room(room_type, user):
 	visited_rooms_proc = len(visited_rooms) / len(rooms)
 
 	if visited_rooms_proc < 1:
-		visit_new_p = 1 - visited_rooms_proc / 2
+		visit_new_p = 1 - visited_rooms_proc / 5
 
 		name = ''
 

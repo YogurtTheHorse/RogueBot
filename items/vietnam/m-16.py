@@ -1,6 +1,6 @@
 name = 'М-16'
 description = (
-    'Почти не заржавела'
+    'Приклад немного подплавился и треснул. _Держать вдали от воды!_'
 )
 
 price = 300
@@ -11,7 +11,7 @@ strengthoff = True
 
 def fight_use(user, reply, room):
 	res = 0
-	while user.has_item('bullet') and res // 60 < 10:
+	while user.has_item('bullet') and res // 30 < 20:
 		user.remove_item('bullet')
-		res += 60
+		res += 30
 	return res

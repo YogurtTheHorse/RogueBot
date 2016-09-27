@@ -267,6 +267,7 @@ def update_tornament(bot, job):
 	if len(msg) > 0 or image:
 		reply(uid, bot, msg, buttons, image)
 
+@run_async
 def divine_intervention(bot, job):
 	logger.info('Divine intervention!')
 

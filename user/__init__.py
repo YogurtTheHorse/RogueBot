@@ -140,7 +140,10 @@ class User(object):
 				return True
 			else:
 				reply('Не в этот раз.')
-				self.state = self.state.split()[1]
+				try:
+					self.state = self.state.split()[1]
+				except:
+					self.state = 'corridor'
 
 		return False
 			

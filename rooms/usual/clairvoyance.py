@@ -16,47 +16,62 @@ def get_actions(user):
 
 def action(user, reply, text):
 	if text == 'Посмотреть в шар':
-		usr = usermanager.random_user()
-		res = 'Вижу.. Вижу.. {0}... Ничего не видно..'
+		users = list(usermanager.get_telegram_users())
+		random.shuffle(users)
 
-		name = usr.name
-		if usr.pet:
-			pet = usr.get_pet()
-			name += ' и {0} {1}'.format(pet.name, pet.real_name)
+		user_id = None
+		found_user = None
 
-		if usr.dead:
-			res = '{0} валяется мертвым на краю мира..'
-		elif usr.state == 'corridor':
-			res = '{0} пялится на коридор.'
-		elif usr.state == 'pray':
-			res = '{0} молится Богам.'
-		elif usr.state == 'shop':
-			res = '{0} затаривается вещичками.'
-		elif usr.state == 'inventory':
-			res = '{0} копается в инвентаре.'
-		elif usr.state == 'room':
-			res = (
-				'{0} находится в комнате..\n\n'
-				'И видит..\n'
-			)
+		for usr_id in users:
+			usr = usermanager.get_user(usr_id)
+			if not usr.dead and usr.get_time_from_last_message() < 5 * 60 and usr.uid != user.uid:
+				user_id = usr_id
+				found_user = usr
+				break
 
-			room = roomloader.load_room(usr.room[1], usr.room[0])
-			room_name = room.name
+		if found_user is None:
+			reply('Ничего не видно..')
+		else:
+			name = found_user.name
+			if found_user.pet:
+				pet = found_user.get_pet()
+				name += ' и {0} {1}'.format(pet.name, pet.real_name)
 
-			res += room_name
-		elif usr.state == 'dice':
-			res = (
-				'{0} находится в комнате..\n\n'
-				'И бросает кости в..\n'
-			)
+			res = 'Вижу.. Вижу.. {0}... Ничего не видно..'
 
-			room = roomloader.load_room(usr.room[1], usr.room[0])
-			room_name = room.name
+			if found_user.dead:
+				res = '{0} валяется мертвым на краю мира..'
+			elif found_user.state == 'corridor':
+				res = '{0} пялится на коридор.'
+			elif found_user.state == 'pray':
+				res = '{0} молится Богам.'
+			elif found_user.state == 'shop':
+				res = '{0} затаривается вещичками.'
+			elif found_user.state == 'inventory':
+				res = '{0} копается в инвентаре.'
+			elif found_user.state == 'room':
+				res = (
+					'{0} находится в комнате..\n\n'
+					'И видит..\n'
+				)
 
-			res += room_name
-		elif usr.state == 'reborned':
-			res = '{0} понимает, что «' + str(usr.reborn_answer) + '»'
+				room = roomloader.load_room(found_user.room[1], found_user.room[0])
+				room_name = room.name
 
-		reply(res.format(name))
+				res += room_name
+			elif found_user.state == 'dice':
+				res = (
+					'{0} находится в комнате..\n\n'
+					'И бросает кости в..\n'
+				)
+
+				room = roomloader.load_room(found_user.room[1], found_user.room[0])
+				room_name = room.name
+
+				res += room_name
+			elif found_user.state == 'reborned':
+				res = '{0} понимает, что «' + str(found_user.reborn_answer) + '»'
+
+			reply(res.format(name))
 	else:
 		user.leave(reply)

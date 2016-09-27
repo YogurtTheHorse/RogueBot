@@ -1,4 +1,5 @@
 import random
+import statistics
 
 import rooms.roomloader as roomloader
 
@@ -70,7 +71,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 	if room_name not in visited:
 		visited.append(room_name)
 	self.set_perma_variable('visited_rooms', visited)
-
+	statistics.track(self.uid, {'uid': self.uid, 'name': room_name, 'type': room_type}, 'Room opened')
 
 	room = roomloader.load_room(self.room[1], self.room[0])
 

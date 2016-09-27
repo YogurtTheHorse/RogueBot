@@ -1,6 +1,7 @@
 import rooms.roomloader as roomloader
 
 import logging
+import statistics
 from constants import *
 
 from localizations import locale_manager
@@ -29,6 +30,19 @@ def death(self, reply, reason=None):
 	self.state = ''
 
 	self.update_leaderbord(reason)
+	track_stats = {
+		'uid': self.uid, 
+		'reason': reason, 
+		'rooms_count': self.rooms_count,
+		'gold': self.gold,
+		'kills_count': self.monsters_killed,
+		'damage': self.get_damage(),
+		'defence': self.get_defence(),
+		'charisma': self.get_charisma(),
+		'mana_damage': self.get_mana_damage(),
+		'live_time': self.get_live_time()
+	}
+	statistics.track(self.uid, track_stats, 'Death')
 
 	reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 

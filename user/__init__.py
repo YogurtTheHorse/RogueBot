@@ -81,6 +81,10 @@ class User(object):
 			self.session = time.time()
 			return round(self.session * 10)
 
+	def get_live_time(self):
+		started = self.get_session_seed() / 10
+		return (time.time() - started) / 60
+
 	def get_time_from_last_message(self):
 		try:
 			return (datetime.now() - self.last_message).seconds

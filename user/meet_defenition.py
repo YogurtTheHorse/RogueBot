@@ -26,7 +26,7 @@ def name_confirm(self, reply, text):
 		reply(locale_manager.get('ASK_NAME_AGAIN'))
 
 def name_given(self, reply, name):
-	if not only_letters(name):
+	if not only_letters(name) or len(name) <= 0:
 		reply(locale_manager.get('NAME_ERROR'))
 	else:
 		n = name

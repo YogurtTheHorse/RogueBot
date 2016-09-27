@@ -35,7 +35,8 @@ def debug_info(self):
 	msg += 'buffs: ' + str(self.buffs) + '\n'
 	msg += 'missions: ' + str(self.missions) + '\n'
 	msg += 'level: ' + str(self.level) + '\n'
-	msg += 'levels: ' + str(self.levels) 
+	msg += 'levels: ' + str(self.levels) + '\n'
+	msg += 'visited_rooms: ' + str(self.get_perma_variable('visited_rooms', def_val=[]))
 
 	return msg
 

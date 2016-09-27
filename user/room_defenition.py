@@ -66,10 +66,10 @@ def open_room(self, reply, room_type=None, room_name=None):
 	self.room = (room_type, room_name)
 	self.room_temp = { }
 
-	visited = self.get_perma_variable('visisted_rooms', def_val=[])
+	visited = self.get_perma_variable('visited_rooms', def_val=[])
 	if room_name not in visited:
 		visited.append(room_name)
-	self.set_perma_variable('visisted_rooms', visited)
+	self.set_perma_variable('visited_rooms', visited)
 
 
 	room = roomloader.load_room(self.room[1], self.room[0])

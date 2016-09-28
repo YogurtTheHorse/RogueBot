@@ -56,7 +56,7 @@ def action(user, reply, text):
 					'И видит..\n'
 				)
 
-				room = roomloader.load_room(found_user.room[1], found_user.room[0])
+				room = roomloader.load_room(found_user.room[1], found_user.room[0], found_user)
 				room_name = room.name
 
 				res += room_name
@@ -66,7 +66,7 @@ def action(user, reply, text):
 					'И бросает кости в..\n'
 				)
 
-				room = roomloader.load_room(found_user.room[1], found_user.room[0])
+				room = roomloader.load_room(found_user.room[1], found_user.room[0], found_user)
 				room_name = room.name
 
 				res += room_name

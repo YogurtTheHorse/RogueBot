@@ -22,7 +22,7 @@ def update_leaderbord(self, reason=None):
 
 def death(self, reply, reason=None):
 	if self.state == 'room':
-		room = roomloader.load_room(self.room[1], self.room[0])
+		room = roomloader.load_room(self.room[1], self.room[0], self)
 		room.on_death(self, reply)
 		reply(locale_manager.get('DEATH_PLACE').format(room.name))
 

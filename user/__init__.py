@@ -54,6 +54,7 @@ class User(object):
 		self.level = 'easy'
 		self.room = ('', '')
 		self.room_temp = { }
+		self.rooms_pack = 'default'
 
 		self.reborn_answer = None
 		self.dead = False

@@ -13,7 +13,7 @@ class Tests(unittest.TestCase):
 	def test_rooms(self):
 		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main' ]
 		for t in ROOM_TYPES:
-			for r in roomloader.get_all_rooms(t):
+			for r in roomloader.get_all_rooms('default', t):
 				if r == 'twi_monster':
 					continue
 

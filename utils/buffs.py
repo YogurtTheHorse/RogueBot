@@ -25,18 +25,36 @@ class Buff(object):
 
 	def on_end(self, user, reply, room):
 		pass
+
+	def is_negative(self):
+		return False
 		
 class RainbowBuff(Buff):
 	def __init__(self):
-		super(RainbowBuff, self).__init__(20, name='negative_rainbow', mana_damage_plus=50)
+		super(RainbowBuff, self).__init__(20, name='rainbow', mana_damage_plus=50)
+		
+class VietnamBuff(Buff):
+	def __init__(self):
+		super(VietnamBuff, self).__init__(100000, name='negative_vietnam')
+
+	def on_room(self, user, reply, room):
+		self.time -= 1
+		self.make_damage(5, 5, reply, name='Вьетнамская ловушка')
+		reply('Как же болят твои ноги... Хуже, чем от ботинок.')
+
+	def is_negative(self):
+		return True
 		
 class NegativeRainbowBuff(Buff):
 	def __init__(self):
-		super(RainbowBuff, self).__init__(50, name='rainbow', mana_damage_plus=50)
+		super(NegativeRainbowBuff, self).__init__(50, name='negative_rainbow', mana_damage_plus=50)
 
 	def on_room(self, user, reply, room):
 		self.time -= 1
 		self.mana_damage_plus = (1.25 * random.random() - 1) * user.get_mana_damage()
+
+	def is_negative(self):
+		return True
 
 class DevilPower(Buff):
 	def __init__(self,):
@@ -85,6 +103,9 @@ class EmperorBurn(Buff):
 		self.time -= 1
 		user.make_damage(10, 20, reply, death=True, name='Праведный огонь')
 		reply('У тебя кожа горит.')	
+
+	def is_negative(self):
+		return True
 
 class ScrollBuff_armor(Buff):
 	def __init__(self):

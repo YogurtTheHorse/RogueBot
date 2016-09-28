@@ -21,7 +21,7 @@ def get_actions(user):
 	actions = [ ]
 
 	for room_type, room_name in rooms:
-		loaded_room = roomloader.load_room(room_name, room_type)
+		loaded_room = roomloader.load_room(room_name, room_type, user)
 		name = loaded_room.name
 		if room_name not in all_visited_rooms:
 			name = crypt(name)
@@ -34,7 +34,7 @@ def enter(user, reply):
 
 	while len(rooms) < 4:
 		rm = roomloader.get_next_room(user)
-		loaded_room = roomloader.load_room(rm[1], rm[0])
+		loaded_room = roomloader.load_room(rm[1], rm[0], user)
 
 		if random.random() < 0.05:
 			rm = ('special', 'rick_astley')
@@ -47,7 +47,7 @@ def enter(user, reply):
 def action(user, reply, text):
 	rooms = user.get_room_temp('rooms')
 	for room_type, room_name in rooms:
-		loaded_room = roomloader.load_room(room_name, room_type)
+		loaded_room = roomloader.load_room(room_name, room_type, user)
 		if loaded_room.name == text or crypt(loaded_room.name) == text:
 			if random.random() < 0.1:
 				reply('Что-то пошло не так, ты увидел фезку пролетающую у тебя над головой. Ощущения будто был нарушен межпространственный континуум.')

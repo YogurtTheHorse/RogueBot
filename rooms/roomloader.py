@@ -10,7 +10,7 @@ from constants import *
 logger = logging.getLogger('rg')
 
 def load_room(name, room_type='usual', user=None):
-	path = 'rooms/{0}/{1}.py'.format(room_type, name)
+	path = 'rooms/{0}/{1}/{2}.py'.format(user.rooms_pack if user is not None else 'default', room_type, name)
 
 	if not os.path.exists(path):
 		path += 'c'
@@ -275,12 +275,13 @@ def get_next_room(user):
 	if p < 1 / 100:
 		return ('special', 'remains')
 	elif p <= 0.7:
-		return get_random_room('monster/' + user.level, user)
+		return get_random_room('monster/' + user.level, user, 'monster')
 	else:
 		return get_random_room('usual', user)
 
-def get_all_rooms(room_type):
-	pth = 'rooms/' + room_type + '/'
+def get_all_rooms(rooms_pack, room_type):
+	pth = 'rooms/' + rooms_pack + '/' + room_type + '/'
+
 	rooms =  [ f[:-3] for f in os.listdir(pth) if f.endswith('.py') ]
 	comp_rooms =  [ f[:-4] for f in os.listdir(pth) if f.endswith('.pyc') ]
 
@@ -291,7 +292,7 @@ def get_level_rooms(user, level):
 	names = [ ]
 	rm_type = 'monster/' + str(level)
 
-	for rm in get_all_rooms(rm_type):
+	for rm in get_all_rooms(user.rooms_pack, rm_type):
 		if rm in all_visited_rooms:
 			room = load_room(rm, rm_type, user)
 			names.append(room.name)
@@ -300,33 +301,36 @@ def get_level_rooms(user, level):
 
 	return names
 
-def get_random_room(room_type, user):
-	rooms = get_all_rooms(room_type)
+def get_random_room(room_type, user, second_type=None):
+	rooms = [ (room_type, rm) for rm in get_all_rooms(user.rooms_pack, room_type) ]
+
+	if second_type is not None:
+		rooms.extend([ (second_type, rm) for rm in get_all_rooms(user.rooms_pack, second_type) ])
 
 	all_visited_rooms = user.get_perma_variable('visited_rooms', [ ])
 
 	not_visited_rooms = [ ]
 	visited_rooms = [ ]
 
-	for rm in rooms:
+	for tp, rm in rooms:
 		if rm in all_visited_rooms:
-			visited_rooms.append(rm)
+			visited_rooms.append((tp, rm))
 		else:
-			not_visited_rooms.append(rm)
+			not_visited_rooms.append((tp, rm))
 	
 	visited_rooms_proc = len(visited_rooms) / len(rooms)
 
 	if visited_rooms_proc < 1:
 		visit_new_p = 1 - visited_rooms_proc / 5
 
-		name = ''
+		new_room = ''
 
 		if random.random() < visit_new_p:
-			name = random.choice(not_visited_rooms)
+			new_room = random.choice(not_visited_rooms)
 		else:
-			name = random.choice(visited_rooms)
+			new_room = random.choice(visited_rooms)
 	else:
 		user.prepare_boss()
-		name = random.choice(rooms)
+		new_room = random.choice(rooms)
 
-	return (room_type, name)
+	return new_room

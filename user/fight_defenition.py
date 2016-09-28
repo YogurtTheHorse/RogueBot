@@ -26,7 +26,7 @@ def get_fight_actions(self):
 	return actions
 
 def fight_dice(self, reply, result, subject=None):
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 	if subject == 'noname':
 		dmg = result + self.get_damage_bonus(reply) // 2
 
@@ -40,7 +40,7 @@ def fight_dice(self, reply, result, subject=None):
 
 
 def fight_action(self, reply, text):
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 	if text == locale_manager.get('KICK_ARM'):
 		dmg = self.get_damage() + self.get_damage_bonus(reply)
 
@@ -98,7 +98,7 @@ def fight_action(self, reply, text):
 		self.fight_answer(reply)
 
 def fight_answer(self, reply):
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 	if room.code_name == 'tornament':
 		return
 
@@ -124,7 +124,7 @@ def escape(self, reply, success=True):
 		self.leave(reply)
 
 def won(self, reply, tornament=False, boss=None):
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 
 	if room.code_name == 'tornament' and tornament:
 		reply('Стоп. Это же турнир, тут все работает не так. Ты просто нанес огромный урон противникам. Примерно `100`')

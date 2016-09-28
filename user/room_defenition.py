@@ -27,7 +27,7 @@ def make_damage(self, mn, mx, reply, death=True, defence=True, name=None):
 		self.hp = max(self.hp, 1)
 	elif self.hp <= 0:
 		if name is None and self.state == 'room':
-			room = roomloader.load_room(self.room[1], self.room[0])
+			room = roomloader.load_room(self.room[1], self.room[0], self)
 			name = room.name
 
 		self.death(reply, reason=name)
@@ -73,7 +73,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 	self.set_perma_variable('visited_rooms', visited)
 	statistics.track(self.uid, {'uid': self.uid, 'name': room_name, 'type': room_type}, 'Room opened')
 
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 
 	for i in self.get_items():
 		i.on_room(self, reply, room)
@@ -112,12 +112,12 @@ def open_room(self, reply, room_type=None, room_name=None):
 		return
 
 def in_room(self, reply, text):
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 	room.action(self, reply, text)
 
 	if self.state == 'room':
 		reply(self.get_stats())
-		room = roomloader.load_room(self.room[1], self.room[0])
+		room = roomloader.load_room(self.room[1], self.room[0], self)
 		reply(locale_manager.get('YOUR_ACTIONS'), room.get_actions(self))
 
 def throw_dice(self, reply, subject=None):
@@ -146,7 +146,7 @@ def dice(self, reply, text):
 		res += self.get_dice_bonus(reply)
 		reply(locale_manager.get('DICE_RESULT').format(res))
 		
-		room = roomloader.load_room(self.room[1], self.room[0])
+		room = roomloader.load_room(self.room[1], self.room[0], self)
 		room.dice(self, reply, res, self.subject)
 
 		if self.state == 'room':
@@ -159,7 +159,7 @@ def leave(self, reply):
 	self.shop_items = [ ]
 	self.prayed = False
 
-	room = roomloader.load_room(self.room[1], self.room[0])
+	room = roomloader.load_room(self.room[1], self.room[0], self)
 	if room is not None:
 		room.on_leave(self, reply)
 

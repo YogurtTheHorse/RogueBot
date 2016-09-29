@@ -9,9 +9,11 @@
     [
         {
             "name": "Telegram launch",
+            "working_dir": "${project_path}",
             "cmd": [ "python3", "${project_path}/main.py" ]
         },{
             "name": "Tests",
+            "working_dir": "${project_path}",
             "cmd": [ "python3", "${project_path}/tests.py" ]
         }
     ]

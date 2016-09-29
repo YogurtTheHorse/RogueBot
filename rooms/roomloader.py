@@ -320,7 +320,7 @@ def get_random_room(room_type, user, second_type=None):
 	
 	visited_rooms_proc = len(visited_rooms) / len(rooms)
 
-	if visited_rooms_proc < 1:
+	if visited_rooms_proc < 0.95:
 		visit_new_p = 1 - visited_rooms_proc / 5
 
 		new_room = ''

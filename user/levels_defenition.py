@@ -1,7 +1,7 @@
 def prepare_boss(self):
 	next_level = self.get_next_level()
 
-	if next_level not in self.levels:
+	if next_level not in self.levels and next_level is not None:
 		self.levels.append(next_level)
 
 def get_prev_level(self):

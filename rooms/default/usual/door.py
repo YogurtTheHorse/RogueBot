@@ -18,6 +18,7 @@ def action(user, reply, text):
 			reply('_Ты умер от изнеможения')
 			user.death(reply, reason='Столкновение с дверью')
 		reply('_тишина_')
+		user.set_room_temp('cnt', cnt+1)
 	else:
 		reply('Ты открываешь дверь, а за ней... Коридор!')
 		user.leave(reply)

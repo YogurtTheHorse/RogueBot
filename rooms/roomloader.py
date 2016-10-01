@@ -320,15 +320,8 @@ def get_random_room(room_type, user, second_type=None):
 	
 	visited_rooms_proc = len(visited_rooms) / len(rooms)
 
-	if visited_rooms_proc < 0.95:
-		visit_new_p = 1 - visited_rooms_proc / 5
-
-		new_room = ''
-
-		if random.random() < visit_new_p:
-			new_room = random.choice(not_visited_rooms)
-		else:
-			new_room = random.choice(visited_rooms)
+	if len(not_visited_rooms) > 0:
+		new_room = random.choice(not_visited_rooms)
 	else:
 		user.prepare_boss()
 		new_room = random.choice(rooms)

@@ -13,7 +13,7 @@ def track(uid, message, name='Message'):
 			arg = {
 				'text': message.text,
 				'date': message.date.isoformat(),
-				'from_user': str(message.from_user)
+				'from_user': message.from_user.__dict__
 			}
 		except:
 			pass

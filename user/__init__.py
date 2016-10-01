@@ -73,6 +73,7 @@ class User(object):
 		self.buffs = list()
 
 		self.new_mission('main')
+		self.new_mission('tips', 'tips', path_len=30)
 		self.new_mission('caravan', path_len=20)
 
 	def get_session_seed(self):

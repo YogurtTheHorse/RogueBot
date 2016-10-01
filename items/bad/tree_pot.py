@@ -1,3 +1,5 @@
+from constants import TREE_STICKER
+
 import items.itemloader as itemloader
 from utils.potions import get_potion_color
 from utils.potions import TREE_POT
@@ -11,6 +13,6 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Теперь ты Дерево.', [ ])
+	reply('Теперь ты Дерево.', [ ], photo=TREE_STICKER)
 
 	user.reborn(reply, 'Деревья ничего не делают', name='Дерево')

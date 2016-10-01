@@ -24,7 +24,7 @@ def enter(user, reply):
 
 	user.set_room_temp('gold', user.gold)
 
-	reply(msg)
+	reply(msg, photo=CASINO_STICKER)
 
 
 def get_actions(user):

@@ -11,4 +11,4 @@ loot = []
 
 
 def enter(user, reply):
-	reply('Единение!')
+	reply('Единение!', photo=GHOST_STICKER)

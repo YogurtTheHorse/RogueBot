@@ -1,3 +1,4 @@
+from constants import MINION_STICKER
 from random import randrange
 
 name = 'Миньон'
@@ -14,5 +15,6 @@ def enter(user, reply):
 		'Это странное желтое существо в очках разговаривает на каком-то странном диалекте.\n'
 		'Минуточку, я посмотрю в своем справочнике.\n'
 		'Тут написано что это Миньон.\n'
-		'Очень интересно...'
+		'Очень интересно...',
+		photo=MINION_STICKER
 	)

@@ -25,7 +25,7 @@ def enter(user, reply):
 
 	user.set_room_temp('hp_max', hp)
 
-	reply('Я — _{0}_й Доктор!'.format(number))
+	reply('Я — _{0}_й Доктор!'.format(number), photo=DOCTOR_WHO_STICKER)
 
 	if name is not None:
 		t = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)

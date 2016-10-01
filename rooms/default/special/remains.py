@@ -4,6 +4,8 @@ import items.itemloader as itemloader
 
 from collections import Counter
 
+from constants import REMAINS_STICKER
+
 name = 'Останки'
 
 actions = [ 'Забрать себе', 'Уйти' ]
@@ -26,10 +28,10 @@ def enter(user, reply):
 			break
 
 	if found_user is not None:
-		reply('Здесь лежат останки игрока {0}'.format(found_user.name))
+		reply('Здесь лежат останки игрока {0}'.format(found_user.name), photo=REMAINS_STICKER)
 		user.set_room_temp('items', found_user.items)
 	else:
-		reply('Здесь лежат останки лягушки. Воняет. Ты уходишь отсюда побыстрее.')
+		reply('Здесь лежат останки лягушки. Воняет. Ты уходишь отсюда побыстрее.', photo=REMAINS_STICKER)
 		user.leave(reply)
 
 

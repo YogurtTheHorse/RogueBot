@@ -1,3 +1,5 @@
+from constants import QUINQUEPEDE_STICKER
+
 name = 'Неестественная семилапка'
 
 hp = 50
@@ -8,4 +10,4 @@ coins = 30
 loot = [ ]
 
 def enter(user, reply):
-	reply('Семилапая ящерица, чудный эксперимент магов по одомашниванию драконов.')
+	reply('Семилапая ящерица, чудный эксперимент магов по одомашниванию драконов.', photo=QUINQUEPEDE_STICKER)

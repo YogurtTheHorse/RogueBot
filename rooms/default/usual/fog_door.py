@@ -20,7 +20,7 @@ def enter(user, reply):
 		' — Что это за запах?, — подумал ты'
 	)
 
-	reply(msg)
+	reply(msg, photo=FOG_STICKER)
 
 
 def get_actions(user):

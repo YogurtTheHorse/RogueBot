@@ -16,4 +16,4 @@ def enter(user, reply):
 		'*Летучая*.\n\n'
 		'Слабая, но бьет больно.'
 	)
-	reply(msg)
+	reply(msg, photo=BAT_STICKER)

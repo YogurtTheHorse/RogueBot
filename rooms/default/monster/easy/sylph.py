@@ -9,4 +9,4 @@ loot = ['ballet_tutu']  # Балетная пачка
 
 
 def enter(user, reply):
-	reply('Не доверяй этой женшине, ой, не доверяй!', photo='BQADAgADDAkAAmrZzgdS6xec3MqmYQI')
+	reply('Не доверяй этой женщине, ой, не доверяй!', photo='BQADAgADDAkAAmrZzgdS6xec3MqmYQI')

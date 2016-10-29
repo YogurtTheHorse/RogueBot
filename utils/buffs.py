@@ -104,6 +104,13 @@ class EmperorBurn(Buff):
 		user.make_damage(10, 20, reply, death=True, name='Праведный огонь')
 		reply('У тебя кожа горит.')	
 
+class DiabetBuff(Buff):
+	def __init__(self):
+		super(DiabetBuff, self).__init__(3, name='diabet')
+	def on_room(self, user, reply, room):
+		user.make_damage(10, 20, reply, death=True, name='Диабет')
+		reply('Что-то сухо во рту.')	
+
 	def is_negative(self):
 		return True
 

@@ -44,6 +44,9 @@ def get_room_temp(self, name, def_val=None):
 		return def_val
 
 def open_room(self, reply, room_type=None, room_name=None):
+	if room_name != 'halloween_shop':
+		self.set_variable('halloween_visited', False)
+
 	if self.race == RAT_RACE:
 		reply('Ты — крыса, у тебя не хватило сил сдвинуть дверь с места :(')
 		self.open_corridor(reply)

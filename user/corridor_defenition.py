@@ -34,6 +34,9 @@ def open_corridor(self, reply):
 	if not self.prayed:
 		buttons.append(locale_manager.get('PRAY_TO_GOD'))
 
+	if not self.get_variable('halloween_visited', False):
+		buttons.append('Хеллуин!')
+
 	if not self.visited_shop:
 		buttons.append(locale_manager.get('OPEN_SHOP'))
 
@@ -64,6 +67,9 @@ def corridor(self, reply, text):
 		self.open_inventory(reply)
 	elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 		self.show_characteristics(reply)
+	elif text == 'Хеллуин!' and not self.get_variable('halloween_visited', False):
+		self.open_room(reply, 'special', 'helloween_shop')
+		self.set_variable('halloween_visited', True)
 	elif text == 'Умереть':
 		reply('Пакеда!', photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')
 		self.death(reply, reason='Суицид')

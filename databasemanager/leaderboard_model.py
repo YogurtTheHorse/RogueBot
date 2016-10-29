@@ -8,6 +8,8 @@ from mongothon import Schema
 from mongothon import create_model
 from mongothon.validators import one_of
 
+from utils import costumes
+
 ROOMS_TABLE = 'rooms'
 KILLS_TABLE = 'kills'
 GNOME_TABLE = 'gnome'
@@ -66,6 +68,10 @@ def get_model(db):
 	@Scores.class_method
 	def add_to_leaderboard(cls, user, score, leaderboard_name='rooms'):
 		name = user.name
+
+		costume = costumes.get_costume(user.costume)
+		name += ' в костюме _{0}_'.format(costume['who'])
+
 		if user.pet:
 			pet = user.get_pet()
 			name += ' и {0} {1}'.format(pet.name, pet.real_name)

@@ -6,7 +6,7 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('Дубовая!')
+	reply('Дубовая!', photo='BQADAgAD9wgAAmrZzgfQsNScN9T3LwI')
 	user.set_room_temp('cnt', 0)
 
 def action(user, reply, text):

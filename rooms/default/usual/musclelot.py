@@ -31,7 +31,7 @@ def enter(user, reply):
 			'На входе вас встречает Сэр Качколот!\n\n'
 			'«Сколько качаешь?»'
 		)
-		reply(msg)
+		reply(msg, photo='BQADAgAD1AgAAmrZzgcux0BHbF1X1gI')
 
 def action(user, reply, text):
 	if user.has_tag(EVIL_MUSCLELOT):

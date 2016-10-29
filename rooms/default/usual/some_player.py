@@ -65,7 +65,7 @@ def dice(user, reply, result, subject=None):
 		reply('Ворюга ты конечно первоклассный.')
 		steal(user, steal_user, result > DICE_MAX, reply)
 	else:
-		reply('Мда, вот тебя отмутохало-то.')
+		reply('Мда, вот тебя отмутохало-то.', photo='BQADAgAD1ggAAmrZzgenvIB-RsNAhwI')
 		dmg = steal_user.get_damage()
 		user.make_damage(1, dmg, reply, name='Воровство')
 

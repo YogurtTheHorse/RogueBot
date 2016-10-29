@@ -17,7 +17,7 @@ def enter(user, reply):
 		'Я думал, в этом мире-улье никто не хочет служить. Сейчас будет '
 		'небольшой опрос на определение твоего отряда. Бояться нечего»'
 	)
-	reply(msg)
+	reply(msg, photo='BQADAgADHwEAAgy18wMAAWs-pH_tD3MC')
 	user.set_room_temp('question', 'first')
 
 def dice(user, reply, result, subject=None):

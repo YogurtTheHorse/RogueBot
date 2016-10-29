@@ -10,7 +10,7 @@ coins = 170
 loot = [ random.choice(['shield', 'knight_helmet', 'knight_sword', 'knight_knee']) ]
 
 def enter(user, reply):
-	reply('Весь в доспехах.')
+	reply('Весь в доспехах.', photo='BQADAgAD-ggAAmrZzgdlwyeLQ-iTfwI')
 
 	if user.rooms_count < 100:
 		reply('Я не бью маленьких девочек типа тебя.')

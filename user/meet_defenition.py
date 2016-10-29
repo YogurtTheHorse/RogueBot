@@ -20,6 +20,8 @@ def name_confirm(self, reply, text):
 
 		logger.info('New user with id {0}'.format(self.uid))
 
+		self.set_perma_variable('name', text)
+
 		reply(txt, [ locale_manager.get('WHATS_NEXT') ])
 	else:
 		self.state = 'name'

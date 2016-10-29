@@ -22,7 +22,7 @@ def enter(user, reply):
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply(random.choice(tips))
+		reply(random.choice(tips), photo='BQADAgADUQkAAmrZzgeh8l758pmZEQI')
 
 		user.new_mission('tips', 'tips', path_len=25)
 	else:

@@ -13,4 +13,4 @@ def skill_preparing(user, reply, boss):
     'Ты услышал громыхающее рычание и увидел, что Лунная Бабочка выпускает ядовитую пыльцу.'
   )
 
-  reply(msg)
+  reply(msg, photo='BQADAgAD-wgAAmrZzgcvl-cLwNrVkgI')

@@ -15,7 +15,8 @@ loot = [ 'ring' ]
 def enter(user, reply):
 	reply(
 		'Кажется мы оказались не в том месте в не то время.\n'
-		'Очень надеюсь что {} не обратит на нас внимание.'.format(name)
+		'Очень надеюсь что {} не обратит на нас внимание.'.format(name),
+		photo='BQADAgAD_ggAAmrZzgfWmyCl_kraUgI'
 	)
 
 	if user.rooms_count < 500000:

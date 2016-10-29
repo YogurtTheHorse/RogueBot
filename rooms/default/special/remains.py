@@ -28,10 +28,10 @@ def enter(user, reply):
 			break
 
 	if found_user is not None:
-		reply('Здесь лежат останки игрока {0}'.format(found_user.name), photo=REMAINS_STICKER)
+		reply('Здесь лежат останки игрока {0}'.format(found_user.name), photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
 		user.set_room_temp('items', found_user.items)
 	else:
-		reply('Здесь лежат останки лягушки. Воняет. Ты уходишь отсюда побыстрее.', photo=REMAINS_STICKER)
+		reply('Здесь лежат останки лягушки. Воняет. Ты уходишь отсюда побыстрее.', photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
 		user.leave(reply)
 
 

@@ -36,13 +36,13 @@ def action(user, reply, text):
 			reply('Они прыгнули в портал и он исчезли.')
 			reply('На полу вы нашли полную флягу какого-то крепкого напитка.')
 
-			reply('Из-за запаха алкоголя за тобой пошел какой-то бомж.')
+			reply('Из-за запаха алкоголя за тобой пошел какой-то бомж.', photo='BQADAgADQwkAAmrZzgc2w-E75Bm4pwI')
 
 			user.add_item('special', 'whisky')
 			user.new_pet(reply, 'homeless')
 		else:
 			reply('Мужик одним ловким движением достал пистолет и... заморозил тебя')
-			reply('Приходи через 2 годика, может, уже и оттаешь.')
+			reply('Приходи через 2 годика, может, уже и оттаешь.', photo='BQADAgAD8AgAAmrZzgfsRAAB0r1hUeAC')
 
 			user.reborn(reply, 'Еще чуть-чуть и оттаешь!', name='Кусок льда')
 

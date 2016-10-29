@@ -71,7 +71,7 @@ def action(user, reply, text):
 			user.set_room_temp('question', 'grow')
 	elif question == 'boldness':
 		if text == SHAME_ON_YOU:
-			reply('—Что ж, ступай.\n\nВ этой комнате вы нашли:\nVAC бан')
+			reply('—Что ж, ступай.\n\nВ этой комнате вы нашли:\nVAC бан', photo='BQADAgAD4ggAAmrZzgd0WYobKpDxOAI')
 			user.death(reply, reason='VAC бан')
 		else:
 			reply('—Ничего, с каждым может случиться. ')

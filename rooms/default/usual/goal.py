@@ -25,7 +25,7 @@ def dice(user, reply, result, subject=None):
 			'Читатила! Стреляй в него!'
 		)
 
-		reply(msg)
+		reply(msg, photo='BQADAgAD3wgAAmrZzgdOxgndC2991gI')
 		user.make_damage(10, 30, reply, name='Кодекс чести лучников')
 
 	user.leave(reply)
@@ -42,6 +42,6 @@ def action(user, reply, text):
 			'В общем, в твою _мишень_ прилетела стрела.'
 		)
 
-		reply(msg)
+		reply(msg, photo='BQADAgAD3wgAAmrZzgdOxgndC2991gI')
 		user.make_damage(10, 30, reply, name='Какой-то лучник')
 		user.leave(reply)

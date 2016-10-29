@@ -14,7 +14,7 @@ def get_actions(user):
 	return [ GO, WAIT ]
 
 def enter(user, reply):
-	reply('— Ты еще кто такой?! Не дергайся, дай мне проверить твои документы! У меня на это уйдёт примерно 15 секунд.')
+	reply('— Ты еще кто такой?! Не дергайся, дай мне проверить твои документы! У меня на это уйдёт примерно 15 секунд.', photo='BQADAgAD6QgAAmrZzgd8DgIPKNYJ7QI')
 
 	user.set_room_temp('time', time())
 

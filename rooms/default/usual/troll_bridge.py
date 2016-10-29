@@ -23,7 +23,7 @@ def enter(user, reply):
 	msg = (
 		'Обычный такой мост. Через самую обычную реку.'
 	)
-	reply(msg)
+	reply(msg, photo='BQADAgAD2wgAAmrZzgdIlwyFp4vXPwI')
 	user.set_room_temp('question', 'first')
 
 def dice(user, reply, result, subject=None):

@@ -15,4 +15,4 @@ def enter(user, reply):
 		reply('Крысы не трогают буддистов. Иди с миром.')
 		user.won(reply)
 	else:
-		reply('ААААААААА! ТУТ КРЫСА. УБЕЙ ЕЕ.')
+		reply('ААААААААА! ТУТ КРЫСА. УБЕЙ ЕЕ.', photo='BQADAgADFgkAAmrZzgfs5OH3R2C_1wI')

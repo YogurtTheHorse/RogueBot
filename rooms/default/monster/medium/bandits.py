@@ -35,7 +35,7 @@ def action(user, reply, text):
 
 def enter(user, reply):
 	reply('Вы видите группу людей в плащах и капюшонах.')
-	reply('Они вас заметили и говорят «Опа, фраерок нарисовался! Бабло, артефакты есть?»')
+	reply('Они вас заметили и говорят «Опа, фраерок нарисовался! Бабло, артефакты есть?»', photo='BQADAgADBwkAAmrZzgeViVze6T4hnAI')
 
 	user.set_room_temp('fight', False)
 

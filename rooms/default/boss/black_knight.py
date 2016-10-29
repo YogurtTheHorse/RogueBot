@@ -13,4 +13,4 @@ def skill_preparing(user, reply, boss):
     'Ты услышал громыхающее рычание и увидел, что Черный Рыцарь готовится со всей силы выпустить в тебя свой клинок.'
   )
 
-  reply(msg)
+  reply(msg, photo='BQADAgADBQkAAmrZzgfwyyrSjVn2rgI')

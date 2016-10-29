@@ -13,4 +13,4 @@ def enter(user, reply):
 	msg = (
 		'Огромая куча вьетнамцев, на летающих тракторах производства СССР, устроит дискотеку с фейерверком и светомузыкой. '
 	)
-	reply(msg)
+	reply(msg, photo='BQADAgAD3AgAAmrZzgcgvL7Zlof8MQI')

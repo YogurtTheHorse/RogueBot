@@ -11,6 +11,6 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Теперь ты Булыжник.', photo='BQADAgAD8gADDLXzAxLUH2ng6NIiAg')
+	reply('Теперь ты Булыжник.', photo='BQADAgAD7wgAAmrZzgdNC04WtFQVSAI')
 
 	user.reborn(reply, 'Булыжник должен лежать', name='Булыжник')

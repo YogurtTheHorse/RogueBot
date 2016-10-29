@@ -13,7 +13,7 @@ def skill_preparing(user, reply, boss):
     'Ты услышал громыхающее рычание и увидел, что Ктулху замахивается на тебя всеми своими щупальцами.'
   )
 
-  reply(msg)
+  reply(msg, photo='BQADAgAD_AgAAmrZzge-xwd2a6LXzAI')
 
 
 def on_die(user, reply):

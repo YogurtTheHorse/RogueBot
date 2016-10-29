@@ -38,7 +38,7 @@ def open_corridor(self, reply):
 		buttons.append(locale_manager.get('OPEN_SHOP'))
 
 	if self.race == RAT_RACE:
-		buttons.append('Умереть')			
+		buttons.append('Умереть')		
 
 	if len(self.items) > 0:
 		buttons.append(locale_manager.get('SHOW_INVENTORY'))
@@ -65,6 +65,7 @@ def corridor(self, reply, text):
 	elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 		self.show_characteristics(reply)
 	elif text == 'Умереть':
+		reply('Пакеда!', photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')
 		self.death(reply, reason='Суицид')
 	elif text == locale_manager.get('JOIN_TORNAMENT'):
 		self.open_room(reply, 'usual', 'cesar')

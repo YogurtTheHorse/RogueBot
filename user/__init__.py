@@ -113,7 +113,7 @@ class User(object):
 		logger.info('msg from {0}'.format(self.uid))
 
 		if self.dead:
-			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ])
+			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ], photo='BQADAgADWAkAAmrZzgf8dV_v2nf2uQI')
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':

@@ -33,7 +33,7 @@ def action(user, reply, text):
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАН...\n'
 					'А, так ты из наших, держи, это тебе. Да хранит тебя Господь!\n'
-					'Протягивает Винцо.'
+					'Протягивает Винцо.', photo='BQADAgAD8wgAAmrZzgci29uXEW-PPgI'
 				)
 				user.add_item('special', 'wine')
 				user.leave(reply)
@@ -44,7 +44,7 @@ def action(user, reply, text):
 					'..\n'
 					'НИКТО НЕ ОЖИДАЕТ ИСПАНСКУЮ ИНКВИЗИЦИЮ!\n'
 				)
-				reply(msg)
+				reply(msg, photo='BQADAgAD8wgAAmrZzgci29uXEW-PPgI')
 				user.throw_dice(reply, 'burn')
 		else:
 			reply('Красотка обиженно на вас смотрит.')

@@ -11,7 +11,7 @@ def enter(user, reply):
 		'Она грустно смотрит в сторону петли.'
 	)
 
-	reply(msg)
+	reply(msg, photo='BQADAgADPwkAAmrZzgd3oMWGzcJbhgI')
 
 def action(user, reply, text):
 	if text == actions[0]:

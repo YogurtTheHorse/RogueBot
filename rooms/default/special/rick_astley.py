@@ -41,7 +41,7 @@ def action(user, reply, text):
 		user.set_room_temp('question', 'third')
 	elif question == 'third':
 		if text == CRY:
-			reply(NICE)
+			reply(NICE, photo='BQADAgADyggAAmrZzgc6EaeE79gQAAEC')
 			user.leave(reply)
 		else:
 			reply(WRONG)

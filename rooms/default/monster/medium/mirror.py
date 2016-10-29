@@ -14,7 +14,7 @@ def enter(user, reply):
 	msg = (
 		'Ты видишь какого-то странного, грязного и страшного человека.'
 	)
-	reply(msg, photo='BQADAgAD7gADDLXzA9JW2pcRlw5OAg')
+	reply(msg, photo='BQADAgAD2ggAAmrZzgeHYxYQWFaEZgI')
 
 	user.set_room_temp('hp', user.hp)
 

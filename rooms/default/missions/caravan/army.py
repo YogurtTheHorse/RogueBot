@@ -25,4 +25,4 @@ def enter(user, reply):
 	msg = (
 		'Перед тобой 1337 война. Мне кажется у кого-то большие проблемы.'
 	)
-	reply(msg)
+	reply(msg, photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')

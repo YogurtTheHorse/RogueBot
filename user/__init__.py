@@ -68,6 +68,8 @@ class User(object):
 		self.race = 'human'
 		self.pet = None
 
+		self.costume = 'none'
+
 		self.variables = dict()
 		self.missions = list()
 		self.buffs = list()

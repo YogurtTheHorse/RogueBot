@@ -18,6 +18,9 @@ def open_corridor(self, reply):
 		locale_manager.get('PLAYER_CHARACTERISTICS')#, locale_manager.get('JOIN_TORNAMENT')
 	]
 
+	if not self.get_variable('halloween_visited', False) and self.rooms_pack == 'default':
+		buttons.append('Хеллуин!')
+
 	if self.has_item('sign'):
 		buttons.append(locale_manager.get('USE_SIGN'))
 
@@ -33,9 +36,6 @@ def open_corridor(self, reply):
 
 	if not self.prayed:
 		buttons.append(locale_manager.get('PRAY_TO_GOD'))
-
-	if not self.get_variable('halloween_visited', False):
-		buttons.append('Хеллуин!')
 
 	if not self.visited_shop:
 		buttons.append(locale_manager.get('OPEN_SHOP'))

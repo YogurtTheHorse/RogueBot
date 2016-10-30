@@ -1,3 +1,5 @@
+from utils import costumes
+
 from constants import *
 
 name = 'Зеркало'
@@ -12,7 +14,7 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Ты видишь какого-то странного, грязного и страшного человека.'
+		'Ты видишь что-то странное в костюме {0}.'.format(costumes.get_costume(user.costume)['who'])
 	)
 	reply(msg, photo='BQADAgAD2ggAAmrZzgeHYxYQWFaEZgI')
 

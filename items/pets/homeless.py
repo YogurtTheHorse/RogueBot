@@ -8,6 +8,7 @@ def get_damage_bonus(user, reply):
 		return 11
 	else:
 		reply('Нет виски — нет помощи.')
+	return 0
 
 def get_dice_bonus(user, reply):
 	if user.has_item('whisky'):

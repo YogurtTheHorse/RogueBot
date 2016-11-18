@@ -33,7 +33,7 @@ def god_love(self, reply, god):
 		reply(locale_manager.get('BUDDHA_LOVE'))
 		self.mp = self.max_mp
 	elif god == JESUS_NUM: # Jesus
-		reply(locale_manager.get('JESUS_LOVE'), photo='BQADAgAD2AgAAmrZzgeua1QKkzZUjAI')
+		reply(locale_manager.get('JESUS_LOVE'))
 		self.add_item('special', 'wine')
 	elif god == ALLAH_NUM: # Allah
 		reply(locale_manager.get('ALLAH_LOVE'))

@@ -19,4 +19,4 @@ def fight_use(user, reply, room):
 	if user.dead:
 		return 0
 	
-	return random.range(50, 70)
+	return random.randint(50, 70)

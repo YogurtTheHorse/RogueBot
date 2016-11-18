@@ -18,8 +18,8 @@ def open_corridor(self, reply):
 		locale_manager.get('PLAYER_CHARACTERISTICS')#, locale_manager.get('JOIN_TORNAMENT')
 	]
 
-	if not self.get_variable('halloween_visited', False) and self.rooms_pack == 'default':
-		buttons.append('Хеллуин!')
+#	if not self.get_variable('halloween_visited', False) and self.rooms_pack == 'default':
+#		buttons.append('Хеллуин!')
 
 	if self.has_item('sign'):
 		buttons.append(locale_manager.get('USE_SIGN'))
@@ -67,9 +67,9 @@ def corridor(self, reply, text):
 		self.open_inventory(reply)
 	elif text.startswith(locale_manager.get('PLAYER_CHARACTERISTICS').split()[0]):
 		self.show_characteristics(reply)
-	elif text == 'Хеллуин!' and not self.get_variable('halloween_visited', False):
-		self.open_room(reply, 'special', 'helloween_shop')
-		self.set_variable('halloween_visited', True)
+#	elif text == 'Хеллуин!' and not self.get_variable('halloween_visited', False):
+#		self.open_room(reply, 'special', 'helloween_shop')
+#		self.set_variable('halloween_visited', True)
 	elif text == 'Умереть':
 		reply('Пакеда!', photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')
 		self.death(reply, reason='Суицид')

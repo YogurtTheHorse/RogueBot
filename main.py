@@ -22,8 +22,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 logger = logging.getLogger('rg')
 
 question_filename = 'question.int'
-question_yes = 0
-question_no = 0
+question_yes = 388
+question_no = 78
 asked = [ ]
 queue = deque([])
 
@@ -314,7 +314,7 @@ def msg(bot, update):
 		global msg, image, buttons
 
 		if len(msg) + len(txt) + 2 >= 4096:
-			reply(c_id, bot, msg, buttons, image)
+			_reply(c_id, bot, msg, buttons, image)
 
 			msg = ''
 			image = None
@@ -334,8 +334,8 @@ def msg(bot, update):
 	if len(msg) > 0 or image:
 		global updater
 
-		reply(c_id, bot, msg, buttons, image)
-
+		_reply(c_id, bot, msg, buttons, image)
+@run_async
 def leaderboard(bot, update):
 	c_id = update.message.chat_id
 

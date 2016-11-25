@@ -1,7 +1,6 @@
 sortedcontainers
 python-telegram-bot
 vk_api
-<<<<<<< HEAD
 tinydb
 tinyrecord
 codecov

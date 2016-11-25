@@ -1,9 +1,11 @@
 sortedcontainers
 python-telegram-bot
 vk_api
+<<<<<<< HEAD
 tinydb
 tinyrecord
 codecov
 tweepy
 mongothon3
 pymongo
+pyyaml

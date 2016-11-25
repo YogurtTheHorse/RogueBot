@@ -1,4 +1,4 @@
-import json
+import yaml
 import config
 import logging
 
@@ -8,7 +8,7 @@ def get_language():
 	try:
 		return config.LANG
 	except:
-		return 'ru'
+		return 'ru-RU'
 
 def get_locale(language=None):
 	if language is None:
@@ -17,21 +17,34 @@ def get_locale(language=None):
 	locale = dict()
 
 	try:
-		with open('localizations/{0}.json'.format(language), encoding='utf-8') as lang_file:
-			locale = json.load(lang_file)
+		with open('localizations/{0}.yml'.format(language), encoding='utf-8') as lang_file:
+			locale = yaml.load(lang_file)[language]
 	except BaseException as e:
 		logger.warn('Error loading "{0}" locale: {1}'.format(language, e))
 
 	return locale
 
-
 def get(code_name, language=None):
 	locale = get_locale(language)
+	keys = code_name.split('.')
 
-	if code_name in locale:		
-		return locale[code_name]
-	else:
-		if 'parent' in locale:
-			return get(code_name, locale['parent'])
+	translation = _get(keys, locale)
 
-		return "NOT_IN_LOCALE"
+	if translation is None:
+		return 'Missing translation: {}, language: {}'.format(code_name, language)
+
+	return translation
+
+def _get(keys, locale):
+	head, *tail = keys
+
+	if head in locale:
+		new_locale = locale[head]
+		if not tail:
+			if isinstance(new_locale, str):
+				return new_locale
+		else:
+			if isinstance(new_locale, object):
+				return _get(tail, new_locale)
+
+	return None

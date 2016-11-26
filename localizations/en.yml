@@ -2,67 +2,67 @@ en:
   items:
     good:
       hp_pot:
-        description: 
-        name: 
-        use_action: 
+        description: A drink with some black potion.
+        name: Black potion
+        use_action: It happened to be a potion of life. Now you're fully healed.
   messages:
     ask_name_again: 
     dead_message: 
     dead_message_again: 
     dead_place: 
-    name_agree: 
-    name_confirm: 
-    name_confirmed: 
-    name_dismiss: 
-    name_error: 
-    whats_next: 
-    room_opened: 
+    name_agree: Yes, I'm sure
+    name_confirm: You know, I have a friend named {0} and I think it sounds better that {1}\n Are you sure?
+    name_confirmed: You win. From now on you'll be called {0}. You can change your name with /setname
+    name_dismiss: Let me change
+    name_error: You can't use an underscore character because life is a struggle. \n What's your name?
+    whats_next: What's next?
+    room_opened: You open the door and see...
     your_actions: 
   user:
-    stats: 
+    stats: ! "\U0001F534HP: {0} \U0001F535MP: {1} \U0001F4B0Gold: {2}"
   corridor:
-    characteristics: 
-    go_down: 
-    go_up: 
-    join_tornament: 
-    open_next_door: 
-    open_shop: 
-    player_characteristics: 
-    pray_ro_god: 
-    show_inventory: 
-    use_sign: 
-    what_will_we_do: 
+    characteristics: ! "\U0001F4AA Strength: _{0}_\\n\U0001F6E1 Defence: _{1}_\\n☺ Charisma: _{2}_\\n\U0001F393 Intelligence: _{3}_\\n\U0001F47E Monsters killed: {4}\\n\U0001F6AA Doors opened: {5}"
+    go_down: ⬇ Go downstairs
+    go_up: ⬆ Go upstairs
+    join_tornament: ! "\U0001F4CB Sign up for tournament"
+    open_next_door: ! "\U0001F6AA Open the next door"
+    open_shop: ! "\U0001F6CD  Enter the Alchemy shop"
+    player_characteristics: ! "\U0001F4C8 Check player stats"
+    pray_ro_god: Pray the God for escape
+    show_inventory: ! 'Check your inventory '
+    use_sign: Use the signpost
+    what_will_we_do: What we will do next?
   dice:
-    dice_confidence: 
-    dice_result: 
-    dice_time: 
-    thow_dice: 
+    dice_confidence: I can't see any confidence!
+    dice_result: Your result is *{0}*
+    dice_time: It's time to roll a dice!
+    thow_dice: Roll a dice
   fight:
-    didnt_understand: 
+    didnt_understand: Didn't understand you
     gold_found: 
-    imagination: 
-    imagination_fight: 
-    item_used: 
-    kick_arm: 
+    imagination: ✨ Imagination
+    imagination_fight: Your weird thing dealt *{0}* damage.
+    item_used: With some simple actions {0} deals *{1}* damage
+    kick_arm: ! "\U0001F44A Punch with your fist."
     kick_magic: 
-    magic_kicked: 
+    magic_kicked: Bibbidi-Bobbidi-Boo! \n A giant fist appears out of nowhere and deals *{0}* damage
     monster_damaged: 
-    no_fight_thing: 
-    use: 
-    user_damaged: 
+    no_fight_thing: I don't have such thing but you can throw a dice and try.
+    use: ! '➰ Use:'
+    user_damaged: In return you got *{0}* damage
     you_won: 
   gods:
-    allah_love: 
-    allah_prayed: 
-    author_love: 
-    author_prayed: 
-    buddha_love: 
+    allah_love: You fell how you become stronger
+    allah_prayed: Allah isn't tolerant with mistakes
+    author_love: ! 'I''ll show you one interesting room because of this '
+    author_prayed: Oh, I'm pleased. Thank you
+    buddha_love: You obtained a piece of nirvana, dude.
     buddha_prayed: 
     jesus_love: 
     jesus_prayed: 
-    allah: 
-    author: 
-    buddha: 
+    allah: Allah
+    author: Story teller
+    buddha: Buddha
     emperor: 
     evil_allah: 
     evil_author: 
@@ -74,30 +74,30 @@ en:
     jesus: 
     no_god: 
   divine_intervantion:
-    divine_assasin: 
-    divine_forgives: 
-    divine_heal: 
-    divine_mana: 
+    divine_assasin: ! ' Higher beings presented you a pass for a kill'
+    divine_forgives: You are gifted with indulgence. Your sins are forgiven!
+    divine_heal: Gods bless you with life!
+    divine_mana: Magic powder gifted to you by Gods!
   inventory:
-    activate: 
+    activate: ! "\U0001F53A Put it on"
     activated: 
-    back: 
+    back: Go back
     cant_activate: 
-    cant_throw: 
-    deactivate: 
-    hello_message: 
-    inventory_message: 
-    next: 
-    sell: 
-    throw_away: 
-    to_corridor: 
+    cant_throw: Impossible to throw it away
+    deactivate: ! "\U0001F53B Take it off"
+    hello_message: You are starting a difficult journey and I'm your story teller. Now you're standing in the middle of a corridor - the center of our game. It has lots of doors and every turn you will open one of them. Is there a way out of this hell? I don't even know, but we can check. Be careful, behind the door might be a dungeon with a dragon, but also a lake of ice cream. Take dice, you need to throw them on any action requiring the luck and skills. If you're lucky a monster will fall. But if not... Well... You'll be embarressed before your enemy and they'll take pity on you. We have a shrine. If you'll pray to one God three times you can get something good. But it's better to not mix up. Our telegram group where you can find people like you @robotgroup You might experience some lag because of user influx :(
+    inventory_message: ! 'In the inventory you found:'
+    next: ▶ Next
+    sell: ! "\U0001F4B0 Sell"
+    throw_away: ! "\U0001F5D1 Throw it away"
+    to_corridor: ↪ To the corridor
   shop:
-    bad_buyed: 
-    exit: 
-    good_buyed: 
+    bad_buyed: ! 'Finally someone has bought that! '
+    exit: Way out
+    good_buyed: You made best choice
     neutral_buyed: 
-    no_gold: 
-    no_goods: 
+    no_gold: No money – no honey!
+    no_goods: ! 'I don''t have it '
     shop_check: 
-    shop_exited: 
-    shop_message: 
+    shop_exited: See you soon!
+    shop_message: ! 'Hi! Long time no see, look what i have: {0}\nPrice: {1}\n{2} {3}\nPrice: {4}\n{5} {6}\nPrice: {7}\n{8} {9}\nPrice: {10}\n{11}'

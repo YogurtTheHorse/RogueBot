@@ -15,30 +15,30 @@ logger = logging.getLogger('rg')
 
 def name_confirm(self, reply, text):
 	if len(text) == 7:
-		txt = locale_manager.get('NAME_CONFIRMED').format(self.name)
+		txt = locale_manager.get('messages.name_confirmed').format(self.name)
 		self.state = 'first_msg'
 
 		logger.info('New user with id {0}'.format(self.uid))
 
 		self.set_perma_variable('name', text)
 
-		reply(txt, [ locale_manager.get('WHATS_NEXT') ])
+		reply(txt, [ locale_manager.get('messages.whats_next') ])
 	else:
 		self.state = 'name'
-		reply(locale_manager.get('ASK_NAME_AGAIN'))
+		reply(locale_manager.get('messages.ask_name_again'))
 
 def name_given(self, reply, name):
 	if not only_letters(name) or len(name) <= 0:
-		reply(locale_manager.get('NAME_ERROR'))
+		reply(locale_manager.get('messages.name_error'))
 	else:
 		n = name
 		while n == name:
 			usr = usermanager.random_user()
 			n = usr.name
 
-		msg = locale_manager.get('NAME_CONFIRM').format(n, name)
+		msg = locale_manager.get('messages.name_confirm').format(n, name)
 
-		buttons = [ locale_manager.get('NAME_AGREE'), locale_manager.get('NAME_DISMISS') ]
+		buttons = [ locale_manager.get('messages.name_agree'), locale_manager.get('messages.name_dismiss') ]
 			
 		self.state = 'name_confirm'
 		self.name = antimat(name)
@@ -46,13 +46,13 @@ def name_given(self, reply, name):
 		reply(msg, buttons)
 
 def first(self, reply, text):
-	reply(locale_manager.get('HELLO_MESSAGE'))
+	reply(locale_manager.get('messages.hello_message'))
 
 	mn = databasemanager.get_variable(str(self.uid) + '_gold')
 
 	if mn is not None and mn:
 		databasemanager.set_variable(str(self.uid) + '_gold', False)
-		reply('Вы не помните даже кем вы были в той жизни, а вот мы замечательно помним, что получили от вас ровно тысячу. Да. Точно-точно. Нет, не развод.')
+		reply(locale_manager.get('messages.lucifer_gold'))
 		self.give_gold(1000)
 
 	self.open_corridor(reply)

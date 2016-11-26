@@ -10,16 +10,16 @@ from localizations import locale_manager
 
 def get_fight_actions(self):
 	actions = [
-		locale_manager.get('KICK_ARM'),
-		locale_manager.get('KICK_MAGIC'),
-		locale_manager.get('USE') + locale_manager.get('IMAGINATION')
+		locale_manager.get('fight.kick_arm'),
+		locale_manager.get('fight.kick_magic'),
+		locale_manager.get('fight.use') + locale_manager.get('fight.imagination')
 	]
 
 	items = self.get_items()
 	counter_items = Counter(items)
 	for i, cnt in counter_items.most_common():
 		if i.fightable:
-			act = locale_manager.get('USE') + i.name + ' ({0} шт.)'.format(cnt)
+			act = locale_manager.get('fight.use') + i.name + locale_manager.get('fight.count').format(cnt)
 			if act not in actions:
 				actions.append(act)
 
@@ -30,7 +30,7 @@ def fight_dice(self, reply, result, subject=None):
 	if subject == 'noname':
 		dmg = result + self.get_damage_bonus(reply) // 2
 
-		reply(locale_manager.get('IMAGINATION_FIGHT').format(dmg))
+		reply(locale_manager.get('fight.imagination_fight').format(dmg))
 
 		room.make_damage(self, reply, dmg)
 		
@@ -41,27 +41,27 @@ def fight_dice(self, reply, result, subject=None):
 
 def fight_action(self, reply, text):
 	room = roomloader.load_room(self.room[1], self.room[0], self)
-	if text == locale_manager.get('KICK_ARM'):
+	if text == locale_manager.get('fight.kick_arm'):
 		dmg = self.get_damage() + self.get_damage_bonus(reply)
 
-		reply(locale_manager.get('MONSTER_DAMAGED').format(dmg))
+		reply(locale_manager.get('fight.monster_damaged').format(dmg))
 
 		room.make_damage(self, reply, dmg)
-	elif text == locale_manager.get('KICK_MAGIC'):
+	elif text == locale_manager.get('fight.kick_magic'):
 		dmg = self.get_mana_damage()
 
 		if self.use_mana(5):
-			reply(locale_manager.get('MAGIC_KICKED').format(dmg))
+			reply(locale_manager.get('fight.magic_kicked').format(dmg))
 
 			room.make_damage(self, reply, dmg)
 		else:
-			reply('Маны то не хватает :(')
-	elif text.startswith(locale_manager.get('USE')):
+			reply(locale_manager.get('fight.no_mana'))
+	elif text.startswith(locale_manager.get('fight.use')):
 		name = 'foo'
 		item = None
 
 		if '(' in text:
-			name = text[len(locale_manager.get('USE')):]
+			name = text[len(locale_manager.get('fight.use')):]
 			name = name[:name.rindex('(')-1]
 
 		for i in self.get_items():
@@ -84,15 +84,15 @@ def fight_action(self, reply, text):
 				self.remove_item(item.code_name)
 
 			if self.state == 'room':
-				reply(locale_manager.get('ITEM_USED').format(name, dmg))
+				reply(locale_manager.get('fight.item_used').format(name, dmg))
 
 				room.make_damage(self, reply, dmg)
 		else:
-			reply(locale_manager.get('NO_FIGHT_THING'))
+			reply(locale_manager.get('fight.no_fight_thing'))
 
 			self.throw_dice(reply, 'noname')
 	else:
-		reply(locale_manager.get('DIDNT_UNDERSTAND'))
+		reply(locale_manager.get('fight.didnt_understand'))
 
 	if self.state == 'room':
 		self.fight_answer(reply)
@@ -114,7 +114,7 @@ def fight_answer(self, reply):
 	dmg = self.make_damage(a, b, reply, name=room.name)
 
 	if not self.dead and dmg > 0.2:
-		reply(locale_manager.get('USER_DAMAGED').format(dmg))
+		reply(locale_manager.get('fight.user_damaged').format(dmg))
 
 def escape(self, reply, success=True):
 	for i in self.get_items():
@@ -127,7 +127,7 @@ def won(self, reply, tornament=False, boss=None):
 	room = roomloader.load_room(self.room[1], self.room[0], self)
 
 	if room.code_name == 'tornament' and tornament:
-		reply('Стоп. Это же турнир, тут все работает не так. Ты просто нанес огромный урон противникам. Примерно `100`')
+		reply(locale_manager.get('fight.tornament_not_won'))
 		room.make_damage(self, reply, 100)
 		return
 
@@ -135,7 +135,7 @@ def won(self, reply, tornament=False, boss=None):
 	room.on_won(self, reply)
 
 	items = [ itemloader.load_item(i, 'loot') for i in room.loot ]
-	loot = ', '.join([ item.name for item in items ]) if len(items) > 0 else 'Ничего.'
+	loot = ', '.join([ item.name for item in items ]) if len(items) > 0 else locale_manager.get('fight.nothing')
 
 	for lt in room.loot:
 		self.add_item('loot', lt)
@@ -150,11 +150,11 @@ def won(self, reply, tornament=False, boss=None):
 			room.coins = 0
 
 	if room.coins > 0:
-		reply(locale_manager.get('GOLD_FOUND').format(room.coins))
+		reply(locale_manager.get('fight.gold_found').format(room.coins))
 
 		self.give_gold(room.coins)
 
-	reply(locale_manager.get('YOU_WON').format(loot))
+	reply(locale_manager.get('fight.you_won').format(loot))
 
 	if room.room_type != 'boss':
 		self.leave(reply)

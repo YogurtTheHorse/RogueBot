@@ -101,12 +101,7 @@ class User(object):
 
 		self.state = 'restart ' + self.state
 
-		msg = (
-			'Если ты действительно хочешь начать игру заново, то тебе '
-			'нужно написать вручную *Начать новую игру* и отправить.\n'
-			'*Это необратимо*'
-		)
-		reply(msg, [ 'Отменить удаление персонажа' ])
+		reply(locale_manager.get('messages.confirm_restart'), [ locale_manager.get('user.dont_delete') ])
 
 		return False
 
@@ -115,7 +110,7 @@ class User(object):
 		logger.info('msg from {0}'.format(self.uid))
 
 		if self.dead:
-			reply(locale_manager.get('DEAD_MESSAGE_AGAIN'), [ '/start' ], photo='BQADAgADWAkAAmrZzgf8dV_v2nf2uQI')
+			reply(locale_manager.get('messages.dead_message_again'), [ '/start' ], photo='BQADAgADWAkAAmrZzgf8dV_v2nf2uQI')
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':
@@ -139,11 +134,11 @@ class User(object):
 		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
 		elif self.state.startswith('restart'):
-			if text == 'Начать новую игру':
-				reply('Приговор приведен в исполнение.\nТеперь скажи мне свое новое имя')
+			if text == locale_manager.get('user.start_new_game'):
+				reply(locale_manager.get('user.restarted'))
 				return True
 			else:
-				reply('Не в этот раз.')
+				reply(locale_manager.get('user.not_today'))
 				try:
 					self.state = self.state.split()[1]
 				except:

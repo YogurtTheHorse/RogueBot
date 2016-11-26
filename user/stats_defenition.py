@@ -141,7 +141,7 @@ def mana(self, mp):
 	self.mp = min(self.mp + mp, self.max_mp)
 
 def get_stats(self):
-	return locale_manager.get('USER_STATS').format(self.hp, self.mp, self.gold)
+	return locale_manager.get('user.stats').format(self.hp, self.mp, self.gold)
 
 def add_tag(self, tag):
 	self.tags.append(tag)
@@ -163,7 +163,7 @@ def remove_tags(self, tag):
 	self.tags = list(filter((tag).__ne__, self.tags))
 
 def show_characteristics(self, reply):
-	msg = locale_manager.get('CHARACTERISTICS').format(
+	msg = locale_manager.get('corridor.characteristics').format(
 		self.get_damage(), 
 		self.get_defence(), 
 		self.get_charisma(),

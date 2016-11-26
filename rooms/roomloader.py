@@ -9,8 +9,11 @@ from constants import *
 
 logger = logging.getLogger('rg')
 
-def load_room(name, room_type='usual', user=None):
-	path = 'rooms/{0}/{1}/{2}.py'.format(user.rooms_pack if user is not None else 'default', room_type, name)
+def load_room(name, room_type='usual', pack=None):
+	if not isinstance(pack, str):
+		pack = pack.rooms_pack if pack is not None else 'default'
+
+	path = 'rooms/{0}/{1}/{2}.py'.format(pack, room_type, name)
 
 	if not os.path.exists(path):
 		path += 'c'

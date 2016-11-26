@@ -24,7 +24,7 @@ def death(self, reply, reason=None):
 	if self.state == 'room':
 		room = roomloader.load_room(self.room[1], self.room[0], self)
 		room.on_death(self, reply)
-		reply(locale_manager.get('DEATH_PLACE').format(room.name))
+		reply(locale_manager.get(locale_manager.get('messages.dead_place')).format(room.name))
 
 	self.dead = True
 	self.state = ''
@@ -44,7 +44,7 @@ def death(self, reply, reason=None):
 	}
 	statistics.track(self.uid, track_stats, 'Death')
 
-	reply(locale_manager.get('DEAD_MESSAGE').format(self.monsters_killed, self.rooms_count), [ '/start' ])
+	reply(locale_manager.get('corridor.dead_message').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
 	if 'save' in self.variables:
 		self.recover(reply)
@@ -52,7 +52,7 @@ def death(self, reply, reason=None):
 def reborn(self, reply, answer, name=None):
 	self.state = 'reborned'
 	self.reborn_answer = answer
-	reason = 'Перерождение'
+	reason = locale_manager.get('user.reborn')
 	if name is not None:
 		reason += ' ({0})'.format(name)
 

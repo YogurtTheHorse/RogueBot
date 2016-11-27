@@ -1,4 +1,5 @@
-name = 'Нечто из глубин'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.special.the_thing_from_below.phrase_1')
 
 hp = 900
 damage_range = ( 40, 80 )

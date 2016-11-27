@@ -1,18 +1,16 @@
+from localizations import locale_manager
 import random
 import usermanager
 from constants import *
 
-TOOK_TOOK = 'Отдышаться и вежливо постучать в дверь'
-SPINE = 'Войти спиной вперёд'
+TOOK_TOOK = locale_manager.get('rooms.default.usual.vladislav.phrase_2')
+SPINE = locale_manager.get('rooms.default.usual.vladislav.phrase_3')
 
-name = 'Человек'
+name = locale_manager.get('rooms.default.usual.vladislav.phrase_4')
 
 def enter(user, reply):
 	msg = (
-		'Вы заходите в комнату и, бросив мимолётный взгляд на человека, сидящего '
-		'в уголке на табурете, непринуждённо поворачиваете на сто восемьдесят '
-		'градусов и выходите за дверь. Зачем-то при этом насвистывая что-то из раннего Моцарта.'
-	)
+		locale_manager.get('rooms.default.usual.vladislav.phrase_1'))
 	reply(msg)
 	user.set_room_temp('question', 'first')
 
@@ -33,10 +31,10 @@ def action(user, reply, text):
 			else:
 				user.open_room(reply, 'special', 'bill_gates')
 		elif text == SPINE:
-			reply('Начав движение, из-за спины Вы слышите голос с небольшим восточным акцентом: — Ты что, идиот?')
+			reply(locale_manager.get('rooms.default.usual.vladislav.phrase_5'))
 			user.set_room_temp('question', 'spine')
 	elif question == 'spine':
-		reply('Вы испытываете сильный стыд и так краснеете, что на лице лопается капилляр.')
+		reply(locale_manager.get('rooms.default.usual.vladislav.phrase_6'))
 		user.make_damage(10, 15, reply, False)
 
 		user.leave(reply)
@@ -48,6 +46,6 @@ def get_actions(user):
 	if question == 'first':
 		ans = [ TOOK_TOOK, SPINE ]
 	else:
-		ans = [ 'Я... э-э... (сбежать)' ]
+		ans = [ locale_manager.get('rooms.default.usual.vladislav.phrase_7') ]
 
 	return ans

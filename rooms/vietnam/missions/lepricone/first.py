@@ -1,4 +1,5 @@
-name = 'Леприкон'
+from localizations import locale_manager
+name = locale_manager.get('rooms.vietnam.missions_lepricone.first.phrase_1')
 damage_range = (25, 50)
 hp = 1500
 loot = [ 'clever' ]
@@ -6,18 +7,18 @@ loot = [ 'clever' ]
 is_monster = True
 
 def enter(user, reply):
-	reply('Набежали процентики.. Он требует *1000* золотых.')
+	reply(locale_manager.get('rooms.vietnam.missions_lepricone.first.phrase_2'))
 
 def get_actions(user):
 	acts = user.get_fight_actions()
 
 	if user.gold >= 1000:
-		acts = [ 'Вернуть долг' ] + acts
+		acts = [ locale_manager.get('rooms.vietnam.missions_lepricone.first.phrase_3')] + acts
 
 	return acts
 
 def action(user, reply, text):
-	if text == 'Вернуть долг' and user.gold >= 1000:
+	if text == locale_manager.get('rooms.vietnam.missions_lepricone.first.phrase_4')and user.gold >= 1000:
 		user.gold -= 1000
 		user.leave(reply)
 	else:

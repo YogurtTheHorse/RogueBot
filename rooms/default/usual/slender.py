@@ -1,12 +1,13 @@
+from localizations import locale_manager
 from constants import *
 
-READY = 'Войти в туман'
-ESCAPE = 'Уйти'
+READY = locale_manager.get('rooms.default.usual.slender.phrase_1')
+ESCAPE = locale_manager.get('rooms.default.usual.slender.phrase_2')
 
-name = 'Туман'
+name = locale_manager.get('rooms.default.usual.slender.phrase_3')
 
 def enter(user, reply):
-	reply('Ты ничего не видишь, здесь все в тумане.', photo=FOG_STICKER)
+	reply(locale_manager.get('rooms.default.usual.slender.phrase_4'), photo=FOG_STICKER)
 	user.set_room_temp('question', 'first')
 
 def action(user,reply, text):
@@ -14,89 +15,89 @@ def action(user,reply, text):
 
 	if question == 'first':
 		if text == READY:
-			reply('Войдя в туман, ты обнаруживаешь, что дверь за тобой исчезла. Ты продолжаешь идти вперед, постепенно туман расступается, обнажая стволы деревьев.\nТы в лесу.\nГуляя по лесу ты замечаешь что на одном из деревьев закреплен листок бумаги.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_5'))
 			user.set_room_temp('question', 'second')
 		else:
-			reply('Дверь за тобой с силой захлопнулась.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_6'))
 			user.leave(reply)
 	elif question == 'second':
-		if text == 'Сорвать':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_7'):
 			reply('Ты снимаешь листок с дерева и осматриваешь. На обратной стороне ты замечаешь надпись крупными буквами:\nВСЕГДА СМОТРИТ. НЕТ ГЛАЗ.\n1/4\nГде-то вдалеке ты слышишь шум.')
 			user.set_room_temp('question', 'third')
 	elif question == 'third':
-		if text == 'Идти на шум':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_8'):
 			reply('Шум усиливается, внезапно из-за деревьев возник неестественно высокий человек.\nТы не можешь двигаться.\nТьма окутала твоё сознание.', photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
-			user.death(reply, reason='Слендер')
+			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_9'))
 		else:
-			reply('Ты бежишь, постепенно шум утихает. Ты осматриваешься и замечаешь что находишься на границе леса.\nВдалеке виднеется водонапорная вышка, парк трейлеров и какой-то ангар, но дорога есть только к вышке.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_10'))
 			user.set_room_temp('question', 'forth')
 	elif question == 'forth':
-		if text == 'Идти к вышке':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_11'):
 			reply('Ты подошел к вышке. Осмотрев ее, ты обнаруживаешь на одной из опор еще один лист бумаги.\nНа обратной стороне рисунок человека с неестественно длинными конечностями и текст:\nНЕТ НЕТ НЕТ НЕТ НЕТ НЕТ НЕТ НЕТ.\n2/4\nТы снова слишишь шум, но в этот раз ближе и громче.')
 			user.set_room_temp('question', 'fifth')
 	elif question =='fifth':
-		if text == 'Бежать':
-			reply('Ты приближаешься к ангару.\nШум утих.')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_12'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_13'))
 			user.set_room_temp('question', 'seventh')
 		else:
-			reply('Ты поворачиваешься на шум и видишь вдалеке медленно движущегося к вам человека.\nНет, не человека, это существо мало похоже на него. Всмотревшись, ты замечаешь, что у него слишком длинные конечности.\nТы скован ужасом, но действовать надо быстро.\nПрятаться тут негде, так что придется бежать.', photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_14'), photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
 			user.set_room_temp('question', 'sixth')
 	elif question == 'sixth':
-		if text == 'Бежать':
-			reply('Ты приближаешься к ангару. Ты оторвался от монстра.\nШум утих.')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_15'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_16'))
 			user.set_room_temp('question', 'seventh')
 	elif question == 'seventh':
-		if text == 'Войти внутрь':
-			reply('Внутри Ты видишь тускло мерцающую лампу, стол и опрокинутый стул.\nПодойдя к столу ты видишь бутылку с какой-то жидкостью, наполовину полный стакан и очередной лист бумаги.')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_17'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_18'))
 			user.set_room_temp('question', 'eighth')
 	elif question == 'eighth':
-		if text == 'Посмотреть лист':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_19'):
 			reply('Взяв в руки лист бумаги ты обнаруживаешь на другой стороне надпись :\nНЕ СМОТРИ....\nИЛИ ОН ЗАБЕРЕТ ТЕБЯ.\n3/4\nПрочитав этот текст ты вновь услышал шум.')
 			user.set_room_temp('question', 'nineth')
 	elif question == 'nineth':
-		if text == 'Выбежать из ангара':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_20'):
 			reply('Выбежав из ангара, ты столкнулся с ним лицом к лицу.\nТьма окутала твоё сознание', photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
-			user.death(reply, reason='Слендер')
+			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_21'))
 		else:
-			reply('Ты прячешься под столом. Странно, но это сработало, шум утих.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_22'))
 			user.set_room_temp('question', 'tenth')
 	elif question == 'tenth':
-		if text == 'Выйти из ангара':
-			reply('Ты вышел из ангара и снова услышали шум, здесь оставаться небезопасно.')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_23'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_24'))
 			user.set_room_temp('question', 'eleventh')
 	elif question == 'eleventh':
-		if text == 'Бежать к трейлерам':
-			reply('Пока ты идешь к трейлерам, шум усиливается и теперь раздается из-за вашей спины.')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_25'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_26'))
 			user.set_room_temp('question', 'dozenth')
 	elif question == 'dozenth':
-		if text == 'Обернуться':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_27'):
 			reply('Это было глупо.\nТьма окутала твоё сознание.')
-			user.death(reply, reason='Слендер')
+			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_28'))
 		else:
-			reply('Ты добегаешь до трейлеров, шум ослаб, но не исчез. Осмотревшись, ты не видишь последнего рисунка, надо еще осмотреться.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_29'))
 			user.set_room_temp('question', 'thirteenth')
 	elif question == 'thirteenth':
-		if text == 'Искать':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_30'):
 			reply('Шум стал громче, твоё сердцебиение участилось. Заглянув за очередной трейлер, ты обнаруживаешь скомканную бумажку. Развернув ее ты видишь большую надпись:\nНЕЛЬЗЯ УБЕЖАТЬ\n4/4\nТебя затрясло, ведь ты не понимаешь, как же так, все это было зря? Но твои размышления прервал усилившийся шум.')
 			user.set_room_temp('question', 'fourteenth')
 	elif question == 'fourteenth':
-		if text == 'Бежать':
-			reply('Ты спотыкаешься и падаешь. Источник шума совсем рядом. Быстрее!')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_31'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_32'))
 			user.set_room_temp('question', 'fifteenth')
 	elif question == 'fifteenth':
-		if text == 'Откатиться под трейлер':
-			reply('Ты лежишь под трейлером. Шум стал невыносимо громким. Из своего укрытия ты видишь две тонкие ноги, которые проходят мимо, смотря на них, ты замечаешь дверь в отдалении...')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_33'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_34'))
 			user.set_room_temp('question', 'sixteenth')	
 	elif question == 'sixteenth':
-		if text == 'Бежать к двери':
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_35'):
 			reply('Ты же не думал, что получится?\nТьма окутала твоё сознание.')
-			user.death(reply, reason='Слендер')
+			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_36'))
 		else:
-			reply('Ты заметил, как ноги остановились вдалеке от двери. У тебя есть шанс!')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_37'))
 			user.set_room_temp('question', 'seventeenth')
 	elif question == 'seventeenth':
-		if text == 'Бежать к двери':
-			reply('Ты захлопываешь за собой дверь и слышишь глухие удары с другой стороны. Надо убираться отсюда.\nРядом с дверью ты обнаруживаешь 100 золотых')
+		if text == locale_manager.get('rooms.default.usual.slender.phrase_38'):
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_39'))
 			user.gold += 100
 			user.leave(reply)
 
@@ -107,36 +108,36 @@ def get_actions(user):
 	if question == 'first':
 		ans = [ READY, ESCAPE ]
 	elif question == 'second':
-		ans = [ 'Сорвать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_40') ]
 	elif question == 'third':
-		ans = [ 'Идти на шум', 'Бежать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_41'), locale_manager.get('rooms.default.usual.slender.phrase_42') ]
 	elif question == 'forth':
-		ans = [ 'Идти к вышке' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_43') ]
 	elif question == 'fifth':
-		ans = [ 'Бежать', 'Посмотреть в сторону шума' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_44'), locale_manager.get('rooms.default.usual.slender.phrase_45') ]
 	elif question == 'sixth':
-		ans = [ 'Бежать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_46') ]
 	elif question == 'seventh':
-		ans = [ 'Войти внутрь' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_47') ]
 	elif question == 'eighth':
-		ans = [ 'Посмотреть лист' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_48') ]
 	elif question == 'nineth':
-		ans = [ 'Выбежать из ангара', 'Спрятаться под столом' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_49'), locale_manager.get('rooms.default.usual.slender.phrase_50') ]
 	elif question == 'tenth':
-		ans = [ 'Выйти из ангара' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_51') ]
 	elif question == 'eleventh':
-		ans = [ 'Бежать к трейлерам' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_52') ]
 	elif question == 'dozenth':
-		ans = [ 'Обернуться', 'Не оборачиваться' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_53'), locale_manager.get('rooms.default.usual.slender.phrase_54') ]
 	elif question == 'thirteenth':
-		ans = [ 'Искать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_55') ]
 	elif question == 'fourteenth':
-		ans = [ 'Бежать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_56') ]
 	elif question == 'fifteenth':
-		ans = [ 'Откатиться под трейлер' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_57') ]
 	elif question == 'sixteenth':
-		ans = [ 'Бежать к двери', 'Подождать' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_58'), locale_manager.get('rooms.default.usual.slender.phrase_59') ]
 	else:
-		ans = [ 'Бежать к двери' ]
+		ans = [ locale_manager.get('rooms.default.usual.slender.phrase_60') ]
 
 	return ans

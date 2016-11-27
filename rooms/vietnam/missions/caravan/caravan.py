@@ -1,17 +1,14 @@
+from localizations import locale_manager
 import random
 from items import itemloader
 
-name = 'Караван Дварфов'
+name = locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_3')
 
-FIRST_ACTIONS = [ 'Закупиться', 'Заказать', 'Ограбить', 'Уйти' ]
+FIRST_ACTIONS = [ locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_4'), locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_5'), locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_6'), locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_7') ]
 
 def enter(user, reply):
 	reply(
-		'Ты открываешь дверь и видишь целый караван дварфов!\n'
-		'К тебе подходит серобородый дварф в доспехах и начинает разговор:\n\n'
-		'— Привет, Путник! Мы уже встречали тебя на просторах этого подземелья '
-		'и привезли тебе то, что ты просил.. Ну постарались привезти..'
-	)
+		locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_1'))
 
 	user.set_room_temp('question', 'first')
 
@@ -59,17 +56,17 @@ def get_actions(user):
 	if question == 'first':
 		return FIRST_ACTIONS
 	elif question == 'trade':
-		return user.get_room_temp('trade_items_names') + [ 'Назад' ]
+		return user.get_room_temp('trade_items_names') + [ locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_8') ]
 	elif question == 'order':
-		return user.get_room_temp('new_order_list_names') + [ 'Назад' ]
+		return user.get_room_temp('new_order_list_names') + [ locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_9') ]
 
 def get_message(user, lst):
 	names = user.get_room_temp(lst + '_names', [])
 	descriptions = user.get_room_temp(lst + '_descriptions', [])
 	costs = user.get_room_temp(lst + '_costs', [])
 
-	msg = 'Вот, что у нас есть сегодня:\n\n'
-	msg += '\n\n'.join([ '{0}\nЦена: {1}\n{2}'.format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
+	msg = locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_10')
+	msg += '\n\n'.join([ locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_11').format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
 
 	return msg
 
@@ -87,9 +84,9 @@ def buy(user, reply, name):
 			costs[ind] *= 2
 			user.set_room_temp('trade_items_costs', costs)
 
-			reply('Забирай! Теперь {0} стоит *{1}*.'.format(name, costs[ind]))
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_12').format(name, costs[ind]))
 		else:
-			reply('Дварф ехидно улыбается и не отдает тебе вещь.\n«Нет денег — нет товара».')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_13'))
 
 
 		return True
@@ -151,25 +148,23 @@ def action(user, reply, text):
 			reply(get_message(user, 'new_order_list'))
 		elif text == FIRST_ACTIONS[2]:
 			reply(
-				'Ты избил всех дварфов (Благо они маленькие и ты просто пинал их по лицу) и '
-				'забрал все вещи и деньги! Так держать, Воришка!'
-			)
+				locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_2'))
 			steal(user)
 			leave(user, reply, with_army=True)
 		else:
-			reply('Приятных путешествий! Мы еще встретимся.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_14'))
 			leave(user, reply)
 	elif question == 'order':
-		if text == 'Назад':
+		if text == locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_15'):
 			question = user.set_room_temp('question', 'first')
 		elif order(user, text):
-			reply('Попробуем что-то сделать.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_16'))
 		else:
-			reply('Будут накладки.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_17'))
 	else:
-		if text == 'Назад':
+		if text == locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_18'):
 			question = user.set_room_temp('question', 'first')
 		elif not buy(user, reply, text):
-			reply('Таких вещей не привозили.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_19'))
 
-		reply('Что-то еще?')
+		reply(locale_manager.get('rooms.vietnam.missions_caravan.caravan.phrase_20'))

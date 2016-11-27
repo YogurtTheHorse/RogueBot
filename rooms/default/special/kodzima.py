@@ -1,24 +1,23 @@
+from localizations import locale_manager
 import random
 import usermanager
 from constants import *
 
-HOW = '—А... э-э... как Вы здесь оказались?'
-JOKE = 'Рассказать анекдот'
-ASK = 'Могу я задать Вам один вопрос?...'
+HOW = locale_manager.get('rooms.default.special.kodzima.phrase_5')
+JOKE = locale_manager.get('rooms.default.special.kodzima.phrase_6')
+ASK = locale_manager.get('rooms.default.special.kodzima.phrase_7')
 
-ANYTHING_ELSE = '—Есть ли что-нибудь вне этой бесконечной череды комнат?'
-SLIME = '—Правда ли, что Вы лично приложили руку к разработке дизайна Слизня?'
+ANYTHING_ELSE = locale_manager.get('rooms.default.special.kodzima.phrase_8')
+SLIME = locale_manager.get('rooms.default.special.kodzima.phrase_9')
 
-BRAINSTORM = 'Пораскинуть мозгами'
-TAKE_SPOON = 'Взять ложку'
+BRAINSTORM = locale_manager.get('rooms.default.special.kodzima.phrase_10')
+TAKE_SPOON = locale_manager.get('rooms.default.special.kodzima.phrase_11')
 
-name = 'Человек'
+name = locale_manager.get('rooms.default.special.kodzima.phrase_12')
 
 def enter(user, reply):
 	msg = (
-		'—Проходи, {0}, чего хотел?\n\nНа негнущихся коленях ты проходишь '
-		'в середину комнаты. Да, глаза не подвели, это действительно...\n\n'
-		'*Хидэо Кодзима*!'
+		locale_manager.get('rooms.default.special.kodzima.phrase_1')
 	)
 	reply(msg.format(user.name))
 	user.set_room_temp('question', 'first')
@@ -33,56 +32,40 @@ def action(user, reply, text):
 			name1 = user1.name
 			name2 = user2.name
 
-			reply('—Так же, как и ты, очевидно же. Всё, не занимай линию, там за тобой уже двое в очереди. {0} и {1}, чёрт бы его побрал, уже третий раз за сегодня'.format(name1, name2))
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_13').format(name1, name2))
 
-			reply('Тебя выставили за дверь.')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_14'))
 			user.leave(reply)
 		elif text == ASK:
-			reply('—Только один.')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_15'))
 			user.set_room_temp('question', 'question')
 		else:
-			reply('От волнения Вы не придумали ничего лучше, как рассказать анекдот собственного сочинения.\n—Заходит как-то геймдизайнер в бар, \n—бодро начинаете Вы, но неожиданно с Вашим лицом резко стыкуется табурет, на котором недавно сидел Хидэо:—Пошёл вон!')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_16'))
 			user.make_damage(25, 50, reply, False)
 
-			reply('Тебя выставили за дверь.')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_17'))
 			user.leave(reply)
 	elif question == 'question':
 		if text == ANYTHING_ELSE:
 			msg = (
-				'—Ахаха. АХАХАХА. Насмешил, юродивый. Пораскинь мозгами, если коридор бесконечен,'
-				' то место, где он находится, должно быть *больше, чем бесконечность*. Ты ещё '
-				'скажи, что где-то существует огромная яркая жёлтая штука над головой и мы всего '
-				'лишь записаны в память машины, размером меньше сундука, ахаха.  Вот, держи ложку и '
-				'поменьше думай про всякую чушь.'
-			)
+				locale_manager.get('rooms.default.special.kodzima.phrase_2'))
 			reply(msg)
 			user.set_room_temp('question', 'spoon')
 		else:
 			msg = (
-				'—Это долгая история... В те времена, когда я и  Гейб ещё не были совращены лёгкими '
-				'деньгами, текущими золотой рекой из кошельков родителей школьников, мы сидели в '
-				'гараже и размышляли. Я пил какао, а он, как обычно, ел курочку. И тут меня словно '
-				'озарило: «Габе, как ты думаешь, есть ли такое существо, которым можно описать '
-				'человеческое существование?». Начался жаркий спор, в ходе которого и родился '
-				'прообраз Слизня, сидящего в комнате, и ждущего когда его раздавит кто-то вроде тебя, {0}.'
-			)
+				locale_manager.get('rooms.default.special.kodzima.phrase_3'))
 			reply(msg.format(user.name))
 			user.set_room_temp('question', 'slime')
 	elif question == 'slime':
-		reply(
-			'—Вот же глупенький. В Слизне заключены четыре экзистенциальные данности:'
-			'\n1. Смерть\n2. Свобода воли\n3. Одиночество\n4. Бессмысленность\n\n'
-			'За сим прощаюсь, моя смена заканчивается. Надеюсь, эта информация '
-			'не сведёт тебя с ума.Ты мне даже понравился. Вот держи, на память.'
-		)
+		reply(locale_manager.get('rooms.default.special.kodzima.phrase_18') + locale_manager.get('rooms.default.special.kodzima.phrase_4'))
 		user.add_item('special', 'spoilers')
 		user.leave(reply)
 	elif question == 'spoon':
 		if text == BRAINSTORM:
-			reply('Ты перестарался и мозги раскинулись по всей комнате. ')
-			user.death(reply, reason='Повышенная умственная активность')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_19'))
+			user.death(reply, reason=locale_manager.get('rooms.default.special.kodzima.phrase_20'))
 		else:
-			reply('Получена Серебрянная ложка')
+			reply(locale_manager.get('rooms.default.special.kodzima.phrase_21'))
 			user.add_item('special', 'good_spoon')
 			user.leave(reply)
 
@@ -102,8 +85,8 @@ def get_actions(user):
 	elif question == 'spoon':
 		return [ BRAINSTORM, TAKE_SPOON ]
 	elif question == 'slime':
-		ans = [ 'Не понимаю... Слизень... И человеческое существование...' ]
+		ans = [ locale_manager.get('rooms.default.special.kodzima.phrase_22') ]
 	else:
-		ans = [ 'Загрузка' ]
+		ans = [ locale_manager.get('rooms.default.special.kodzima.phrase_23') ]
 
 	return ans

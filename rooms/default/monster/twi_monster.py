@@ -1,6 +1,7 @@
+from localizations import locale_manager
 import twimanager
 
-name = 'Твиттер-блоггер'
+name = locale_manager.get('rooms.default.monster.twi_monster.phrase_1')
 hp = 1
 damage_range =  ( 15, 20 )
 
@@ -30,12 +31,11 @@ def enter(user, reply):
 	else:
 		if status == 'busy':
 			reply(
-				'Его охрана выставила тебя за дверь, у него сейчас посетитель.\n'
-				'За подробности обращаться сюда: twitter.com/funrogbot\n\n'
+				locale_manager.get('rooms.default.monster.twi_monster.phrase_2')'За подробности обращаться сюда: twitter.com/funrogbot\n\n'
 				'«Охрана у школьника?..»'
 			)
 		else:
-			reply('Он спит — приходи попозже.')
+			reply(locale_manager.get('rooms.default.monster.twi_monster.phrase_3'))
 			#reply(
 			#	'Он спит — приходи попозже, что именно ему сниться можно посмотреть вот тут — twitter.com/funrogbot.'
 			#)

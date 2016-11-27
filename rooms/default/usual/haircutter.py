@@ -1,31 +1,30 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Парикмахерская'
+name = locale_manager.get('rooms.default.usual.haircutter.phrase_1')
 
 room_type = 'other'
-actions = [ 'Подстричься за 10 золотых', 'Сказать, что ты парикмахер и попробовать устроиться на работу', 'Сделать вид, что ошибся дверью' ]
+actions = [ locale_manager.get('rooms.default.usual.haircutter.phrase_2'), locale_manager.get('rooms.default.usual.haircutter.phrase_3'), locale_manager.get('rooms.default.usual.haircutter.phrase_4')]
 
 def get_actions(user):
 	return actions
 
 def dice(user, reply, result, subject=None):
 	if result > DICE_MIDDLE:
-		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще.')
+		reply(locale_manager.get('rooms.default.usual.haircutter.phrase_5'))
 	else:
-		reply('Мда. Тебя избили битой за то, что ты сломал ножницы.')
+		reply(locale_manager.get('rooms.default.usual.haircutter.phrase_6'))
 
 		if user.has_item('scissors'):
 			user.remove_items_with_tag('scissors')
-			reply('О. Так у тебя есть ножницы. Ну и их отберем!')
+			reply(locale_manager.get('rooms.default.usual.haircutter.phrase_7'))
 
 		user.make_damage(20, 30, reply, name=name)
 	user.leave(reply)
 
 def enter(user, reply):
 	msg = (
-		'Добро пожаловать в парикмахерскую Дяди Толи!\n'
-		'Мы здесь вне конкуренции — конкурировать не с чем.'
-	)
+		locale_manager.get('rooms.default.usual.haircutter.phrase_8'))
 	reply(msg)
 
 def action(user, reply, text):
@@ -34,14 +33,14 @@ def action(user, reply, text):
 		user.charisma += 10
 		
 		if user.paid(10):
-			reply('С вами приятно работать!')
+			reply(locale_manager.get('rooms.default.usual.haircutter.phrase_9'))
 		else:
-			reply('Наверное, без денег лучше не стричься. Вам постригли волосы и не только.')
+			reply(locale_manager.get('rooms.default.usual.haircutter.phrase_10'))
 			user.make_damage(20, 30, reply, name=name)
 		
 		user.leave(reply)
 	elif text == actions[1]:
-		reply('Ну, покажи на что способен.')
+		reply(locale_manager.get('rooms.default.usual.haircutter.phrase_11'))
 		user.throw_dice(reply)
 	else:
 		user.leave(reply)

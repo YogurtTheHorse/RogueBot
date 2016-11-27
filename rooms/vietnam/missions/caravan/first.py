@@ -1,16 +1,13 @@
+from localizations import locale_manager
 from items import itemloader
 
-name = 'Караван Дварфов'
+name = locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_2')
 
-FIRST_ACTIONS = [ 'Договориться', 'Уйти' ]
+FIRST_ACTIONS = [ locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_3'), locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_4') ]
 
 def enter(user, reply):
 	reply(
-		'Ты открываешь дверь и видишь целый караван дварфов!\n'
-		'К тебе подходит рыжебородый дварф в доспехах и начинает разговор:\n\n'
-		'— Привет, Путник! Мы путешествуем по этим комнатам и предоставляем '
-		'услуги торговли. Можешь заказать чего-нибудь и мы доставим тебе!'
-	)
+		locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_1'))
 
 	user.set_room_temp('question', 'first')
 
@@ -49,14 +46,14 @@ def get_actions(user):
 	if question == 'first':
 		return FIRST_ACTIONS
 	elif question == 'trade':
-		return user.get_room_temp('names') + [ 'Выйти' ]
+		return user.get_room_temp('names') + [ locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_5') ]
 
 def get_message(user):
 	names = user.get_room_temp('names', [])
 	descriptions = user.get_room_temp('descriptions', [])
 	costs = user.get_room_temp('costs', [])
 
-	msg = 'Выбирай, что привезти с собой (Оплата после доставки):\n\n'
+	msg = locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_6')
 	msg += '\n\n'.join([ '{0}\nЦена (Доставка + покупка): {1}\n{2}'.format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
 
 	return msg
@@ -103,16 +100,16 @@ def action(user, reply, text):
 
 			reply(get_message(user))
 		else:
-			reply('Приятных путешествий! Мы еще встретимся.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_7'))
 			leave(user, reply)
 	else:
-		if text == 'Выйти' or len(user.get_room_temp('names')) == 0:
-			reply('До новых встреч! Мы еще вернемся.')
+		if text == locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_8') or len(user.get_room_temp('names')) == 0:
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_9'))
 			leave(user, reply)
 		elif order(user, text):
-			reply('Постараемся привезти в кратчайшие сроки.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_10'))
 		else:
-			reply('Могут возникнуть проблемы с доставкой.')
+			reply(locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_11'))
 
 
-		reply('Что-то еще?')
+		reply(locale_manager.get('rooms.vietnam.missions_caravan.first.phrase_12'))

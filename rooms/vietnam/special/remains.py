@@ -1,12 +1,13 @@
+from localizations import locale_manager
 import random
 import usermanager
 import items.itemloader as itemloader
 
 from collections import Counter
 
-name = 'Останки'
+name = locale_manager.get('rooms.vietnam.special.remains.phrase_1')
 
-actions = [ 'Забрать себе', 'Уйти' ]
+actions = [ locale_manager.get('rooms.vietnam.special.remains.phrase_2'), locale_manager.get('rooms.vietnam.special.remains.phrase_3')]
 
 def get_actions(user):
 	return actions
@@ -29,7 +30,7 @@ def enter(user, reply):
 		reply('Здесь лежат останки игрока {0}'.format(found_user.name), photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
 		user.set_room_temp('items', found_user.items)
 	else:
-		reply('Здесь лежат останки лягушки. Воняет. Ты уходишь отсюда побыстрее.')
+		reply(locale_manager.get('rooms.vietnam.special.remains.phrase_4'))
 		user.leave(reply)
 
 
@@ -38,9 +39,9 @@ def action(user, reply, text):
 		items = [ (it[0], it[1]) for it in user.get_room_temp('items', def_val=[]) if len(it) < 3 or len(it[2]) == 0 ]
 
 		if len(items) == 0:
-			reply('У него ничего не было.')
+			reply(locale_manager.get('rooms.vietnam.special.remains.phrase_5'))
 		else:
-			reply('Ты забрал его вещи, золотишко и парочку сохранившихся зубов.')
+			reply(locale_manager.get('rooms.vietnam.special.remains.phrase_6'))
 
 			user.give_gold(random.randrange(12, 72))
 
@@ -60,6 +61,6 @@ def action(user, reply, text):
 			reply('Его рюкзак вмещал в себя следующие вещи: {0}'.format(', '.join(items_str)))
 
 	else:
-		reply('Ты уходишь отсюда.')
+		reply(locale_manager.get('rooms.vietnam.special.remains.phrase_7'))
 		
 	user.leave(reply)

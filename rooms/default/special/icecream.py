@@ -1,41 +1,42 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Озеро из мороженного'
+name = locale_manager.get('rooms.default.special.icecream.phrase_1')
 
 room_type = 'other'
-actions = [ 'Набрать себе', 'Съесть как можно больше', 'Выйти' ]
+actions = [ locale_manager.get('rooms.default.special.icecream.phrase_2'), locale_manager.get('rooms.default.special.icecream.phrase_3'), locale_manager.get('rooms.default.special.icecream.phrase_4') ]
 
 def get_actions(user):
 	return actions
 
 def dice(user, reply, result, subject=None):
 	if result > DICE_MIDDLE:
-		reply('Неплохо, но у Толи слишком мало клиентов, чтобы еще и платить несостоявшимся искателям приключений, поэтому пойдем поищем чего еще')
+		reply(locale_manager.get('rooms.default.special.icecream.phrase_5'))
 	else:
-		reply('Мда. Тебя избили битой за то, что ты сломал ножницы.')
+		reply(locale_manager.get('rooms.default.special.icecream.phrase_6'))
 
 		if user.has_item('scissors'):
 			user.remove_items_with_tag('scissors')
-			reply('О. Так у тебя есть ножницы. Ну и их отберем!')
+			reply(locale_manager.get('rooms.default.special.icecream.phrase_7'))
 
 		user.make_damage(20, 30, reply, death=False)
 	user.leave(reply)
 
 def enter(user, reply):
-	msg = 'Настоящие озеро мороженного.\nРазвлекайся.'
+	msg = locale_manager.get('rooms.default.special.icecream.phrase_8')
 	reply(msg)
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply('Держи рожок мороженого')
+		reply(locale_manager.get('rooms.default.special.icecream.phrase_9'))
 
 		user.add_item('special', 'icecream')
 	elif text == actions[1]:
 		if user.gods_level[BUDDHA_NUM] > 0:
-			reply('Ты не следовал восмеричному пути и слегка испортил баланс кармы в своей жизни.')
+			reply(locale_manager.get('rooms.default.special.icecream.phrase_10'))
 			user.gods_level[BUDDHA_NUM] = 0
 		else:
-			reply('Вкусно и _больно_')
+			reply(locale_manager.get('rooms.default.special.icecream.phrase_11'))
 			user.make_damage(1, 5, reply, death=False)
 	else:
 		user.leave(reply)

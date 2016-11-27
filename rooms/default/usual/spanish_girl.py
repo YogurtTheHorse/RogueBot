@@ -1,16 +1,15 @@
+from localizations import locale_manager
 from constants import *
 
-READY = 'Подойти ближе'
-ESCAPE = 'Уйти'
-CLOSER = 'Подойти еще ближе'
+READY = locale_manager.get('rooms.default.usual.spanish_girl.phrase_5')
+ESCAPE = locale_manager.get('rooms.default.usual.spanish_girl.phrase_6')
+CLOSER = locale_manager.get('rooms.default.usual.spanish_girl.phrase_7')
 
-name = 'Красотка'
+name = locale_manager.get('rooms.default.usual.spanish_girl.phrase_8')
 
 def enter(user, reply):
 	msg = ( 
-		'Ты видишь огненную красотку\n'
-		'Она улыбнулась тебе и поманила пальчиком к себе.'
-	)
+		locale_manager.get('rooms.default.usual.spanish_girl.phrase_1'))
 	reply(msg)
 	user.set_room_temp('question', 'first')
 
@@ -19,35 +18,25 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text  == READY:
-			reply('Вы подходите ближе, а красотка начинает раздеваться.')
+			reply(locale_manager.get('rooms.default.usual.spanish_girl.phrase_9'))
 			user.set_room_temp('question', 'undress')
 		else:
-			reply('Красотка обиженно на вас смотрит.')
+			reply(locale_manager.get('rooms.default.usual.spanish_girl.phrase_10'))
 			user.leave(reply)
 	elif question == 'undress':
 		if text == CLOSER:
 			if user.has_item('christ'):
 				reply(
-					'ВНЕЗАПНО красотка исчезает.\n'
-					'Вместо нее появляются три мужика в красном\n'
-					'..\n'
-					'НИКТО НЕ ОЖИДАЕТ ИСПАН...\n'
-					'А, так ты из наших, держи, это тебе. Да хранит тебя Господь!\n'
-					'Протягивает Винцо.', photo='BQADAgAD8wgAAmrZzgci29uXEW-PPgI'
+					locale_manager.get('rooms.default.usual.spanish_girl.phrase_2') + locale_manager.get('rooms.default.usual.spanish_girl.phrase_3'), photo='BQADAgAD8wgAAmrZzgci29uXEW-PPgI'
 				)
 				user.add_item('special', 'wine')
 				user.leave(reply)
 			else:
-				msg = (
-					'ВНЕЗАПНО красотка исчезает.\n'
-					'Вместо нее появляются три мужика в красном\n'
-					'..\n'
-					'НИКТО НЕ ОЖИДАЕТ ИСПАНСКУЮ ИНКВИЗИЦИЮ!\n'
-				)
+				msg = locale_manager.get('rooms.default.usual.spanish_girl.phrase_4') + '..\n' + locale_manager.get('rooms.default.usual.spanish_girl.phrase_11')
 				reply(msg, photo='BQADAgAD8wgAAmrZzgci29uXEW-PPgI')
 				user.throw_dice(reply, 'burn')
 		else:
-			reply('Красотка обиженно на вас смотрит.')
+			reply(locale_manager.get('rooms.default.usual.spanish_girl.phrase_12'))
 			user.leave(reply)
 
 def get_actions(user):
@@ -63,8 +52,8 @@ def get_actions(user):
 
 def dice(user, reply, result, subject='burn'):
 	if result > DICE_MIDDLE:
-		reply('Инквизиция злобно на тебя смотрит.\nВ другой раз ты не уйдешь!')
+		reply(locale_manager.get('rooms.default.usual.spanish_girl.phrase_13'))
 		user.leave(reply)
 	else:
-		reply('На костёр неверного!')
-		user.death(reply, reason='Инквизиция')	
+		reply(locale_manager.get('rooms.default.usual.spanish_girl.phrase_14'))
+		user.death(reply, reason=locale_manager.get('rooms.default.usual.spanish_girl.phrase_15'))	

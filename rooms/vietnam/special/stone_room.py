@@ -1,12 +1,11 @@
+from localizations import locale_manager
 import usermanager
 
-name = 'Катапульта'
+name = locale_manager.get('rooms.vietnam.special.stone_room.phrase_1')
 
 def enter(user, reply):
 	msg = (
-		'Указав имя отправителя ты сможешь запулить в него булыжником!\n\n'
-		'Только скажи куда доставить посылку'
-	)
+		locale_manager.get('rooms.vietnam.special.stone_room.phrase_2'))
 	reply(msg)
 
 	user.set_room_temp('question', 'first')
@@ -20,7 +19,7 @@ def action(user, reply, text):
 	if question == 'first':
 		user.set_room_temp('goal_name', text)
 		user.set_room_temp('question', 'second')
-		reply('Теперь напечатай текст послания.')
+		reply(locale_manager.get('rooms.vietnam.special.stone_room.phrase_3'))
 	else:
 		name = user.get_room_temp('goal_name', def_val='____')
 		found_uid = 0
@@ -34,10 +33,10 @@ def action(user, reply, text):
 				break
 
 		if found_usr is None:
-			reply('Вашего адресата мы не нашли, но нашли кое-кого другого')
+			reply(locale_manager.get('rooms.vietnam.special.stone_room.phrase_4'))
 			found_usr = usermanager.random_user()
 
-		reply('Отлично! Доставим в кратчайшие сроки.')
+		reply(locale_manager.get('rooms.vietnam.special.stone_room.phrase_5'))
 
 		if found_uid == user.uid:
 			user.add_item('good', 'stone', {'message': text})

@@ -1,6 +1,7 @@
+from localizations import locale_manager
 import random
 
-name = 'Черный Рыцарь'
+name = locale_manager.get('rooms.default.boss.black_knight.phrase_1')
 
 hp = 129500
 damage_range = ( 0, 129 )
@@ -10,7 +11,7 @@ coins = random.randrange( 1000, 51000, 1 )
 
 def skill_preparing(user, reply, boss):
   msg = (
-    'Ты услышал громыхающее рычание и увидел, что Черный Рыцарь готовится со всей силы выпустить в тебя свой клинок.'
+    locale_manager.get('rooms.default.boss.black_knight.phrase_2')
   )
 
   reply(msg, photo='BQADAgADBQkAAmrZzgfwyyrSjVn2rgI')

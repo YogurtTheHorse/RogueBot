@@ -1,8 +1,9 @@
+from localizations import locale_manager
 from constants import *
 import time
 import databasemanager
 
-name = 'Доктор кто'
+name = locale_manager.get('rooms.default.monster.doctor_who.phrase_1')
 
 hp = 25 * 1.01 ** (databasemanager.get_variable('doctor_num', 1) - 1)
 damage_range =  ( 0, 50 )
@@ -15,10 +16,10 @@ def can_open(user, reply):
 	return not user.has_tag(DEVIL)
 
 def open_failure(user, reply):
-	reply('Здесь не рады проклятым!')
+	reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_2'))
 
 def enter(user, reply):
-	reply('Кто-кто?..')
+	reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_3'))
 
 	number = databasemanager.get_variable('doctor_num', 1)
 	name = databasemanager.get_variable('doctor_killer')
@@ -36,7 +37,7 @@ def enter(user, reply):
 			reply('Моя новая реинкарнация длится уже {0:.2f} минут!'.format(t / 60))
 
 def get_actions(user):
-	return user.get_fight_actions() + [ 'Сдаться' ]
+	return user.get_fight_actions() + [ locale_manager.get('rooms.default.monster.doctor_who.phrase_4')]
 
 def make_damage(user, reply, dmg):
 	hp = user.get_room_temp('hp', 0)
@@ -54,8 +55,8 @@ def make_damage(user, reply, dmg):
 		user.set_room_temp('hp', hp)
 
 def action(user, reply, text):
-	if text == 'Сдаться':
-		reply('Доктор с ухмылкой сует Лазерную отвертку тебе в нос.')
+	if text == locale_manager.get('rooms.default.monster.doctor_who.phrase_5'):
+		reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_6'))
 
 		user.leave(reply)
 	else:

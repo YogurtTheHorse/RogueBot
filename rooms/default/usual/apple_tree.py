@@ -1,27 +1,26 @@
-name = 'Яблоня'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.usual.apple_tree.phrase_1')
 
-actions = [ 'Взять', 'Отказаться' ]
+actions = [ locale_manager.get('rooms.default.usual.apple_tree.phrase_2'), locale_manager.get('rooms.default.usual.apple_tree.phrase_3')]
 
 def get_actions(user):
 	return actions
 
 def enter(user, reply):
 	msg = (
-		'Огромная яблоня растет посреди полянки с травкой и цветочками, '
-		'голая девушка под яблоней предлагает яблочко. '
-	)
+		locale_manager.get('rooms.default.usual.apple_tree.phrase_4'))
 	reply(msg)
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply('Ты съедаешь яблоко, а девушка дает тебе еще одно в дорогу.')
+		reply(locale_manager.get('rooms.default.usual.apple_tree.phrase_5'))
 
-		reply('В облаках загремел гром, девушку убило молнией. Ну ничего, тут таких еще куча. Спасибо, Господь!')
+		reply(locale_manager.get('rooms.default.usual.apple_tree.phrase_6'))
 
 		user.hp = min(user.max_hp, user.hp + 50)
 		user.add_item('loot', 'apple')
 	else:
-		reply('Из дерева выпадает змей и кусает тебя.')
+		reply(locale_manager.get('rooms.default.usual.apple_tree.phrase_7'))
 		user.make_damage(20, 30, reply, name=name)
 
 	user.leave(reply)

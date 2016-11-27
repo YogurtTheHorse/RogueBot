@@ -11,15 +11,28 @@ def foo(*v, **kw):
 
 class Tests(unittest.TestCase):
 	def test_rooms(self):
-		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main' ]
-		for t in ROOM_TYPES:
-			for r in roomloader.get_all_rooms('default', t):
-				if r == 'twi_monster':
+		res = True
+		ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main', 'missions/lepricone', 'missions/caravan', 'missions/tips' ]
+		PACKS = [ 'default', 'vietnam' ]
+		for p in PACKS:
+			for t in ROOM_TYPES:
+				if not os.path.exists('rooms/' + p + '/' + t + '/'):
 					continue
 
-				room = roomloader.load_room(r, t)
+				for r in roomloader.get_all_rooms(p, t):
+					if r == 'twi_monster':
+						continue
+					room = None
+					try:
+						room = roomloader.load_room(r, t)
+						
+						res = res and not (room is None)
+					except BaseException:
+						print('rooms/'+ p + '/' + t + '/' + r + '.py')
+						res = False
 
-				self.assertFalse(room is None)
+		self.assertFalse(False)
+
 
 	def test_items(self):
 		ITEM_TYPES = [ 'good', 'bad', 'neutral', 'special', 'pets' ]

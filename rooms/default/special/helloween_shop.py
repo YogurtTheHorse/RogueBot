@@ -1,17 +1,15 @@
+from localizations import locale_manager
 import random
 from items import itemloader
 from utils import costumes
 
-name = 'Зуллуинский магазин'
+name = locale_manager.get('rooms.default.special.helloween_shop.phrase_1')
 
-ACTIONS = [ 'Тыква', 'Костюм', 'Конфета' ]
+ACTIONS = [ locale_manager.get('rooms.default.special.helloween_shop.phrase_2'), locale_manager.get('rooms.default.special.helloween_shop.phrase_3'), locale_manager.get('rooms.default.special.helloween_shop.phrase_4')]
 
 def enter(user, reply):
 	reply(
-		'Какие-то странные бездедушки, черепа и прочая ересь.\n'
-		'Рука невольно тянется к ручки двери, чтобы сбежать, но '
-		'какая-та улыбчивая тварь пригласила тебя внутрь и предлагает тебе взять что-то одно, но зато *абсолютно* бесплатно.'
-	)
+		locale_manager.get('rooms.default.special.helloween_shop.phrase_5'))
 
 	user.set_room_temp('costume', costumes.rand_costume_key())
 
@@ -20,11 +18,11 @@ def get_actions(user):
 
 def action(user, reply, text):
 	if text == ACTIONS[0]:
-		reply('Держи!', photo='BQADAgAD7QgAAmrZzgfDVlphbK6MlgI')
+		reply(locale_manager.get('rooms.default.special.helloween_shop.phrase_6'), photo='BQADAgAD7QgAAmrZzgfDVlphbK6MlgI')
 		user.add_item('special', 'pumpkin')
 		user.leave(reply)
-	elif text == 'Свечка':
-		reply('Держи свечу, не обожгись!')
+	elif text == locale_manager.get('rooms.default.special.helloween_shop.phrase_7'):
+		reply(locale_manager.get('rooms.default.special.helloween_shop.phrase_8'))
 		user.add_item('special', 'candle')
 		user.leave(reply)
 	elif text == ACTIONS[1]:
@@ -33,15 +31,15 @@ def action(user, reply, text):
 
 		user.costume = key
 
-		reply('Держи этот шикарный костюм!')
+		reply(locale_manager.get('rooms.default.special.helloween_shop.phrase_9'))
 		reply('_Вы надеваете костюм {0}_'.format(costume['who']))
 		reply(costume['description'])
 	elif text == ACTIONS[2]:
-		reply('Забирай, но не переедай!')
+		reply(locale_manager.get('rooms.default.special.helloween_shop.phrase_10'))
 
 		user.add_item('special', 'candy')
 	else:
-		reply('Не понял сейчас')
+		reply(locale_manager.get('rooms.default.special.helloween_shop.phrase_11'))
 		return
 
 	user.leave(reply)

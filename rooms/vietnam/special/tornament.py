@@ -1,13 +1,14 @@
+from localizations import locale_manager
 import tornamentmanager
 
-name = 'Колизей'
+name = locale_manager.get('rooms.vietnam.special.tornament.phrase_1')
 
 def enter(user, reply):
 	user.hp = user.max_hp
 	tornament = tornamentmanager.get_tornament(user.tornament_id)
 	names = ', '.join(tornament['names'])
 
-	reply('Боги вылечили твои недуги и ниспослали в Колизей.')
+	reply(locale_manager.get('rooms.vietnam.special.tornament.phrase_2'))
 	reply('Вместе с тобой тут находятся: {0}'.format(names))
 
 def get_actions(user):

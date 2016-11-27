@@ -1,22 +1,19 @@
+from localizations import locale_manager
 import random
 import usermanager
 import rooms.roomloader as roomloader
 
-name = 'Шар'
+name = locale_manager.get('rooms.default.usual.clairvoyance.phrase_4')
 
 def enter(user, reply):
 	reply(
-		'Дверь за вами исчезла, повеяло холодом. Вы оказались в '
-		'огромном зале, с тусклым светом исходящим издали. Сотни '
-		'шаров, расставленных на постаментах по всему '
-		'безграничному залу, отбрасывают мрачные тени.'
-	)
+		locale_manager.get('rooms.default.usual.clairvoyance.phrase_1'))
 
 def get_actions(user):
-	return [ 'Посмотреть в шар', 'Идти на свет' ]
+	return [ locale_manager.get('rooms.default.usual.clairvoyance.phrase_5'), locale_manager.get('rooms.default.usual.clairvoyance.phrase_6') ]
 
 def action(user, reply, text):
-	if text == 'Посмотреть в шар':
+	if text == locale_manager.get('rooms.default.usual.clairvoyance.phrase_7'):
 		users = list(usermanager.get_telegram_users())
 		random.shuffle(users)
 
@@ -31,30 +28,28 @@ def action(user, reply, text):
 				break
 
 		if found_user is None:
-			reply('Ничего не видно..')
+			reply(locale_manager.get('rooms.default.usual.clairvoyance.phrase_8'))
 		else:
 			name = found_user.name
 			if found_user.pet:
 				pet = found_user.get_pet()
 				name += ' и {0} {1}'.format(pet.name, pet.real_name)
 
-			res = 'Вижу.. Вижу.. {0}... Ничего не видно..'
+			res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_9')
 
 			if found_user.dead:
-				res = '{0} валяется мертвым на краю мира..'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_10')
 			elif found_user.state == 'corridor':
-				res = '{0} пялится на коридор.'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_11')
 			elif found_user.state == 'pray':
-				res = '{0} молится Богам.'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_12')
 			elif found_user.state == 'shop':
-				res = '{0} затаривается вещичками.'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_13')
 			elif found_user.state == 'inventory':
-				res = '{0} копается в инвентаре.'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_14')
 			elif found_user.state == 'room':
 				res = (
-					'{0} находится в комнате..\n\n'
-					'И видит..\n'
-				)
+					locale_manager.get('rooms.default.usual.clairvoyance.phrase_2'))
 
 				room = roomloader.load_room(found_user.room[1], found_user.room[0], found_user)
 				room_name = room.name
@@ -62,16 +57,14 @@ def action(user, reply, text):
 				res += room_name
 			elif found_user.state == 'dice':
 				res = (
-					'{0} находится в комнате..\n\n'
-					'И бросает кости в..\n'
-				)
+					locale_manager.get('rooms.default.usual.clairvoyance.phrase_3'))
 
 				room = roomloader.load_room(found_user.room[1], found_user.room[0], found_user)
 				room_name = room.name
 
 				res += room_name
 			elif found_user.state == 'reborned':
-				res = '{0} понимает, что «' + str(found_user.reborn_answer) + '»'
+				res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_15') + str(found_user.reborn_answer) + '»'
 
 			reply(res.format(name))
 	else:

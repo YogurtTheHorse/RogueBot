@@ -1,17 +1,16 @@
+from localizations import locale_manager
 import random
 import usermanager
 from constants import *
 
-CONFUSED = 'Растеряться'
-SPINE = 'Войти спиной вперёд'
+CONFUSED = locale_manager.get('rooms.default.special.bill_gates.phrase_2')
+SPINE = locale_manager.get('rooms.default.special.bill_gates.phrase_3')
 
-name = 'Человек'
+name = locale_manager.get('rooms.default.special.bill_gates.phrase_4')
 
 def enter(user, reply):
 	msg = (
-		'—Проходи, {0}, чего хотел?\n\nНа негнущихся коленях ты проходишь '
-		'в середину комнаты. Да, глаза не подвели, это действительно...\n\n'
-		'*Билл Гейтс*!'
+		locale_manager.get('rooms.default.special.bill_gates.phrase_1')
 	)
 	reply(msg.format(user.name))
 	user.set_room_temp('question', 'first')
@@ -20,7 +19,7 @@ def action(user, reply, text):
 	question = user.get_room_temp('question', def_val='first')
 
 	if question == 'first':
-		reply('—Ты чего там стоишь как не родной? Хочешь фокус? Следи за руками... Опа!')
+		reply(locale_manager.get('rooms.default.special.bill_gates.phrase_5'))
 		reply('*ВАШЕ УСТРОЙСТВО ОБНОВЛЕНО ДО WINDOWS 10*')
 		user.set_room_temp('question', '14')
 	elif question == '14':
@@ -50,8 +49,8 @@ def get_actions(user):
 	ans = [ ]
 
 	if question == 'first':
-		ans = [ 'Растеряться' ]
+		ans = [ locale_manager.get('rooms.default.special.bill_gates.phrase_6') ]
 	else:
-		ans = [ 'Загрузка' ]
+		ans = [ locale_manager.get('rooms.default.special.bill_gates.phrase_7') ]
 
 	return ans

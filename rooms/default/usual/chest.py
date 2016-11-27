@@ -1,11 +1,12 @@
+from localizations import locale_manager
 from constants import *
 import items.itemloader as itemloader
 import itertools
 import random
 
-name = 'Сундук'
+name = locale_manager.get('rooms.default.usual.chest.phrase_1')
 
-actions = ['Открыть сундук', 'Уйти']
+actions = [locale_manager.get('rooms.default.usual.chest.phrase_2'), locale_manager.get('rooms.default.usual.chest.phrase_3')]
 
 TYPES_OF_ITEMS = [ 'bad', 'good', 'neutral' ]
 
@@ -15,37 +16,31 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук', photo='BQADAgADCQkAAmrZzgfwfl33PblsWQI')
+	reply(locale_manager.get('rooms.default.usual.chest.phrase_4'), photo='BQADAgADCQkAAmrZzgfwfl33PblsWQI')
 
 
 def action(user, reply, text):
 	if text == actions[0]:
 		reply(
-			'Ты подходишь к сундуку...\n'
-			'...\n'
-			'...\n'
-			'...\n'
-			'...\n'
-			'...\n'
-			'Поднимаешь крышку\n'
+			locale_manager.get('rooms.default.usual.chest.phrase_5')
 		)
 
 		random_number = random.random();
 
 		if random_number < 0.33:
-			reply('Пусто.\nОчень жаль. Повезет в следующий раз.')
+			reply(locale_manager.get('rooms.default.usual.chest.phrase_7'))
 
 		elif random_number < 0.66:
 			coins = random.randrange(2, 5, 1)
 
-			reply('Яркий свет ослепил тебя. В сундуке ты нашел немного монет.')
+			reply(locale_manager.get('rooms.default.usual.chest.phrase_8'))
 			for _ in itertools.repeat(None, coins):
 				user.add_item('neutral', 'coin')
 
 		else:
 			item_type, item_name, item = __random_item()
 
-			reply('В сундуке был {}'.format(item.name))
+			reply(locale_manager.get('rooms.default.usual.chest.phrase_9').format(item.name))
 			user.add_item(item_type, item_name)
 
 	user.leave(reply)

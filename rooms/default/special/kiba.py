@@ -1,8 +1,9 @@
+from localizations import locale_manager
 import random
 import usermanager
 from constants import *
 
-name = 'Человек'
+name = locale_manager.get('rooms.default.special.kiba.phrase_9')
 
 STICKER_ENTER = 'BQADAgADbAADR_sJDEi39QLBEBigAg'
 STICKER_ASKHELP = 'BQADAgADfgADR_sJDGLtdHnAJZ0uAg'
@@ -15,17 +16,17 @@ STICKER_UNCERTAIN = 'BQADAgADkwADR_sJDJ5FA78SkL5OAg'
 STICKER_GOOD_POTION = 'BQADAgADggADR_sJDGGwawbbnxyIAg'
 STICKER_WONDER = 'BQADAgADZAADR_sJDBlEjbjLhUyVAg'
 
-actions_enter = [ 'Привет キバ！', 'Попросить лису', 'Ты привез мне лису?', 'Ты кто?', 'Уйти' ]
-actions_fox_01 = [ 'Да, можно мне лису?', 'А.. нет, я оговорился' ]
-actions_fox_02 = [ 'Хорошо, вот мои деньги', 'Слишком дорого' ]
-actions_chat = [ 'Каком чате?', 'Ага, я понял кто ты', 'Уйти' ]
-actions_ask_help = [ 'Конечно, чем тебе помочь?', 'Извини, но у меня нет времени.' ]
-actions_make_potion = [ 'Размешать', 'Не размешавать' ]
-actions_open_eye = [ 'Открыть глаза' ]
-actions_drink = [ 'Выпить', 'Не пить' ]
+actions_enter = [ 'Привет キバ！', locale_manager.get('rooms.default.special.kiba.phrase_10'), locale_manager.get('rooms.default.special.kiba.phrase_11'), locale_manager.get('rooms.default.special.kiba.phrase_12'), locale_manager.get('rooms.default.special.kiba.phrase_13') ]
+actions_fox_01 = [ locale_manager.get('rooms.default.special.kiba.phrase_14'), locale_manager.get('rooms.default.special.kiba.phrase_15') ]
+actions_fox_02 = [ locale_manager.get('rooms.default.special.kiba.phrase_16'), locale_manager.get('rooms.default.special.kiba.phrase_17') ]
+actions_chat = [ locale_manager.get('rooms.default.special.kiba.phrase_18'), locale_manager.get('rooms.default.special.kiba.phrase_19'), locale_manager.get('rooms.default.special.kiba.phrase_20') ]
+actions_ask_help = [ locale_manager.get('rooms.default.special.kiba.phrase_21'), locale_manager.get('rooms.default.special.kiba.phrase_22') ]
+actions_make_potion = [ locale_manager.get('rooms.default.special.kiba.phrase_23'), locale_manager.get('rooms.default.special.kiba.phrase_24') ]
+actions_open_eye = [ locale_manager.get('rooms.default.special.kiba.phrase_25') ]
+actions_drink = [ locale_manager.get('rooms.default.special.kiba.phrase_26'), locale_manager.get('rooms.default.special.kiba.phrase_27') ]
 
-HAVE_NOTHING = 'У меня ничего нет'
-GIVE_ITEM = 'Дать '
+HAVE_NOTHING = locale_manager.get('rooms.default.special.kiba.phrase_28')
+GIVE_ITEM = locale_manager.get('rooms.default.special.kiba.phrase_29')
 
 FOX_COSTS = 10000
 
@@ -47,9 +48,7 @@ def actions_add_item(user):
 
 def enter(user, reply):
 	msg = (
-		'На негнущихся коленях ты проходишь '
-		'в середину комнаты. Да, глаза не подвели, это действительно...\n\n'
-		'*キバ*!'
+		locale_manager.get('rooms.default.special.kiba.phrase_1')'*キバ*!'
 	)
 
 	msg = msg + (
@@ -124,7 +123,7 @@ def action(user, reply, text):
 
 	if result is False or result is None:
 		msg = (
-			'Я тебя не слышу!!! Прошу, говори громче.'
+			locale_manager.get('rooms.default.special.kiba.phrase_30')
 		)
 
 		reply(msg)
@@ -146,10 +145,7 @@ def action_enter(user, reply, text):
 
 	if text == actions_enter[0]:
 		msg = (
-			'И тебе привет!\n'
-			'Ты ведь можешь помочь мне закончить зелье?\n'
-			'Остался последний ингредиент, но я не знаю какой.'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_2'))
 
 		user.set_room_temp('question', 'ask_help')
 
@@ -170,9 +166,7 @@ def action_enter(user, reply, text):
 
 	if text == actions_enter[2]:
 		msg = (
-			'Конечно, вот она!\n'
-			'Заходи ко мне еще..'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_3'))
 
 		user.remove_tag('fox_payed')
 
@@ -185,9 +179,7 @@ def action_enter(user, reply, text):
 	if text == actions_enter[4]:
 		msg = (
 			'Когда ты уходил, на секунду тебе показалось, что キバ расстроился.\n'
-			'Ты обернулся и увидел, что он спит.\n'
-			' — Вот же соня!, — подумал ты'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_4'))
 
 		reply(msg, photo=STICKER_SLEEP)
 
@@ -199,10 +191,7 @@ def action_enter(user, reply, text):
 def action_fox_01(user, reply, text):
 	if text == actions_fox_01[0]:
 		msg = (
-			'Дай подумать..\n'
-			'Думаю я мог бы достать одну лису, это будет стоить {} золотых.\n'
-			'Что думаешь?'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_5'))
 
 		reply(msg.format(FOX_COSTS), photo=STICKER_FORGOT)
 
@@ -212,9 +201,7 @@ def action_fox_01(user, reply, text):
 
 	if text == actions_fox_01[1]:
 		msg = (
-			'Нет? Ну ладно. Я просто знаю где достать одну лису.\n'
-			'Если понадобится, то заходи..'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_6'))
 
 		reply(msg, photo=STICKER_SLEEP)
 
@@ -227,7 +214,7 @@ def action_fox_02(user, reply, text):
 	if text == actions_fox_02[0]:
 		if user.paid(FOX_COSTS):
 			msg = (
-				'Отлично! Заходи через неделю, я привезу лису.'
+				locale_manager.get('rooms.default.special.kiba.phrase_31')
 			)
 
 			user.add_tag('fox_payed')
@@ -240,9 +227,7 @@ def action_fox_02(user, reply, text):
 
 	if text == actions_fox_02[1]:
 		msg = (
-			'Нет? Ну ладно. Я просто знаю где достать одну лису.\n'
-			'Если понадобится, то заходи..'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_7'))
 
 		reply(msg, photo=STICKER_SLEEP)
 
@@ -258,9 +243,7 @@ def action_chat(user, reply, text):
 	if text == actions_chat[0]:
 		msg = (
 			'Ну как в каком? В чате бота конечно же, вот он @rogbotgroup.\n'
-			'Если увидишь меня там, то передавай привет!\n'
-			'А я спать.. потопа...'
-		)
+			locale_manager.get('rooms.default.special.kiba.phrase_8'))
 
 		reply(msg, photo=STICKER_SLEEP)
 
@@ -270,9 +253,9 @@ def action_chat(user, reply, text):
 
 	if text == actions_chat[1]:
 		msg = (
-			'Очень хорошо, что ты знаешь меня, я правда очень рад!\n'
-			'Если увидишь меня в чате, то передавай привет!\n'
-			'А я спать.. потопа...'
+			locale_manager.get('rooms.default.special.kiba.phrase_32')
+			locale_manager.get('rooms.default.special.kiba.phrase_33')
+			locale_manager.get('rooms.default.special.kiba.phrase_34')
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -284,7 +267,7 @@ def action_chat(user, reply, text):
 	if text == actions_chat[2]:
 		msg = (
 			'Когда ты уходил, на секунду тебе показалось, что キバ расстроился.\n'
-			'Ты обернулся и увидел, что он спит.\n'
+			locale_manager.get('rooms.default.special.kiba.phrase_35')
 			' — Вот же соня!, — подумал ты'
 		)
 
@@ -299,8 +282,8 @@ def action_ask_help(user, reply, text):
 	if text == actions_ask_help[0]:
 		msg = (
 			'*Ура!* Смотри, вот мой котел. В нем я готовлю вкусное зелье.\n'
-			'Но к сожалению я забыл последний ингредиент для него.\n'
-			'У тебя есть идеи?'
+			locale_manager.get('rooms.default.special.kiba.phrase_36')
+			locale_manager.get('rooms.default.special.kiba.phrase_37')
 		)
 
 		reply(msg, photo=STICKER_FORGOT)
@@ -311,8 +294,8 @@ def action_ask_help(user, reply, text):
 
 	if text == actions_ask_help[1]:
 		msg = (
-			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи ко мне еще..'
+			locale_manager.get('rooms.default.special.kiba.phrase_38')
+			locale_manager.get('rooms.default.special.kiba.phrase_39')
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -325,8 +308,8 @@ def action_ask_help(user, reply, text):
 def action_give_ingredient(user, reply, text):
 	if text == HAVE_NOTHING:
 		msg = (
-			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи ко мне еще..'
+			locale_manager.get('rooms.default.special.kiba.phrase_40')
+			locale_manager.get('rooms.default.special.kiba.phrase_41')
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -344,7 +327,7 @@ def action_give_ingredient(user, reply, text):
 		return False
 
 	msg = (
-		'Отлично, кидай {} в котел и давай размешаем.. У тебя есть чем размешать?'
+		locale_manager.get('rooms.default.special.kiba.phrase_42')
 	)
 
 	reply(msg.format(item_name), photo=STICKER_FORGOT)
@@ -360,8 +343,8 @@ def action_give_ingredient(user, reply, text):
 def action_give_stir(user, reply, text):
 	if text == HAVE_NOTHING:
 		msg = (
-			'Эх, вот так всегда.. Но все равно я был очень рад тебя видеть!\n'
-			'Заходи ко мне еще..'
+			locale_manager.get('rooms.default.special.kiba.phrase_43')
+			locale_manager.get('rooms.default.special.kiba.phrase_44')
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -379,7 +362,7 @@ def action_give_stir(user, reply, text):
 		return False
 
 	msg = (
-		'Твоя {}, ты и мешай!'
+		locale_manager.get('rooms.default.special.kiba.phrase_45')
 	)
 
 	reply(msg.format(item_name), photo=STICKER_HIDDING)
@@ -425,8 +408,8 @@ def action_make_potion(user, reply, text):
 
 	if text == actions_make_potion[1]:
 		msg = (
-			'Я тоже не буду это мешать. Что же, придется вылить и готовить зелье заново.\n'
-			'Но позже, я потопал.. спа...'
+			locale_manager.get('rooms.default.special.kiba.phrase_46')
+			locale_manager.get('rooms.default.special.kiba.phrase_47')
 		)
 
 		reply(msg, photo=STICKER_SLEEP)
@@ -440,7 +423,7 @@ def action_make_potion_success(user, reply, text):
 	if user.get_room_temp('potion') == 'success':
 		msg = (
 			'*Ура!* Похоже у нас получилось сделать его.\n'
-			'Вот то зелье, которое ты приготовил, будешь его пить?'
+			locale_manager.get('rooms.default.special.kiba.phrase_48')
 		)
 
 		reply(msg, photo=STICKER_GOOD_POTION)
@@ -448,7 +431,7 @@ def action_make_potion_success(user, reply, text):
 	else:
 		msg = (
 			'*Ура!* Похоже у нас получилось сделать его, хоть оно и немного другого цвета.\n'
-			'Вот то зелье которое ты приготовил, будешь его пить?'
+			locale_manager.get('rooms.default.special.kiba.phrase_49')
 		)    
 
 		reply(msg, photo=STICKER_UNCERTAIN)
@@ -461,7 +444,7 @@ def action_make_potion_success(user, reply, text):
 def action_make_potion_failed(user, reply, text):
 	msg = (
 		'*Ох* Что же ты натворил? Мою лабараторию всю разнесло.\n'
-		'Вот то зелье которое ты приготовил, будешь его пить?'
+		locale_manager.get('rooms.default.special.kiba.phrase_50')
 	)
 
 	reply(msg, photo=STICKER_CRASH)
@@ -475,9 +458,9 @@ def action_drink(user, reply, text):
 	if text == actions_drink[0]:
 		if user.get_room_temp('potion') == 'success':
 			msg = (
-				'Похоже это было зелье маны! Твоя максимальная мана увеличена на 10!\n'
-				'Я был очень рад тебя видеть!\n'
-				'Заходи ко мне еще..'
+				locale_manager.get('rooms.default.special.kiba.phrase_51')
+				locale_manager.get('rooms.default.special.kiba.phrase_52')
+				locale_manager.get('rooms.default.special.kiba.phrase_53')
 			)
 
 			reply(msg, photo=STICKER_SLEEP)
@@ -491,7 +474,7 @@ def action_drink(user, reply, text):
 		else:
 			msg = (
 				' — Да, это не то зелье. Я провожу тебя до коридора, а дальше как-нибудь сам, окей?\n\n'
-				'Ты отравился и твое максимальное здоровье немного уменьшилось.'
+				locale_manager.get('rooms.default.special.kiba.phrase_54')
 			)
 
 			reply(msg, photo=STICKER_FORGOT)

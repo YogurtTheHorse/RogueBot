@@ -1,46 +1,42 @@
+from localizations import locale_manager
 import random
 from constants import *
 
 EVIL_COMISSAR = 'EVIL_COMISSAR'
 
-READY = 'Сказать, что готовы'
-ESCAPE = 'Попытаться убежать'
-FIGHT = 'Напасть на комиссара.'
+READY = locale_manager.get('rooms.default.usual.comissar.phrase_2')
+ESCAPE = locale_manager.get('rooms.default.usual.comissar.phrase_3')
+FIGHT = locale_manager.get('rooms.default.usual.comissar.phrase_4')
 
-name = 'Комиссар'
+name = locale_manager.get('rooms.default.usual.comissar.phrase_5')
 
 def enter(user, reply):
 	msg = (
-		'Не знаю, кто это такой, но он в форме, похожей на немецкую, '
-		'и с двухглавым орлом на фуражке. В углу вы замечаете множество '
-		'трупов с простреленной головой...\n\nОн говорит вам: «О, новобранец. '
-		'Я думал, в этом мире-улье никто не хочет служить. Сейчас будет '
-		'небольшой опрос на определение твоего отряда. Бояться нечего»'
-	)
+		locale_manager.get('rooms.default.usual.comissar.phrase_1'))
 	reply(msg, photo='BQADAgADHwEAAgy18wMAAWs-pH_tD3MC')
 	user.set_room_temp('question', 'first')
 
 def dice(user, reply, result, subject=None):
 	if subject == ESCAPE:
 		if result > (DICE_MAX / 3) * 2:
-			reply('Ты сбежал без потерь.')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_6'))
 			user.make_damage(10, 20, reply, name=name)
 			user.leave(reply)
 		elif result > DICE_MAX / 3:
-			reply('Подстрелили руку. Держись, борец')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_7'))
 			user.make_damage(10, 20, reply)
 			user.leave(reply)
 		else:
-			reply('Да вас, батенька, расстреляли')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_8'))
 			user.death(reply, reason=name)
 	elif subject == FIGHT:
 		if result > DICE_MIDDLE:
-			reply('Победа за тобой. НО комиссар тебе это припомнит')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_9'))
 			user.add_tag(EVIL_COMISSAR)
 			user.add_item('loot', 'laser_gun')
 			user.leave(reply)
 		else:
-			reply('Да вас, батенька, расстреляли')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_10'))
 			user.death(reply, reason=name)
 
 def action(user, reply, text):
@@ -48,47 +44,47 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text == READY:
-			reply('Ну хорошо. Боец, ты моешься вообще? А то тут чем-то пахнет.')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_11'))
 			user.set_room_temp('question', 'smell')
 		elif text == ESCAPE:
-			reply('Комиссар начал кричать что-то про предателя и бегство. Время кидать кубики!')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_12'))
 			user.throw_dice(reply, ESCAPE)
 		elif text == FIGHT:
-			reply('В атаку!')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_13'))
 			user.throw_dice(reply, FIGHT)
 	elif question == 'smell':
-		if text == 'Да':
-			reply('А, ну да, я забыл про те трупы в углу. Надо будет сжечь их как-нибудь на досуге... Ну ладно, первый вопрос. Умеешь колдовать? Нам в Гвардии нужны маги.')
+		if text == locale_manager.get('rooms.default.usual.comissar.phrase_14'):
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_15'))
 			user.set_room_temp('question', 'mage')
 		else:
-			reply('Последователь Нургла! Расстрелять!')
-			reply('Придется бежать')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_16'))
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_17'))
 
 			user.throw_dice(reply, ESCAPE)
 	elif question == 'mage':
-		if text == 'Да':
-			reply('Последователь Тзинча! Расстрелять!')
-			reply('Бежим быстрее')
+		if text == locale_manager.get('rooms.default.usual.comissar.phrase_18'):
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_19'))
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_20'))
 
 			user.throw_dice(reply, ESCAPE)
 		else:
-			reply('Ну конечно, не умеешь, ведь магия - это ересь, верно, боец?')
-			reply('На стене вы замечаете плакат с женщиной, похоже, эльфийкой. У неё большой размер груди, и одета она очень откровенно... Комиссар ехидно улыбается и говорит:')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_21'))
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_22'))
 
-			reply('О, вижу, ты заметил мой плакатик. Ну и как тебе? Понравилась, да?')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_23'))
 
 			user.set_room_temp('question', 'poster')
 	elif question == 'poster':
-		if text == 'Нет':
+		if text == locale_manager.get('rooms.default.usual.comissar.phrase_24'):
 			reply('Комиссар меняет улыбку на серьезное выражение лица. "Ну конечно, нет, это же ксенос. Неизвестно, что еще у него там в шта... кхм. Говорю, это от предыдущего владельца комнаты осталось.')
-			reply('Кажется, ты прошел все испытания. Но у нас пока нет мест, ты приходи лет через 20, когда мы на следующую планету соберемся, ладно? А теперь иди отсюда, мне еще тела убрать надо. Славься Император!')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_25'))
 
 			for i in range(7):
 				user.add_item('neutral', 'laser_bullet')
 			user.leave(reply)
 		else:
 			reply('Комиссар резко изменяется в лице и орет на тебя: "Ну это вообще беспредел! Мало того, что ксеносов не ненавидят, еще и слаанешизм развели какой-то! Расстрелять!')
-			reply('Время спасаться!')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_26'))
 
 			user.throw_dice(reply, ESCAPE)
 
@@ -99,9 +95,9 @@ def get_actions(user):
 	if question == 'first':
 		ans = [ READY, ESCAPE, FIGHT ]
 	elif question == 'smell' or question == 'mage':
-		ans = [ 'Да', 'Нет' ]
+		ans = [ locale_manager.get('rooms.default.usual.comissar.phrase_27'), locale_manager.get('rooms.default.usual.comissar.phrase_28') ]
 	else:
-		ans = [ 'Черт возьми, ДА!', 'Нет' ]
+		ans = [ locale_manager.get('rooms.default.usual.comissar.phrase_29'), locale_manager.get('rooms.default.usual.comissar.phrase_30') ]
 
 	random.shuffle(ans)
 

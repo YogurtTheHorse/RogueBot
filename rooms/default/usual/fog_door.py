@@ -1,24 +1,23 @@
+from localizations import locale_manager
 from constants import *
 import bossmanager
 import random
 
-name = 'Темная комната'
+name = locale_manager.get('rooms.default.usual.fog_door.phrase_5')
 
-actions_enter =  [ 'Пойти дальше', 'Уйти' ]
-actions_try_to_see = [ 'Посмотреть сквозь туман', 'Развернуться и уйти' ]
-actions_pass_throw_fog = [ 'Пройти сквозь туман', 'Убежать прочь' ]
+actions_enter =  [ locale_manager.get('rooms.default.usual.fog_door.phrase_6'), locale_manager.get('rooms.default.usual.fog_door.phrase_7') ]
+actions_try_to_see = [ locale_manager.get('rooms.default.usual.fog_door.phrase_8'), locale_manager.get('rooms.default.usual.fog_door.phrase_9') ]
+actions_pass_throw_fog = [ locale_manager.get('rooms.default.usual.fog_door.phrase_10'), locale_manager.get('rooms.default.usual.fog_door.phrase_11') ]
 
 def can_open(user, reply):
 	return not user.has_tag(DEVIL)
 
 def open_failure(user, reply):
-	reply('Здесь не рады проклятым!')
+	reply(locale_manager.get('rooms.default.usual.fog_door.phrase_12'))
 
 def enter(user, reply):
 	msg = (
-		'Ты вошел в комнату и почувствовал запах прогнившей плоти.\n'
-		' — Что это за запах?, — подумал ты'
-	)
+		locale_manager.get('rooms.default.usual.fog_door.phrase_1'))
 
 	reply(msg, photo=FOG_STICKER)
 
@@ -54,9 +53,7 @@ def action(user, reply, text):
 def action_enter(user, reply, text):
 	if text == actions_enter[0]:
 		msg = (
-			'Ты продолжил путь, и через мгновенье перед тобой оказались огромные врата, наполненные туманом.\n'
-			' — Где-то я это уже видел, — подумалось тебе.\n'
-		)
+			locale_manager.get('rooms.default.usual.fog_door.phrase_2'))
 
 		reply(msg)
 
@@ -64,7 +61,7 @@ def action_enter(user, reply, text):
 
 	else:
 		msg = (
-			'Ты не стал продолжать путь, вышел из комнаты, и так и не узнал что в ней было.'
+			locale_manager.get('rooms.default.usual.fog_door.phrase_13')
 		)
 
 		reply(msg)
@@ -78,9 +75,7 @@ def action_try_to_see(user, reply, text):
 
 		if boss['alive']:
 			msg = (
-				'Ты подошел ближе к туману, но ничего не увидел.\n'
-				'Однако ты услышал рыки злобного чудища и крики людей.\n'
-			)
+				locale_manager.get('rooms.default.usual.fog_door.phrase_3'))
 
 			reply(msg)
 
@@ -88,9 +83,7 @@ def action_try_to_see(user, reply, text):
 
 		else:
 			msg = (
-				'Подойдя ближе, туман рассеялся, и за ним ты увидел гору трупов.\n'
-				'Может быть к счастью?'
-			)
+				locale_manager.get('rooms.default.usual.fog_door.phrase_4'))
 
 			reply(msg)
 
@@ -98,7 +91,7 @@ def action_try_to_see(user, reply, text):
 
 	else:
 		msg = (
-			'Ты так и не узнал что находится за туманом и ушел.'
+			locale_manager.get('rooms.default.usual.fog_door.phrase_14')
 		)
 
 		reply(msg)
@@ -108,12 +101,7 @@ def action_try_to_see(user, reply, text):
 
 def action_pass_throw_fog(user, reply, text):
 	if text == actions_pass_throw_fog[0]:
-		msg = (
-			'Пройдя сквозь туман ты увидел множество людей таких как ты и ...\n'
-			'...\n'
-			'...\n'
-			'...'
-		)
+		msg = locale_manager.get('rooms.default.usual.fog_door.phrase_15') + '...\n' +  '...\n' + '...'
 
 		reply(msg)
 
@@ -126,14 +114,14 @@ def action_pass_throw_fog(user, reply, text):
 
 		if random_number < 0.2:
 			msg = (
-				'Когда ты убегал из комнаты, ты вовремя заметил лежащий камень на земле и успел увернуться.'
+				locale_manager.get('rooms.default.usual.fog_door.phrase_16')
 			)
 
 			reply(msg)
 
 		else:
 			msg = (
-				'Ты убегал настолько быстро, что не заметил лежащий на земле камень и споткнулся об него.'
+				locale_manager.get('rooms.default.usual.fog_door.phrase_17')
 			)
 
 			reply(msg)

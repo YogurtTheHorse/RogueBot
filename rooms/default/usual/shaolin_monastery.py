@@ -1,14 +1,15 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Шаолиньский монастырь'
+name = locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_1')
 
 room_type = 'other'
 
 def get_actions(user):
-	return [ 'Кинуть кость и показать', 'Потренироваться', 'Попробовать уйти' ]
+	return [ locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_2'), locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_3'), locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_4')]
 
 def enter(user, reply):
-	reply('Ты видишь перед собой монастырь.\nНа входе один из монахов взял тебя за локоть и отвел в сторону.\n-Кто ты? А, впрочем неважно, у нас сейчас как раз тренировка. Скажи мне, друг, насколько крепка твоя защита?', photo='BQADAgADFQkAAmrZzgeH6hmh7PbRYgI')
+	reply(locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_5'), photo='BQADAgADFQkAAmrZzgeH6hmh7PbRYgI')
 
 def action(user, reply, text):
 	actions = get_actions(user)
@@ -19,7 +20,7 @@ def action(user, reply, text):
 		user.defence += 5
 		reply('Ты принял участие в тренировке монахов, теперь твоё тело крепче. Это стоило тебе добровольного пожертвования.', photo='BQADAgADFAkAAmrZzgfPUvv4wiphMQI')
 		if not user.paid(50):
-			reply('Монахи не обиделись, на то, что у тебя не оказалось денег. Но уходя ты уронил на себя стопку кирпичей.')
+			reply(locale_manager.get('rooms.default.usual.shaolin_monastery.phrase_6'))
 			user.make_damage(20, 60, reply, name=name)
 		user.leave(reply)
 	else:

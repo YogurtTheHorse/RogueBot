@@ -1,3 +1,4 @@
+from localizations import locale_manager
 from time import time
 from constants import *
 
@@ -5,8 +6,8 @@ INJURED = 'injured'
 
 name = 'Потрёпанный мужик с дробовиком'
 
-GO = 'Уйти'
-WAIT = 'Постоять'
+GO = locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_1')
+WAIT = locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_2')
 
 DELTA_TIME_MAX = 15
 
@@ -25,7 +26,7 @@ def action(user, reply, text):
 	if text == GO:
 		if user.has_tag(INJURED) and delta < DELTA_TIME_MAX:
 			reply('— Я тебя предупреждал!')
-			user.death(reply, reason='Нетерпеливость')
+			user.death(reply, reason=locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_3'))
 		elif delta < DELTA_TIME_MAX:
 			reply('— Я тебя предупреждаю последний раз.\nМужик поднимает дробовик и стреляет чуть правее твоей головы, но тебя все равно зацепило.\n*Click-Clack*\n— Следующий будет в голову.')
 			user.add_tag(INJURED)

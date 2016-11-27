@@ -1,15 +1,14 @@
-name = 'Какой-то мужчина'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.usual.witcher.phrase_1')
 
-ASK = 'Ты носишь двуручник за спиной? Ты в каком фильме это видел?'
+ASK = locale_manager.get('rooms.default.usual.witcher.phrase_2')
 CAN_I_HELP = '— Может, тебе помочь?'
-HELP = 'Помочь'
-WAIT = 'Подождать'
+HELP = locale_manager.get('rooms.default.usual.witcher.phrase_3')
+WAIT = locale_manager.get('rooms.default.usual.witcher.phrase_4')
 
 def enter(user, reply):
 	reply(
-		'Вы видите мужчину, у которого седые волосы, желтые кошачьи глаза и 2 меча за спиной.\n'
-		'Завидев вас, он пытается достать меч, судя по всему, серебрянный.'
-	)
+		locale_manager.get('rooms.default.usual.witcher.phrase_5'))
 	user.set_room_temp('question', 'first')
 	user.set_room_temp('cnt', 0)
 
@@ -19,16 +18,14 @@ def action(user, reply, text):
 	cnt = user.get_room_temp('cnt', 0) + 1
 	user.set_room_temp('cnt', cnt)
 	if text == ASK:
-		reply('У мужчины глаза заливаются слезами, и он в истерике убегает из комнаты. Что это было?')
+		reply(locale_manager.get('rooms.default.usual.witcher.phrase_6'))
 		user.leave(reply)
 	elif text == CAN_I_HELP:
 		reply('— Не надо, я сам! Я ведьмак, или ты?!')
 		user.set_room_temp('question', 'third')
 	elif text == HELP:
 		reply(
-			'Вы подходите к мужчине, с невозмутимым лицом достаете меч из его ножен на спине и отдаете '
-			'его ему в руки, после чего уходите, сдерживая желание засмеяться'
-		)
+			locale_manager.get('rooms.default.usual.witcher.phrase_7'))
 		user.leave(reply)
 	else:
 		reply('— Сейчас достану, подожди...')

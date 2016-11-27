@@ -1,16 +1,17 @@
+from localizations import locale_manager
 import random
 
-name = 'Человек'
+name = locale_manager.get('rooms.default.special.yegorf1.phrase_7')
 
 STICKER_YEGORF1 = 'BQADAgADQwADDLXzAxNNjVnoJZqxAg'
 
-actions_enter = [ 'Зайти в дверь' ]
-actions_corridor = [ 'Идти дальше по коридору', 'Открыть дверь #445', 'Открыть дверь #444', 'Открыть дверь #443', 'Открыть дверь #442', 'Открыть дверь #441' ]
-actions_choose_door_01 = [ 'Зайти в дверь слева', 'Зайти в дверь справа' ]
-actions_choose_door_02 = [ 'Зайти в эту дверь', 'Постоять' ]
-actions_choose_door_03 = [ 'Зайти в дверь синего цвета', 'Зайти в дверь красного цвета' ]
+actions_enter = [ locale_manager.get('rooms.default.special.yegorf1.phrase_8') ]
+actions_corridor = [ locale_manager.get('rooms.default.special.yegorf1.phrase_9'), 'Открыть дверь #445', 'Открыть дверь #444', 'Открыть дверь #443', 'Открыть дверь #442', 'Открыть дверь #441' ]
+actions_choose_door_01 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_10'), locale_manager.get('rooms.default.special.yegorf1.phrase_11') ]
+actions_choose_door_02 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_12'), locale_manager.get('rooms.default.special.yegorf1.phrase_13') ]
+actions_choose_door_03 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_14'), locale_manager.get('rooms.default.special.yegorf1.phrase_15') ]
 actions_choose_door_04 = [ 'Зайти в дверь #308', 'Зайти в дверь #402', 'Зайти в дверь #253', 'Зайти в дверь #620', 'Зайти в дверь #636', 'Зайти в дверь #564' ]
-actions_pray = [ 'Молить рассказчика о выходе', 'Постоять', 'Сесть', 'Посидеть', 'Лечь', 'Полежать', 'Молить рассказчика о смерти' ]
+actions_pray = [ locale_manager.get('rooms.default.special.yegorf1.phrase_16'), locale_manager.get('rooms.default.special.yegorf1.phrase_17'), locale_manager.get('rooms.default.special.yegorf1.phrase_18'), locale_manager.get('rooms.default.special.yegorf1.phrase_19'), locale_manager.get('rooms.default.special.yegorf1.phrase_20'), locale_manager.get('rooms.default.special.yegorf1.phrase_21'), locale_manager.get('rooms.default.special.yegorf1.phrase_22') ]
 
 def doors_filter(user, doors):
 	doors_filtered = filter(lambda room: user.get_room_temp(room, def_val='not-opened') == 'not-opened', doors)
@@ -20,14 +21,11 @@ def doors_filter(user, doors):
 ## INITIALIZE
 
 def enter(user, reply):
-	msg = (
-		'На мгновение тебя ослепило яркой вспышкой, и ты очень удивился тому, что никого кроме тебя в комнате не было.\n'
-		'Перед тобой была открыта дверь, ведущая в коридор, и ты зашел в нее.'
-	)
+	msg = (locale_manager.get('rooms.default.special.yegorf1.phrase_1'))
 
 	reply(msg)
 
-	user.set_room_temp('repeat_msg', 'Ты зашел в дверь перед собой.')
+	user.set_room_temp('repeat_msg', locale_manager.get('rooms.default.special.yegorf1.phrase_23'))
 	user.set_room_temp('question', 'enter')
 
 
@@ -84,13 +82,11 @@ def action(user, reply, text):
 def action_enter(user, reply, text):
 	if text == actions_enter[0]:
 		msg = (
-			'Ты оказался в коридоре, но он не был обычным. На многих из дверей весели таблички с номерами.\n'
-			'Но тебе стало интересно куда ведет этот коридор и пошел бальше.'
-		)
+			locale_manager.get('rooms.default.special.yegorf1.phrase_2'))
 
 		reply(msg)
 
-		user.set_room_temp('repeat_msg', 'Ты пошел дальше по коридору.')
+		user.set_room_temp('repeat_msg', locale_manager.get('rooms.default.special.yegorf1.phrase_24'))
 		user.set_room_temp('question', 'corridor')
 
 		return True
@@ -99,20 +95,18 @@ def action_enter(user, reply, text):
 def action_corridor(user, reply, text):
 	if text == actions_corridor[0]:
 		msg = (
-			'В конце коридора была открытая дверь и ты зашел в нее.\n'
-			'Перед тобой две открытых двери и ты зашел в дверь слева.'
-		)
+			locale_manager.get('rooms.default.special.yegorf1.phrase_3'))
 
 		reply(msg)
 
-		user.set_room_temp('repeat_msg', 'Ты зашел в дверь слева.')
+		user.set_room_temp('repeat_msg', locale_manager.get('rooms.default.special.yegorf1.phrase_25'))
 		user.set_room_temp('question', 'choose_door_01')
 
 		return True
 
 	if text in actions_corridor and user.get_room_temp(text, def_val='not-opened') == 'not-opened':
 		msg = (
-			'Эта дверь закрыта.'
+			locale_manager.get('rooms.default.special.yegorf1.phrase_26')
 		)
 
 		reply(msg)
@@ -128,7 +122,7 @@ def action_corridor(user, reply, text):
 
 		if user.get_room_temp('opened:corridor', def_val=False):
 			msg = (
-				'И правда, можно и дальше продолжать делать что вздумается, игнорируя подсказки.'
+				locale_manager.get('rooms.default.special.yegorf1.phrase_27')
 			)
 
 			reply(msg)
@@ -139,7 +133,7 @@ def action_corridor(user, reply, text):
 def action_choose_door_01(user, reply, text):
 	if text == actions_choose_door_01[0]:
 		msg = (
-			'Ты вышел в коридор.'
+			locale_manager.get('rooms.default.special.yegorf1.phrase_28')
 		)
 
 		reply(msg)
@@ -150,14 +144,11 @@ def action_choose_door_01(user, reply, text):
 
 	if text == actions_choose_door_01[1]:
 		msg = (
-			'Ты должен слушать подсказки и ненарушать их действий.\n'
-			'Попробуем еще раз.\n\n'
-			'Перед тобой одна открытая дверь и ты зашел в эту дверь.'
-		)
+			locale_manager.get('rooms.default.special.yegorf1.phrase_4'))
 
 		reply(msg)
 
-		user.set_room_temp('repeat_msg', 'Ты зашел в эту дверь.')
+		user.set_room_temp('repeat_msg', locale_manager.get('rooms.default.special.yegorf1.phrase_29'))
 		user.set_room_temp('question', 'choose_door_02')
 
 		return True
@@ -166,21 +157,19 @@ def action_choose_door_01(user, reply, text):
 def action_choose_door_02(user, reply, text):
 	if text == actions_choose_door_02[0]:
 		msg = (
-			'Перед тобой две открытых дверей и ты зашел в дверь синего цвета.'
+			locale_manager.get('rooms.default.special.yegorf1.phrase_30')
 		)
 
 		reply(msg)
 
-		user.set_room_temp('repeat_msg', 'Ты зашел в дверь синего цвета.')
+		user.set_room_temp('repeat_msg', locale_manager.get('rooms.default.special.yegorf1.phrase_31'))
 		user.set_room_temp('question', 'choose_door_03')
 
 		return True
 
 	if text == actions_choose_door_02[1]:
 		msg = (
-			'Ты должен слушать подсказки.\n'
-			'И еще, я забираю у тебя этот вариант ответа.'
-		)
+			locale_manager.get('rooms.default.special.yegorf1.phrase_5'))
 
 		reply(msg)
 
@@ -192,7 +181,7 @@ def action_choose_door_02(user, reply, text):
 def action_choose_door_03(user, reply, text):
 		if text == actions_choose_door_03[0]:
 			msg = (
-				'Ты вышел в коридор.'
+				locale_manager.get('rooms.default.special.yegorf1.phrase_32')
 			)
 
 			reply(msg)
@@ -217,7 +206,7 @@ def action_choose_door_03(user, reply, text):
 def action_choose_door_04(user, reply, text):
 	if text in actions_choose_door_04 and user.get_room_temp(text, def_val='not-opened') == 'not-opened':
 		msg = (
-			'Эта дверь закрыта'
+			locale_manager.get('rooms.default.special.yegorf1.phrase_33')
 		)
 
 		reply(msg)
@@ -247,9 +236,7 @@ def action_choose_door_04(user, reply, text):
 def action_pray(user, reply, text):
 	if text == actions_pray[0]:
 		msg = (
-			'Что? Нужна помощь?\n'
-			'На этот раз я тебя прощу, но впредь будь послушным.\n'
-			'@yegorf1 ударил тебя тростью и ты вылетаешь в коридор через открывшуюся дверь.'
+			locale_manager.get('rooms.default.special.yegorf1.phrase_6')
 		)
 
 		reply(msg, photo=STICKER_YEGORF1)
@@ -297,7 +284,7 @@ def action_pray(user, reply, text):
 		return True
 
 	if text == actions_pray[6]:
-		user.death(reply, reason='По собственному желанию')
+		user.death(reply, reason=locale_manager.get('rooms.default.special.yegorf1.phrase_34'))
 
 		return True
 

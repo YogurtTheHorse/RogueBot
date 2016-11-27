@@ -1,8 +1,9 @@
+from localizations import locale_manager
 from constants import DICE_MAX
 
-name = 'Мишень'
+name = locale_manager.get('rooms.default.usual.goal.phrase_1')
 
-actions = [ 'Попробовать попасть в нее', 'Уйти' ]
+actions = [ locale_manager.get('rooms.default.usual.goal.phrase_2'), locale_manager.get('rooms.default.usual.goal.phrase_3')]
 
 
 def get_actions(user):
@@ -22,11 +23,10 @@ def dice(user, reply, result, subject=None):
 
 	else:
 		msg = (
-			'Читатила! Стреляй в него!'
-		)
+			locale_manager.get('rooms.default.usual.goal.phrase_4'))
 
 		reply(msg, photo='BQADAgAD3wgAAmrZzgdOxgndC2991gI')
-		user.make_damage(10, 30, reply, name='Кодекс чести лучников')
+		user.make_damage(10, 30, reply, name=locale_manager.get('rooms.default.usual.goal.phrase_5'))
 
 	user.leave(reply)
 
@@ -37,11 +37,8 @@ def action(user, reply, text):
 
 	else:
 		msg = (
-			'Ты повернулся спиной, а не спине у тебя оказалась _мишень_! Вот почему тебя хотят убить все!\n'
-			'Ну, а еще потому, что это страшное подземелье — такие тут правила.\n'
-			'В общем, в твою _мишень_ прилетела стрела.'
-		)
+			locale_manager.get('rooms.default.usual.goal.phrase_6'))
 
 		reply(msg, photo='BQADAgAD3wgAAmrZzgdOxgndC2991gI')
-		user.make_damage(10, 30, reply, name='Какой-то лучник')
+		user.make_damage(10, 30, reply, name=locale_manager.get('rooms.default.usual.goal.phrase_7'))
 		user.leave(reply)

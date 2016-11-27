@@ -1,26 +1,24 @@
+from localizations import locale_manager
 from constants import *
 import random
 import databasemanager
 
 name = 'Казино "Марианская Впадина"'
 
-actions_enter = [ 'Играем', 'Уйти' ]
+actions_enter = [ locale_manager.get('rooms.default.usual.roulette.phrase_4'), locale_manager.get('rooms.default.usual.roulette.phrase_5') ]
 actions_choose = [ 'Красное x2', 'Зеленое x12', 'Черное x2' ]
-actions_make_bet = [ '100', '250', '500', '1000', 'Назад' ]
+actions_make_bet = [ '100', '250', '500', '1000', locale_manager.get('rooms.default.usual.roulette.phrase_6') ]
 
 
 def can_open(user, reply):
 	return not user.has_tag(DEVIL)
 
 def open_failure(user, reply):
-	reply('Здесь не рады проклятым!')
+	reply(locale_manager.get('rooms.default.usual.roulette.phrase_7'))
 
 def enter(user, reply):
 	msg = (
-		'Ты вошел в комнату и увидел множество игральных столов.\n'
-		'Диллер, стоящий за одним из столов, зазывает тебя:\n'
-		' — Ну что, играть будем?'
-	)
+		locale_manager.get('rooms.default.usual.roulette.phrase_1'))
 
 	user.set_room_temp('gold', user.gold)
 
@@ -58,7 +56,7 @@ def action(user, reply, text):
 def action_enter(user, reply, text):
 	if text not in actions_enter:
 		msg = (
-			'Что-то?'
+			locale_manager.get('rooms.default.usual.roulette.phrase_8')
 		)
 
 		reply(msg)
@@ -76,14 +74,14 @@ def action_enter(user, reply, text):
 
 		if user.gold > gold:
 			msg = (
-				'Ты в плюсе на {}'
+				locale_manager.get('rooms.default.usual.roulette.phrase_9')
 			)
 
 			reply(msg.format(user.gold - gold))
 
 		if user.gold < gold:
 			msg = (
-				'Ты в минусе на {}'
+				locale_manager.get('rooms.default.usual.roulette.phrase_10')
 			)
 
 			databasemanager.add_to_leaderboard(user, gold - user.gold, databasemanager.ROULETTE_TABLE)
@@ -106,7 +104,7 @@ def action_enter(user, reply, text):
 def action_choose(user, reply, text):
 	if text not in actions_choose:
 		msg = (
-			'Определись с выбором!'
+			locale_manager.get('rooms.default.usual.roulette.phrase_11')
 		)
 
 		reply(msg)
@@ -137,7 +135,7 @@ def action_make_bet(user, reply, text):
 
 	if text == actions_make_bet[4]:
 		msg = (
-			'Слабак!'
+			locale_manager.get('rooms.default.usual.roulette.phrase_12')
 		)
 
 		reply(msg)
@@ -149,7 +147,7 @@ def action_make_bet(user, reply, text):
 	try:
 		bet = int(text)
 	except:
-		reply('Непонятное число у вас.')
+		reply(locale_manager.get('rooms.default.usual.roulette.phrase_13'))
 
 		return
 
@@ -164,7 +162,7 @@ def action_make_bet(user, reply, text):
 
 	if not user.paid(bet):
 		msg = (
-			'У тебя нет столько денег.'
+			locale_manager.get('rooms.default.usual.roulette.phrase_14')
 		)
 
 		reply(msg)
@@ -172,15 +170,13 @@ def action_make_bet(user, reply, text):
 		return
 
 	msg = (
-		'Игрок {} делает ставку {}. '
-		'Ставки сделаны, игра начинается!'
-	)
+		locale_manager.get('rooms.default.usual.roulette.phrase_2'))
 
 	reply(msg.format(user.name, bet))
 
 
 	msg = (
-		'На рулетке выпадает {} - {}'
+		locale_manager.get('rooms.default.usual.roulette.phrase_15')
 	)
 
 	number = get_random_number()
@@ -201,9 +197,7 @@ def action_make_bet(user, reply, text):
 
 	if color == user_color:
 		msg = (
-			' — Ограбить казино собрался? Держи свои {}\n'
-			'   Посмотрим повезет ли тебе в следующий раз..'
-		)
+			locale_manager.get('rooms.default.usual.roulette.phrase_3'))
 
 		coins = 0
 

@@ -1,6 +1,7 @@
+from localizations import locale_manager
 import random
 
-name = 'Дети'
+name = locale_manager.get('rooms.default.monster.kids.phrase_1')
 
 hp = 1000
 
@@ -10,30 +11,30 @@ coins = 0
 
 def get_actions(user):
 	if not user.get_room_temp('fight', False):
-		return ['Сладость', 'Гадость']
+		return [locale_manager.get('rooms.default.monster.kids.phrase_2'), locale_manager.get('rooms.default.monster.kids.phrase_3')]
 	else:
 		return user.get_fight_actions()
 
 def action(user, reply, text):
 	if not user.get_room_temp('fight', False):
-		if text == 'Сладость':
+		if text == locale_manager.get('rooms.default.monster.kids.phrase_4'):
 			if user.has_item('candy'):
-				reply('Ты уже было протянул им конфету, но тебе заехали по лицу и украли у тебя все твои деньги')
+				reply(locale_manager.get('rooms.default.monster.kids.phrase_5'))
 				user.gold = 0
 				user.leave(reply)
 			else:
-				reply('У тебя не оказалось сладостей, придется сбегать, хотя, что могут сде.. У НИХ ПИСТОЛЕТ. ЧЕРТОВЫ АМЕРИКАНЦЫ.')
+				reply(locale_manager.get('rooms.default.monster.kids.phrase_6'))
 				user.throw_dice(reply)
 		else:
-			reply('Ну что же ты детям гадость, а?\nБох накажет!')
+			reply(locale_manager.get('rooms.default.monster.kids.phrase_7'))
 
-			reply('Из неба сверкнула молния и все те святые, которых вспоминают на Хеллуин бог направил на тебя')
+			reply(locale_manager.get('rooms.default.monster.kids.phrase_8'))
 			user.set_room_temp('fight', True)
 	else:
 		user.fight_action(reply, text)
 
 def enter(user, reply):
-	reply('Вы видите группу людей в странных костюмах. Это мешок из макдака на голове?..')
+	reply(locale_manager.get('rooms.default.monster.kids.phrase_9'))
 	reply('Д̶е̶н̶ь̶г̶и̶ ̶и̶л̶и̶ ̶ж̶и̶з̶н̶ь̶Сладость или гадость?', photo='BQADAgAD6ggAAmrZzgfc2fdWTq6Q8AI')
 
 	user.set_room_temp('fight', False)
@@ -51,7 +52,7 @@ def make_damage(user, reply, dmg):
 	hp -= max(1, dmg)
 
 	if hp <= 0:
-		reply('Денег у святых нет. Негоже.')
+		reply(locale_manager.get('rooms.default.monster.kids.phrase_10'))
 		user.won(reply)
 	else:
 		user.set_room_temp('hp', hp)

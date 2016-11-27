@@ -1,8 +1,9 @@
-name = 'Дозоры'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.usual.watches.phrase_3')
 
-actions_state_0		= [ 'Остановить бой', 'Уйти' ]  # Начало
-actions_state_1		= [ 'Уйти' ] # Ушел
-actions_state_2		= [ 'Уйти' ] # Остановил
+actions_state_0		= [ locale_manager.get('rooms.default.usual.watches.phrase_4'), locale_manager.get('rooms.default.usual.watches.phrase_5') ]  # Начало
+actions_state_1		= [ locale_manager.get('rooms.default.usual.watches.phrase_6') ] # Ушел
+actions_state_2		= [ locale_manager.get('rooms.default.usual.watches.phrase_7') ] # Остановил
 # actions_state_3		= ['']
 # actions_state_4		= ['']
 # actions_state_5		= ['']
@@ -21,44 +22,34 @@ def get_actions(user):
 def enter(user, reply):
 
 	if user.has_tag('watches_escape'):
-		reply('Погибли все.')
+		reply(locale_manager.get('rooms.default.usual.watches.phrase_8'))
 
 	elif user.has_tag('watches_stop'):
-		reply('Ты остановил бой. И заключили силы Света и силы Тьмы договор о перемирии.')
+		reply(locale_manager.get('rooms.default.usual.watches.phrase_9'))
 
 	else:
 		reply(
-			'C незапамятных времен рыцари, называющие себя воинами Света, '
-			'ловят ведьм и колдунов, истязающих род человеческий. '
-			'Но однажды на пути воинов Света встали воины Тьмы. '
-			'И никто не хотел уступить. И начался бой кровавый и беспощадный. '
-			'И когда битва дошла до Небес великий Гесер увидел что силы равны. '
-			'И если не остановить бой — погибнут все... \n'
-			)
+			locale_manager.get('rooms.default.usual.watches.phrase_1'))
 
 
 def action(user, reply, text):
 
 	if user.has_tag('watches_escape'):
 		if text == actions_state_1[0]:
-			reply('Тут больше нечего делать.')
+			reply(locale_manager.get('rooms.default.usual.watches.phrase_10'))
 
 	elif user.has_tag('watches_stop'):
 		if text == actions_state_2[0]:
-			reply('Возможно, скоро что-то случится, а пока пойдем дальше.')
+			reply(locale_manager.get('rooms.default.usual.watches.phrase_11'))
 
 	else:
 		if text == actions_state_0[0]:
 			reply(
-				'И он остановил бой. И заключили силы Света и силы Тьмы договор о перемирии. '
-				'И было сказано, что отныне ни добро ни зло нельзя творить без соглассия. '
-				'И было сказано, что будет Дневной дозор, чтобы следить за силами Света. '
-				'И было сказано, что будет Ночной дозор, чтобы следить за силами Тьмы.\n'
-			)
+				locale_manager.get('rooms.default.usual.watches.phrase_2'))
 			user.add_tag('watches_stop')
 
 		else:
-			reply('Правильно! Нечего вмешиватся в чужие разборки.')
+			reply(locale_manager.get('rooms.default.usual.watches.phrase_12'))
 			user.add_tag('watches_escape')
 
 	user.leave(reply)

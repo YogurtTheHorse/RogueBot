@@ -1,16 +1,13 @@
-ESCAPE = 'Забирай, они мне не нужны'
-READY = 'А что я получу взамен?'
-FIGHT = 'Я не отдам их демону!'
+from localizations import locale_manager
+ESCAPE = locale_manager.get('rooms.default.special.bill_cypher.phrase_2')
+READY = locale_manager.get('rooms.default.special.bill_cypher.phrase_3')
+FIGHT = locale_manager.get('rooms.default.special.bill_cypher.phrase_4')
 
-name = 'Билл Шифр'
+name = locale_manager.get('rooms.default.special.bill_cypher.phrase_5')
 
 def enter(user, reply):
 	msg = (
-		'Вы оказались в странном измерении, кажется здесь нет постоянства.\n'
-		'Ваше внимание привлек большой желтый треугольник с глазом посередине,\n'
-		'который пристально на вас смотрит.\n'
-		'Ты славно потрудился, что принёс их сюда, а теперь отдай их.'
-	)
+		locale_manager.get('rooms.default.special.bill_cypher.phrase_1'))
 	reply(msg)
 
 	user.set_room_temp('question', 'first')
@@ -21,27 +18,27 @@ def get_actions(user):
 	if question == 'first':
 		return [ ESCAPE, READY, FIGHT ]
 	else:
-		return [ 'Да, забирай!', 'Что еще предложишь?' ]
+		return [ locale_manager.get('rooms.default.special.bill_cypher.phrase_6'), locale_manager.get('rooms.default.special.bill_cypher.phrase_7') ]
 
 def action(user, reply, text):
 	question = user.get_room_temp('question', def_val='first')
 
 	if question == 'first':
 		if text == ESCAPE:
-			reply('Хороший мальчик, а теперь прощай!')
+			reply(locale_manager.get('rooms.default.special.bill_cypher.phrase_8'))
 			user.max_hp += 20
 			user.leave(reply)
 		elif text == READY:
-			reply('Я думаю это тебя убедит. Здесь 4000 золотых.')
+			reply(locale_manager.get('rooms.default.special.bill_cypher.phrase_9'))
 			user.set_room_temp('question', 'negotiate')
 		elif text == FIGHT:
-			reply('Посмотри на себя, зачем так злиться?.\nТеперь ты зеркало.')
-			user.reborn(reply, 'Зеркало может только отражать.', name='Зеркало')
+			reply(locale_manager.get('rooms.default.special.bill_cypher.phrase_10'))
+			user.reborn(reply, locale_manager.get('rooms.default.special.bill_cypher.phrase_11'), name=locale_manager.get('rooms.default.special.bill_cypher.phrase_12'))
 	elif question == 'negotiate':
-		if text == 'Да, забирай!':
-			reply('Вот и славно. Смотри не рассыпь.')
+		if text == locale_manager.get('rooms.default.special.bill_cypher.phrase_13'):
+			reply(locale_manager.get('rooms.default.special.bill_cypher.phrase_14'))
 			user.gold += 4000
 			user.leave(reply)
 		else:
-			reply('Какой ты не сговорчивый.\nСловно воды в рот набрал.')
-			user.reborn(reply, 'Рыбы на суше не живут.', name='Рыба')
+			reply(locale_manager.get('rooms.default.special.bill_cypher.phrase_15'))
+			user.reborn(reply, locale_manager.get('rooms.default.special.bill_cypher.phrase_16'), name=locale_manager.get('rooms.default.special.bill_cypher.phrase_17'))

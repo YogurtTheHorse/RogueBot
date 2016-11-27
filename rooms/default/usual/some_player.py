@@ -1,12 +1,13 @@
+from localizations import locale_manager
 import random
 import usermanager
 import items.itemloader as itemloader
 
 from constants import *
 
-name = 'Какой-то игрок'
+name = locale_manager.get('rooms.default.usual.some_player.phrase_1')
 
-actions = [ 'Ограбить', 'Уйти' ]
+actions = [ locale_manager.get('rooms.default.usual.some_player.phrase_2'), locale_manager.get('rooms.default.usual.some_player.phrase_3')]
 
 def get_actions(user):
 	return actions
@@ -30,14 +31,14 @@ def enter(user, reply):
 		user.set_room_temp('uid', found_user.uid)
 		user.set_room_temp('steal_tries', 0)
 	else:
-		reply('Убежал куда-то..')
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_4'))
 		user.leave(reply)
 
 def steal(user, steal_user, is_last, reply):
 	items = steal_user.get_items()
 
 	if len(items) == 0:
-		reply('Но в карманах было чуть меньше чем ничего. Вот неудача!')
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_5'))
 		user.leave(reply)
 		return
 
@@ -62,17 +63,17 @@ def dice(user, reply, result, subject=None):
 
 	steal_user = usermanager.get_user(user.get_room_temp('uid'))
 	if result >= DICE_MAX * p:
-		reply('Ворюга ты конечно первоклассный.')
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_6'))
 		steal(user, steal_user, result > DICE_MAX, reply)
 	else:
-		reply('Мда, вот тебя отмутохало-то.', photo='BQADAgAD1ggAAmrZzgenvIB-RsNAhwI')
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_7'), photo='BQADAgAD1ggAAmrZzgenvIB-RsNAhwI')
 		dmg = steal_user.get_damage()
-		user.make_damage(1, dmg, reply, name='Воровство')
+		user.make_damage(1, dmg, reply, name=locale_manager.get('rooms.default.usual.some_player.phrase_8'))
 
 
 def action(user, reply, text):
 	if text == actions[0]:
 		user.throw_dice(reply)
 	else:
-		reply('Ты уходишь отсюда.')
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_9'))
 		user.leave(reply)

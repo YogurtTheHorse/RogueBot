@@ -1,24 +1,25 @@
+from localizations import locale_manager
 import random
 
-name = 'Подсказка'
+name = locale_manager.get('rooms.default.missions_tips.tips.phrase_1')
 
 tips = [
-	'Если смотреть на то, что говорит алхимик, то можно понять, хорошую вещь ты купил или нет.',
-	'Смерть и жизнь едины, а значит конец это не конец. Но лучше не заканчивать.',
-	'Лучше спилить мушку',
-	'Иногда не стоит читать до конца, можно понять суть раньше',
-	'Старайся бить зеркало не сильно и не умрешь. _Так быстро_',
-	'Не доверяй красоткам',
-	'Дави слизней'
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_2'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_3'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_4'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_5'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_6'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_7'),
+	locale_manager.get('rooms.default.missions_tips.tips.phrase_8')
 ]
 
-actions = [ 'Послушать и уйти', 'У вас подсказки не интересные' ]
+actions = [ locale_manager.get('rooms.default.missions_tips.tips.phrase_9'), locale_manager.get('rooms.default.missions_tips.tips.phrase_10') ]
 
 def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('Спойлеры?')
+	reply(locale_manager.get('rooms.default.missions_tips.tips.phrase_11'))
 
 def action(user, reply, text):
 	if text == actions[0]:
@@ -26,5 +27,5 @@ def action(user, reply, text):
 
 		user.new_mission('tips', 'tips', path_len=25)
 	else:
-		reply('Ну и проваливай!')
+		reply(locale_manager.get('rooms.default.missions_tips.tips.phrase_12'))
 	user.leave(reply)

@@ -1,6 +1,7 @@
+from localizations import locale_manager
 import random
 
-name = 'Ктулху'
+name = locale_manager.get('rooms.default.boss.cthulhu.phrase_1')
 
 hp = 575900
 damage_range = ( 150, 250 )
@@ -10,7 +11,7 @@ coins = random.randrange( 1000, 251000, 1 )
 
 def skill_preparing(user, reply, boss):
   msg = (
-    'Ты услышал громыхающее рычание и увидел, что Ктулху замахивается на тебя всеми своими щупальцами.'
+    locale_manager.get('rooms.default.boss.cthulhu.phrase_2')
   )
 
   reply(msg, photo='BQADAgAD_AgAAmrZzge-xwd2a6LXzAI')
@@ -18,8 +19,6 @@ def skill_preparing(user, reply, boss):
 
 def on_die(user, reply):
 	msg = (
-		'Ктулху обронил одно из своих щупалец и покинул поле боя.\n'
-		'В этот раз ты одержал победу над ним, но не забывай — Боги бессмертны.'
-	)
+		locale_manager.get('rooms.default.boss.cthulhu.phrase_3'))
 
 	reply(msg)

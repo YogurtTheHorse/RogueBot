@@ -1,8 +1,9 @@
+from localizations import locale_manager
 from constants import OLDMAN_STICKER
 
-name = 'Старик'
+name = locale_manager.get('rooms.default.missions_main.first.phrase_1')
 
-actions = [ 'Помолчать', 'Уйти' ]
+actions = [ locale_manager.get('rooms.default.missions_main.first.phrase_2'), locale_manager.get('rooms.default.missions_main.first.phrase_3')]
 
 def get_actions(user):
 	return actions

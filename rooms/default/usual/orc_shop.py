@@ -1,61 +1,51 @@
+from localizations import locale_manager
 import usermanager
 
-name = 'Торговец'
+name = locale_manager.get('rooms.default.usual.orc_shop.phrase_2')
 
 def enter(user, reply):
 	usr = usermanager.random_user()
 	msg = (
-		'Перед тобой находится какая-то будка, неумело сколоченная из каких-то кривых досок. '
-		'За широкой деревянной доской (прилавок) на воображаемой табуретке сидит зеленый бугай '
-		'метра 2 ростом. Серьезно, он сидит в воздухе! Завидев тебя, он что-то нечленораздельно '
-		'говорит, ты понимаешь лишь:\n'
-		'«Привит, юдишка! Йа есть Боба! Босс сказал Бобе таргавать!! Боба типерь умеет в тарговлю!»\n\n'
-		'Зуб (Цена 1 зуб)\n'
-		'Тока што выбил с {0}, дажи кечтуп ищо капаит!\n\n'
-		'Палка (Цена 5 зубов)\n'
-		'Плахая палка, адной такой стукнул юдишку — а она сламалась\n\n'
-		'Парашок (Цена 5 зубов)\n'
-		'Вкусный парашок, клянусь Горком и Морком!'
-	)
+		locale_manager.get('rooms.default.usual.orc_shop.phrase_1'))
 	reply(msg.format(usr.name))
 
 def get_actions(user):
-	return [ 'Зуб', 'Палка', 'Парашок', 'Уйти' ]
+	return [ locale_manager.get('rooms.default.usual.orc_shop.phrase_3'), locale_manager.get('rooms.default.usual.orc_shop.phrase_4'), locale_manager.get('rooms.default.usual.orc_shop.phrase_5'), locale_manager.get('rooms.default.usual.orc_shop.phrase_6') ]
 
 def action(user, reply, text):
-	if text == 'Зуб':
+	if text == locale_manager.get('rooms.default.usual.orc_shop.phrase_7'):
 		teeth_cnt = user.get_room_temp('teeth_cnt', def_val=0)
 
 
 		if user.has_item('tooth'):
 			if teeth_cnt > 2:
-				reply('Ты давно понимаешь, что что-то идет не так, но орк выглядит вполне счастливым, и ты слышишь, как он бормочет что-то вроде: «какая харошая тарговля, босс будит даволен»')
+				reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_8'))
 			else:
 				user.set_room_temp('teeth_cnt', teeth_cnt + 1)
 
-			reply('Ты купил зуб! (И потратил на это зуб)')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_9'))
 		else:
-			reply('«Нет зубов — нет товара» — хотел сказать орк, но просто ударил тебя по лицу.')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_10'))
 			user.make_damage(1, 10, reply, death=False)
-	elif text == 'Палка':
+	elif text == locale_manager.get('rooms.default.usual.orc_shop.phrase_11'):
 		if user.items.count(('loot', 'tooth', {})) >= 5:
-			reply('Забирай')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_12'))
 			user.add_item('good', 'mage_stick')
 
 			for i in range(5):
 				user.remove_item('tooth')
 		else:
-			reply('«Нет зубов — нет товара» — хотел сказать орк, но просто ударил тебя по лицу.')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_13'))
 			user.make_damage(1, 10, reply, death=False)
-	elif text == 'Парашок':
+	elif text == locale_manager.get('rooms.default.usual.orc_shop.phrase_14'):
 		if user.items.count(('loot', 'tooth', {})) >= 5:
-			reply('Забирай')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_15'))
 			user.add_item('neutral', 'protein')
 
 			for i in range(5):
 				user.remove_item('tooth')
 		else:
-			reply('«Нет зубов — нет товара» — хотел сказать орк, но просто ударил тебя по лицу.')
+			reply(locale_manager.get('rooms.default.usual.orc_shop.phrase_16'))
 			user.make_damage(1, 10, reply, death=False)
 	else:
 		user.leave(reply)

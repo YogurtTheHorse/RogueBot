@@ -1,7 +1,8 @@
+from localizations import locale_manager
 import random
 import rooms.roomloader as roomloader
 
-name = 'Распутье'
+name = locale_manager.get('rooms.default.special.sign.phrase_1')
 
 room_type = 'other'
 
@@ -50,11 +51,11 @@ def action(user, reply, text):
 		loaded_room = roomloader.load_room(room_name, room_type, user)
 		if loaded_room.name == text or crypt(loaded_room.name) == text:
 			if random.random() < 0.1:
-				reply('Что-то пошло не так, ты увидел фезку пролетающую у тебя над головой. Ощущения будто был нарушен межпространственный континуум.')
+				reply(locale_manager.get('rooms.default.special.sign.phrase_2'))
 				user.open_room(reply)
 			else:
 				user.open_room(reply, room_type, room_name)
 			return
 
-	reply('Такого выбора тебе не давали.')
+	reply(locale_manager.get('rooms.default.special.sign.phrase_3'))
 

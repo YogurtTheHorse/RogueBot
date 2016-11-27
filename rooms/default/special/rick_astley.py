@@ -1,4 +1,5 @@
-name = 'Сокровищница'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.special.rick_astley.phrase_1')
 
 UP = 'NEVER GONNA GIVE YOU UP!'
 DOWN = 'NEVER GONNA LET YOU DOWN!'
@@ -8,15 +9,14 @@ DESERT = 'AND DESERT YOU!'
 CRY = 'NEVER GONNA MAKE YOU CRY!'
 GOODBYE = 'NEVER GONNA SAY GOODBYE'
 
-NICE = 'Молодец. Но впредь не будь настолько алчным.'
+NICE = locale_manager.get('rooms.default.special.rick_astley.phrase_2')
 WRONG = '*НЕПРАВИЛЬНО!*'
 
-APPEAR = 'ПОЯВЛЯЕТСЯ РИК ЭСТЛИ И БЬЕТ ТЕБЯ МИКРОФОНОМ!'
+APPEAR = locale_manager.get('rooms.default.special.rick_astley.phrase_3')
 
 def enter(user, reply):
 	msg = (
-		'Здесь горы из всевозможных сокровищ и тысячи, нет, миллионы золо...\n*О НЕТ, БЕГИ ЗА СВОЮ ЖИ...*\n'
-	)
+		locale_manager.get('rooms.default.special.rick_astley.phrase_4'))
 	reply(msg)
 	user.set_room_temp('question', 'first')
 
@@ -46,5 +46,5 @@ def action(user, reply, text):
 		else:
 			reply(WRONG)
 			reply(APPEAR)
-			user.make_damage(50, 50, reply, name='Рик Астли')
+			user.make_damage(50, 50, reply, name=locale_manager.get('rooms.default.special.rick_astley.phrase_5'))
 			user.leave(reply)

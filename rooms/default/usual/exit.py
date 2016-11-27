@@ -1,13 +1,14 @@
-name = 'Конец игры'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.usual.exit.phrase_1')
 
 def get_actions(user):
-	return [ 'Выйти на поверхность', 'Уйти' ]
+	return [ locale_manager.get('rooms.default.usual.exit.phrase_2'), locale_manager.get('rooms.default.usual.exit.phrase_3')]
 
 def enter(user, reply):
-	reply('Трава, облачка, птички щебечут! Неужели ты нашел выход? Мы выбрались отсюда!')
+	reply(locale_manager.get('rooms.default.usual.exit.phrase_4'))
 
 def action(user, reply, text):
-	if text == 'Выйти на поверхность':
-		user.death(reply, reason='Конец игры')
+	if text == locale_manager.get('rooms.default.usual.exit.phrase_5'):
+		user.death(reply, reason=locale_manager.get('rooms.default.usual.exit.phrase_6'))
 	else:
 		user.leave(reply)

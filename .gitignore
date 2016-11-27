@@ -102,3 +102,9 @@ question.int
 
 *.xml
 .localeapp
+
+Gemfile
+Gemfile.lock
+config/
+localizations/tmp.yaml
+rooms/default/special/helloween_quest.py

@@ -1,10 +1,11 @@
+from localizations import locale_manager
 from constants import *
 import random
 
-name = 'Супер свиток'
+name = locale_manager.get('items.good.scroll_superpower.phrase_1')
 
 description = (
-	'Только лишь взглянув на него, твои мускулы увеличились. Ты хочешь кого-то ударить.'
+	locale_manager.get('items.good.scroll_superpower.phrase_2')
 )
 
 price = 500
@@ -14,9 +15,9 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if user.use_mana(100):
-		reply('Твои руки увеличиваются и ты со всей силы бьешь врагу в лицо!')
+		reply(locale_manager.get('items.good.scroll_superpower.phrase_3'))
 		return user.get_damage()*3
 	else:
-		reply('Недостаточно маны')
+		reply(locale_manager.get('items.good.scroll_superpower.phrase_4'))
 		user.add_item('good', 'scroll_superpower')
 		return 0

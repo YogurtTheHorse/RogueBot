@@ -1,20 +1,17 @@
+from localizations import locale_manager
 import random
 
-name = 'Монетка'
+name = locale_manager.get('items.neutral.coin.phrase_3')
 
 price = 1
 
 description = (
-	'Есть и орел, и решка! Она какой-то странной формы и больше похожа на '
-	'цилиндр, поэтому ни один банкомат ее не принимает.'
-)
+	locale_manager.get('items.neutral.coin.phrase_1'))
 
 def get_dice_bonus(user, reply):
 	if random.random() <= 0.1:
 		txt = (
-			'Ты это видел? Монетка упала на ребро!\nНаверное, '
-			'это из-за особой цилиндрической формы, но это же все равно монетка, верно?'
-		)
+			locale_manager.get('items.neutral.coin.phrase_2'))
 		reply(txt)
 
 		return 1

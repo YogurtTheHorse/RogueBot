@@ -1,11 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Роба Монаха'
+name = locale_manager.get('items.good.budda_robe.phrase_2')
 
 description = (
-	'Оранжевая роба какого-то монаха, который продал мне ее, чтобы купить еды. '
-	'Некоторые монстры уважают Буддистов и не трогают их.'
-)
+	locale_manager.get('items.good.budda_robe.phrase_1'))
 
 aura = AURA_BUDDHA
 price = 150

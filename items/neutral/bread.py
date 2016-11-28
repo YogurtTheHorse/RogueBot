@@ -1,11 +1,12 @@
+from localizations import locale_manager
 import random
 
-name = 'Буханка хлеба'
+name = locale_manager.get('items.neutral.bread.phrase_1')
 
 price = 16
 
 description = (
-	'Свежий, теплый и мягкий. Разбирай.'
+	locale_manager.get('items.neutral.bread.phrase_2')
 )
 
 fightable = True
@@ -13,11 +14,11 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if room.code_name == 'duck':
-		reply('Ты ей понравился.')
+		reply(locale_manager.get('items.neutral.bread.phrase_3'))
 		user.new_pet(reply, 'duck')
 
 		return 0
 	else:
-		reply('Ты раскрошил хлеб. Зачем?')
+		reply(locale_manager.get('items.neutral.bread.phrase_4'))
 
 		return 0

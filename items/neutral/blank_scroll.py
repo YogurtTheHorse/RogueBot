@@ -1,10 +1,9 @@
+from localizations import locale_manager
 
-name = 'Пустой свиток'
+name = locale_manager.get('items.neutral.blank_scroll.phrase_3')
 
 description = (
-	'В этом свите можно делать записи!\n'
-	'Осталось только научиться.'
-)
+	locale_manager.get('items.neutral.blank_scroll.phrase_1'))
 
 mp_cost = 50
 
@@ -21,22 +20,17 @@ def on_use(user, reply):
 		if user.mp >= mp_cost:
 
 			reply(
-				'Ты наносишь какие-то загадочные символы на свиток\n'
-				'Когда дописан последний символ, буквы вспихивают\n'
-				'Кажется у тебя получилось сделать *Магический свиток*\n\n'
-				'*Из инвентаря пропал зуб Василиска*'
-
-			)
+				locale_manager.get('items.neutral.blank_scroll.phrase_2'))
 
 			user.remove_item('tooth_basilisk')
 			user.mp -= mp_cost
 			user.add_item('special', 'magic_scroll')
 
 		else:
-			reply('Не получилось.\n\n *Ты лишился Свитка и зуба Василиска*.')
+			reply(locale_manager.get('items.neutral.blank_scroll.phrase_4'))
 			user.remove_item('tooth_basilisk')
 			user.mp = 0
 
 	else:
-		reply('Молодец! Ты его испортил!')
+		reply(locale_manager.get('items.neutral.blank_scroll.phrase_5'))
 

@@ -1,10 +1,11 @@
+from localizations import locale_manager
 import items.itemloader as itemloader
 from utils.potions import get_potion_color
 from utils.potions import HP_POT
 
-name = get_potion_color(itemloader.get_user(), HP_POT) + ' зелье'
+name = get_potion_color(itemloader.get_user(), HP_POT) + locale_manager.get('items.good.hp_pot.phrase_1')
 
-description = 'Пробирка с каким-то зельем.'
+description = locale_manager.get('items.good.hp_pot.phrase_2')
 
 price = 100
 shop_count = 2
@@ -13,7 +14,7 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Это оказалось зелье жизни. Теперь ты здоровее чем мог бы быть.')
+	reply(locale_manager.get('items.good.hp_pot.phrase_3'))
 
 	user.hp = user.max_hp
 

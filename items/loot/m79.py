@@ -1,6 +1,7 @@
+from localizations import locale_manager
 name = 'M79'
 description = (
-	'Уничтожает. Быстро.'
+	locale_manager.get('items.loot.m79.phrase_1')
 )
 
 price = 800

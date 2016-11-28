@@ -1,6 +1,7 @@
-name = 'Миниган'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.minigun.phrase_1')
 description = (
-	'Тратит твои патроны. Быстро.'
+	locale_manager.get('items.loot.minigun.phrase_2')
 )
 
 price = 650

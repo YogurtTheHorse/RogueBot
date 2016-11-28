@@ -1,9 +1,10 @@
+from localizations import locale_manager
 import random
 
-name = 'Мешочек со спойлерами'
+name = locale_manager.get('items.special.spoilers.phrase_1')
 
 description = (
-	'Не вскрывать!'
+	locale_manager.get('items.special.spoilers.phrase_2')
 )
 
 price = 300
@@ -12,16 +13,16 @@ disposable = True
 
 
 def can_use(user, reply, room):
-  reply('Ты бросаешь мешочек со спойлерами в врага и...')
+  reply(locale_manager.get('items.special.spoilers.phrase_3'))
 
   return random.random() > 0.66 and room.code_name != 'doctor_who' and room.room_type != 'boss'
 
 
 def success(user, reply, room):
-  reply('Ты — отвратительный человек. Но спойлеры подействовали: противник сбежал, закрыв глаза и уши!')
+  reply(locale_manager.get('items.special.spoilers.phrase_4'))
   user.won(reply)
 
 
 def failure(user, reply, room):
-  reply('Ничего не происходит.')
-  reply('К сожалению, противник тщательно готовился к бою и досмотрел все сериалы.')
+  reply(locale_manager.get('items.special.spoilers.phrase_5'))
+  reply(locale_manager.get('items.special.spoilers.phrase_6'))

@@ -1,4 +1,5 @@
-name = 'Боксерские перчатки'
+from localizations import locale_manager
+name = locale_manager.get('items.good.box_gloves.phrase_1')
 price = 200
-description = 'Держать в них меч неудобно, зато можно бить сильнее и не болит!'
+description = locale_manager.get('items.good.box_gloves.phrase_2')
 damage = 10

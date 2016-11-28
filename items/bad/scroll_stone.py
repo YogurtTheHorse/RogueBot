@@ -1,9 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Свиток вызова камней'
+name = locale_manager.get('items.bad.scroll_stone.phrase_1')
 
 description = (
-	'Все что о нем известно, так это то что на нем нарисован камень.'
+	locale_manager.get('items.bad.scroll_stone.phrase_2')
 )
 
 price = 200
@@ -13,9 +14,9 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if user.use_mana(50):
-		reply('С неба падают камни прямо на тебя и наносят 50 урона.')
-		user.make_damage(50, 100, reply, death=True, name='Камнепад')
+		reply(locale_manager.get('items.bad.scroll_stone.phrase_3'))
+		user.make_damage(50, 100, reply, death=True, name=locale_manager.get('items.bad.scroll_stone.phrase_4'))
 	else:
-		reply('Недостаточно маны')
+		reply(locale_manager.get('items.bad.scroll_stone.phrase_5'))
 		user.add_item('bad', 'scroll_stone')
 	return 0

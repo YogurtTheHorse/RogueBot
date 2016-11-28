@@ -1,6 +1,7 @@
-name = 'Клевер'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.clever.phrase_1')
 description = (
-	'Четырехлистый.'
+	locale_manager.get('items.loot.clever.phrase_2')
 )
 
 price = 300

@@ -1,6 +1,7 @@
-name = 'Деревянная ложка'
+from localizations import locale_manager
+name = locale_manager.get('items.special.spoon.phrase_1')
 description = (
-	'Ее кто-то грыз...'
+	locale_manager.get('items.special.spoon.phrase_2')
 )
 
 price = 3

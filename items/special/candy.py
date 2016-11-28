@@ -1,10 +1,11 @@
+from localizations import locale_manager
 import random
 
 from utils.buffs import DiabetBuff
 
-name = 'Конфетка'
+name = locale_manager.get('items.special.candy.phrase_1')
 description = (
-	'Сладкая и вкусная'
+	locale_manager.get('items.special.candy.phrase_2')
 )
 
 price = 1
@@ -16,20 +17,20 @@ def on_use(user, reply):
 	cnt = user.get_variable('candies_eat', 0)
 
 	if cnt == 10:
-		reply('Поздравляю, у вас диабет!')
-		reply('Вот вам конфетка без сахара, чтобы утешить себя')
+		reply(locale_manager.get('items.special.candy.phrase_3'))
+		reply(locale_manager.get('items.special.candy.phrase_4'))
 
 		user.new_buff(DiabetBuff())
 		user.add_item('special', 'candy')
 	elif cnt == 11:
-		reply('А нет, это с сахаром :(\nВот вам другая.')
+		reply(locale_manager.get('items.special.candy.phrase_5'))
 		user.add_item('special', 'candy')
-		user.make_damage(3, 7, reply, name='Диабет')
+		user.make_damage(3, 7, reply, name=locale_manager.get('items.special.candy.phrase_6'))
 	elif cnt > 11:
-		reply('Ну что же вы себя убиваете, голубчик!')
-		user.make_damage(cnt - 5, cnt + 3, reply, name='Диабет')
+		reply(locale_manager.get('items.special.candy.phrase_7'))
+		user.make_damage(cnt - 5, cnt + 3, reply, name=locale_manager.get('items.special.candy.phrase_8'))
 	else:
-		reply('Вкусненько!')
+		reply(locale_manager.get('items.special.candy.phrase_9'))
 		user.heal(15)
 
 	user.get_variable('candies_eat', cnt + 1)

@@ -1,9 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Яблочко'
+name = locale_manager.get('items.loot.apple.phrase_1')
 
 description = (
-	'Зелененькое.'
+	locale_manager.get('items.loot.apple.phrase_2')
 )
 
 price = 50
@@ -12,7 +13,7 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Приятно.')
+	reply(locale_manager.get('items.loot.apple.phrase_3'))
 
 	user.hp = min(user.max_hp, user.hp + 50)
 

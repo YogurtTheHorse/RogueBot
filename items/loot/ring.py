@@ -1,15 +1,13 @@
-name = 'Кольцо'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.ring.phrase_2')
 
 description = (
-	'... И в это кольцо он засадил всю свою жестокость,\n'
-	'злобу свою засадил, детские комплексы,\n'
-	'ну там привычки нехорошие и всё такое...\n'
-)
+	locale_manager.get('items.loot.ring.phrase_1'))
 
 price = 0
 iscursed = True
 
 
 def on_room(user, reply, room):
-	reply('Опять вставило, да?')
+	reply(locale_manager.get('items.loot.ring.phrase_3'))
 	user.make_damage(10, 20, reply, death=False)

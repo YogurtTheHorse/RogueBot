@@ -1,7 +1,9 @@
+from localizations import locale_manager
+from localizations import locale_manager
 import random
 
-name = 'Лиса'
-description = 'Оказывает поддержку в трудную минуту'
+name = locale_manager.get('items.pets.fox.phrase_1')
+description = locale_manager.get('items.pets.fox.phrase_2')
 price = 0
 
 MAX_MAGIC_POWER = 10
@@ -10,7 +12,7 @@ MAX_MAGIC_POWER = 10
 def on_room(user, reply, room):
 	if room.room_type in [ 'monster', 'boss' ]:
 		msg = (
-			'Твой лис {} спрятался позади тебя.'
+			locale_manager.get('items.pets.fox.phrase_3')
 		)
 
 		pet_name = user.get_pet().real_name
@@ -20,7 +22,7 @@ def on_room(user, reply, room):
 
 def get_damage_bonus(user, reply):
 	msg = (
-		'Твой лис {} кастует заклинание.'
+		locale_manager.get('items.pets.fox.phrase_4')
 	)
 
 	pet_name = user.get_pet().real_name
@@ -34,7 +36,7 @@ def get_damage_bonus(user, reply):
 
 	if magic_power >= MAX_MAGIC_POWER or random.random() < 0.15:
 		msg = (
-			'Твой лис {} восстановил тебе *{}* HP.'
+			locale_manager.get('items.pets.fox.phrase_5')
 		)
 		
 		heal_hp = int(user.max_hp * (magic_power / 30))

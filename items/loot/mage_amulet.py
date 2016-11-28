@@ -1,7 +1,8 @@
-name = 'Амулет мага'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.mage_amulet.phrase_1')
 
 description = (
-	'Амулет мага, который дает тебе магическую силу!'
+	locale_manager.get('items.loot.mage_amulet.phrase_2')
 )
 
 price = 200

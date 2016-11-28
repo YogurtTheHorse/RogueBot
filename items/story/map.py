@@ -1,6 +1,7 @@
-name = 'Карта сокровищ'
+from localizations import locale_manager
+name = locale_manager.get('items.story.map.phrase_1')
 description = (
-	'На ней только странная черная полоска и три цифры.'
+	locale_manager.get('items.story.map.phrase_2')
 )
 
 price = 0

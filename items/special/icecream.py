@@ -1,9 +1,10 @@
+from localizations import locale_manager
 import random 
 
 name = "Мороженое"
 
 description = (
-	'Очень дорогое лакомство.'
+	locale_manager.get('items.special.icecream.phrase_1')
 )
 
 price = 30
@@ -13,6 +14,6 @@ disposable = True
 fightable = True
 
 def fight_use(user, reply, room):
-	reply('ЕЕЕЕЕ.\nМороженное по лицу.\nИ рожком по ребру_!_')
+	reply(locale_manager.get('items.special.icecream.phrase_2'))
 	
 	return 15

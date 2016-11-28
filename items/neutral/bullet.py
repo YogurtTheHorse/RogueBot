@@ -1,17 +1,18 @@
+from localizations import locale_manager
 import random
 
-name = 'Пуля'
+name = locale_manager.get('items.neutral.bullet.phrase_1')
 
 price = 2
 
 description = (
-	'Калибр в этой игре не важен, вот и знать тебе его не нужно.'
+	locale_manager.get('items.neutral.bullet.phrase_2')
 )
 
 fightable = True
 disposable = True
 
 def fight_use(user, reply, room):
-	reply('Ты выкинул пулю в противника. И зачем?')
+	reply(locale_manager.get('items.neutral.bullet.phrase_3'))
 	
 	return 0

@@ -1,6 +1,7 @@
-name = 'Нож'
+from localizations import locale_manager
+name = locale_manager.get('items.good.knife.phrase_1')
 description = (
-	'Нож как нож. Кровь врагов уже засохла, но ты всегда можешь пролить новую с его помощью.'
+	locale_manager.get('items.good.knife.phrase_2')
 )
 
 price = 100

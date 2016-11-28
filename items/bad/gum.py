@@ -1,11 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Жвачка'
+name = locale_manager.get('items.bad.gum.phrase_2')
 
 description = (
-	'Розовая жвачка со вкусом клубники. '
-	'Ну хоть пожуешь чего-нибудь.'
-)
+	locale_manager.get('items.bad.gum.phrase_1'))
 
 charisma = -1
 price = 10
@@ -13,7 +12,7 @@ tags = ['hair']
 
 def on_buy(user, reply):
 	if user.get_mana_damage() < SMART_LEVEL:
-		reply('Надувать пузырь не стоило — жвачка застряла в волосах, а парикмахера ты тут вряд ли найдешь.')
+		reply(locale_manager.get('items.bad.gum.phrase_3'))
 	else:
 		charisma = 0
-		reply('А ты оказался достаточно умен, чтобы не запутать жвачку в волосах.')
+		reply(locale_manager.get('items.bad.gum.phrase_4'))

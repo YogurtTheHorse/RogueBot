@@ -1,11 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Коран'
+name = locale_manager.get('items.good.koran.phrase_2')
 
 description = (
-	'Священная книга мусульман. Написана на арабском, поэтому я даже не брался за нее. '
-	'Забирай, если хочешь. Бесплатно? Это же священная книжка! _Ты что?!_ '
-)
+	locale_manager.get('items.good.koran.phrase_1'))
 
 price = 100
 

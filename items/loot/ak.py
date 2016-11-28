@@ -1,6 +1,7 @@
-name = 'АК-47'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.ak.phrase_1')
 description = (
-	' Пробивает рельс. Насвозь. Вдоль. Наверное.'
+	locale_manager.get('items.loot.ak.phrase_2')
 )
 
 price = 300

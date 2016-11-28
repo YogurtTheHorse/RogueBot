@@ -1,6 +1,7 @@
-name = 'Волшебная палочка'
+from localizations import locale_manager
+name = locale_manager.get('items.bad.magick_wand.phrase_1')
 description = (
-	'Говорят, что каждая палочка сама выбирает хозяина, но чхал я на это. Можно делать «_Авада Кедавра!_» и убивать *всё*.'
+	locale_manager.get('items.bad.magick_wand.phrase_2')
 )
 
 price = 100
@@ -8,7 +9,7 @@ price = 100
 fightable = True
 disposable = True
 def fight_use(user, reply, room):
-	reply('Авада Кедавра!\n\nПалочка убила всё вокруг и не только.')
-	user.death(reply, reason='Магия')
+	reply(locale_manager.get('items.bad.magick_wand.phrase_3'))
+	user.death(reply, reason=locale_manager.get('items.bad.magick_wand.phrase_4'))
 
 	return 0

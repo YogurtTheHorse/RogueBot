@@ -1,11 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Крестик'
+name = locale_manager.get('items.good.christ.phrase_2')
 
 description = (
-	'Нательный крестик, который я нашел в одной из этих дверей. '
-	'Не знаю, кто его носил, но он весь пропах вином.'
-)
+	locale_manager.get('items.good.christ.phrase_1'))
 
 tags = [ 'wine' ]
 price = 150

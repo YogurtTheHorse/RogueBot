@@ -1,11 +1,10 @@
+from localizations import locale_manager
 import random
 
-name = 'Свиток вспышки'
+name = locale_manager.get('items.good.escape_scroll.phrase_4')
 
 description = (
-	'Вспыхивает всё вокруг.\n'
-	'Надпись на обороте: применять осторожно.'
-)
+	locale_manager.get('items.good.escape_scroll.phrase_1'))
 
 price = 9990
 fightable = True
@@ -14,18 +13,14 @@ disposable = True
 
 def success(user, reply, room):
 	msg = (
-		'Яркий свет ослепил всех вокруг, '
-		'у тебя появилась возможность убежать и ты убежал!'
-	)
+		locale_manager.get('items.good.escape_scroll.phrase_2'))
 
 	reply(msg)
 
 
 	if user.gold > 0:
 		msg = (
-			'Ты бежал насколько быстро, что растряс все свои денежки.\n'
-			'Ты потерял {}.'
-		)
+			locale_manager.get('items.good.escape_scroll.phrase_3'))
 
 		coins = user.gold // 2
 
@@ -39,7 +34,7 @@ def success(user, reply, room):
 
 	if user_items and item.name is not name:
 		msg = (
-			'А еще ты потерял {}'
+			locale_manager.get('items.good.escape_scroll.phrase_5')
 		)
 
 		user.remove_item_by_name(item.name)

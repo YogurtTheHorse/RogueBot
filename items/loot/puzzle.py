@@ -1,8 +1,9 @@
+from localizations import locale_manager
 import random
 
-name = 'Головоломка Йог-Сотота'
+name = locale_manager.get('items.loot.puzzle.phrase_1')
 
-description = 'Тяжелая, кубическая, сделана из непонятного металла. Состоит из множетсва элементов. Изредка изнутри можно улышать тихое сердцебиение.'
+description = locale_manager.get('items.loot.puzzle.phrase_2')
 
 price = 150
 
@@ -10,35 +11,35 @@ usable = True
 iscursed = True
 
 def on_use(user, reply):
-	reply('Не получается решить. Попробуй в другой раз')
+	reply(locale_manager.get('items.loot.puzzle.phrase_3'))
 
 def on_room(user, reply, room):
 	say = [ '«Р`льех – город, в котором издревле совершается множество страшных преступлений.»',
 			'«Сердце утонувшего бога – это черный лед.»',
 			'«В Р`льех есть только сон.»',
-			'«Ты сопротивляешься. Ты цепляешься за жизнь, как будто она имеет значение. Ничего, ты еще узнаешь правду.»',
-			'«Даже смерть может умереть.»',
-			'«В конце ты всегда остаешься один.»',
-			'«Между реальностью и фантазией нет четких границ.»',
+			locale_manager.get('items.loot.puzzle.phrase_4'),
+			locale_manager.get('items.loot.puzzle.phrase_5'),
+			locale_manager.get('items.loot.puzzle.phrase_6'),
+			locale_manager.get('items.loot.puzzle.phrase_7'),
 			'«По спящему городу Р`льех бродят только безумные существа.»',
-			'«Оглянись вокруг. Они все предадут тебя. Беги в черный лес, завывая от ужаса.»',
-			'«Холодный свет звезд заставляет людей дрожать во тьме.»',
-			'«У каждого места, у каждого объекта есть душа. Любую душу можно поглотить.»',
-			'«Тебе снова приснился этот сон? Про черного семиглазого козла, который следит за тобой?»',
+			locale_manager.get('items.loot.puzzle.phrase_8'),
+			locale_manager.get('items.loot.puzzle.phrase_9'),
+			locale_manager.get('items.loot.puzzle.phrase_10'),
+			locale_manager.get('items.loot.puzzle.phrase_11'),
 			'«Молчаливые, тихие, наблюдающие дома всегда видят сны. Снести их – значит избавить от страданий.»',
-			'«Огромный грач следит за всеми с верхушки мертвого дерева. Никто не смеет даже дышать под его сенью.»',
+			locale_manager.get('items.loot.puzzle.phrase_12'),
 			'«Пх’нглуи мглв’нафх Ктулху Р’льех вгах’нагл фхтагн.»',
-			'«Видишь ли ты сны, когда спишь? Или ты просто уходишь от кошмара реальности?»',
-			'«Оно стоит у тебя за спиной. Не двигайся. Не дыши.»',
-			'«Открой меня! Открой меня! Открой меня! Только тогда ты обретешь покой.»',
-			'«Что может изменить природу человека?»',
-			'«В затопленном городе спит он.»',
-			'«Пустота пожирает твою душу. И будет делать это медленно.»',
-			'«Рыбам известны все секреты. Они знают, что такое холод. Они знают, что такое мрак.»',
-			'«На дне океана умирает даже свет.»',
-			'«В темном лесу заблудился ягненок.»',
-			'«Измученные души предков цепляются за тебя, заходясь в безмолвном крике. Похоже, их довольно много.»',
-			'«Это была твоя вина.»',
-			'«В тени темного шпиля нет ни света, ни милосердия, внутри только пустота и хаос.»'
+			locale_manager.get('items.loot.puzzle.phrase_13'),
+			locale_manager.get('items.loot.puzzle.phrase_14'),
+			locale_manager.get('items.loot.puzzle.phrase_15'),
+			locale_manager.get('items.loot.puzzle.phrase_16'),
+			locale_manager.get('items.loot.puzzle.phrase_17'),
+			locale_manager.get('items.loot.puzzle.phrase_18'),
+			locale_manager.get('items.loot.puzzle.phrase_19'),
+			locale_manager.get('items.loot.puzzle.phrase_20'),
+			locale_manager.get('items.loot.puzzle.phrase_21'),
+			locale_manager.get('items.loot.puzzle.phrase_22'),
+			locale_manager.get('items.loot.puzzle.phrase_23'),
+			locale_manager.get('items.loot.puzzle.phrase_24')
 	]
 	reply(random.choice(say))

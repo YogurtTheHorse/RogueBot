@@ -1,11 +1,12 @@
-name = 'Некрономикон'
-description = 'Тяжелая книга, сделанная из кожи. Кажется из человеческой кожи. Открыв ее ты видишь странные символы, написанные кровью. От них у тебя начинает болеть голова.'
+from localizations import locale_manager
+name = locale_manager.get('items.neutral.necronomicone.phrase_1')
+description = locale_manager.get('items.neutral.necronomicone.phrase_2')
 price = 600
 
 disposable = True
 usable = True
 def on_use(user, reply):
 	if user.has_item('puzzle'):
-		reply('Ты видишь странных существ, но между тобой и этими существами словно стена. Их время еще не пришло...')
+		reply(locale_manager.get('items.neutral.necronomicone.phrase_3'))
 	else:
 		user.open_room(reply, 'special', 'the_thing_from_below')

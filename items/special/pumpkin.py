@@ -1,8 +1,9 @@
+from localizations import locale_manager
 import random
 
-name = 'Тыква'
+name = locale_manager.get('items.special.pumpkin.phrase_1')
 description = (
-	'Праздник к нам приходит, праздник к нам приходит!'
+	locale_manager.get('items.special.pumpkin.phrase_2')
 )
 
 price = 3
@@ -12,9 +13,9 @@ strengthoff = True
 disposable = True
 
 def fight_use(user, reply, room):
-	reply('Не фашисты, но гранату получат.')
+	reply(locale_manager.get('items.special.pumpkin.phrase_3'))
 
-	user.make_damage(0, 20, reply, name='Тыква')
+	user.make_damage(0, 20, reply, name=locale_manager.get('items.special.pumpkin.phrase_4'))
 
 	if user.dead:
 		return 0

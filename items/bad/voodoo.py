@@ -1,10 +1,11 @@
+from localizations import locale_manager
 
-name = 'Кукла вуду'
+name = locale_manager.get('items.bad.voodoo.phrase_1')
 
-description = 'Небольшая тряпичная кукла, говорят, в умелых руках она творит чудеса.'
+description = locale_manager.get('items.bad.voodoo.phrase_2')
 
 price = 50
 
 def on_room(user, reply, room):	
-	reply('У тебя закололо в груди.')
+	reply(locale_manager.get('items.bad.voodoo.phrase_3'))
 	user.make_damage(20,30, reply, death=False)

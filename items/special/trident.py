@@ -1,6 +1,7 @@
-name = 'Трезубец'
+from localizations import locale_manager
+name = locale_manager.get('items.special.trident.phrase_1')
 description = (
-	'Три зубца — это на три больше, чем у тебя было.'
+	locale_manager.get('items.special.trident.phrase_2')
 )
 
 price = 500

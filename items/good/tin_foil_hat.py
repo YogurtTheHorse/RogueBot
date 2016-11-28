@@ -1,6 +1,7 @@
-name = 'Шапочка из фольги'
+from localizations import locale_manager
+name = locale_manager.get('items.good.tin_foil_hat.phrase_1')
 
-description = 'Головной убор из металлической фольги, якобы способный защитить мозг и сознание от вредных излучений и влияний.'
+description = locale_manager.get('items.good.tin_foil_hat.phrase_2')
 
 price = 2000
 

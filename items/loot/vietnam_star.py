@@ -1,12 +1,13 @@
+from localizations import locale_manager
 name = 'Мазь "Звёздочка"'
-description = 'Лечебная мазь универсального действия. Кажется, может вылечить даже от рака.'
+description = locale_manager.get('items.loot.vietnam_star.phrase_1')
 price = 300
 
 usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Вот так-то лучше!')
+	reply(locale_manager.get('items.loot.vietnam_star.phrase_2'))
 
 	user.heal(25)
 

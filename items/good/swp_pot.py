@@ -1,9 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Черно-белое зелье'
+name = locale_manager.get('items.good.swp_pot.phrase_1')
 
 description = (
-	'Пробирка с каким-то черно-белым зельем.'
+	locale_manager.get('items.good.swp_pot.phrase_2')
 )
 
 price = 100
@@ -13,7 +14,7 @@ usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Это оказалось зелье ПЕРЕМЕН. Ты поменял местами ману и жизнь.')
+	reply(locale_manager.get('items.good.swp_pot.phrase_3'))
 
 	user.hp, user.mp = user.mp, user.hp
 	user.heal(0)

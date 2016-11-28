@@ -1,6 +1,7 @@
-name = 'Песок'
+from localizations import locale_manager
+name = locale_manager.get('items.good.sand.phrase_1')
 description = (
-	'Песок в глаза — это больно.'
+	locale_manager.get('items.good.sand.phrase_2')
 )
 
 price = 99

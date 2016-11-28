@@ -1,16 +1,17 @@
+from localizations import locale_manager
 from utils.buffs import Buff
 
-name = 'Золотой песок'
+name = locale_manager.get('items.good.gold_sand.phrase_1')
 price = 700
 description = (
-	'Увеличивает получаемое золото в два раза!'
+	locale_manager.get('items.good.gold_sand.phrase_2')
 )
 
 usable = True
 disposable = True
 
 def on_use(user, reply):
-	reply('Пыщ-пыщ.')
+	reply(locale_manager.get('items.good.gold_sand.phrase_3'))
 
 	has_gold_buff = False
 
@@ -22,7 +23,7 @@ def on_use(user, reply):
 	gold_bonus = 2
 	if has_gold_buff:
 		gold_bonus = 0
-		reply('Ой, подождите-ка... У тебя песок попал в глаза и ты не видишь золото в этом блеске. Как жаль :(')
+		reply(locale_manager.get('items.good.gold_sand.phrase_4'))
 
 	bf = Buff(10, name='gold', gold_bonus=gold_bonus)
 

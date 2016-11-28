@@ -1,10 +1,11 @@
+from localizations import locale_manager
 import random
 from constants import *
 
-name = 'Зелье полусмерти'
+name = locale_manager.get('items.good.fake_death_pot.phrase_1')
 
 description = (
-	'Читал «Ромео и Джульетта»? Вот эта штука поможет прbтвориться мертвым'
+	locale_manager.get('items.good.fake_death_pot.phrase_2')
 )
 
 price = 100
@@ -15,10 +16,10 @@ disposable = True
 fightable = True
 def fight_use(user, reply, room):
 	if random.random() > 0.5:
-		reply('Ты успешно притворился мертвым и монстр ушел')
+		reply(locale_manager.get('items.good.fake_death_pot.phrase_3'))
 		user.leave(reply)
 	else:
-		reply('То ли монстр не поверил твоей игре, то ли наоборот: ты слишком убедительно притворялся, но факт остается фактом. Очнулся ты уже мертвым.')
+		reply(locale_manager.get('items.good.fake_death_pot.phrase_4'))
 		user.death(reply, reason=name)
 
 	return 0

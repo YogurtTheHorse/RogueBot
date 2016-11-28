@@ -1,6 +1,8 @@
 ﻿import random
-name = 'Мехмод'
-description = 'Вы чувствуете, как подворачиваются ваши штаны.'
+from localizations import locale_manager
+
+name = locale_manager.get('items.loot.mechmod.phrase_1')
+description = locale_manager.get('items.loot.mechmod.phrase_2')
 
 price = 15
 usable = True
@@ -9,14 +11,14 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if random.random() < 0.3:
-		reply('Все исчезло в дыму. Ты очутился в коридоре.')
+		reply(locale_manager.get('items.loot.mechmod.phrase_3'))
 		user.leave(reply)
 	else:
-		reply('Пых-пых.')
+		reply(locale_manager.get('items.loot.mechmod.phrase_4'))
 
 	return 0
 
 def on_use(user, reply):
-	reply('Ты ничего не видишь.')
+	reply(locale_manager.get('items.loot.mechmod.phrase_5'))
 
 	user.defence -= 20

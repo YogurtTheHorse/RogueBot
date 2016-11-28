@@ -1,9 +1,10 @@
+from localizations import locale_manager
 import random
 
-name = 'Звонок гейбу'
+name = locale_manager.get('items.special.call_gabe.phrase_3')
 
 description = (
-	'Решит любые проблемы.'
+	locale_manager.get('items.special.call_gabe.phrase_4')
 )
 
 price = 300
@@ -13,10 +14,7 @@ disposable = True
 
 def can_use(user, reply, room):
   msg = (
-    'Идут гудки..\n'
-    '—Алло, Гейб, у меня тут проблемы с монстром.\n'
-    '—Каким монстром?\b'
-  )
+    locale_manager.get('items.special.call_gabe.phrase_1'))
 
   reply(msg)
 
@@ -25,7 +23,7 @@ def can_use(user, reply, room):
 
 def success(user, reply, room):
   msg = (
-    'Действительно, каким? Твой противник сбежал.'
+    locale_manager.get('items.special.call_gabe.phrase_5')
   )
 
   reply(msg)
@@ -34,8 +32,6 @@ def success(user, reply, room):
 
 def failure(user, reply, room):
   msg = (
-    '—*Ахххр-гр!*\n'
-    'Гейб услышал рык монстра и повесил трубку.'
-  )
+    locale_manager.get('items.special.call_gabe.phrase_2'))
 
   reply(msg)

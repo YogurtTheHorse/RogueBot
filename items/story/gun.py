@@ -1,6 +1,7 @@
-name = 'Пистолет'
+from localizations import locale_manager
+name = locale_manager.get('items.story.gun.phrase_1')
 description = (
-	'Хороший такой пистолет. 20 миллиметров.'
+	locale_manager.get('items.story.gun.phrase_2')
 )
 
 price = 300
@@ -11,12 +12,12 @@ strengthoff = True
 
 def fight_use(user, reply, room):
 	if user.has_item('bullet'):
-		reply('БАХ! Выстрел!')
+		reply(locale_manager.get('items.story.gun.phrase_3'))
 
 		user.remove_item('bullet')
 
 		return 30
 	else:
-		reply('Патроны закончились, но ты не дрейфь. Весит эта штука достаточно.')
+		reply(locale_manager.get('items.story.gun.phrase_4'))
 
 		return 10

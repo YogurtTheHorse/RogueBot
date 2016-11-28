@@ -1,3 +1,4 @@
+from localizations import locale_manager
 import random
 from utils.buffs import RainbowBuff
 from utils.buffs import NegativeRainbowBuff
@@ -5,12 +6,7 @@ from utils.buffs import NegativeRainbowBuff
 name = "Психопаста «Радуга»"
 price = 100
 description = (
-	'Самый надежный спутник психовоина:\n\n'
-
-	' — Эффективно устраняет трещины сознания\n'
-	' — Снимает зуд базальных ганглий\n'
-	' — Отпускает без рецепта\n'
-)
+	locale_manager.get('items.good.rainbow.phrase_1'))
 
 usable = True
 disposable = True
@@ -23,7 +19,7 @@ def on_use(user, reply):
 
 	p = 0.9 ** (rainbows_count - 1)
 	if random.random() > p:
-		reply('Дозировать.. Дозировать нужно, голубчик.')
+		reply(locale_manager.get('items.good.rainbow.phrase_2'))
 		# Turn off positive effect
 		for b in user.buffs:
 			if isinstance(b, RainbowBuff):
@@ -31,5 +27,5 @@ def on_use(user, reply):
 
 		user.new_buff(NegativeRainbowBuff())
 	else:
-		reply('_О-даа_.')
+		reply(locale_manager.get('items.good.rainbow.phrase_3'))
 		user.new_buff(RainbowBuff())

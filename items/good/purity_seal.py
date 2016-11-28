@@ -1,8 +1,9 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Печать Чистоты'
+name = locale_manager.get('items.good.purity_seal.phrase_1')
 
-description = ('Печать в виде черепа, к ней прикреплены 2 длинных листочка с Литаниями Богу-Императору Всего Человечества.\nКак сказал алхимик ее нужно крепить прямо на себя.')
+description = (locale_manager.get('items.good.purity_seal.phrase_2'))
 
 price = 50
 

@@ -1,6 +1,7 @@
-name = 'М-16'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.m-16.phrase_1')
 description = (
-	'Приклад немного подплавился и треснул. _Держать вдали от воды!_'
+	locale_manager.get('items.loot.m-16.phrase_2')
 )
 
 price = 300

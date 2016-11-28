@@ -1,10 +1,11 @@
+from localizations import locale_manager
 import items.itemloader as itemloader
 from utils.potions import get_potion_color
 from utils.potions import DALTONISM_POT
 
-name = get_potion_color(itemloader.get_user(), DALTONISM_POT) + ' зелье'
+name = get_potion_color(itemloader.get_user(), DALTONISM_POT) + locale_manager.get('items.bad.daltonism_pot.phrase_1')
 
-description = 'Пробирка с каким-то зельем.'
+description = locale_manager.get('items.bad.daltonism_pot.phrase_2')
 
 price = 100
 shop_count = 1
@@ -15,10 +16,10 @@ disposable = True
 def on_use(user, reply):
 	if user.has_tag('daltonism'):
 		user.remove_tags('daltonism')
-		reply('Ты снова видишь цвет! Правда корридор все такой же серый и беспросветный..')
+		reply(locale_manager.get('items.bad.daltonism_pot.phrase_3'))
 	else:
 		user.add_tag('daltonism')
-		reply('Это оказалось зелье дальтонизма. Что могу сказать.. «Клин клином вышибают» — вдруг поможет?')
+		reply(locale_manager.get('items.bad.daltonism_pot.phrase_4'))
 
 
 fightable = True

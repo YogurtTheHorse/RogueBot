@@ -1,6 +1,7 @@
-name = 'Лазерный пистолет'
+from localizations import locale_manager
+name = locale_manager.get('items.loot.laser_gun.phrase_1')
 description = (
-	'Хороший такой ЛАЗЕРНЫЙ пистолет.'
+	locale_manager.get('items.loot.laser_gun.phrase_2')
 )
 
 price = 300

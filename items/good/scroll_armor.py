@@ -1,11 +1,12 @@
+from localizations import locale_manager
 from constants import *
 from utils.buffs import ScrollBuff_armor
 import random
 
-name = 'Свиток черепахи'
+name = locale_manager.get('items.good.scroll_armor.phrase_1')
 
 description = (
-	'Свиток железный, его не согнуть'
+	locale_manager.get('items.good.scroll_armor.phrase_2')
 )
 
 price = 100
@@ -15,9 +16,9 @@ disposable = True
 
 def fight_use(user, reply, room):
 	if user.use_mana(50):
-		reply('Ты читаешь заклинание и твои руки начинают трястись.\nТы не в состоянии их больше сдерживать\nОни начинают описывать круги. Твоя броня увеличилась на 1000 очков.')
+		reply(locale_manager.get('items.good.scroll_armor.phrase_3'))
 		user.new_buff(ScrollBuff_armor())
 	else:
-		reply('Недостаточно маны')
+		reply(locale_manager.get('items.good.scroll_armor.phrase_4'))
 		user.add_item('good', 'scroll_armor')
 	return 0

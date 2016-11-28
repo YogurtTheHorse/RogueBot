@@ -1,9 +1,10 @@
+from localizations import locale_manager
 import random
 
-name = 'Магический свиток'
+name = locale_manager.get('items.special.magic_scroll.phrase_3')
 
 description = (
-	'На этом свитке записанно какое-то заклинание.'
+	locale_manager.get('items.special.magic_scroll.phrase_4')
 )
 
 mp_cost = 100
@@ -19,20 +20,18 @@ def can_use(user, reply, room):
 
 def fight_use(user, reply, room):
 	if user.mp >= mp_cost:
-		reply('Чпок!')
+		reply(locale_manager.get('items.special.magic_scroll.phrase_5'))
 		user.mp -= mp_cost
 
 	else:
-		reply('А маны то не хватает!')
+		reply(locale_manager.get('items.special.magic_scroll.phrase_6'))
 
 	return 0
 
 
 def success(user, reply, room):
 	reply(
-		'Ты превратил противника в лягушонка.\n'
-		'Посмотри как он мило прыгает отсюда.'
-	)
+		locale_manager.get('items.special.magic_scroll.phrase_1'))
 
 	user.won(reply)
 
@@ -40,14 +39,10 @@ def success(user, reply, room):
 def failure(user, reply, room):
 	if room.room_type != 'boss':
 		reply(
-			'Ты непонял как это случилось, '
-			'но ты превратился в лягушку.\n\n'
-			'Ну что, попрыгали искать принцессу. '
-			'Надеюсь она не в другом замке.'
-		)
+			locale_manager.get('items.special.magic_scroll.phrase_2'))
 
-		user.reborn(reply, 'Ква', name='Лягушка')
+		user.reborn(reply, locale_manager.get('items.special.magic_scroll.phrase_7'), name=locale_manager.get('items.special.magic_scroll.phrase_8'))
 
 	else:
-		reply('К счастью Магический свиток не сработал и ты не превратился в лягушку.')
+		reply(locale_manager.get('items.special.magic_scroll.phrase_9'))
 	

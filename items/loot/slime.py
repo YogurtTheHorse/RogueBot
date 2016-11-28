@@ -1,10 +1,9 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Слизь'
+name = locale_manager.get('items.loot.slime.phrase_2')
 
 description = (
-	'Можно сделать поршень, но в другой игре\n'
-	'Зато можно сделать «Зеленое зелье» чего-то там.'
-)
+	locale_manager.get('items.loot.slime.phrase_1'))
 
 price = 20

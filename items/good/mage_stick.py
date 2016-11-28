@@ -1,15 +1,14 @@
-name = 'Посох начинающего мага'
+from localizations import locale_manager
+name = locale_manager.get('items.good.mage_stick.phrase_2')
 description = (
-	'Посох мага. Увеличивает твой магический урон. Круто, да?\n'
-	'Только осторожно, он хрупкий.'
-)
+	locale_manager.get('items.good.mage_stick.phrase_1'))
 
 price = 100
 mana_damage = 20
 fightable = True
 
 def fight_use(user, reply, room):
-	reply('Ты сломал свой посох, но зато у кого-то теперь шишка.')
+	reply(locale_manager.get('items.good.mage_stick.phrase_3'))
 
 	user.remove_item_by_name(name)
 

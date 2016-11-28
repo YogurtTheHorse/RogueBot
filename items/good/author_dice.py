@@ -1,11 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Игральная кость Рассказчика'
+name = locale_manager.get('items.good.author_dice.phrase_2')
 
 description = (
-	'Игральная кость, которую мне отдал рассказчик по ненадобности. '
-	'Он же рассказчик — зачем ему? Правда на ней всегда выпадает единица...'
-)
+	locale_manager.get('items.good.author_dice.phrase_1'))
 
 price = 150
 

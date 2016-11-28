@@ -3,6 +3,7 @@ import config
 import logging
 
 logger = logging.getLogger('rg')
+loaded_locales = { }
 
 def get_language():
 	try:
@@ -14,15 +15,15 @@ def get_locale(language=None):
 	if language is None:
 		language = get_language()
 
-	locale = dict()
+	if language not in loaded_locales:
+		loaded_locales[language] = dict()
+		try:
+			with open('localizations/{0}.yml'.format(language), encoding='utf-8') as lang_file:
+				loaded_locales[language] = yaml.load(lang_file)[language]
+		except BaseException as e:
+			logger.warn('Error loading "{0}" locale: {1}'.format(language, e))
 
-	try:
-		with open('localizations/{0}.yml'.format(language), encoding='utf-8') as lang_file:
-			locale = yaml.load(lang_file)[language]
-	except BaseException as e:
-		logger.warn('Error loading "{0}" locale: {1}'.format(language, e))
-
-	return locale
+	return loaded_locales[language]
 
 def get(code_name, language=None):
 	locale = get_locale(language)

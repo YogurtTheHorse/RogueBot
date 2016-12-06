@@ -3,7 +3,9 @@ import glob
 import pickle
 import random
 import config
+
 from user import User
+from localizations import locale_manager
 		
 def get_fname(uid):
 	return config.USERS_PATH + '/{0}.usr'.format(uid)
@@ -22,7 +24,7 @@ def new_user(uid, nickname=None, reply=lambda *x, **y: None):
 		usr = User(uid)
 		if nickname is not None:
 			usr.nickname = nickname
-		reply('Теперь скажи мне свое имя.')
+		reply(locale_manager.get('main.whats_name', usr.lang))
 
 	save_user(usr)
 
@@ -60,7 +62,7 @@ def message(uid, reply, text):
 	usr = get_user(uid)
 
 	if not usr:
-		reply('Что-то пошло не так. Попробуй /start')
+		reply('Error. Try /start')
 	elif usr.message(reply, text):
 		usr = User(uid)
 
@@ -70,7 +72,7 @@ def debug_info(uid):
 	usr = get_user(uid)
 
 	if not usr:
-		return 'Что-то пошло не так. Попробуй /start'
+		return 'Error. Try /start'
 	else:
 		return usr.debug_info()
 
@@ -83,7 +85,7 @@ def open_room(uid, reply, room_type, name):
 	usr = get_user(uid)
 
 	if not usr:
-		reply('Что-то пошло не так. Попробуй /start')
+		reply('Error. Try /start')
 	else:
 		usr.open_room(reply, room_type, name)
 

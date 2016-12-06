@@ -34,7 +34,7 @@ class User(object):
 		self.active_items = [ ]
 		self.inventory_page = 0
 
-		self.gods = [ locale_manager.get('BUDDHA'), locale_manager.get('JESUS'), locale_manager.get('ALLAH'), locale_manager.get('AUTHOR'), locale_manager.get('EMPEROR') ]
+		self.gods = [ 'buddha', 'jesus', 'allah', 'author', 'emperor' ]
 		self.gods_level = [ 0 for g in self.gods ]
 		self.last_god = ''
 		self.prayed = False
@@ -78,6 +78,8 @@ class User(object):
 		self.new_mission('tips', 'tips', path_len=30)
 		self.new_mission('caravan', path_len=20)
 
+		self.lang = 'en'
+
 	def get_session_seed(self):
 		try:
 			return round(self.session * 10)
@@ -106,6 +108,8 @@ class User(object):
 		return False
 
 	def message(self, reply, text):
+		locale_manager.set_language(self.lang)
+
 		self.last_message = datetime.now()
 		logger.info('msg from {0}'.format(self.uid))
 
@@ -133,6 +137,8 @@ class User(object):
 			self.on_pet(reply, text)
 		elif self.state == 'reborned':
 			reply(self.reborn_answer, [ '/start' ])
+		elif self.state == 'other':
+			self.other(reply, text)
 		elif self.state.startswith('restart'):
 			if text == locale_manager.get('user.start_new_game'):
 				reply(locale_manager.get('user.restarted'))
@@ -167,4 +173,4 @@ class User(object):
 	from user.pets_defenition import new_pet, on_pet, get_pet, pet_gone
 	from user.missions_defenition import new_mission, get_last_mission, pop_mission
 	from user.levels_defenition import prepare_boss, get_next_level, get_prev_level
-	
+	from user.other_defenition import open_other, other

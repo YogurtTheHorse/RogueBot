@@ -14,7 +14,7 @@ import usermanager
 logger = logging.getLogger('rg')
 
 def name_confirm(self, reply, text):
-	if len(text) == 7:
+	if text == locale_manager.get('messages.name_agree'):
 		txt = locale_manager.get('messages.name_confirmed').format(self.name)
 		self.state = 'first_msg'
 

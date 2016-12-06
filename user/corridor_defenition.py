@@ -46,6 +46,8 @@ def open_corridor(self, reply):
 	if len(self.items) > 0:
 		buttons.append(locale_manager.get('corridor.show_inventory'))
 
+	buttons.append(locale_manager.get('corridor.other'))
+
 	reply(locale_manager.get('corridor.what_will_we_do'), buttons)
 
 def corridor(self, reply, text):
@@ -97,5 +99,7 @@ def corridor(self, reply, text):
 		reply(msg)
 
 		self.open_corridor(reply)
+	elif text == locale_manager.get('corridor.other'):
+		self.open_other(reply)
 	else:
 		self.open_corridor(reply)

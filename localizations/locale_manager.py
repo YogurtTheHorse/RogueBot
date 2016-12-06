@@ -5,11 +5,16 @@ import logging
 logger = logging.getLogger('rg')
 loaded_locales = { }
 
+global language
+language = 'ru_RU' if ('LANG' not in config.__dict__) else config.LANG
+
 def get_language():
-	try:
-		return config.LANG
-	except:
-		return 'ru-RU'
+	global language
+	return language
+
+def set_language(lang):
+	global language
+	language = lang
 
 def get_locale(language=None):
 	if language is None:

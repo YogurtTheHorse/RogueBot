@@ -7,7 +7,10 @@ import statistics
 from telegram.ext.dispatcher import run_async
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from telegram.ext import Job
+
 from collections import deque
+
+from localizations import locale_manager
 
 import tornamentmanager
 import databasemanager
@@ -131,7 +134,7 @@ def setname(bot, update):
 		name = txt[len('/setname')+1:]
 		usermanager.setname(update.message.chat_id, name)
 
-		bot.sendMessage(update.message.chat_id, text='Ну хорошо')
+		bot.sendMessage(update.message.chat_id, text=locale_manager.get('main.name_set'))
 
 def debug_print(bot, update):
 	inf = usermanager.debug_info(update.message.chat_id)
@@ -205,7 +208,7 @@ def zero(bot, update):
 		bot.sendMessage(update.message.chat_id, text='NO.')
 
 def question_status(bot, update):
-	msg ='Да: {0}\nНет: {1}'.format(question_yes, question_no)
+	msg = locale_manager.get('main.poll').format(question_yes, question_no)
 	bot.sendMessage(update.message.chat_id, text=msg)
 
 def yes(bot, update):
@@ -214,10 +217,10 @@ def yes(bot, update):
 	uid = str(update.message.chat_id)
 
 	if uid in asked:
-		bot.sendMessage(update.message.chat_id, text='Только 1 раз ;)')
+		bot.sendMessage(update.message.chat_id, text=locale_manager.get('main.only_one'))
 	else:
 		question_yes += 1
-		bot.sendMessage(update.message.chat_id, text='Голос учтен. Чтобы посмотреть результат, используй /question_status')
+		bot.sendMessage(update.message.chat_id, text=locale_manager.get('main.all_okay'))
 		asked.append(uid)
 
 		save_question()
@@ -228,10 +231,10 @@ def no(bot, update):
 	uid = str(update.message.chat_id)
 
 	if uid in asked:
-		bot.sendMessage(update.message.chat_id, text='Только 1 раз ;)')
+		bot.sendMessage(update.message.chat_id, text=locale_manager.get('main.only_one'))
 	else:
 		question_no += 1
-		bot.sendMessage(update.message.chat_id, text='Голос учтен. Чтобы посмотреть результат, используй /question_status')
+		bot.sendMessage(update.message.chat_id, text=locale_manager.get('main.all_okay'))
 		asked.append(uid)
 
 		save_question()
@@ -373,7 +376,7 @@ def leaderboard(bot, update):
 				
 			msg += '{0}. {1}: {2}'.format(i + 1, table_name, score)
 			if death_reason is not None:
-				msg += '\nПричина смерти: ' + death_reason
+				msg += '\n' + locale_manager.get('main.death_reason').format(death_reason)
 
 			msg += '\n'
 
@@ -387,6 +390,20 @@ def cesar(bot, update):
 	v = databasemanager.get_variable('ces', def_val=True)
 	databasemanager.set_variable('ces', not v)
 
+def ru(bot, update):
+	c_id = update.message.chat_id
+	
+	u = usermanager.get_user(c_id)
+	u.lang = 'ru-RU'
+	usermanager.save_user(u)
+
+def en(bot, update):
+	c_id = update.message.chat_id
+	
+	u = usermanager.get_user(c_id)
+	u.lang = 'en'
+	usermanager.save_user(u)
+
 @run_async
 def rate(bot, update):
 	c_id = update.message.chat_id
@@ -399,7 +416,7 @@ def error_callback(bot, update, error):
 		logger.warn('429!')
 	else:
 		logger.warn(error_msg)
-	msg = 'Ошибка внутри сервера. Если это мешает играть, сообщите @yegorf1'
+	msg = 'Error. Tech support - @yegorf1'
 	bot.sendMessage(update.message.chat_id, text=msg)
 	bot.sendMessage(update.message.chat_id, 
 					text='```text\n{0}\n```'.format(error_msg),
@@ -429,6 +446,8 @@ def main():
 	updater.dispatcher.add_handler(CommandHandler('give', give))
 	updater.dispatcher.add_handler(CommandHandler('gold', gold))
 	updater.dispatcher.add_handler(CommandHandler('pet', pet))
+	updater.dispatcher.add_handler(CommandHandler('ru', ru))
+	updater.dispatcher.add_handler(CommandHandler('en', en))
 
 
 	updater.dispatcher.add_handler(CommandHandler('question_status', question_status))

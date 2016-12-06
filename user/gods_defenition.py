@@ -11,20 +11,20 @@ from localizations import locale_manager
 def evilgod(self, reply, god):
 	self.gods_level = [ 0 for g in self.gods ]
 
-	if god == self.gods[0]: # Buddha
+	if god == locale_manager.get('buddha'): # Buddha
 		txt = ()
-		reply(locale_manager.get('EVIL_BUDDHA'))
-	elif god == self.gods[1]: # Jesus
+		reply(locale_manager.get('gods.evil_buddha'))
+	elif god == locale_manager.get('jesus'): # Jesus
 		txt = ()
 		self.make_damage(5, 10, reply, death=False)
 		reply(locale_manager.get('gods.evil_jesus'))
-	elif god == self.gods[2]: # Allah
-		self.make_damage(20, 30, reply, name='Аллах')
+	elif god == locale_manager.get('allah'): # Allah
+		self.make_damage(20, 30, reply, name='death_reason.allah')
 		reply(locale_manager.get('gods.evil_allah'))
-	elif god == self.gods[3]: # Author
+	elif god == locale_manager.get('author'): # Author
 		self.add_item('special', 'intoxicated_shoes')
 		reply(locale_manager.get('gods.evil_author'))
-	elif god == self.gods[4]: # Emperor
+	elif god == locale_manager.get('emperor'): # Emperor
 		self.new_buff(EmperorBurn())
 		reply(locale_manager.get('gods.evil_emperor'))	
 
@@ -92,7 +92,7 @@ def pray(self, reply, god=None):
 		if self.prayed:
 			reply(locale_manager.get('gods.fast_god'))
 		else:
-			reply(locale_manager.get('gods.god_ask'), self.gods)
+			reply(locale_manager.get('gods.god_ask'), [ locale_manager.get(g) for g in self.gods] )
 	elif god not in self.gods:
 		reply(locale_manager.get('gods.no_god'), self.gods)
 	else:
@@ -105,13 +105,8 @@ def pray(self, reply, god=None):
 def divine_intervention(self, reply):
 	res = random.random()
 
-	try:
-		if (datetime.now() - self.last_message).total_seconds() > 60 * 60 * 2:
-			return
-	except:
-		self.last_message = datetime.now()
-
-	if self.dead:
+	# 2 hours or dead ?
+	if (datetime.now() - self.last_message).total_seconds() > 60 * 60 * 2 or self.dead:
 		return
 
 	if self.has_item('intoxicated_shoes'):

@@ -581,7 +581,7 @@ en:
     no_fight_thing: I don't have this item, but you can roll the dice and try.
     use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
-    you_won: ! "\U0001F389 You won!\\nAlso you found in the room… {0}"
+    you_won: ! "\U0001F389 You won!\nAlso you found in the room… {0}"
     count: ! ' ({0} pcs.)'
     no_mana: Not enough mana :(
     nothing: Nothing
@@ -632,7 +632,9 @@ en:
     cant_sell: Not for sale
     item_str: ! '{0} ({2} items. at the cost of {4} gold.) {1}:
 
-      {3}'
+      {3}
+
+'
     sold: The gold though... It rings!
   shop:
     bad_buyed: ! 'Finally someone has bought that! '
@@ -1069,7 +1071,7 @@ en:
           phrase_4: ! 'You enter in the room and see a chest.
 
             A common chest.'
-          phrase_5: You are approaching to the chest... ...\n ...\n ...\n ...\n ...\n You are lifting the lid
+          phrase_5: ! "You are approaching to the chest... ...\n ...\n ...\n ...\n ...\n You are lifting the lid"
           phrase_6: You are lifting the lid
           phrase_7: ! 'It''s empty.
 

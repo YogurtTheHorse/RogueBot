@@ -103,7 +103,7 @@ class User(object):
 
 		self.state = 'restart ' + self.state
 
-		reply(locale_manager.get('messages.confirm_restart'), [ locale_manager.get('user.dont_delete') ])
+		reply(locale_manager.get('messages.confirm_restart', self.lang), [ locale_manager.get('user.dont_delete', self.lang) ])
 
 		return False
 
@@ -114,7 +114,7 @@ class User(object):
 		logger.info('msg from {0}'.format(self.uid))
 
 		if self.dead:
-			reply(locale_manager.get('messages.dead_message_again'), [ '/start' ], photo='BQADAgADWAkAAmrZzgf8dV_v2nf2uQI')
+			reply(locale_manager.get('messages.dead_message_again', self.lang), [ '/start' ], photo='BQADAgADWAkAAmrZzgf8dV_v2nf2uQI')
 		elif self.state == 'name':
 			self.name_given(reply, text)
 		elif self.state == 'name_confirm':
@@ -140,11 +140,11 @@ class User(object):
 		elif self.state == 'other':
 			self.other(reply, text)
 		elif self.state.startswith('restart'):
-			if text == locale_manager.get('user.start_new_game'):
-				reply(locale_manager.get('user.restarted'))
+			if text == locale_manager.get('user.start_new_game', self.lang):
+				reply(locale_manager.get('user.restarted', self.lang))
 				return True
 			else:
-				reply(locale_manager.get('user.not_today'))
+				reply(locale_manager.get('user.not_today', self.lang))
 				try:
 					self.state = self.state.split()[1]
 				except:

@@ -23,27 +23,27 @@ def open_shop(self, reply):
 	for item in self.get_items():
 		item.on_shop(self, reply, items)
 
-	txt = locale_manager.get('shop.shop_message').format(
+	txt = locale_manager.get('shop.shop_message', self.lang).format(
 		items[0].name, items[0].price, items[0].description, 
 		items[1].name, items[1].price, items[1].description,
 		items[2].name, items[2].price, items[2].description,
 		items[3].name, items[3].price, items[3].description
 	)
 
-	keyboard = [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit') ]
+	keyboard = [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit', self.lang) ]
 
 	reply(txt, keyboard)
 
 def buy(self, item, reply):
 	if self.paid(item.price):
 		if item.buff == 'bad':
-			reply(locale_manager.get('shop.bad_buyed'))
+			reply(locale_manager.get('shop.bad_buyed', self.lang))
 		elif item.buff == 'good':
-			reply(locale_manager.get('shop.good_buyed'))
+			reply(locale_manager.get('shop.good_buyed', self.lang))
 		else:
-			reply(locale_manager.get('shop.neutral_buyed'))
+			reply(locale_manager.get('shop.neutral_buyed', self.lang))
 
-		check = locale_manager.get('shop.shop_check').format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()),item.name,item.shop_count,item.price,item.price)
+		check = locale_manager.get('shop.shop_check', self.lang).format(strftime("%Y-%m-%d %H:%M:%S UTC", gmtime()),item.name,item.shop_count,item.price,item.price)
 
 		for i in range(item.shop_count):
 			self.add_item(item.buff, item.code_name)
@@ -54,11 +54,11 @@ def buy(self, item, reply):
 		self.visited_shop = True
 		self.open_corridor(reply)
 	else:
-		reply(locale_manager.get('shop.no_gold'), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit') ])
+		reply(locale_manager.get('shop.no_gold', self.lang), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit', self.lang) ])
 
 def shop(self, reply, text):
-	if text == locale_manager.get('shop.exit'):
-		reply(locale_manager.get('shop.shop_exited'))
+	if text == locale_manager.get('shop.exit', self.lang):
+		reply(locale_manager.get('shop.shop_exited', self.lang))
 		self.open_corridor(reply)
 	else:
 		for ind, name in enumerate(self.shop_names):
@@ -68,4 +68,4 @@ def shop(self, reply, text):
 				self.buy(item, reply)
 				return
 
-		reply(locale_manager.get('shop.no_goods'), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit') ])
+		reply(locale_manager.get('shop.no_goods', self.lang), [ self.shop_names[0:2], self.shop_names[2:], locale_manager.get('shop.exit', self.lang) ])

@@ -14,31 +14,31 @@ import usermanager
 logger = logging.getLogger('rg')
 
 def name_confirm(self, reply, text):
-	if text == locale_manager.get('messages.name_agree'):
-		txt = locale_manager.get('messages.name_confirmed').format(self.name)
+	if text == locale_manager.get('messages.name_agree', self.lang):
+		txt = locale_manager.get('messages.name_confirmed', self.lang).format(self.name)
 		self.state = 'first_msg'
 
 		logger.info('New user with id {0}'.format(self.uid))
 
 		self.set_perma_variable('name', text)
 
-		reply(txt, [ locale_manager.get('messages.whats_next') ])
+		reply(txt, [ locale_manager.get('messages.whats_next', self.lang) ])
 	else:
 		self.state = 'name'
-		reply(locale_manager.get('messages.ask_name_again'))
+		reply(locale_manager.get('messages.ask_name_again', self.lang))
 
 def name_given(self, reply, name):
 	if not only_letters(name) or len(name) <= 0:
-		reply(locale_manager.get('messages.name_error'))
+		reply(locale_manager.get('messages.name_error', self.lang))
 	else:
 		n = name
 		while n == name:
 			usr = usermanager.random_user()
 			n = usr.name
 
-		msg = locale_manager.get('messages.name_confirm').format(n, name)
+		msg = locale_manager.get('messages.name_confirm', self.lang).format(n, name)
 
-		buttons = [ locale_manager.get('messages.name_agree'), locale_manager.get('messages.name_dismiss') ]
+		buttons = [ locale_manager.get('messages.name_agree', self.lang), locale_manager.get('messages.name_dismiss', self.lang) ]
 			
 		self.state = 'name_confirm'
 		self.name = antimat(name)
@@ -46,13 +46,13 @@ def name_given(self, reply, name):
 		reply(msg, buttons)
 
 def first(self, reply, text):
-	reply(locale_manager.get('messages.hello_message'))
+	reply(locale_manager.get('messages.hello_message', self.lang))
 
 	mn = databasemanager.get_variable(str(self.uid) + '_gold')
 
 	if mn is not None and mn:
 		databasemanager.set_variable(str(self.uid) + '_gold', False)
-		reply(locale_manager.get('messages.lucifer_gold'))
+		reply(locale_manager.get('messages.lucifer_gold', self.lang))
 		self.give_gold(1000)
 
 	self.open_corridor(reply)

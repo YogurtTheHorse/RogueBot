@@ -14,41 +14,41 @@ def open_corridor(self, reply):
 	reply(self.get_stats())
 
 	buttons = [ 
-		locale_manager.get('corridor.open_next_door'), 
-		locale_manager.get('corridor.player_characteristics')#, locale_manager.get('JOIN_TORNAMENT')
+		locale_manager.get('corridor.open_next_door', self.lang), 
+		locale_manager.get('corridor.player_characteristics', self.lang)#, locale_manager.get('JOIN_TORNAMENT', self.lang)
 	]
 
 #	if not self.get_variable('halloween_visited', False) and self.rooms_pack == 'default':
 #		buttons.append('Хеллуин!')
 
 	if self.has_item('sign'):
-		buttons.append(locale_manager.get('corridor.use_sign'))
+		buttons.append(locale_manager.get('corridor.use_sign', self.lang))
 
 	levels_acts = [ ]
 	if self.get_next_level() is not None:
-		levels_acts.append(locale_manager.get('corridor.go_down'))
+		levels_acts.append(locale_manager.get('corridor.go_down', self.lang))
 
 	if self.get_prev_level() is not None:
-		levels_acts.append(locale_manager.get('corridor.go_up'))
+		levels_acts.append(locale_manager.get('corridor.go_up', self.lang))
 
 	if len(levels_acts) > 0:
 		buttons.append(levels_acts)
 
 	if not self.prayed:
-		buttons.append(locale_manager.get('corridor.pray_ro_god'))
+		buttons.append(locale_manager.get('corridor.pray_ro_god', self.lang))
 
 	if not self.visited_shop:
-		buttons.append(locale_manager.get('corridor.open_shop'))
+		buttons.append(locale_manager.get('corridor.open_shop', self.lang))
 
 	if self.race == RAT_RACE:
-		buttons.append(locale_manager.get('corridor.die'))
+		buttons.append(locale_manager.get('corridor.die', self.lang))
 
 	if len(self.items) > 0:
-		buttons.append(locale_manager.get('corridor.show_inventory'))
+		buttons.append(locale_manager.get('corridor.show_inventory', self.lang))
 
-	buttons.append(locale_manager.get('corridor.other'))
+	buttons.append(locale_manager.get('corridor.other', self.lang))
 
-	reply(locale_manager.get('corridor.what_will_we_do'), buttons)
+	reply(locale_manager.get('corridor.what_will_we_do', self.lang), buttons)
 
 def corridor(self, reply, text):
 	if self.has_tag('wet'):
@@ -56,30 +56,30 @@ def corridor(self, reply, text):
 	if self.has_tag('wet_enemy'):
 		self.remove_tag('wet_enemy')
 
-	if text.startswith(locale_manager.get('corridor.open_next_door').split()[0]):
+	if text.startswith(locale_manager.get('corridor.open_next_door', self.lang).split()[0]):
 		self.open_room(reply)
-	elif text == locale_manager.get('corridor.use_sign'):
+	elif text == locale_manager.get('corridor.use_sign', self.lang):
 		self.open_room(reply, 'special', 'sign')
-	elif text.startswith(locale_manager.get('corridor.pray_to_god').split()[0]):
+	elif text.startswith(locale_manager.get('corridor.pray_to_god', self.lang).split()[0]):
 		self.pray(reply)
-	elif text.startswith(locale_manager.get('corridor.open_shop').split()[0]):
+	elif text.startswith(locale_manager.get('corridor.open_shop', self.lang).split()[0]):
 		self.open_shop(reply)
-	elif text.startswith(locale_manager.get('corridor.show_inventory').split()[0]):
+	elif text.startswith(locale_manager.get('corridor.show_inventory', self.lang).split()[0]):
 		self.inventory_page = 0
 		self.open_inventory(reply)
-	elif text.startswith(locale_manager.get('corridor.show_inventory').split()[0]):
+	elif text.startswith(locale_manager.get('corridor.show_inventory', self.lang).split()[0]):
 		self.show_characteristics(reply)
 #	elif text == 'Хеллуин!' and not self.get_variable('halloween_visited', False):
 #		self.open_room(reply, 'special', 'helloween_shop')
 #		self.set_variable('halloween_visited', True)
-	elif text == locale_manager.get('corridor.die'):
-		reply(locale_manager.get('corridor.died'), photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')
-		self.death(reply, reason='Суицид')
-	elif text == locale_manager.get('corridor.join_tornament'):
+	elif text == locale_manager.get('corridor.die', self.lang):
+		reply(locale_manager.get('corridor.died', self.lang), photo='BQADAgAD5wgAAmrZzgcHFvPa24KvDwI')
+		self.death(reply, reason=locale_manager.get('corridor.suicide', self.lang))
+	elif text == locale_manager.get('corridor.join_tornament', self.lang):
 		self.open_room(reply, 'usual', 'cesar')
-	elif self.get_prev_level() is not None and text == locale_manager.get('corridor.go_up'):
+	elif self.get_prev_level() is not None and text == locale_manager.get('corridor.go_up', self.lang):
 		self.level = self.get_prev_level()
-		reply(locale_manager.get('corridor.died'))
+		reply(locale_manager.get('corridor.died', self.lang))
 
 		msg = ''
 		for ind, name in enumerate(roomloader.get_level_rooms(self, self.level)):
@@ -88,9 +88,9 @@ def corridor(self, reply, text):
 		reply(msg)
 
 		self.open_corridor(reply)
-	elif self.get_next_level() is not None and text == locale_manager.get('corridor.go_down'):
+	elif self.get_next_level() is not None and text == locale_manager.get('corridor.go_down', self.lang):
 		self.level = self.get_next_level()
-		reply(locale_manager.get('corridor.went_down'))
+		reply(locale_manager.get('corridor.went_down', self.lang))
 
 		msg = ''
 		for ind, name in enumerate(roomloader.get_level_rooms(self, self.level)):
@@ -99,7 +99,7 @@ def corridor(self, reply, text):
 		reply(msg)
 
 		self.open_corridor(reply)
-	elif text == locale_manager.get('corridor.other'):
+	elif text == locale_manager.get('corridor.other', self.lang):
 		self.open_other(reply)
 	else:
 		self.open_corridor(reply)

@@ -48,7 +48,7 @@ def open_room(self, reply, room_type=None, room_name=None):
 		self.set_variable('halloween_visited', False)
 
 	if self.race == RAT_RACE:
-		reply(locale_manager.get('messages.room_rat'))
+		reply(locale_manager.get('messages.room_rat', self.lang))
 		self.open_corridor(reply)
 		return
 
@@ -100,13 +100,13 @@ def open_room(self, reply, room_type=None, room_name=None):
 	if room.room_type == 'monster':
 		self.set_room_temp('hp', room.hp)
 
-	reply(locale_manager.get('messages.room_opened'))
+	reply(locale_manager.get('messages.room_opened', self.lang))
 	reply(room.name + '!')
 
 	room.enter(self, reply)
 
 	if self.state == 'room':
-		reply(locale_manager.get('messages.your_actions'), room.get_actions(self))
+		reply(locale_manager.get('messages.your_actions', self.lang), room.get_actions(self))
 
 	if not room.can_open(self, reply):
 		room.open_failure(self, reply)
@@ -121,13 +121,13 @@ def in_room(self, reply, text):
 	if self.state == 'room':
 		reply(self.get_stats())
 		room = roomloader.load_room(self.room[1], self.room[0], self)
-		reply(locale_manager.get('messages.your_actions'), room.get_actions(self))
+		reply(locale_manager.get('messages.your_actions', self.lang), room.get_actions(self))
 
 def throw_dice(self, reply, subject=None):
 	self.state = 'dice'
 	self.subject = subject
 
-	reply(locale_manager.get('dice.dice_time'), [locale_manager.get('dice.thow_dice')])
+	reply(locale_manager.get('dice.dice_time', self.lang), [locale_manager.get('dice.thow_dice', self.lang)])
 
 def get_dice_bonus(self, reply):
 	res = 0
@@ -142,20 +142,20 @@ def get_dice_bonus(self, reply):
 
 
 def dice(self, reply, text):
-	if text == locale_manager.get('dice.thow_dice'):
+	if text == locale_manager.get('dice.thow_dice', self.lang):
 		self.state = 'room'
 
 		res = sum(random.randint(1, 8) for n in range(0, DICE_MAX // 8))
 		res += self.get_dice_bonus(reply)
-		reply(locale_manager.get('dice.dice_result').format(res))
+		reply(locale_manager.get('dice.dice_result', self.lang).format(res))
 		
 		room = roomloader.load_room(self.room[1], self.room[0], self)
 		room.dice(self, reply, res, self.subject)
 
 		if self.state == 'room':
-			reply(locale_manager.get('messages.your_actions'), room.get_actions(self))
+			reply(locale_manager.get('messages.your_actions', self.lang), room.get_actions(self))
 	else:
-		reply(locale_manager.get('dice.dice_confidence'), [locale_manager.get('dice.thow_dice')])
+		reply(locale_manager.get('dice.dice_confidence', self.lang), [locale_manager.get('dice.thow_dice', self.lang)])
 
 def leave(self, reply):
 	self.visited_shop = False

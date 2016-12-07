@@ -15,7 +15,7 @@ def open_inventory(self, reply):
 		return
 
 	actions = [ ]
-	msg = locale_manager.get('inventory.inventory_message')
+	msg = locale_manager.get('inventory.inventory_message', self.lang)
 
 	counter_items = Counter(items)
 	selected_items = list(counter_items)
@@ -27,34 +27,34 @@ def open_inventory(self, reply):
 		if i is not None:
 			acts = [ ]
 			is_atcive = ''#'(Надето: {0} шт.)'.format(active_items.count(i)) if i in active_items else ''
-			msg += locale_manager.get('inventory.item_str').format(i.name, is_atcive, counter_items[i], i.description, round(i.price * 0.7))
+			msg += locale_manager.get('inventory.item_str', self.lang).format(i.name, is_atcive, counter_items[i], i.description, round(i.price * 0.7))
 			if i.usable:
 				acts.append(i.name)
 
 			if active_items.count(i) > 0:
-				pass#actions.append(locale_manager.get('inventory.deactivate') + i.name)
+				pass#actions.append(locale_manager.get('inventory.deactivate', self.lang) + i.name)
 
 			if active_items.count(i) < items.count(i) and (len(active_items) < self.get_active_slots_len()):
-				pass#actions.append(locale_manager.get('inventory.activate') + i.name)
+				pass#actions.append(locale_manager.get('inventory.activate', self.lang) + i.name)
 
-			acts.append(locale_manager.get('inventory.throw_away') + i.name)
-			acts.append(locale_manager.get('inventory.sell') + i.name)
+			acts.append(locale_manager.get('inventory.throw_away', self.lang) + i.name)
+			acts.append(locale_manager.get('inventory.sell', self.lang) + i.name)
 
 			actions.append(acts)
 
 	if begin > 0:
-		actions.append(locale_manager.get('inventory.back'))
+		actions.append(locale_manager.get('inventory.back', self.lang))
 	if end < len(selected_items):
-		actions.append(locale_manager.get('inventory.next'))
+		actions.append(locale_manager.get('inventory.next', self.lang))
 
-	actions.append(locale_manager.get('inventory.to_corridor'))
+	actions.append(locale_manager.get('inventory.to_corridor', self.lang))
 	reply(msg, actions)
 
 def inventory(self, reply, text):
-	if text == locale_manager.get('inventory.to_corridor'):
+	if text == locale_manager.get('inventory.to_corridor', self.lang):
 		self.open_corridor(reply)
-	elif False and text.startswith(locale_manager.get('inventory.activate')):
-		name = text[len(locale_manager.get('inventory.activate')):]
+	elif False and text.startswith(locale_manager.get('inventory.activate', self.lang)):
+		name = text[len(locale_manager.get('inventory.activate', self.lang)):]
 
 		item = self.get_item_by_name(name)
 
@@ -63,40 +63,40 @@ def inventory(self, reply, text):
 		
 		if item is not None and active_items.count(item) < items.count(item) and (len(active_items) < self.get_active_slots_len()):
 			self.active_items.append((item.buff, item.code_name))
-			reply(locale_manager.get('inventory.activated'))
+			reply(locale_manager.get('inventory.activated', self.lang))
 		else:
-			reply(locale_manager.get('inventory.cant_activate'))
+			reply(locale_manager.get('inventory.cant_activate', self.lang))
 
 		self.open_inventory(reply)
-	elif False and text.startswith(locale_manager.get('inventory.deactivate')):
-		name = text[len(locale_manager.get('inventory.deactivate')):]
+	elif False and text.startswith(locale_manager.get('inventory.deactivate', self.lang)):
+		name = text[len(locale_manager.get('inventory.deactivate', self.lang)):]
 
 		item = self.get_item_by_name(name)
 
 		self.deactivate_item_by_name(name)
 		self.open_inventory(reply)
-	elif text.startswith(locale_manager.get('inventory.throw_away')):
-		name = text[len(locale_manager.get('inventory.throw_away')):]
+	elif text.startswith(locale_manager.get('inventory.throw_away', self.lang)):
+		name = text[len(locale_manager.get('inventory.throw_away', self.lang)):]
 
 		if not self.remove_item_by_name(name):
-			reply(locale_manager.get('inventory.cant_throw'))
+			reply(locale_manager.get('inventory.cant_throw', self.lang))
 
 		self.open_inventory(reply)
-	elif text.startswith(locale_manager.get('inventory.sell')):
-		name = text[len(locale_manager.get('inventory.sell')):]
+	elif text.startswith(locale_manager.get('inventory.sell', self.lang)):
+		name = text[len(locale_manager.get('inventory.sell', self.lang)):]
 
 		item = self.get_item_by_name(name)
 		if not self.remove_item_by_name(name):
-			reply(locale_manager.get('inventory.cant_sell'))
+			reply(locale_manager.get('inventory.cant_sell', self.lang))
 			self.open_inventory(reply)
 		else:
-			reply(locale_manager.get('inventory.sold'))
+			reply(locale_manager.get('inventory.sold', self.lang))
 			self.give_gold(round(item.price * 0.7))
 			self.open_inventory(reply)
-	elif text == locale_manager.get('inventory.back'):
+	elif text == locale_manager.get('inventory.back', self.lang):
 		self.inventory_page = max(self.inventory_page - 1, 0)
 		self.open_inventory(reply)
-	elif text == locale_manager.get('inventory.next'):
+	elif text == locale_manager.get('inventory.next', self.lang):
 		self.inventory_page = self.inventory_page + 1
 		self.open_inventory(reply)
 	else:

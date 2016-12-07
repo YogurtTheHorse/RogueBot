@@ -163,7 +163,7 @@ def remove_tags(self, tag):
 	self.tags = list(filter((tag).__ne__, self.tags))
 
 def show_characteristics(self, reply):
-	msg = locale_manager.get('corridor.characteristics').format(
+	msg = locale_manager.get('corridor.characteristics', self.lang).format(
 		self.get_damage(), 
 		self.get_defence(), 
 		self.get_charisma(),

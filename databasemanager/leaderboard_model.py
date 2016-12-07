@@ -70,7 +70,7 @@ def get_model(db):
 		name = user.name
 
 		costume = costumes.get_costume(user.costume)
-		name += ' в костюме _{0}_'.format(costume['who'])
+		#name += ' в костюме _{0}_'.format(costume['who'])
 
 		if user.pet:
 			pet = user.get_pet()

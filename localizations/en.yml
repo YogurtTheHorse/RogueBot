@@ -508,9 +508,9 @@ en:
   messages:
     hello_message: ! "You are starting a difficult journey and I'm your story teller. Now you're standing in the middle of a corridor — the center of our game. It has lots of doors and on every turn you will open one of them. Is there a way out of this hell? I don't even know, frankly, but we can find out. Be careful, behind a door there might be a dragon-guarded dungeon, but it might as well be a lake of ice cream. Take these dice, you'll need to roll them whenever an action requires luck or skill. If you're lucky, a monster will fall. But if not... Well... your foes might take pity on you if you're pathetic enough. We also have a shrine. If you pray to the same god several times in a row, you can get something fancy in return. \n\nYou might experience some lag because of user influx :("
     ask_name_again: So what will your name be this time?
-    dead_message: ! "\U0001F480 Oh boy, you died! Back to square one"
+    dead_message: ! "Oh boy, you died! Back to square one"
     dead_message_again: ! "\U0001F480 You're oh so dead, my friend"
-    dead_place: ! "\U0001F4CD Place of death: {0}"
+    dead_place: ! "Place of death: {0}"
     name_agree: Yes, I'm sure.
     name_confirm: ! 'You know, I have a friend named {0} and I think it sounds better than {1}
 

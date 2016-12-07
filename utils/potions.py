@@ -1,4 +1,4 @@
-COLORS = [ 'Серое', 'Черное', 'Белое', 'Желтое', 'Радужное', 'Коричневое', 'Красное', 'Розовое', 'Лазуревое' ]
+from localizations import locale_manager
 
 MP_POT = 0
 HP_POT = 1
@@ -10,12 +10,24 @@ DALTONISM_POT = 6
 
 def get_potion_color(user, pot_num):
 	if user is None:
-		return COLORS[0]
+		return 'Gray'
+ 
+	colors = [ 
+		locale_manager.get('gray', user.lang)
+		locale_manager.get('black', user.lang)
+		locale_manager.get('white', user.lang)
+		locale_manager.get('yellow', user.lang)
+		locale_manager.get('rainbow', user.lang)
+		locale_manager.get('brown', user.lang)
+		locale_manager.get('red', user.lang)
+		locale_manager.get('pink', user.lang)
+		locale_manager.get('azure', user.lang)
+	]
 
-	if user.has_tag('daltonism') or pot_num >= len(COLORS):
-		return COLORS[0]
+	if user.has_tag('daltonism') or pot_num >= len(colors):
+		return colors[0]
 
 	seed = user.get_session_seed()
 	seed += pot_num
 
-	return COLORS[seed % len(COLORS)]
+	return colors[seed % len(colors)]

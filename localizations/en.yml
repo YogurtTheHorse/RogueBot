@@ -2,10 +2,7 @@ en:
   items:
     good:
       hp_pot:
-        description: A flask with some black potion.
-        name: Black potion
-        use_action: This proved to be a potion of life. Now you're fully healed.
-        phrase_1: A potion
+        phrase_1: ! " potion"
         phrase_2: Tube with unknown potion
         phrase_3: Your health now fully restored. It was a potion of life.
       author_dice:
@@ -62,7 +59,7 @@ en:
         phrase_2: Novice mage's staff
         phrase_3: You've broken your staff, but you left a bruise.
       mp_pot:
-        phrase_1: A potion
+        phrase_1: ! " potion"
         phrase_2: Tube with unknown potion.
         phrase_3: Your mana now fully restored. It was a potion of mana.
       purity_seal:
@@ -125,7 +122,7 @@ en:
         phrase_2: A tin foil hat is a hat made from aluminium foil, worn in the belief it shields the brain from threats such as electromagnetic fields, mind control, and mind reading.
     bad:
       daltonism_pot:
-        phrase_1: potion
+        phrase_1: ! ' potion'
         phrase_2: Tube with some potion.
         phrase_3: You can see colors again! But this corridor is still gray and hopeless…
         phrase_4: That was Daltonism potion. Well.. «One fire drives out another» — maybe it will help?
@@ -135,7 +132,7 @@ en:
         phrase_3: It was bad idea to blow a bubble- bubble gum stuck in hair. Unfortunately it's hard to find a barber around.
         phrase_4: You were smart enough not to tangle gum in hair.
       homeless_pot:
-        phrase_1: potion
+        phrase_1: ! ' potion'
         phrase_2: A vial with some potion.
         phrase_3: Now you are bum.. But in our game we have no class division, so it doesn't matter.
       magick_wand:
@@ -147,7 +144,7 @@ en:
           Wand killed everything around and even more.'
         phrase_4: Magic
       rat_pot:
-        phrase_1: potion
+        phrase_1: ! ' potion'
         phrase_2: A vial with some potion.
         phrase_3: Now you are Rat.
         phrase_4: PHEW. EVERYTHING WAS SO BIG.
@@ -158,13 +155,13 @@ en:
         phrase_4: Rockfall
         phrase_5: Not enough mana
       stone_pot:
-        phrase_1: potion
+        phrase_1: ! ' potion'
         phrase_2: Tube with some potion.
         phrase_3: Now you are cobble.
         phrase_4: The cobble must lie
         phrase_5: Cobble
       tree_pot:
-        phrase_1: potion
+        phrase_1: ! ' potion'
         phrase_2: Tube with some potion.
         phrase_3: Now you are Tree.
         phrase_4: Trees don't do anything
@@ -498,6 +495,16 @@ en:
       map:
         phrase_1: Treasure map
         phrase_2: There are only black strip and three numbers on it.
+    potions:
+      azure: Azure
+      black: Black
+      brown: Brown
+      gray: Gray
+      pink: Pink
+      rainbow: Rainbow
+      red: Red
+      white: White
+      yellow: Yellow
   messages:
     hello_message: ! "You are starting a difficult journey and I'm your story teller. Now you're standing in the middle of a corridor — the center of our game. It has lots of doors and on every turn you will open one of them. Is there a way out of this hell? I don't even know, frankly, but we can find out. Be careful, behind a door there might be a dragon-guarded dungeon, but it might as well be a lake of ice cream. Take these dice, you'll need to roll them whenever an action requires luck or skill. If you're lucky, a monster will fall. But if not... Well... your foes might take pity on you if you're pathetic enough. We also have a shrine. If you pray to the same god several times in a row, you can get something fancy in return. \n\nYou might experience some lag because of user influx :("
     ask_name_again: So what will your name be this time?
@@ -572,7 +579,7 @@ en:
     magic_kicked: Bibbidi-Bobbidi-Boo! \n A giant fist appears out of nowhere and deals *{0}* damage
     monster_damaged: You deal *{0}* damage to the monster
     no_fight_thing: I don't have this item, but you can roll the dice and try.
-    use: ! '➰ Use:'
+    use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
     you_won: ! "\U0001F389 You won!\\nAlso you found in the room… {0}"
     count: ({0} pcs.)
@@ -636,19 +643,19 @@ en:
     no_goods: I don't have that
     shop_check: ! "```\n             RECEIPT              \n         Dungeon Mall Ltd.        \n             WELCOME!           \n             Date: {0}\nCashier 1\n------------------------------------------\n  {1} ({2}) — {3}.00 gold\n\n  TOTAL — {4}.00 gold\n\nThanks, please come again!```"
     shop_exited: See you soon!
-    shop_message: ! 'Hi! Long time no see, look what i have: {0}\nPrice: {1}\n{2} {3}\nPrice: {4}\n{5} {6}\nPrice: {7}\n{8} {9}\nPrice: {10}\n{11}'
+    shop_message: ! "Hi! Long time no see, look what i have: {0}\nPrice: {1}\n{2} {3}\nPrice: {4}\n{5} {6}\nPrice: {7}\n{8} {9}\nPrice: {10}\n{11}"
   rooms:
     default:
       boss:
         black_knight:
           phrase_1: Black Knight
-          phrase_2: You heard rumbling growl and saw Black Knight ready to pierce you with his blade.
+          phrase_2: You heard rumbling growl and saw that Black Knight are ready to pierce you with his blade.
         cthulhu:
           phrase_1: Cthulhu
           phrase_2: You heard rumbling growl and saw Cthulhu charging its attack.
           phrase_3: ! 'Cthulhu dropped one of his tentacles and left the battlefield.
 
-            You won the day this time, but don''t forget that Gods are immortal.'
+            You won this time, but don''t forget that Gods are immortal.'
         hellkite_dragon:
           phrase_1: Bloody Wyvern
           phrase_2: You heard rumbling growl and saw Red Wyvern charging her attack.
@@ -657,7 +664,7 @@ en:
           phrase_2: Kneel down before your Lord!
         moonlight_butterfly:
           phrase_1: Moonlight Butterfly
-          phrase_2: You heard rumbling growl and saw Moon Butterfly charging its attack.
+          phrase_2: You heard rumbling growl and saw Moon Butterfly releases poisonous dust.
         naping_dragon:
           phrase_1: Gaping Dragon
           phrase_2: You heard rumbling growl and saw that Gaping Dragon flies up to crash down on you.
@@ -740,7 +747,7 @@ en:
           phrase_9: Listen and go away
       monster:
         doctor_who:
-          phrase_1: Doctor who
+          phrase_1: Doctor Who
           phrase_2: Accursed are not welcome here!
           phrase_3: ! 'Who?.. '
           phrase_4: Surrender
@@ -1441,7 +1448,7 @@ en:
           phrase_7: Cursed are not welcome here!
           phrase_8: Something?
           phrase_9: ! 'You won {} '
-          phrase_15: 
+          phrase_15: The ball stops at {} - {}
         sensei:
           phrase_1: Learn japanese
           phrase_2: Say, you speak it already
@@ -1517,27 +1524,31 @@ en:
           phrase_42: Run
           phrase_43: Come to the tower
           phrase_44: Run
-          phrase_45: 
+          phrase_45: Look towards noise
           phrase_46: Run
           phrase_47: Get inside
-          phrase_48: 
-          phrase_49: 
-          phrase_5: 
+          phrase_48: Look at the sheet
+          phrase_49: Escape the hangar
+          phrase_5: ! 'You enter the fog and notice there''s no door behind you no more. You walk forward - fog gradually melts and reveals trees.
+
+            You''re into the woods.
+
+            During a walk you see a sheet on a tree.'
           phrase_50: Hide under the table
-          phrase_51: 
-          phrase_52: 
-          phrase_53: 
-          phrase_54: 
-          phrase_55: 
-          phrase_56: 
-          phrase_57: 
-          phrase_58: 
-          phrase_59: 
-          phrase_6: 
-          phrase_60: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_51: Leave the hangar
+          phrase_52: Run to the trailers
+          phrase_53: Turn around
+          phrase_54: Don't turn around
+          phrase_55: Seek
+          phrase_56: Run
+          phrase_57: Hide under the trailer
+          phrase_58: Run to the door
+          phrase_59: Wait
+          phrase_6: Door banged behind your.
+          phrase_60: Run to the door
+          phrase_7: Tear it
+          phrase_8: Go toward the noise
+          phrase_9: Slender
         some_player:
           phrase_1: Some player
           phrase_2: To rob
@@ -1549,7 +1560,7 @@ en:
           phrase_8: Theft
           phrase_9: You leaving this place.
         spanish_girl:
-          phrase_1: ! 'You see flaming hottie
+          phrase_1: ! 'You see a smoking hottie
 
             She smiles at you and beckons…'
           phrase_10: Pretty resentfully looking at you.
@@ -1619,7 +1630,7 @@ en:
           phrase_3: Leave
           phrase_4: You come back into the corridor!
         vladislav:
-          phrase_1: 
+          phrase_1: You walk into the room and throw a look on the man sitting on the stool in a corner. You casually turn around and leave the room whistling an early Mozart tune for some reason.
           phrase_2: Catch your breath and politely knock on the door
           phrase_3: Enter backwards
           phrase_4: Man
@@ -1627,38 +1638,42 @@ en:
           phrase_6: You feel a strong shame and blushes, capillar bursts on your face.
           phrase_7: I... mmm... (flee)
         watches:
-          phrase_1: 
+          phrase_1: All through the ages Light warrios hunt down witches and wizards who torture human race. But Dark warrios stood in their way. Nobody wanted to give the way. And the battle was sanguine and merciless. And when it reached the sky the Epic of King Gesar saw forces were equal. Everybody dies if he doesn't end the battle…
           phrase_10: There is nothing to do here.
-          phrase_11: 
-          phrase_12: 
-          phrase_13: 
-          phrase_14: 
-          phrase_15: 
-          phrase_2: 
-          phrase_3: 
-          phrase_4: 
-          phrase_5: 
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_11: Probably something is going to happen soon. For now, let's go further.
+          phrase_12: Right! Don't mess with other's conflicts.
+          phrase_13: And it was said the Day Watch would shepherd the Forces of Light.
+          phrase_14: And it was said the Night Watch would shepherd the Forces of Dark.
+          phrase_15: Right! Don't mess with other's conflicts.
+          phrase_2: And he ended the battle. And Forces of Light set truce with Forces of Dark. And it was forbidden to do any good or evil without agreement. And it was said the Day Watch would shepherd the Forces of Light. And it was said the Night Watch would shepherd the Forces of Dark.
+          phrase_3: The Watches
+          phrase_4: End the battle
+          phrase_5: Leave
+          phrase_6: Leave
+          phrase_7: Leave
+          phrase_8: Everyone died.
+          phrase_9: You ended the battle. And Forces of Light set truce with Forces of Dark.
         water:
-          phrase_1: 
-          phrase_2: 
-          phrase_3: 
-          phrase_4: 
-          phrase_5: 
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
+          phrase_1: ! '_Man_, here''s a room full of _water_!\nthere''s a water wall, but it won''t last long...
+
+            Think *faster*.'
+          phrase_2: You see s chest! Swim for it
+          phrase_3: Close the door ASAP before you're all wet
+          phrase_4: Finally you made it to the chest. You found a trident there.
+          phrase_5: Something got wrong. You got flushed into the corridor anyway.
+          phrase_6: Huge wave flushed you into the corridor and you hit the walls. You had {0:.2f} sec to make your mind!
+          phrase_7: Barely made it. Phew!
+          phrase_8: Think faster!
         witcher:
-          phrase_1: 
-          phrase_2: 
+          phrase_1: Some man
+          phrase_2: You carry a longsword behind your back? Where did you see it?
           phrase_3: Help him
           phrase_4: Wait
-          phrase_5: 
-          phrase_6: 
-          phrase_7: 
+          phrase_5: ! 'You see a man with gray hair, yellow cat eyes and two swords behind his back.
+
+            He notices you and tries to pull out a sword (silver, I guess).'
+          phrase_6: Man bursts into tears and runs out. What was that?
+          phrase_7: You approach the man, put on your poker face, pull out his sword and give it to him. Then you walk away, trying not to laugh.
     vietnam:
       missions_caravan:
         army:
@@ -1667,38 +1682,42 @@ en:
           phrase_3: We will catch you.. Later.
           phrase_4: You watch in front of you and see 1337 warriors. I think someone's got a problem.
         caravan:
-          phrase_1: Dwarves Caravan
-          phrase_10: ! 'You beat up all dwarves (fortunately they are small, you just kicked them in faces) and '
-          phrase_11: took all the stuff and money! Keep it up, Nipper!
-          phrase_12: Enjoy your andventures! We'll meet again.
-          phrase_13: Back
-          phrase_14: We'll try to do something.
-          phrase_15: ! '
+          phrase_1: 
+          phrase_10: ! 'Here''s what we offer today:'
+          phrase_11: ! '{0}
 
-            There are overlays.'
-          phrase_16: Back
+            Price: {1}
+
+            {2}'
+          phrase_12: Take! Now {0} costs *{1}*.
+          phrase_13: ! 'Dwarf grins and doesn''t give stuff to you.
+
+            "No money - no buy."'
+          phrase_14: Have a nice trip! We'll meet again.
+          phrase_15: Back
+          phrase_16: Let us do something
           phrase_17: Such things are not delivered.
-          phrase_18: Something else?
-          phrase_2: Purchase something
-          phrase_3: Order something
-          phrase_4: Rob them
-          phrase_5: Go away
-          phrase_6: You open the door and see Dwarves Caravan!
-          phrase_7: and brought you what you ordered.. Well, they tried...
+          phrase_18: Back
+          phrase_2: You've beaten up all the dwarves  (Fortunately, they are small and you just kicked them in the faces) and took all the money and stuff. Keep it up, nipper!
+          phrase_3: Dwarves Caravan
+          phrase_4: Stock up
+          phrase_5: Order
+          phrase_6: Rob
+          phrase_7: Leave
           phrase_8: Back
           phrase_9: Back
           phrase_19: That kinda things isn't delievered.
-          phrase_20: Something else?
+          phrase_20: Anything else?
         first:
           phrase_1: Dwarves Caravan
           phrase_10: We'll try to brought it as soon as possible.
           phrase_11: Some troubles with deliever can occur.
           phrase_12: Something else?
-          phrase_2: Reach an agreement
-          phrase_3: Left
-          phrase_4: You open the door and see Dwarves Caravan!
-          phrase_5: trade services. You can order something and we will brought it to you!
-          phrase_6: Go away
+          phrase_2: Dwarves Caravan
+          phrase_3: Negotiate
+          phrase_4: Leave
+          phrase_5: Leave
+          phrase_6: ! 'Choose what to bring with you (pay on-delivery):'
           phrase_7: Enjoy your andventures! We'll meet again.
           phrase_8: Go away
           phrase_9: See you later! We will meet again.
@@ -1753,162 +1772,194 @@ en:
           phrase_2: Crowd of Vietnamese people on flying tractors made in USSR are going to throw a party with fireworks and lightshow.
       special:
         bill_cypher:
-          phrase_1: 
+          phrase_1: ! 'You got into weird dimension. You can''t find stability here.
+
+            You notice big yellow triangle with an eye in the centre. He gazes at you.
+
+            You did a good job bringing it here. Now give it to me!'
           phrase_10: ! 'Look at yourself, what is the reason for your anger?
 
             You are mirror now.'
           phrase_11: A mirror can only reflect
           phrase_12: Mirror
           phrase_13: Here, take it!
-          phrase_14: 
-          phrase_15: 
-          phrase_16: 
+          phrase_14: Nice. Don't spill it.
+          phrase_15: ! 'You''re stubborn.
+
+            Did you swallow your tongue?'
+          phrase_16: Fish die onshore.
           phrase_17: Fish
-          phrase_2: 
-          phrase_3: 
-          phrase_4: 
+          phrase_2: Take, I don't need it
+          phrase_3: What do I get in exchange?
+          phrase_4: I shall not give it to demon!
           phrase_5: Bill Cypher
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_6: Yeah, take.
+          phrase_7: Any other offers?
+          phrase_8: Good boy. Now bye!
+          phrase_9: I guess this will convince you. Here's 4000 gold.
         bill_gates:
-          phrase_1: 
-          phrase_2: 
-          phrase_3: 
+          phrase_1: ! '- Come, {0}. What do you want?
+
+            You hardly walk into the room. Your eyes don''t deceive you, it really is…'
+          phrase_2: Get in nowhere
+          phrase_3: Walk backwards
           phrase_4: A man
-          phrase_5: 
-          phrase_6: 
+          phrase_5: ! '- Why you''re standing like you''re lost? Wanna trick? Watch my hands… Shazam!'
+          phrase_6: Get in nowhere
           phrase_7: Loading
         gabe:
-          phrase_1: 
-          phrase_10: 
-          phrase_11: 
-          phrase_12: 
-          phrase_13: 
-          phrase_14: 
-          phrase_15: 
-          phrase_16: 
-          phrase_17: 
-          phrase_18: 
-          phrase_19: 
+          phrase_1: ! '- Come, {0}. What do you want?
+
+            You hardly walk into the room. Your eyes don''t deceive you, it really is…'
+          phrase_10: ! '- Look who you became! Sloth and gluttony!'
+          phrase_11: ! '- Fine! I''ll do it myself!'
+          phrase_12: ! '- How you''re doing?'
+          phrase_13: A man
+          phrase_14: ! '- I must have seen you before…'
+          phrase_15: ! '- {0}, wazza! Long time no see! I''m great, how ''bout you?'
+          phrase_16: ! '- Nevermind, happens to everybody.'
+          phrase_17: You understand you were wrong, so you leave.
+          phrase_18: You had a nice talk.
+          phrase_19: ! '- I can''t believe my eyes! Geniune! Fragrant! My hero!'
           phrase_2: 
           phrase_20: 
           phrase_3: 
           phrase_4: 
-          phrase_5: 
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
-          phrase_21: 
-          phrase_22: 
-          phrase_23: 
-          phrase_24: 
-          phrase_25: 
-          phrase_26: 
-          phrase_27: 
+          phrase_5: ! '- Does not this future scare you? Open these bloody doors for all of your life. Don''t you wanna see something new besides these Wizards, Werewolves and other creeps?'
+          phrase_6: ! '- OK, here''s a tip. But you''ll owe me. Come here in couple of hours, it will be mr.''s Kodzima shift. He might tell you something peculiar. Or he won''t. And remember - if you manage to get out of here, bring me please some fried chicken. I hadn''t eaten it for years. I''ll be *very generous in return*!'
+          phrase_7: ! '- Your curiosity is nice! But remember - if you manage to get out of here, bring me please some fried chicken. I hadn''t eaten it for years. I''ll be *very generous in return*!'
+          phrase_8: I was born and raised here. My grandpa opened doors, my dad opened doors, I do open doors.
+          phrase_9: ! '- Sorry, I overreacted.'
+          phrase_21: if you have any problems, contact me any time.
+          phrase_22: ! '- Is it really you?'
+          phrase_23: ! '- Can I have your autograph?'
+          phrase_24: ! '- That''s me, {0}!
+
+            I''ve brought chicken. Enjoy while it''s still hot.'
+          phrase_25: ! '- I crush mobs like cabbage!'
+          phrase_26: Do I have a choice?
+          phrase_27: Loading
         icecream:
           phrase_1: Ice cream lake
-          phrase_10: 
-          phrase_11: 
-          phrase_2: 
-          phrase_3: 
-          phrase_4: 
-          phrase_5: 
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_10: You did not take the Noble Eightfold Path so slightly spoiled your carma.
+          phrase_11: Tasty and _painfully_
+          phrase_2: Take for yourself
+          phrase_3: Eat as much as posible
+          phrase_4: Leave
+          phrase_5: Not bad. However Tolia has too few clients, so he can't pay to loosers seeking adventures. Let's find something else.
+          phrase_6: Oh well. You broke scissors and got beaten with a bat.
+          phrase_7: Great, you've got scissors! Shall we take it!
+          phrase_8: ! 'Real lake full of ice-cream.
+
+            Enjoy!'
+          phrase_9: Have an ice-cream cone.
         kiba:
-          phrase_1: 
-          phrase_10: 
-          phrase_11: 
-          phrase_12: 
-          phrase_13: 
-          phrase_14: 
-          phrase_15: 
-          phrase_16: 
-          phrase_17: 
-          phrase_18: 
-          phrase_19: 
-          phrase_2: 
-          phrase_20: 
-          phrase_21: 
-          phrase_22: 
-          phrase_23: 
-          phrase_24: 
-          phrase_25: 
-          phrase_26: 
-          phrase_27: 
-          phrase_28: 
-          phrase_29: 
-          phrase_3: 
-          phrase_30: 
-          phrase_31: 
-          phrase_32: 
-          phrase_33: 
-          phrase_34: 
-          phrase_35: 
-          phrase_36: 
-          phrase_37: 
-          phrase_38: 
-          phrase_39: 
-          phrase_4: 
-          phrase_40: 
-          phrase_41: 
-          phrase_42: 
-          phrase_43: 
-          phrase_44: 
-          phrase_45: 
-          phrase_46: 
-          phrase_47: 
-          phrase_48: 
-          phrase_49: 
-          phrase_5: 
-          phrase_50: 
+          phrase_1: You hardly walk into the room. Yeah, your eyes don't deceive you, it truly is…
+          phrase_10: Ask the fox
+          phrase_11: Did you bring me the fox?
+          phrase_12: Who are you?
+          phrase_13: Leave
+          phrase_14: Can I have a fox?
+          phrase_15: Oh… I made a mistake
+          phrase_16: Good, have my money
+          phrase_17: Too expensive
+          phrase_18: What chat?
+          phrase_19: Oh, I get who you are
+          phrase_2: ! 'Well hello!
+
+            Can you help me finish the potion?
+
+            There''s only one component left, but I don''t know what it is.'
+          phrase_20: Leave
+          phrase_21: Sure. How can I help you?
+          phrase_22: I'm sorry. I'm busy.
+          phrase_23: Stir
+          phrase_24: Don't stir
+          phrase_25: Open eyes
+          phrase_26: Drink
+          phrase_27: Don't drink
+          phrase_28: I have nothing
+          phrase_29: Give
+          phrase_3: ! 'Sure, here it is!
+
+            Come again…'
+          phrase_30: I can't hear you! Can you talk louder?
+          phrase_31: Great! Come in a week, I'll bring a fox.
+          phrase_32: Great you know me! I'm really glad.
+          phrase_33: If you notice me in a chat, say hi!
+          phrase_34: I'm off to sleep…
+          phrase_35: You turn around and see he's asleep.
+          phrase_36: But I forgot the last component. What a pity!
+          phrase_37: Any ideas?
+          phrase_38: Oh, as usual. Well, seeing you was a joy!
+          phrase_39: Come by again!
+          phrase_4: ! 'You turn around and see he''s asleep.
+
+            You think, "What a sleeper!"'
+          phrase_40: Oh, as usual. Well, seeing you was a joy!
+          phrase_41: Come by again!
+          phrase_42: Great, put {} into the pot and let's stir. Do you have anything to stir with?
+          phrase_43: Oh, as usual. Well, seeing you was a joy!
+          phrase_44: Come by again!
+          phrase_45: You brought the {}, you do the stirring!
+          phrase_46: I ain't gonna stir it as well. Oh well, I'll pour it away and remake the potion.
+          phrase_47: But later. I'm off to slee…
+          phrase_48: Here's the potion you've made. Gonna drink it?
+          phrase_49: Here's the potion you've made. Gonna drink it?
+          phrase_5: ! 'Let me think.
+
+            I guess I can get a fox. The price will be {} gold.
+
+            Agree?'
+          phrase_50: Here's the potion you've made. Gonna drink it?
           phrase_51: 
-          phrase_52: 
-          phrase_53: 
+          phrase_52: It was a joy seeing you!
+          phrase_53: Come by again…
           phrase_54: 
-          phrase_55: 
-          phrase_56: 
+          phrase_55: Here's the potion you've made. Gonna drink it?
+          phrase_56: Here's the potion you've made. Gonna drink it?
           phrase_57: 
-          phrase_58: 
-          phrase_59: 
-          phrase_6: 
+          phrase_58: It was a joy seeing you!
+          phrase_59: Come by again…
+          phrase_6: ! 'Nope? Okay. I know where you can get a fox.
+
+            If you need it, come by.'
           phrase_60: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_7: ! 'Nope? Okay. I know where you can get a fox.
+
+            If you need it, come by.'
+          phrase_8: ! 'If you see me there, say hi!
+
+            I''m off to slee…'
+          phrase_9: Man
         kodzima:
           phrase_1: 
           phrase_10: 
-          phrase_11: 
-          phrase_12: 
+          phrase_11: Take a spoon
+          phrase_12: Man
           phrase_13: 
-          phrase_14: 
-          phrase_15: 
+          phrase_14: They showed you the door.
+          phrase_15: ! '- Just one.'
           phrase_16: 
-          phrase_17: 
+          phrase_17: They showed you the door.
           phrase_18: 
           phrase_2: 
           phrase_3: 
           phrase_4: 
           phrase_5: 
-          phrase_6: 
-          phrase_7: 
+          phrase_6: Tell a joke
+          phrase_7: Can I ask you a question?...
           phrase_8: 
           phrase_9: 
           phrase_19: 
           phrase_20: 
           phrase_21: 
           phrase_22: 
-          phrase_23: 
+          phrase_23: Loading
         remains:
           phrase_1: 
           phrase_2: 
-          phrase_3: 
+          phrase_3: Go away
           phrase_4: 
           phrase_5: 
           phrase_6: 
@@ -1918,7 +1969,7 @@ en:
           phrase_2: 
           phrase_3: 
           phrase_4: 
-          phrase_5: 
+          phrase_5: Rick Astley
         sign:
           phrase_1: 
           phrase_2: 
@@ -1932,7 +1983,7 @@ en:
         the_thing_from_below:
           phrase_1: 
         tornament:
-          phrase_1: 
+          phrase_1: Coliseum
           phrase_2: 
         yegorf1:
           phrase_1: ! 'For a moment you blinded by a bright flash, you were surprised that you are alone in the room.
@@ -1958,26 +2009,28 @@ en:
           phrase_26: This door is locked.
           phrase_27: 
           phrase_28: 
-          phrase_29: 
+          phrase_29: You entered this door.
           phrase_3: 
           phrase_30: 
-          phrase_31: 
+          phrase_31: You entered the blue door.
           phrase_32: 
-          phrase_33: 
+          phrase_33: This door is closed
           phrase_34: 
           phrase_35: 
           phrase_36: 
           phrase_37: 
-          phrase_38: 
-          phrase_39: 
+          phrase_38: This door is closed
+          phrase_39: What's wrong? Do you need some help?
           phrase_4: 
           phrase_40: 
           phrase_41: 
           phrase_5: 
-          phrase_6: 
-          phrase_7: 
-          phrase_8: 
-          phrase_9: 
+          phrase_6: ! 'What''s wrong? Do you need some help?
+
+            I forgive you right now, but listen to me next time.'
+          phrase_7: Man
+          phrase_8: Enter the door
+          phrase_9: Go through the corridor
       usual:
         river:
           phrase_1: ! 'You decide to look around and notice a boat nearby.

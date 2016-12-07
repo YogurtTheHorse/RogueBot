@@ -13,14 +13,14 @@ def get_potion_color(user, pot_num):
 		return 'Gray'
  
 	colors = [ 
-		locale_manager.get('gray', user.lang)
-		locale_manager.get('black', user.lang)
-		locale_manager.get('white', user.lang)
-		locale_manager.get('yellow', user.lang)
-		locale_manager.get('rainbow', user.lang)
-		locale_manager.get('brown', user.lang)
-		locale_manager.get('red', user.lang)
-		locale_manager.get('pink', user.lang)
+		locale_manager.get('gray', user.lang),
+		locale_manager.get('black', user.lang),
+		locale_manager.get('white', user.lang),
+		locale_manager.get('yellow', user.lang),
+		locale_manager.get('rainbow', user.lang),
+		locale_manager.get('brown', user.lang),
+		locale_manager.get('red', user.lang),
+		locale_manager.get('pink', user.lang),
 		locale_manager.get('azure', user.lang)
 	]
 

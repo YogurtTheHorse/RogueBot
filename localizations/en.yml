@@ -2,7 +2,7 @@ en:
   items:
     good:
       hp_pot:
-        phrase_1: ! " potion"
+        phrase_1: ! ' potion'
         phrase_2: Tube with unknown potion
         phrase_3: Your health now fully restored. It was a potion of life.
       author_dice:
@@ -59,7 +59,7 @@ en:
         phrase_2: Novice mage's staff
         phrase_3: You've broken your staff, but you left a bruise.
       mp_pot:
-        phrase_1: ! " potion"
+        phrase_1: ! ' potion'
         phrase_2: Tube with unknown potion.
         phrase_3: Your mana now fully restored. It was a potion of mana.
       purity_seal:
@@ -582,7 +582,7 @@ en:
     use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
     you_won: ! "\U0001F389 You won!\\nAlso you found in the room… {0}"
-    count: ! " ({0} pcs.)"
+    count: ! ' ({0} pcs.)'
     no_mana: Not enough mana :(
     nothing: Nothing
     tornament_not_won: Stop, it's a tournament, it doesn't work this way. You've attacked with huge amount of damage about '100'
@@ -643,7 +643,23 @@ en:
     no_goods: I don't have that
     shop_check: ! "```\n             RECEIPT              \n         Dungeon Mall Ltd.        \n             WELCOME!           \n             Date: {0}\nCashier 1\n------------------------------------------\n  {1} ({2}) — {3}.00 gold\n\n  TOTAL — {4}.00 gold\n\nThanks, please come again!```"
     shop_exited: See you soon!
-    shop_message: ! "Hi! Long time no see, look what i have: {0}\nPrice: {1}\n{2} {3}\nPrice: {4}\n{5} {6}\nPrice: {7}\n{8} {9}\nPrice: {10}\n{11}"
+    shop_message: ! 'Hi! Long time no see, look what i have: {0}
+
+      Price: {1}
+
+      {2} {3}
+
+      Price: {4}
+
+      {5} {6}
+
+      Price: {7}
+
+      {8} {9}
+
+      Price: {10}
+
+      {11}'
   rooms:
     default:
       boss:

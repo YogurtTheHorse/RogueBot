@@ -582,7 +582,7 @@ en:
     use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
     you_won: ! "\U0001F389 You won!\\nAlso you found in the room… {0}"
-    count: !" ({0} pcs.)"
+    count: ! " ({0} pcs.)"
     no_mana: Not enough mana :(
     nothing: Nothing
     tornament_not_won: Stop, it's a tournament, it doesn't work this way. You've attacked with huge amount of damage about '100'

@@ -44,7 +44,7 @@ def death(self, reply, reason=None):
 	}
 	statistics.track(self.uid, track_stats, 'Death')
 
-	reply(locale_manager.get('corridor.dead_message').format(self.monsters_killed, self.rooms_count), [ '/start' ])
+	reply(locale_manager.get('messages.dead_message').format(self.monsters_killed, self.rooms_count), [ '/start' ])
 
 	if 'save' in self.variables:
 		self.recover(reply)

@@ -1,6 +1,7 @@
+from localizations import locale_manager
 import random
 
-name = 'Группа Бандитов'
+name = locale_manager.get('rooms.default.monster_medium.bandits.phrase_1')
 
 hp = 400
 
@@ -8,12 +9,12 @@ damage_range = ( 30, 60 )
 loot = [ ]
 coins = 300
 
-actions = [ 'Да, есть', 'Нет', 'Блин, вы либо дольше держите, либо глубже опускайте!']
+actions = [ locale_manager.get('rooms.default.monster_medium.bandits.phrase_2'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_3'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_4')]
 
 PHRASES = [
-	'А нууу чики-брики и в дамки!', 'Сбоку, сбоку заходи!', 
-	'Сышишь, фраер, ща ты у нас крякнешь!', 'Нука помааацаем, чтооо у нас тут', 
-	'Я маслину словил!', 'Берём его тепленького!', 'Щаа мы вам, армбы недоделанные!'
+	locale_manager.get('rooms.default.monster_medium.bandits.phrase_5'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_6'), 
+	locale_manager.get('rooms.default.monster_medium.bandits.phrase_7'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_8'), 
+	locale_manager.get('rooms.default.monster_medium.bandits.phrase_9'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_10'), locale_manager.get('rooms.default.monster_medium.bandits.phrase_11')
 ]
 
 def get_actions(user):
@@ -25,7 +26,7 @@ def get_actions(user):
 def action(user, reply, text):
 	if not user.get_room_temp('fight', False):
 		if text == actions[2]:
-			reply('Бандиты расстроились, сказали «Ну ты плесень, ты б еще про Штирлица рассказал» и ушли.')
+			reply(locale_manager.get('rooms.default.monster_medium.bandits.phrase_12'))
 			user.leave(reply)
 		else:
 			reply('Бандиты достали оружие и атакуют вас, крича "Маачи казла!"')
@@ -34,8 +35,8 @@ def action(user, reply, text):
 		user.fight_action(reply, text)
 
 def enter(user, reply):
-	reply('Вы видите группу людей в плащах и капюшонах.')
-	reply('Они вас заметили и говорят «Опа, фраерок нарисовался! Бабло, артефакты есть?»', photo='BQADAgADBwkAAmrZzgeViVze6T4hnAI')
+	reply(locale_manager.get('rooms.default.monster_medium.bandits.phrase_13'))
+	reply(locale_manager.get('rooms.default.monster_medium.bandits.phrase_14'), photo='BQADAgADBwkAAmrZzgeViVze6T4hnAI')
 
 	user.set_room_temp('fight', False)
 

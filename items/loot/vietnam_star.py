@@ -1,5 +1,5 @@
 from localizations import locale_manager
-name = 'Мазь "Звёздочка"'
+name = locale_manager.get('items.loot.vietnam_star.name')
 description = locale_manager.get('items.loot.vietnam_star.phrase_1')
 price = 300
 

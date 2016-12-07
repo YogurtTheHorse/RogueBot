@@ -1,7 +1,8 @@
+from localizations import locale_manager
 from constants import MINION_STICKER
 from random import randrange
 
-name = 'Миньон'
+name = locale_manager.get('rooms.default.monster_easy.minion.phrase_2')
 hp = 23
 damage_range = ( 1, 4 )
 
@@ -12,9 +13,6 @@ loot = [ 'banana' ]
 
 def enter(user, reply):
 	reply(
-		'Это странное желтое существо в очках разговаривает на каком-то странном диалекте.\n'
-		'Минуточку, я посмотрю в своем справочнике.\n'
-		'Тут написано что это Миньон.\n'
-		'Очень интересно...',
+		locale_manager.get('rooms.default.monster_easy.minion.phrase_1'),
 		photo=MINION_STICKER
 	)

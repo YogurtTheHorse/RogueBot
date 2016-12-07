@@ -1,4 +1,5 @@
-name = 'Диппер'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.monster_medium.dipper.phrase_1')
 
 hp = 60
 damage_range = ( 3, 8 )
@@ -14,12 +15,12 @@ def make_damage(user, reply, dmg):
 
 	if hp <= 0:
 		if not user.has_item('mystery_book_3'):
-			reply('Держи книжку, ты победил!')
+			reply(locale_manager.get('rooms.default.monster_medium.dipper.phrase_2'))
 			user.add_item('special', 'mystery_book_3')
 		user.won(reply)
 	else:
 		user.set_room_temp('hp', hp)
 
 def enter(user, reply):
-	reply('Ты не получишь эту книгу!')
+	reply(locale_manager.get('rooms.default.monster_medium.dipper.phrase_3'))
 

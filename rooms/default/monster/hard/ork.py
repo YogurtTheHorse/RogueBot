@@ -1,4 +1,5 @@
-name = 'Орк'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.monster_hard.ork.phrase_2')
 hp = 130
 damage_range = ( 20, 40 )
 
@@ -8,8 +9,4 @@ loot = [ 'tooth' ]
 
 def enter(user, reply):
 	reply(
-		'Вы видите огромного зеленого бугая метра 2 ростом. '
-		'У него отсутствуют некоторые зубы, и вообще у него страшное лицо. '
-		'Он говорит «Юдишка, я тибя отстукаю!» после чего бежит на вас, крича «WAAAAAAAGH!»\n\n'
-		'Кажется, пора расчехлять оружие.'
-	)
+		locale_manager.get('rooms.default.monster_hard.ork.phrase_1'))

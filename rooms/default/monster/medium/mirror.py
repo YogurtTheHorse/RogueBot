@@ -1,8 +1,9 @@
+from localizations import locale_manager
 from utils import costumes
 
 from constants import *
 
-name = 'Зеркало'
+name = locale_manager.get('rooms.default.monster_medium.mirror.phrase_1')
 
 hp = 1
 element = NONE
@@ -14,7 +15,7 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Ты видишь что-то странное в костюме {0}.'.format(costumes.get_costume(user.costume)['who'])
+		locale_manager.get('rooms.default.monster_medium.mirror.phrase_2').format(costumes.get_costume(user.costume)['who'])
 	)
 	reply(msg, photo='BQADAgAD2ggAAmrZzgeHYxYQWFaEZgI')
 
@@ -23,7 +24,7 @@ def enter(user, reply):
 	ch = user.get_charisma()
 
 	if ch < 0:
-		reply('Оно треснуло.')
+		reply(locale_manager.get('rooms.default.monster_medium.mirror.phrase_3'))
 		user.won(reply)
 	elif ch > 15:
 		reply('Такой красивый. Иди с миром ;)')
@@ -36,11 +37,11 @@ def make_damage(user, reply, dmg):
 	if hp <= 0:
 		user.won(reply)
 
-		reply('Ты перестарался и оно нанесло тебе немного урона в ответ.')
+		reply(locale_manager.get('rooms.default.monster_medium.mirror.phrase_4'))
 
 		user.make_damage(0, -hp, reply, defence=False, name=name)
 	else:
 		user.set_room_temp('hp', hp)
 
-		reply('Ты нанес сам себе урон, равный *{0}*'.format(dmg))
+		reply(locale_manager.get('rooms.default.monster_medium.mirror.phrase_5').format(dmg))
 		user.make_damage(dmg, dmg, reply, defence=False, name=name)

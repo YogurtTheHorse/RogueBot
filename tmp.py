@@ -5,7 +5,8 @@ import yaml
 import os
 import re
 
-ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main', 'missions/lepricone', 'missions/caravan', 'missions/tips' ]
+#ROOM_TYPES = [ 'usual', 'special', 'boss', 'monster', 'missions/main', 'missions/lepricone', 'missions/caravan', 'missions/tips' ]
+ROOM_TYPES = [ 'monster/easy', 'monster/medium', 'monster/hard' ]
 PACKS = [ 'default', 'vietnam' ]
 ITEM_TYPES = [ 'good', 'bad', 'neutral', 'special', 'pets', 'loot', 'pets', 'story' ]
 
@@ -108,6 +109,6 @@ def items():
 			pth = 'items/{0}/{1}.py'.format(t, i)
 			work_item(pth, t, i)
 
-items()
+rooms()
 with open('localizations/tmp.yaml', 'w') as f:
-	yaml.dump({'ru-RU': {'items': full_yaml} }, f, default_flow_style=False, allow_unicode=True, width=1000)
+	yaml.dump({'ru-RU': {'rooms': full_yaml} }, f, default_flow_style=False, allow_unicode=True, width=1000)

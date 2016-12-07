@@ -1,7 +1,8 @@
+from localizations import locale_manager
 from constants import *
 from random import randrange
 
-name = 'Зомби'
+name = locale_manager.get('rooms.default.monster_easy.zombie.phrase_2')
 element = DEAD
 hp = 20
 damage_range = (0, 2)
@@ -13,8 +14,6 @@ loot = [ ]
 
 def enter(user, reply):
 	reply(
-		'Откуда тут Зомби?\n'
-		'Не уж то у нас тут некроманты завелись?\n'
-		'Стыдоба то какая!!!',
+		locale_manager.get('rooms.default.monster_easy.zombie.phrase_1'),
 		photo=ZOMBIE_STICKER
 	)

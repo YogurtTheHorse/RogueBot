@@ -1,7 +1,7 @@
 from localizations import locale_manager
 import random 
 
-name = "Ножницы"
+name = locale_manager.get('items.neutral.scissors.name')
 
 description = (
 	locale_manager.get('items.neutral.scissors.phrase_1')

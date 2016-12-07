@@ -1,6 +1,7 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Крыса'
+name = locale_manager.get('rooms.default.monster_easy.rat.phrase_1')
 
 hp = 20
 element = NONE
@@ -12,7 +13,7 @@ loot = [ 'rat_tooth' ]
 
 def enter(user, reply):
 	if user.has_aura(AURA_BUDDHA):
-		reply('Крысы не трогают буддистов. Иди с миром.')
+		reply(locale_manager.get('rooms.default.monster_easy.rat.phrase_2'))
 		user.won(reply)
 	else:
-		reply('ААААААААА! ТУТ КРЫСА. УБЕЙ ЕЕ.', photo='BQADAgADFgkAAmrZzgfs5OH3R2C_1wI')
+		reply(locale_manager.get('rooms.default.monster_easy.rat.phrase_3'), photo='BQADAgADFgkAAmrZzgfs5OH3R2C_1wI')

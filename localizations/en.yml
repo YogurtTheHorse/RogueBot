@@ -69,6 +69,7 @@ en:
         phrase_1: ! "Most reliable companion of psychowarrior:\n\n — Effectivly eliminates mind cracks.\n — Relieves Basal ganglia itching.\n — Sale without prescription"
         phrase_2: Dose.. You have to dose, darling.
         phrase_3: _-hell-yeah_
+        name: 
       sand:
         phrase_1: Sand
         phrase_2: Sand in the eyes is painful.
@@ -273,6 +274,12 @@ en:
         phrase_7: «There is no sharp distinction between the real and the unreal.»
         phrase_8: «Look around. They will all betray you. Flee screaming into the black forest.»
         phrase_9: «The stars sweep chill currents that make men shiver in the dark.»
+        phrase_25: 
+        phrase_26: 
+        phrase_27: 
+        phrase_28: 
+        phrase_29: 
+        phrase_30: 
       rat_tooth:
         phrase_1: Rat's tooth
         phrase_2: Ew.
@@ -300,6 +307,7 @@ en:
       vietnam_star:
         phrase_1: ! 'Wonder balm! Seems it can even heal cancer. '
         phrase_2: That's better!
+        name: 
     neutral:
       blank_scroll:
         phrase_1: ! 'You can make notes in this scroll!
@@ -359,6 +367,7 @@ en:
       scissors:
         phrase_1: Regular scissars. But don't cut yourself.
         phrase_2: You cat with the scissors. Well done mate.
+        name: 
       sign:
         phrase_1: Signpost
         phrase_2: Points at the door with signpost, which points at.. Just points.
@@ -405,6 +414,7 @@ en:
           Icecream in the face.
 
           And cone in the ribs_!_'
+        name: 
       intoxicated_shoes:
         phrase_1: Intoxicated shoes
         phrase_2: Finished badly.
@@ -725,6 +735,7 @@ en:
           phrase_7: Good luck on the journey. We will meet again.
           phrase_8: Leave
           phrase_9: Good bye! We’ll be back.
+          phrase_13: 
       missions_lepricone:
         first:
           phrase_1: Leprechaun
@@ -736,6 +747,7 @@ en:
           phrase_1: Old man
           phrase_2: Be silent
           phrase_3: Escape
+          enter_phrase: 
         second:
           phrase_1: Sir Ducklot
           phrase_2: Keep silence
@@ -743,6 +755,8 @@ en:
           phrase_4: Actually, you can move on
           phrase_5: ! 'You seem ugly. I won''t let you through. Did you see yourself in the mirror? '
           phrase_6: Get the hell out of here!
+          phrase_7: 
+          phrase_8: 
         third:
           phrase_1: Mirror
           phrase_2: Break
@@ -772,6 +786,9 @@ en:
           phrase_4: Surrender
           phrase_5: Surrender
           phrase_6: With a smirk on his face, Doctor shoves his laser screwdriver in your nose.
+          phrase_7: 
+          phrase_8: 
+          phrase_9: 
         dragon:
           phrase_1: Dragon
           phrase_2: Big and red, like in a fairy tail.
@@ -1693,6 +1710,145 @@ en:
             He notices you and tries to pull out a sword (silver, I guess).'
           phrase_6: Man bursts into tears and runs out. What was that?
           phrase_7: You approach the man, put on your poker face, pull out his sword and give it to him. Then you walk away, trying not to laugh.
+      monster_easy:
+        archemage:
+          phrase_1: 
+          phrase_2: 
+        bat:
+          phrase_1: 
+          phrase_2: 
+        duck:
+          phrase_1: 
+          phrase_2: 
+        grass:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+        minion:
+          phrase_1: 
+          phrase_2: 
+        quinquepede:
+          phrase_1: 
+          phrase_2: 
+        rat:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+        slime:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+        spirit:
+          phrase_1: 
+          phrase_2: 
+        sylph:
+          phrase_1: 
+          phrase_2: 
+        werewolf:
+          phrase_1: 
+          phrase_2: 
+        zombie:
+          phrase_1: 
+          phrase_2: 
+      monster_hard:
+        basilisk:
+          phrase_1: 
+          phrase_2: 
+        darklord:
+          phrase_1: 
+          phrase_10: 
+          phrase_11: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+          phrase_6: 
+          phrase_7: 
+          phrase_8: 
+          phrase_9: 
+        jayson:
+          phrase_1: 
+          phrase_2: 
+        ork:
+          phrase_1: 
+          phrase_2: 
+        vaper:
+          phrase_1: 
+          phrase_2: 
+      monster_medium:
+        bandits:
+          phrase_1: 
+          phrase_10: 
+          phrase_11: 
+          phrase_12: 
+          phrase_13: 
+          phrase_14: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+          phrase_6: 
+          phrase_7: 
+          phrase_8: 
+          phrase_9: 
+        bear:
+          phrase_1: 
+          phrase_2: 
+        chubaka:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+        dipper:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+        ghoul:
+          phrase_1: 
+          phrase_2: 
+        internet_troll:
+          phrase_1: 
+          phrase_2: 
+        knight:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+        mimic:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+          phrase_6: 
+        mirror:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+        nazgul:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+        promote:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
+          phrase_4: 
+          phrase_5: 
+          phrase_6: 
+        rabbit:
+          phrase_1: 
+          phrase_2: 
+        turtle:
+          phrase_1: 
+          phrase_2: 
+          phrase_3: 
     vietnam:
       missions_caravan:
         army:
@@ -1701,7 +1857,7 @@ en:
           phrase_3: We will catch you.. Later.
           phrase_4: You watch in front of you and see 1337 warriors. I think someone's got a problem.
         caravan:
-          phrase_1: 
+          phrase_1: You open the door and see entire dvarwe
           phrase_10: ! 'Here''s what we offer today:'
           phrase_11: ! '{0}
 

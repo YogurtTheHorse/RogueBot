@@ -1,7 +1,7 @@
 from localizations import locale_manager
 import random 
 
-name = "Мороженое"
+name = locale_manager.get('items.special.icecream.name')
 
 description = (
 	locale_manager.get('items.special.icecream.phrase_1')

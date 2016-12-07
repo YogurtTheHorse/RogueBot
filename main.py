@@ -408,7 +408,7 @@ def en(bot, update):
 def rate(bot, update):
 	c_id = update.message.chat_id
 	link = statistics.get_link(c_id)
-	bot.sendMessage(update.message.chat_id, text='Держи ссылку ;)\n\n{0}'.format(link))
+	bot.sendMessage(update.message.chat_id, text='{0}'.format(link))
 
 def error_callback(bot, update, error):
 	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)

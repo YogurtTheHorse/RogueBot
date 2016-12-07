@@ -1,9 +1,10 @@
+from localizations import locale_manager
 from constants import *
 
-FIGHT = 'За Шир!!!'
-ESCAPE = 'Попытаться убежать'
+FIGHT = locale_manager.get('rooms.default.monster_hard.darklord.phrase_7')
+ESCAPE = locale_manager.get('rooms.default.monster_hard.darklord.phrase_8')
 
-name = 'Темный лорд'
+name = locale_manager.get('rooms.default.monster_hard.darklord.phrase_9')
 hp = 1000  # Темный Лорд должен быть лютым парнем! А то что-то они там все перекаченные какие-то.
 damage_range = ( 20, 25 )
 
@@ -14,16 +15,13 @@ loot = [ 'ring' ]
 
 def enter(user, reply):
 	reply(
-		'Кажется мы оказались не в том месте в не то время.\n'
-		'Очень надеюсь что {} не обратит на нас внимание.'.format(name),
+		locale_manager.get('rooms.default.monster_hard.darklord.phrase_1').format(name),
 		photo='BQADAgAD_ggAAmrZzgfWmyCl_kraUgI'
 	)
 
 	if user.rooms_count < 500000:
 		reply(
-			'Кажется он вас не заметил.\n'
-			'Вот и славненько, пойдем отсюда скорее, не будем мешать.'
-		)
+			locale_manager.get('rooms.default.monster_hard.darklord.phrase_2'))
 
 		user.leave(reply)
 
@@ -31,18 +29,12 @@ def enter(user, reply):
 
 		if not user.has_item('rigs'):
 			reply(
-				'Апчих!\n'
-				'Как тут пыльно!\n'
-				'ОЙ! По Моему нас заметили!'
-			)
+				locale_manager.get('rooms.default.monster_hard.darklord.phrase_3'))
 
 		else:
 			user.remove_item('rigs')  # У игрока должно быть только одно кольцо!
 			reply(
-				'«_Я чувстую его! Оно мое!_»\n'
-				'Мамочки! Мне страшно!\n'
-				'Верни ему то что он просит! НЕМЕДЛЕННО!'
-			)
+				locale_manager.get('rooms.default.monster_hard.darklord.phrase_4'))
 		user.leave(reply)
 
 
@@ -51,11 +43,11 @@ def dice(user, reply, result, subject=None):
 	if subject == ESCAPE:
 
 		if result > DICE_MIDDLE:
-			reply('Тебе удалось! Надеюсь мы больше не встретим этого мерзкого типа!')
+			reply(locale_manager.get('rooms.default.monster_hard.darklord.phrase_10'))
 			user.leave(reply)
 
 		else:
-			reply('Не вышло!\nНу ни чего я буду за тебя болеть!')
+			reply(locale_manager.get('rooms.default.monster_hard.darklord.phrase_11'))
 			# тут нужно запустить обычый бой
 
 
@@ -64,17 +56,13 @@ def action(user, reply, text):
 
 	if text == FIGHT:
 		reply(
-			'Пойду ка я спрячусь вон за ту колонну! '
-			'А вы тут пока общайтесь!'
-		)
+			locale_manager.get('rooms.default.monster_hard.darklord.phrase_5'))
 		# тут нужно запустить обычый бой
 
 
 	elif text == ESCAPE:
 		reply(
-			'«_Апчих! Пора тут прибарться_»\n'
-			'Кидай кубики, это наш шанс!!!'
-		)
+			locale_manager.get('rooms.default.monster_hard.darklord.phrase_6'))
 		user.throw_dice(reply, ESCAPE)
 
 

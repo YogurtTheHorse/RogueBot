@@ -1,4 +1,5 @@
-name = 'Назгул'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.monster_medium.nazgul.phrase_2')
 
 hp = 100
 damage_range = ( 10, 15 )
@@ -9,15 +10,12 @@ loot = [ ]
 
 
 def enter(user, reply):
-	reply('Эй, Приятель! Ты случайно историей не ошибся?')
+	reply(locale_manager.get('rooms.default.monster_medium.nazgul.phrase_3'))
 
 	if user.rooms_count < 75:
-		reply('{} обиженно уходит'.format(name))
+		reply(locale_manager.get('rooms.default.monster_medium.nazgul.phrase_4').format(name))
 		user.leave(reply)
 
 	else:
 		reply(
-			'*Из-под капюшона послышалось шипение*\n'
-			'Ой-ой! Кажется он не в духе!'
-			'Может решим все по хорошему?'
-		)
+			locale_manager.get('rooms.default.monster_medium.nazgul.phrase_1'))

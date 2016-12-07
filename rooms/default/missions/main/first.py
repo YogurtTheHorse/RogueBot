@@ -9,7 +9,7 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('_Какой-то сверток..\nПосмотрю потом, как выйду отсюда. Этот старик подозрительно молчит._', photo=OLDMAN_STICKER)
+	reply(locale_manager.get('rooms.default.missions_main.first.enter_phrase'), photo=OLDMAN_STICKER)
 
 	user.add_item('story', 'gun')
 	user.add_item('story', 'map')
@@ -21,6 +21,6 @@ def enter(user, reply):
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply('_тишина_')
+		reply('...')
 	else:
 		user.leave(reply)

@@ -3,7 +3,7 @@ import random
 from utils.buffs import RainbowBuff
 from utils.buffs import NegativeRainbowBuff
 
-name = "Психопаста «Радуга»"
+name = locale_manager.get('items.good.rainbow.name')
 price = 100
 description = (
 	locale_manager.get('items.good.rainbow.phrase_1'))

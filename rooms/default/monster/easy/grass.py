@@ -1,6 +1,7 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Трава'
+name = locale_manager.get('rooms.default.monster_easy.grass.phrase_1')
 
 hp = 12
 element = WATER
@@ -12,16 +13,16 @@ loot = [ ]
 
 def enter(user, reply):
 	msg = (
-		'Это трава в горшке.'
+		locale_manager.get('rooms.default.monster_easy.grass.phrase_2')
 	)
 	reply(msg)
 
 def get_actions(user):
-	return user.get_fight_actions() + [ 'Уйти' ]
+	return user.get_fight_actions() + [ locale_manager.get('rooms.default.monster_easy.grass.phrase_3') ]
 
 def action(user, reply, text):
-	if text == 'Уйти':
-		reply('Ты просто ушел от травы.')
+	if text == locale_manager.get('rooms.default.monster_easy.grass.phrase_4'):
+		reply(locale_manager.get('rooms.default.monster_easy.grass.phrase_5'))
 
 		user.leave(reply)
 	else:

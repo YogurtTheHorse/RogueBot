@@ -1,6 +1,7 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Слизень'
+name = locale_manager.get('rooms.default.monster_easy.slime.phrase_1')
 
 hp = 30
 element = WATER
@@ -12,16 +13,16 @@ loot = [ 'slime' ]
 
 def enter(user, reply):
 	msg = (
-		'Это слизень. Самый обычный слизень.'
+		locale_manager.get('rooms.default.monster_easy.slime.phrase_2')
 	)
 	reply(msg, photo=SLIME_STICKER)
 
 def get_actions(user):
-	return [ 'Раздавить' ] + user.get_fight_actions()
+	return [ locale_manager.get('rooms.default.monster_easy.slime.phrase_3') ] + user.get_fight_actions()
 
 def action(user, reply, text):
-	if text == 'Раздавить':
-		reply('Ты раздавил его, но запачкал обувь.')
+	if text == locale_manager.get('rooms.default.monster_easy.slime.phrase_4'):
+		reply(locale_manager.get('rooms.default.monster_easy.slime.phrase_5'))
 
 		if user.has_item('intoxicated_shoes'):
 			user.add_tag('dirt')

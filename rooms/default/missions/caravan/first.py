@@ -56,7 +56,7 @@ def get_message(user):
 	costs = user.get_room_temp('costs', [])
 
 	msg = locale_manager.get('rooms.default.missions_caravan.first.phrase_6')
-	msg += '\n\n'.join([ '{0}\nЦена (Доставка + покупка): {1}\n{2}'.format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
+	msg += '\n\n'.join([ locale_manager.get('rooms.default.missions_caravan.first.phrase_13').format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
 
 	return msg
 

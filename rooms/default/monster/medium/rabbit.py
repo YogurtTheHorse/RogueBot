@@ -1,6 +1,7 @@
+from localizations import locale_manager
 from constants import *
 
-name = 'Кролик'
+name = locale_manager.get('rooms.default.monster_medium.rabbit.phrase_1')
 
 hp = 250
 element = NONE
@@ -11,4 +12,4 @@ coins = 3
 loot = [ ]
 
 def enter(user, reply):
-	reply('Его зубы в крови своих жертв.', photo='BQADAgAD8QgAAmrZzgdh94MU_Y8fegI')
+	reply(locale_manager.get('rooms.default.monster_medium.rabbit.phrase_2'), photo='BQADAgAD8QgAAmrZzgdh94MU_Y8fegI')

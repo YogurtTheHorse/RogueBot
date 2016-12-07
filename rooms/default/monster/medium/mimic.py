@@ -1,7 +1,8 @@
-name = 'Сундук'
+from localizations import locale_manager
+name = locale_manager.get('rooms.default.monster_medium.mimic.phrase_2')
 
 ACTIVATED = 'activated'
-actions = ['Открыть сундук', 'Уйти']
+actions = [locale_manager.get('rooms.default.monster_medium.mimic.phrase_3'), locale_manager.get('rooms.default.monster_medium.mimic.phrase_4')]
 
 hp = 50
 damage_range = (50, 50)
@@ -19,7 +20,7 @@ def get_actions(user):
 
 
 def enter(user, reply):
-	reply('Ты заходишь в комнату и видишь сундук.\nОбычный сундук.', photo='BQADAgADCQkAAmrZzgfwfl33PblsWQI')
+	reply(locale_manager.get('rooms.default.monster_medium.mimic.phrase_5'), photo='BQADAgADCQkAAmrZzgfwfl33PblsWQI')
 
 	user.set_room_temp(ACTIVATED, False)
 
@@ -30,18 +31,11 @@ def action(user, reply, text):
 	else:
 		if text == actions[0]:
 			if user.rooms_count < 25:
-				reply('Не открывается')
+				reply(locale_manager.get('rooms.default.monster_medium.mimic.phrase_6'))
 				user.leave(reply)
 			else:
 				reply(
-					'Ты подходишь к сундуку...\n'
-					'...\n'
-					'...\n'
-					'...\n'
-					'...\n'
-					'...\n'
-					'_МИМИК_\n'
-				)
+					locale_manager.get('rooms.default.monster_medium.mimic.phrase_1'))
 				user.set_room_temp(ACTIVATED, True)
 		else:
 			user.leave(reply)

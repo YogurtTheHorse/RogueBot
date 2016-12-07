@@ -7,8 +7,8 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('—А.. Э.. Это же не спортзал.')
-	reply('—Верно, это сюжетная линия. Автор попросил меня постоять здесь.')
+	reply(locale_manager.get('rooms.default.missions_main.second.phrase_7'))
+	reply(locale_manager.get('rooms.default.missions_main.second.phrase_8'))
 
 	if user.get_charisma() > 10:
 		reply(locale_manager.get('rooms.default.missions_main.second.phrase_4'))

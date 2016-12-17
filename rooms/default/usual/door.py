@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 name = locale_manager.get('rooms.default.usual.door.phrase_1')
 
 actions = [ locale_manager.get('rooms.default.usual.door.phrase_2'), locale_manager.get('rooms.default.usual.door.phrase_3')]
@@ -14,11 +15,11 @@ def action(user, reply, text):
 	if text == actions[0]:
 		cnt = user.get_room_temp('cnt', def_val=0)
 		if cnt > 10:
-			reply('_Ты устал_')
+			reply(locale_manager.get('rooms.default.usual.door.phrase_101'))
 		elif cnt > 20:
-			reply('_Ты умер от изнеможения')
+			reply(locale_manager.get('rooms.default.usual.door.phrase_102'))
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.door.phrase_5'))
-		reply('_тишина_')
+		reply(locale_manager.get('rooms.default.usual.door.phrase_103'))
 		user.set_room_temp('cnt', cnt+1)
 	else:
 		reply(locale_manager.get('rooms.default.usual.door.phrase_6'))

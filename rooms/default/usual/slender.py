@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 from constants import *
 
 READY = locale_manager.get('rooms.default.usual.slender.phrase_1')
@@ -26,7 +27,7 @@ def action(user,reply, text):
 			user.set_room_temp('question', 'third')
 	elif question == 'third':
 		if text == locale_manager.get('rooms.default.usual.slender.phrase_8'):
-			reply('Шум усиливается, внезапно из-за деревьев возник неестественно высокий человек.\nТы не можешь двигаться.\nТьма окутала твоё сознание.', photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_101'), photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_9'))
 		else:
 			reply(locale_manager.get('rooms.default.usual.slender.phrase_10'))
@@ -56,7 +57,7 @@ def action(user,reply, text):
 			user.set_room_temp('question', 'nineth')
 	elif question == 'nineth':
 		if text == locale_manager.get('rooms.default.usual.slender.phrase_20'):
-			reply('Выбежав из ангара, ты столкнулся с ним лицом к лицу.\nТьма окутала твоё сознание', photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_102'), photo='BQADAgAD4AgAAmrZzgdmsBNDB5hPiQI')
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_21'))
 		else:
 			reply(locale_manager.get('rooms.default.usual.slender.phrase_22'))
@@ -71,7 +72,7 @@ def action(user,reply, text):
 			user.set_room_temp('question', 'dozenth')
 	elif question == 'dozenth':
 		if text == locale_manager.get('rooms.default.usual.slender.phrase_27'):
-			reply('Это было глупо.\nТьма окутала твоё сознание.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_103'))
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_28'))
 		else:
 			reply(locale_manager.get('rooms.default.usual.slender.phrase_29'))
@@ -90,7 +91,7 @@ def action(user,reply, text):
 			user.set_room_temp('question', 'sixteenth')	
 	elif question == 'sixteenth':
 		if text == locale_manager.get('rooms.default.usual.slender.phrase_35'):
-			reply('Ты же не думал, что получится?\nТьма окутала твоё сознание.')
+			reply(locale_manager.get('rooms.default.usual.slender.phrase_104'))
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.slender.phrase_36'))
 		else:
 			reply(locale_manager.get('rooms.default.usual.slender.phrase_37'))

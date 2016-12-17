@@ -2,13 +2,13 @@ from localizations import locale_manager
 import random
 from items import itemloader
 
-name = locale_manager.get('rooms.default.missions_caravan.caravan.phrase_3')
+name = locale_manager.get('rooms.default.missions_caravan.caravan.phrase_103')
 
-FIRST_ACTIONS = [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_4'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_5'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_6'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_7') ]
+FIRST_ACTIONS = [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_104'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_105'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_106'), locale_manager.get('rooms.default.missions_caravan.caravan.phrase_107') ]
 
 def enter(user, reply):
 	reply(
-		locale_manager.get('rooms.default.missions_caravan.caravan.phrase_1'),
+		locale_manager.get('rooms.default.missions_caravan.caravan.phrase_101'),
 		photo='BQADAgADDwkAAmrZzgeuSKp_XxTj7wI'
 	)
 
@@ -48,9 +48,9 @@ def generate_items_text(user, lst):
 	descriptions = [ i.description for i in items if i is not None ]
 	costs = [ i.price * 2 for i in items if i is not None ]
 
-	user.set_room_temp(lst + '_names', names)
-	user.set_room_temp(lst + '_descriptions', descriptions)
-	user.set_room_temp(lst + '_costs', costs)
+	user.set_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_108'), names)
+	user.set_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_109'), descriptions)
+	user.set_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_110'), costs)
 
 def get_actions(user):
 	question = user.get_room_temp('question', def_val='first')
@@ -58,17 +58,17 @@ def get_actions(user):
 	if question == 'first':
 		return FIRST_ACTIONS
 	elif question == 'trade':
-		return user.get_room_temp('trade_items_names') + [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_8') ]
+		return user.get_room_temp('trade_items_names') + [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_111') ]
 	elif question == 'order':
-		return user.get_room_temp('new_order_list_names') + [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_9') ]
+		return user.get_room_temp('new_order_list_names') + [ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_112') ]
 
 def get_message(user, lst):
-	names = user.get_room_temp(lst + '_names', [])
-	descriptions = user.get_room_temp(lst + '_descriptions', [])
-	costs = user.get_room_temp(lst + '_costs', [])
+	names = user.get_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_113'), [])
+	descriptions = user.get_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_114'), [])
+	costs = user.get_room_temp(lst + locale_manager.get('rooms.default.missions_caravan.caravan.phrase_115'), [])
 
-	msg = locale_manager.get('rooms.default.missions_caravan.caravan.phrase_10')
-	msg += '\n\n'.join([ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_11').format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
+	msg = locale_manager.get('rooms.default.missions_caravan.caravan.phrase_116')
+	msg += locale_manager.get('rooms.default.missions_caravan.caravan.phrase_117').join([ locale_manager.get('rooms.default.missions_caravan.caravan.phrase_118').format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
 
 	return msg
 
@@ -86,9 +86,9 @@ def buy(user, reply, name):
 			costs[ind] *= 2
 			user.set_room_temp('trade_items_costs', costs)
 
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_12').format(name, costs[ind]))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_119').format(name, costs[ind]))
 		else:
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_13'))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_120'))
 
 
 		return True
@@ -150,23 +150,23 @@ def action(user, reply, text):
 			reply(get_message(user, 'new_order_list'))
 		elif text == FIRST_ACTIONS[2]:
 			reply(
-				locale_manager.get('rooms.default.missions_caravan.caravan.phrase_2'))
+				locale_manager.get('rooms.default.missions_caravan.caravan.phrase_102'))
 			steal(user)
 			leave(user, reply, with_army=True)
 		else:
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_14'))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_121'))
 			leave(user, reply)
 	elif question == 'order':
-		if text == locale_manager.get('rooms.default.missions_caravan.caravan.phrase_15'):
+		if text == locale_manager.get('rooms.default.missions_caravan.caravan.phrase_122'):
 			question = user.set_room_temp('question', 'first')
 		elif order(user, text):
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_16'))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_123'))
 		else:
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_17'))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_124'))
 	else:
-		if text == locale_manager.get('rooms.default.missions_caravan.caravan.phrase_18'):
+		if text == locale_manager.get('rooms.default.missions_caravan.caravan.phrase_125'):
 			question = user.set_room_temp('question', 'first')
 		elif not buy(user, reply, text):
-			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_19'))
+			reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_126'))
 
-		reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_20'))
+		reply(locale_manager.get('rooms.default.missions_caravan.caravan.phrase_127'))

@@ -20,28 +20,28 @@ def action(user, reply, text):
 
 	if question == 'first':
 		reply(locale_manager.get('rooms.default.special.bill_gates.phrase_5'))
-		reply('*ВАШЕ УСТРОЙСТВО ОБНОВЛЕНО ДО WINDOWS 10*')
+		reply('*UPGRADED TO WINDOWS 10*')
 		user.set_room_temp('question', '14')
 	elif question == '14':
-		reply('Загрузка... 14%')
+		reply('Loading... 14%')
 		user.set_room_temp('question', '36')
 	elif question == '36':
-		reply('Загрузка... 36%')
+		reply('Loading... 36%')
 		user.set_room_temp('question', '28')
 	elif question == '28':
-		reply('Загрузка... 28%')
+		reply('Loading... 28%')
 		user.set_room_temp('question', '74')
 	elif question == '74':
-		reply('Загрузка... 74%')
+		reply('Loading... 74%')
 		user.set_room_temp('question', '97')
 	elif question == '97':
-		reply('Загрузка... 97%')
+		reply('Loading... 97%')
 		user.set_room_temp('question', '99')
 	elif question == '99':
-		reply('Загрузка... 99%')
+		reply('Loading... 99%')
 		user.set_room_temp('question', 'error')
 	else:
-		reply('*Ошибка 0х000009с*')
+		reply('*Error 0x000009c*')
 		user.leave(reply)
 
 def get_actions(user):

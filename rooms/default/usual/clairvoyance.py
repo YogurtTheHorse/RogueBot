@@ -31,9 +31,6 @@ def action(user, reply, text):
 			reply(locale_manager.get('rooms.default.usual.clairvoyance.phrase_8'))
 		else:
 			name = found_user.name
-			if found_user.pet:
-				pet = found_user.get_pet()
-				name += ' и {0} {1}'.format(pet.name, pet.real_name)
 
 			res = locale_manager.get('rooms.default.usual.clairvoyance.phrase_9')
 

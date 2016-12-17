@@ -9,13 +9,13 @@ loot = [ 'puzzle' ]
 is_monster = True
 
 def enter(user, reply):
-	reply('Ужас забирается в твоё сознание...')
+	reply(locale_manager.get('rooms.default.special.the_thing_from_below.enter'))
 
 	if user.rooms_count < 800:
-		reply('...и берёт тебя под контроль. Ты так и не понял, что произошло, но твои ноги тебя вынесли из комнаты. Сами.')
+		reply(locale_manager.get('rooms.default.special.the_thing_from_below.to_little'))
 		user.leave(reply)
 	else:
-		reply('...но чудищу не удалось захватить твой разум и теперь оно злится.')
+		reply(locale_manager.get('rooms.default.special.the_thing_from_below.evil'))
 
 def get_actions(user):
 	return user.get_fight_actions()

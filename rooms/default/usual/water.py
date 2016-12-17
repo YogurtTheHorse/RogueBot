@@ -2,7 +2,7 @@ from localizations import locale_manager
 from time import time
 from constants import *
 
-name = '_Вода_'
+name = locale_manager.get('rooms.default.usual.water.name')
 
 CHEST = locale_manager.get('rooms.default.usual.water.phrase_2')
 FAST = locale_manager.get('rooms.default.usual.water.phrase_3')

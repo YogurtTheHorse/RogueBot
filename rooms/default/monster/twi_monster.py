@@ -31,8 +31,7 @@ def enter(user, reply):
 	else:
 		if status == 'busy':
 			reply(
-				locale_manager.get('rooms.default.monster.twi_monster.phrase_2')'За подробности обращаться сюда: twitter.com/funrogbot\n\n'
-				'«Охрана у школьника?..»'
+				locale_manager.get('rooms.default.monster.twi_monster.phrase_2')
 			)
 		else:
 			reply(locale_manager.get('rooms.default.monster.twi_monster.phrase_3'))

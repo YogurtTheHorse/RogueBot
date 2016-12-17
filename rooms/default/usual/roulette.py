@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 from constants import *
 import random
 import databasemanager
@@ -6,8 +7,8 @@ import databasemanager
 name = 'Казино "Марианская Впадина"'
 
 actions_enter = [ locale_manager.get('rooms.default.usual.roulette.phrase_4'), locale_manager.get('rooms.default.usual.roulette.phrase_5') ]
-actions_choose = [ 'Красное x2', 'Зеленое x12', 'Черное x2' ]
-actions_make_bet = [ '100', '250', '500', '1000', locale_manager.get('rooms.default.usual.roulette.phrase_6') ]
+actions_choose = [ locale_manager.get('rooms.default.usual.roulette.phrase_101'), locale_manager.get('rooms.default.usual.roulette.phrase_102'), locale_manager.get('rooms.default.usual.roulette.phrase_103') ]
+actions_make_bet = [ locale_manager.get('rooms.default.usual.roulette.phrase_104'), locale_manager.get('rooms.default.usual.roulette.phrase_105'), locale_manager.get('rooms.default.usual.roulette.phrase_106'), locale_manager.get('rooms.default.usual.roulette.phrase_107'), locale_manager.get('rooms.default.usual.roulette.phrase_6') ]
 
 
 def can_open(user, reply):
@@ -65,7 +66,7 @@ def action_enter(user, reply, text):
 
 	if text == actions_enter[1]:
 		msg = (
-			' — Азартные игры не для меня, — подумал ты и ушел в коридор'
+			locale_manager.get('rooms.default.usual.roulette.phrase_108')
 		)
 
 		reply(msg)
@@ -93,7 +94,7 @@ def action_enter(user, reply, text):
 		return
 
 	msg = (
-		' - Ну чтож, выбирайте ставки, Господа!, — диллер посмотрел на тебя с ухмылкой'
+		locale_manager.get('rooms.default.usual.roulette.phrase_109')
 	)
 
 	reply(msg)
@@ -122,7 +123,7 @@ def action_choose(user, reply, text):
 	user.set_room_temp('color', choose)
 
 	msg = (
-		' — Твой выбор {}. Какова же твоя ставка?'
+		locale_manager.get('rooms.default.usual.roulette.phrase_110')
 	)
 
 	reply(msg.format(text))
@@ -153,7 +154,7 @@ def action_make_bet(user, reply, text):
 
 	if bet <= 0:
 		msg = (
-			' — Что ты мямлишь? Говори четче!, — сказал тебе диллер'
+			locale_manager.get('rooms.default.usual.roulette.phrase_111')
 		)
 
 		reply(msg)
@@ -212,7 +213,7 @@ def action_make_bet(user, reply, text):
 
 	else:
 		msg = (
-			' — Сегодня удача не на твоей стороне, дружище!'
+			locale_manager.get('rooms.default.usual.roulette.phrase_112')
 		)
 
 		reply(msg)

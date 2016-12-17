@@ -1,3 +1,4 @@
+from localizations import locale_manager
 from constants import *
 import random
 
@@ -39,8 +40,8 @@ class VietnamBuff(Buff):
 
 	def on_room(self, user, reply, room):
 		self.time -= 1
-		self.make_damage(5, 5, reply, name='Вьетнамская ловушка')
-		reply('Как же болят твои ноги... Хуже, чем от ботинок.')
+		self.make_damage(5, 5, reply, name=locale_manager.get('buffs.phrase_101'))
+		reply(locale_manager.get('buffs.phrase_102'))
 
 	def is_negative(self):
 		return True
@@ -60,37 +61,37 @@ class DevilPower(Buff):
 	def __init__(self,):
 		super(DevilPower, self).__init__(8, name='devilpow', damage_plus=3000000)
 	def on_end(self, user, reply, room):
-		reply('Контракт истёк.')
+		reply(locale_manager.get('buffs.phrase_103'))
 		user.remove_item('lepergold')
 		user.remove_tag(DEVIL)
-		user.death(reply, reason='Сделка с дьяволом')
+		user.death(reply, reason=locale_manager.get('buffs.phrase_104'))
 
 class DevilInt(Buff):
 	def __init__(self,):
 		super(DevilInt, self).__init__(8, name='devilint', mana_damage_plus=3000000)
 	def on_end(self, user, reply, room):
-		reply('Контракт истёк.')
+		reply(locale_manager.get('buffs.phrase_105'))
 		user.remove_item('lepergold')
 		user.remove_tag(DEVIL)
-		user.death(reply, reason='Сделка с дьяволом')
+		user.death(reply, reason=locale_manager.get('buffs.phrase_106'))
 
 class DevilMoney(Buff):
 	def __init__(self,):
 		super(DevilMoney, self).__init__(8, name='devilmon', mana_damage_plus=0)
 	def on_end(self, user, reply, room):
-		reply('Контракт истёк.')
+		reply(locale_manager.get('buffs.phrase_107'))
 		user.remove_item('lepergold')
 		user.remove_tag(DEVIL)
-		user.death(reply, reason='Сделка с дьяволом')
+		user.death(reply, reason=locale_manager.get('buffs.phrase_108'))
 
 class DevilEntity(Buff):
 	def __init__(self,):
 		super(DevilEntity, self).__init__(8, name='devilent', damage_plus=3000000, mana_damage_plus=3000000)
 	def on_end(self, user, reply, room):
-		reply('Контракт истёк.')
+		reply(locale_manager.get('buffs.phrase_109'))
 		user.remove_item('lepergold')
 		user.remove_tag(DEVIL)
-		user.death(reply, reason='Сделка с дьяволом')
+		user.death(reply, reason=locale_manager.get('buffs.phrase_110'))
 
 class EmperorDefence(Buff):
 	def __init__(self):
@@ -101,15 +102,15 @@ class EmperorBurn(Buff):
 		super(EmperorBurn, self).__init__(3, name='emperorburn')
 	def on_room(self, user, reply, room):
 		self.time -= 1
-		user.make_damage(10, 20, reply, death=True, name='Праведный огонь')
-		reply('У тебя кожа горит.')	
+		user.make_damage(10, 20, reply, death=True, name=locale_manager.get('buffs.phrase_111'))
+		reply(locale_manager.get('buffs.phrase_112'))	
 
 class DiabetBuff(Buff):
 	def __init__(self):
 		super(DiabetBuff, self).__init__(3, name='diabet')
 	def on_room(self, user, reply, room):
-		user.make_damage(10, 20, reply, death=True, name='Диабет')
-		reply('Что-то сухо во рту.')	
+		user.make_damage(10, 20, reply, death=True, name=locale_manager.get('buffs.phrase_113'))
+		reply(locale_manager.get('buffs.phrase_114'))	
 
 	def is_negative(self):
 		return True

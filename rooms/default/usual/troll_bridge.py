@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 from constants import *
 import random
 
@@ -8,8 +9,8 @@ c_PRICE             = 75        # Стоимость прохода
 c_MIN_ROOM_COUNT    = 200       # Мин комнат
 c_MIN_STRENGTH_ANSW = 100       # Мин силы для нападения
 c_MIN_INTELL_ANSW   = 100       # Мин интелекта для ответа
-c_TROLL_R1          = 'Вы видите огромного тролля. Часть его лица покрыта мхом, остальную украшают множество шрамов. На голове у него советская каска со звездой.\n\n — Через этот мост просто так не ходят! Плати {} или обед!'.format(c_PRICE)
-c_TROLL_R2          = ' — О привет боец. Не узнал сразу. Ты давай иди... Иди.'
+c_TROLL_R1          = locale_manager.get('rooms.default.usual.troll_bridge.phrase_101').format(c_PRICE)
+c_TROLL_R2          = locale_manager.get('rooms.default.usual.troll_bridge.phrase_102')
 
 GO     = locale_manager.get('rooms.default.usual.troll_bridge.phrase_2')
 LEAVE  = locale_manager.get('rooms.default.usual.troll_bridge.phrase_3')
@@ -96,7 +97,7 @@ def action(user, reply, text):
 				reply(locale_manager.get('rooms.default.usual.troll_bridge.phrase_23'))
 				user.death(reply, reason=name)
 			elif text == CHEAT:
-				reply(' — Молодец боец. Аккуратней ходить нужно. Вот держи каску, береги голову.')
+				reply(locale_manager.get('rooms.default.usual.troll_bridge.phrase_103'))
 				user.add_item('loot','sunion_helmet')
 				user.leave(reply)
 

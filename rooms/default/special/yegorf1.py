@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 import random
 
 name = locale_manager.get('rooms.default.special.yegorf1.phrase_7')
@@ -6,11 +7,11 @@ name = locale_manager.get('rooms.default.special.yegorf1.phrase_7')
 STICKER_YEGORF1 = 'BQADAgADQwADDLXzAxNNjVnoJZqxAg'
 
 actions_enter = [ locale_manager.get('rooms.default.special.yegorf1.phrase_8') ]
-actions_corridor = [ locale_manager.get('rooms.default.special.yegorf1.phrase_9'), 'Открыть дверь #445', 'Открыть дверь #444', 'Открыть дверь #443', 'Открыть дверь #442', 'Открыть дверь #441' ]
+actions_corridor = [ locale_manager.get('rooms.default.special.yegorf1.phrase_9'), locale_manager.get('rooms.default.special.yegorf1.phrase_101'), locale_manager.get('rooms.default.special.yegorf1.phrase_102'), locale_manager.get('rooms.default.special.yegorf1.phrase_103'), locale_manager.get('rooms.default.special.yegorf1.phrase_104'), locale_manager.get('rooms.default.special.yegorf1.phrase_105') ]
 actions_choose_door_01 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_10'), locale_manager.get('rooms.default.special.yegorf1.phrase_11') ]
 actions_choose_door_02 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_12'), locale_manager.get('rooms.default.special.yegorf1.phrase_13') ]
 actions_choose_door_03 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_14'), locale_manager.get('rooms.default.special.yegorf1.phrase_15') ]
-actions_choose_door_04 = [ 'Зайти в дверь #308', 'Зайти в дверь #402', 'Зайти в дверь #253', 'Зайти в дверь #620', 'Зайти в дверь #636', 'Зайти в дверь #564' ]
+actions_choose_door_04 = [ locale_manager.get('rooms.default.special.yegorf1.phrase_106'), locale_manager.get('rooms.default.special.yegorf1.phrase_107'), locale_manager.get('rooms.default.special.yegorf1.phrase_108'), locale_manager.get('rooms.default.special.yegorf1.phrase_109'), locale_manager.get('rooms.default.special.yegorf1.phrase_110'), locale_manager.get('rooms.default.special.yegorf1.phrase_111') ]
 actions_pray = [ locale_manager.get('rooms.default.special.yegorf1.phrase_16'), locale_manager.get('rooms.default.special.yegorf1.phrase_17'), locale_manager.get('rooms.default.special.yegorf1.phrase_18'), locale_manager.get('rooms.default.special.yegorf1.phrase_19'), locale_manager.get('rooms.default.special.yegorf1.phrase_20'), locale_manager.get('rooms.default.special.yegorf1.phrase_21'), locale_manager.get('rooms.default.special.yegorf1.phrase_22') ]
 
 def doors_filter(user, doors):
@@ -192,7 +193,7 @@ def action_choose_door_03(user, reply, text):
 
 		if text == actions_choose_door_03[1]:
 			msg = (
-				'*Нет!* Раз тебе не нужны подсказки, то дальше действуй сам!\n'
+				locale_manager.get('rooms.default.special.yegorf1.phrase_112')
 			)
 
 			reply(msg)

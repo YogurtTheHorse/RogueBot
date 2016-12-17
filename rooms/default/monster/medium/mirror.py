@@ -27,7 +27,7 @@ def enter(user, reply):
 		reply(locale_manager.get('rooms.default.monster_medium.mirror.phrase_3'))
 		user.won(reply)
 	elif ch > 15:
-		reply('Такой красивый. Иди с миром ;)')
+		reply(locale_manager.get('rooms.default.monster_medium.mirror.phrase_6'))
 		user.won(reply)
 
 def make_damage(user, reply, dmg):

@@ -10,7 +10,7 @@ CRY = 'NEVER GONNA MAKE YOU CRY!'
 GOODBYE = 'NEVER GONNA SAY GOODBYE'
 
 NICE = locale_manager.get('rooms.default.special.rick_astley.phrase_2')
-WRONG = '*НЕПРАВИЛЬНО!*'
+WRONG = locale_manager.get('rooms.default.special.rick_astley.phrase_6')
 
 APPEAR = locale_manager.get('rooms.default.special.rick_astley.phrase_3')
 

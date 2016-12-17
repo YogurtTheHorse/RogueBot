@@ -5,7 +5,7 @@ def get_actions(user):
 	return [ locale_manager.get('rooms.default.usual.call_back.phrase_2')]
 
 def enter(user, reply):
-	reply('— Мы вам перезвоним!')
+	reply(locale_manager.get('rooms.default.usual.call_back.phrase_3'))
 
 def action(user, reply, text):
 	user.leave(reply)

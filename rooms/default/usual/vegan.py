@@ -7,11 +7,11 @@ def get_actions(user):
 	return actions
 
 def enter(user, reply):
-	reply('—Я веган!')
+	reply(locale_manager.get('rooms.default.usual.vegan.main'))
 
 def action(user, reply, text):
 	if text == actions[0]:
-		reply('—Я веган!')
+		reply(locale_manager.get('rooms.default.usual.vegan.main'))
 	else:
 		reply(locale_manager.get('rooms.default.usual.vegan.phrase_4'))
 		user.leave(reply)

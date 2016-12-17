@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 import random
 import usermanager
 import items.itemloader as itemloader
@@ -27,7 +28,7 @@ def enter(user, reply):
 			break
 
 	if found_user is not None:
-		reply('Гоп стоп! Да это же {0}!'.format(found_user.name))
+		reply(locale_manager.get('rooms.default.usual.some_player.phrase_101').format(found_user.name))
 		user.set_room_temp('uid', found_user.uid)
 		user.set_room_temp('steal_tries', 0)
 	else:
@@ -44,7 +45,7 @@ def steal(user, steal_user, is_last, reply):
 
 	item_to_steal = random.choice(items)
 
-	reply('Ты стырил *{0}*!'.format(item_to_steal.name))
+	reply(locale_manager.get('rooms.default.usual.some_player.phrase_102').format(item_to_steal.name))
 
 	user.add_item(item_to_steal.buff, item_to_steal.code_name)
 	steal_user.remove_item(item_to_steal.code_name)

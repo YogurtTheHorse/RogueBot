@@ -29,7 +29,7 @@ def enter(user, reply):
 			break
 
 	if found_user is not None:
-		reply('Здесь лежат останки игрока {0}'.format(found_user.name), photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
+		reply(locale_manager.get('rooms.default.special.remains.phrase_10').format(found_user.name), photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
 		user.set_room_temp('items', found_user.items)
 	else:
 		reply(locale_manager.get('rooms.default.special.remains.phrase_4'), photo='BQADAgADFwkAAmrZzgf5q0m1CmsDggI')
@@ -58,9 +58,9 @@ def action(user, reply, text):
 			for it, cnt in counter_items.most_common():
 				loaded_item = itemloader.load_item(it[1], it[0], usr=user)
 				if loaded_item is not None:
-					items_str.append('*{0}* ({1} шт.)'.format(loaded_item.name, cnt))
+					items_str.append(locale_manager.get('rooms.default.special.remains.phrase_9').format(loaded_item.name, cnt))
 
-			reply('Его рюкзак вмещал в себя следующие вещи: {0}'.format(', '.join(items_str)))
+			reply(locale_manager.get('rooms.default.special.remains.phrase_8').format(', '.join(items_str)))
 
 	else:
 		reply(locale_manager.get('rooms.default.special.remains.phrase_7'))

@@ -2,7 +2,7 @@ from localizations import locale_manager
 name = locale_manager.get('rooms.default.usual.witcher.phrase_1')
 
 ASK = locale_manager.get('rooms.default.usual.witcher.phrase_2')
-CAN_I_HELP = '— Может, тебе помочь?'
+CAN_I_HELP = locale_manager.get('rooms.default.usual.witcher.phrase_8')
 HELP = locale_manager.get('rooms.default.usual.witcher.phrase_3')
 WAIT = locale_manager.get('rooms.default.usual.witcher.phrase_4')
 
@@ -21,14 +21,14 @@ def action(user, reply, text):
 		reply(locale_manager.get('rooms.default.usual.witcher.phrase_6'))
 		user.leave(reply)
 	elif text == CAN_I_HELP:
-		reply('— Не надо, я сам! Я ведьмак, или ты?!')
+		reply(locale_manager.get('rooms.default.usual.witcher.phrase_9'))
 		user.set_room_temp('question', 'third')
 	elif text == HELP:
 		reply(
 			locale_manager.get('rooms.default.usual.witcher.phrase_7'))
 		user.leave(reply)
 	else:
-		reply('— Сейчас достану, подожди...')
+		reply(locale_manager.get('rooms.default.usual.witcher.phrase_10'))
 		if cnt > 1:
 			user.set_room_temp('question', 'second')
 

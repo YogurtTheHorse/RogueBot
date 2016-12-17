@@ -29,7 +29,7 @@ def action(user, reply, text):
 			reply(locale_manager.get('rooms.default.monster_medium.bandits.phrase_12'))
 			user.leave(reply)
 		else:
-			reply('Бандиты достали оружие и атакуют вас, крича "Маачи казла!"')
+			reply(locale_manager.get('rooms.default.monster_medium.bandits.phrase_15'))
 			user.set_room_temp('fight', True)
 	else:
 		user.fight_action(reply, text)

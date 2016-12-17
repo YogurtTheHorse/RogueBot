@@ -1,10 +1,11 @@
 from localizations import locale_manager
+from localizations import locale_manager
 from time import time
 from constants import *
 
 INJURED = 'injured'
 
-name = 'Потрёпанный мужик с дробовиком'
+name = locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_101')
 
 GO = locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_1')
 WAIT = locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_2')
@@ -15,7 +16,7 @@ def get_actions(user):
 	return [ GO, WAIT ]
 
 def enter(user, reply):
-	reply('— Ты еще кто такой?! Не дергайся, дай мне проверить твои документы! У меня на это уйдёт примерно 15 секунд.', photo='BQADAgAD6QgAAmrZzgd8DgIPKNYJ7QI')
+	reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_102'), photo='BQADAgAD6QgAAmrZzgd8DgIPKNYJ7QI')
 
 	user.set_room_temp('time', time())
 
@@ -25,19 +26,19 @@ def action(user, reply, text):
 
 	if text == GO:
 		if user.has_tag(INJURED) and delta < DELTA_TIME_MAX:
-			reply('— Я тебя предупреждал!')
+			reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_103'))
 			user.death(reply, reason=locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_3'))
 		elif delta < DELTA_TIME_MAX:
-			reply('— Я тебя предупреждаю последний раз.\nМужик поднимает дробовик и стреляет чуть правее твоей головы, но тебя все равно зацепило.\n*Click-Clack*\n— Следующий будет в голову.')
+			reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_104'))
 			user.add_tag(INJURED)
 			user.make_damage(10, 30, reply, death=False, name=name)
 		elif delta > DELTA_TIME_MAX:
 			if user.has_tag(INJURED):
 				user.remove_tag(INJURED)
-			reply('— Вали отсюда! Быстро!')
+			reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_105'))
 			user.leave(reply)
 	elif text == WAIT:
 		if delta < DELTA_TIME_MAX:
-			reply('В комнате очень тихо. Настолько что ты слышишь своё собственное сердцебиение.\nЕще бы его не услышать, ведь на вас направлен дробовик!')	
+			reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_106'))	
 		else:
-			reply(' — Иди!')
+			reply(locale_manager.get('rooms.default.usual.no_sudden_movement.phrase_107'))

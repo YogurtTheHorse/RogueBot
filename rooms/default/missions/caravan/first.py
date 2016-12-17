@@ -1,13 +1,13 @@
 from localizations import locale_manager
 from items import itemloader
 
-name = locale_manager.get('rooms.default.missions_caravan.first.phrase_2')
+name = locale_manager.get('rooms.default.missions_caravan.first.phrase_102')
 
-FIRST_ACTIONS = [ locale_manager.get('rooms.default.missions_caravan.first.phrase_3'), locale_manager.get('rooms.default.missions_caravan.first.phrase_4') ]
+FIRST_ACTIONS = [ locale_manager.get('rooms.default.missions_caravan.first.phrase_103'), locale_manager.get('rooms.default.missions_caravan.first.phrase_104') ]
 
 def enter(user, reply):
 	reply(
-		locale_manager.get('rooms.default.missions_caravan.first.phrase_1'),
+		locale_manager.get('rooms.default.missions_caravan.first.phrase_101'),
 		photo='BQADAgADDwkAAmrZzgeuSKp_XxTj7wI'
 	)
 
@@ -48,15 +48,15 @@ def get_actions(user):
 	if question == 'first':
 		return FIRST_ACTIONS
 	elif question == 'trade':
-		return user.get_room_temp('names') + [ locale_manager.get('rooms.default.missions_caravan.first.phrase_5') ]
+		return user.get_room_temp('names') + [ locale_manager.get('rooms.default.missions_caravan.first.phrase_105') ]
 
 def get_message(user):
 	names = user.get_room_temp('names', [])
 	descriptions = user.get_room_temp('descriptions', [])
 	costs = user.get_room_temp('costs', [])
 
-	msg = locale_manager.get('rooms.default.missions_caravan.first.phrase_6')
-	msg += '\n\n'.join([ locale_manager.get('rooms.default.missions_caravan.first.phrase_13').format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
+	msg = locale_manager.get('rooms.default.missions_caravan.first.phrase_106')
+	msg += locale_manager.get('rooms.default.missions_caravan.first.phrase_107').join([ '{0}\nЦена (Доставка + покупка): {1}\n{2}'.format(name, costs[i], descriptions[i]) for i, name in enumerate(names) ])
 
 	return msg
 
@@ -102,16 +102,16 @@ def action(user, reply, text):
 
 			reply(get_message(user))
 		else:
-			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_7'))
+			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_108'))
 			leave(user, reply)
 	else:
-		if text == locale_manager.get('rooms.default.missions_caravan.first.phrase_8') or len(user.get_room_temp('names')) == 0:
-			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_9'))
+		if text == locale_manager.get('rooms.default.missions_caravan.first.phrase_109') or len(user.get_room_temp('names')) == 0:
+			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_110'))
 			leave(user, reply)
 		elif order(user, text):
-			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_10'))
+			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_111'))
 		else:
-			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_11'))
+			reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_112'))
 
 
-		reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_12'))
+		reply(locale_manager.get('rooms.default.missions_caravan.first.phrase_113'))

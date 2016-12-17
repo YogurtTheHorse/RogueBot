@@ -76,14 +76,14 @@ def action(user, reply, text):
 			user.set_room_temp('question', 'poster')
 	elif question == 'poster':
 		if text == locale_manager.get('rooms.default.usual.comissar.phrase_24'):
-			reply('Комиссар меняет улыбку на серьезное выражение лица. "Ну конечно, нет, это же ксенос. Неизвестно, что еще у него там в шта... кхм. Говорю, это от предыдущего владельца комнаты осталось.')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_31'))
 			reply(locale_manager.get('rooms.default.usual.comissar.phrase_25'))
 
 			for i in range(7):
 				user.add_item('neutral', 'laser_bullet')
 			user.leave(reply)
 		else:
-			reply('Комиссар резко изменяется в лице и орет на тебя: "Ну это вообще беспредел! Мало того, что ксеносов не ненавидят, еще и слаанешизм развели какой-то! Расстрелять!')
+			reply(locale_manager.get('rooms.default.usual.comissar.phrase_32'))
 			reply(locale_manager.get('rooms.default.usual.comissar.phrase_26'))
 
 			user.throw_dice(reply, ESCAPE)

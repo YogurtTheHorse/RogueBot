@@ -9,7 +9,7 @@ def enter(user, reply):
 	names = ', '.join(tornament['names'])
 
 	reply(locale_manager.get('rooms.default.special.tornament.phrase_2'), photo='BQADAgAD3ggAAmrZzgdG_MVerHSPWwI')
-	reply('Вместе с тобой тут находятся: {0}'.format(names))
+	reply(locale_manager.get('rooms.default.special.tornament.phrase_3').format(names))
 
 def get_actions(user):
 	return user.get_fight_actions()

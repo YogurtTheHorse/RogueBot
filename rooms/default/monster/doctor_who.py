@@ -26,15 +26,15 @@ def enter(user, reply):
 
 	user.set_room_temp('hp_max', hp)
 
-	reply('Я — _{0}_й Доктор!'.format(number), photo=DOCTOR_WHO_STICKER)
+	reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_7').format(number), photo=DOCTOR_WHO_STICKER)
 
 	if name is not None:
 		t = time.time() - databasemanager.get_variable('doctor_kill_time', time.time()+1000)
 
-		reply('Я реинкарнация после убийства доктора от руки игрока {0}'.format(name))
+		reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_8').format(name))
 
 		if t > 0:
-			reply('Моя новая реинкарнация длится уже {0:.2f} минут!'.format(t / 60))
+			reply(locale_manager.get('rooms.default.monster.doctor_who.phrase_9').format(t / 60))
 
 def get_actions(user):
 	return user.get_fight_actions() + [ locale_manager.get('rooms.default.monster.doctor_who.phrase_4')]

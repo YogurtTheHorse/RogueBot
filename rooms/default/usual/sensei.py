@@ -20,7 +20,7 @@ def enter(user, reply):
 def action(user, reply, text):
 	if text == get_actions(user)[0]:		
 		if user.paid(50):
-			reply('Теперь ты знаешь японский! おめでとうございます!')
+			reply('おめでとうございます!')
 
 			user.add_tag(JAPANESE)
 		else:

@@ -1,4 +1,5 @@
 from localizations import locale_manager
+from localizations import locale_manager
 import random
 from constants import *
 
@@ -20,7 +21,7 @@ def action(user, reply, text):
 
 	if question == 'first':
 		if text == READY:
-			reply('Ты подошел ближе, и к тебе вышли:\nКакой-то мужик в халате и с синими волосами и мальчуган лет 14 в желтой футболке.')
+			reply(locale_manager.get('rooms.default.usual.rick_and_morty.phrase_102'))
 			user.set_room_temp('question', 'action')
 		elif text == ESCAPE:
 			reply(locale_manager.get('rooms.default.usual.rick_and_morty.phrase_7'))
@@ -29,9 +30,7 @@ def action(user, reply, text):
 		if text == HELLO:
 			reply(locale_manager.get('rooms.default.usual.rick_and_morty.phrase_8'))
 			reply(
-				'—Рик, нам... нам надо отсюда убираться, Рик... Это свидетель, Рик, он нас сдаст, Рик\n'
-				'—М-Морти... Хватит психовать, все будет нормаль... *отрыжка* нормально, Морти... Пошли домой.'
-			)
+				locale_manager.get('rooms.default.usual.rick_and_morty.phrase_101'))
 			reply(locale_manager.get('rooms.default.usual.rick_and_morty.phrase_9'))
 			reply(locale_manager.get('rooms.default.usual.rick_and_morty.phrase_10'))
 

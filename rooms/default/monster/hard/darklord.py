@@ -29,7 +29,7 @@ def enter(user, reply):
 
 	else:
 
-		if not user.has_item('rigs'):
+		if not user.has_item('ring'):
 			reply(
 				'Апчих!\n'
 				'Как тут пыльно!\n'
@@ -37,7 +37,7 @@ def enter(user, reply):
 			)
 
 		else:
-			user.remove_item('rigs')  # У игрока должно быть только одно кольцо!
+			user.remove_item('ring')  # У игрока должно быть только одно кольцо!
 			reply(
 				'«_Я чувстую его! Оно мое!_»\n'
 				'Мамочки! Мне страшно!\n'

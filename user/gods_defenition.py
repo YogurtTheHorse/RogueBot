@@ -11,7 +11,7 @@ from localizations import locale_manager
 def evilgod(self, reply, god):
 	self.gods_level = [ 0 for g in self.gods ]
 
-	if god == locale_manager.get('buddha', self.lang): # Buddha
+	if god == locale_manager.get('gods.buddha', self.lang): # Buddha
 		txt = ()
 		reply(locale_manager.get('gods.evil_buddha', self.lang))
 	elif god == locale_manager.get('jesus', self.lang): # Jesus
@@ -92,7 +92,7 @@ def pray(self, reply, god=None):
 		if self.prayed:
 			reply(locale_manager.get('gods.fast_god', self.lang))
 		else:
-			reply(locale_manager.get('gods.god_ask', self.lang), [ locale_manager.get(g) for g in self.gods] )
+			reply(locale_manager.get('gods.god_ask', self.lang), [ locale_manager.get('gods.' + g) for g in self.gods] )
 	elif god not in self.gods:
 		reply(locale_manager.get('gods.no_god', self.lang), self.gods)
 	else:

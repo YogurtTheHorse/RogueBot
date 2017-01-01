@@ -5,6 +5,8 @@ from constants import *
 
 from localizations import locale_manager
 
+logger = logging.getLogger()
+
 def open_corridor(self, reply):
 	if self.state == 'room':
 		for item in self.get_items():
@@ -35,7 +37,7 @@ def open_corridor(self, reply):
 		buttons.append(levels_acts)
 
 	if not self.prayed:
-		buttons.append(locale_manager.get('corridor.pray_ro_god', self.lang))
+		buttons.append(locale_manager.get('corridor.pray_to_god', self.lang))
 
 	if not self.visited_shop:
 		buttons.append(locale_manager.get('corridor.open_shop', self.lang))
@@ -56,18 +58,18 @@ def corridor(self, reply, text):
 	if self.has_tag('wet_enemy'):
 		self.remove_tag('wet_enemy')
 
-	if text.startswith(locale_manager.get('corridor.open_next_door', self.lang).split()[0]):
+	if text == locale_manager.get('corridor.open_next_door', self.lang):
 		self.open_room(reply)
 	elif text == locale_manager.get('corridor.use_sign', self.lang):
 		self.open_room(reply, 'special', 'sign')
-	elif text.startswith(locale_manager.get('corridor.pray_to_god', self.lang).split()[0]):
+	elif text == locale_manager.get('corridor.pray_to_god', self.lang):
 		self.pray(reply)
-	elif text.startswith(locale_manager.get('corridor.open_shop', self.lang).split()[0]):
+	elif text == locale_manager.get('corridor.open_shop', self.lang):
 		self.open_shop(reply)
-	elif text.startswith(locale_manager.get('corridor.show_inventory', self.lang).split()[0]):
+	elif text == locale_manager.get('corridor.show_inventory', self.lang):
 		self.inventory_page = 0
 		self.open_inventory(reply)
-	elif text.startswith(locale_manager.get('corridor.show_inventory', self.lang).split()[0]):
+	elif text == locale_manager.get('corridor.player_characteristics', self.lang):
 		self.show_characteristics(reply)
 #	elif text == 'Хеллуин!' and not self.get_variable('halloween_visited', False):
 #		self.open_room(reply, 'special', 'helloween_shop')

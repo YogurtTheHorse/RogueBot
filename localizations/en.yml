@@ -524,7 +524,7 @@ en:
       Are you sure?'
     name_confirmed: "You win. From now on you'll be known as {0} forever (not really). You can change your name with /setname"
     name_dismiss: Let me change it.
-    name_error: ! "ГўВќВЊ You can't use an underscore character because life is a struggle.
+    name_error: ! "❌ Only english letters, numbers and spaces, because life is a struggle.
 
       What's your name?"
     whats_next: What's next?
@@ -544,15 +544,15 @@ en:
       Now say me your new name.'
     start_new_game: Start new game
   corridor:
-    characteristics: ! "\U0001F4AA Strength: _{0}_\\n\U0001F6E1 Defense: _{1}_\\nO Charisma: _{2}_\\n\U0001F393 Intelligence (magic dmg.): _{3}_\\n\U0001F47E Monsters killed: {4}\\n\U0001F6AA Doors opened: {5}"
+    characteristics: ! "\U0001F4AA Strength: _{0}_\n\U0001F6E1 Defense: _{1}_\nCharisma: _{2}_\n\U0001F393 Intelligence (magic dmg.): _{3}_\n\U0001F47E Monsters killed: {4}\n\U0001F6AA Doors opened: {5}"
     go_down: ГўВ¬В‡ Go downstairs
     go_up: ГўВ¬В† Go upstairs
-    join_tornament: ! "\U0001F4CB  Sign up for tournament"
+    join_tornament: ! "\U0001F4CB Sign up for tournament"
     open_next_door: ! "\U0001F6AA Open another door"
-    open_shop: ! "\U0001F6CD  Enter the alchemist's shop"
-    player_characteristics: ! "\U0001F4C8  Check player stats"
-    pray_ro_god: ! "\U0001F64F  Pray God for egress"
-    show_inventory: ! "\U0001F392  Check your inventory"
+    open_shop: ! "\U0001F6CD Enter the alchemist's shop"
+    player_characteristics: ! "\U0001F4C8 Check player stats"
+    pray_o_god: ! "\U0001F64F Pray God for egress"
+    show_inventory: ! "\U0001F392 Check your inventory"
     use_sign: Use the Signpost
     what_will_we_do: ! "What's next?"
     die: Die
@@ -562,20 +562,17 @@ en:
     other: Other
     suicide: Suicide
   other:
-    message: ! 'Here we have some options and other stuff.
+    message: ! 'Here we have some options and other stuff. For example, you can write to @yegorf1 - creator of that bot.
 
-      Now you can change language.
-
-
-      And here you can find some interesting bots: @rugram'
+      Now you can change language.'
     ru: Russian
     en: English
     back: Back
   dice:
-    dice_confidence: ! "\U0001F3B2  Where's your confidence?"
-    dice_result: ! "\U0001F3B2  You rolled *{0}*"
-    dice_time: ! "\U0001F3B2  It's time to roll the dice!"
-    thow_dice: ! "\U0001F3B2  Roll the dice"
+    dice_confidence: ! "\U0001F3B2 Where's your confidence?"
+    dice_result: ! "\U0001F3B2 You rolled *{0}*"
+    dice_time: ! "\U0001F3B2 It's time to roll the dice!"
+    thow_dice: ! "\U0001F3B2 Roll the dice"
   fight:
     didnt_understand: I didn't get you
     gold_found: You found some gold on the floor. You're now *{0}* coins richer.

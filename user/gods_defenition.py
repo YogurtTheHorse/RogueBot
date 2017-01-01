@@ -47,20 +47,21 @@ def god_love(self, reply, god):
 
 def prayto(self, reply, god):
 	god_num = -1
+	gods = [ locale_manager.get('gods.' + g) for g in self.gods ]
 
-	if god == self.gods[BUDDHA_NUM]: # Buddha
+	if god == gods[BUDDHA_NUM]: # Buddha
 		reply(locale_manager.get('gods.buddha_prayed', self.lang))
 		god_num = BUDDHA_NUM
-	elif god == self.gods[JESUS_NUM]: # Jesus
+	elif god == gods[JESUS_NUM]: # Jesus
 		reply(locale_manager.get('gods.jesus_prayed', self.lang))
 		god_num = JESUS_NUM
-	elif god == self.gods[ALLAH_NUM]: # Allah
+	elif god == gods[ALLAH_NUM]: # Allah
 		reply(locale_manager.get('gods.allah_prayed', self.lang))
 		god_num = ALLAH_NUM
-	elif god == self.gods[AUTHOR_NUM]: # Author
+	elif god == gods[AUTHOR_NUM]: # Author
 		reply(locale_manager.get('gods.author_prayed', self.lang))
 		god_num = AUTHOR_NUM
-	elif god == self.gods[EMPEROR_NUM]: # Emperor
+	elif god == gods[EMPEROR_NUM]: # Emperor
 		reply(locale_manager.get('gods.emperor_prayed', self.lang))
 		god_num = EMPEROR_NUM	
 	else:
@@ -84,24 +85,22 @@ def prayto(self, reply, god):
 
 def pray(self, reply, god=None):
 	if self.prayed:
+		reply(locale_manager.get('gods.fast_god', self.lang))
 		return self.open_corridor(reply)
 
 	self.state = 'pray'
-	gods =  [ locale_manager.get('gods.' + g) for g in self.gods ]
+	gods = [ locale_manager.get('gods.' + g) for g in self.gods ]
 
 	if god == None:
-		if self.prayed:
-			reply(locale_manager.get('gods.fast_god', self.lang))
-		else:
-			reply(locale_manager.get('gods.god_ask', self.lang), gods )
-	elif god not in gods:
-		reply(locale_manager.get('gods.no_god', self.lang), gods)
-	else:
+		reply(locale_manager.get('gods.god_ask', self.lang), gods)
+	elif god in gods:
 		if len(self.last_god) > 0 and god != self.last_god:
 			self.evilgod(reply, self.last_god)
 
 		self.prayto(reply, god)
 		self.last_god = god
+	else:
+		reply(locale_manager.get('gods.no_god', self.lang), gods)
 
 def divine_intervention(self, reply):
 	res = random.random()

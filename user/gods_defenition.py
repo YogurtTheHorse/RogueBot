@@ -87,14 +87,15 @@ def pray(self, reply, god=None):
 		return self.open_corridor(reply)
 
 	self.state = 'pray'
+	gods =  [ locale_manager.get('gods.' + g) for g in self.gods ]
 
 	if god == None:
 		if self.prayed:
 			reply(locale_manager.get('gods.fast_god', self.lang))
 		else:
-			reply(locale_manager.get('gods.god_ask', self.lang), [ locale_manager.get('gods.' + g) for g in self.gods] )
-	elif god not in self.gods:
-		reply(locale_manager.get('gods.no_god', self.lang), self.gods)
+			reply(locale_manager.get('gods.god_ask', self.lang), gods )
+	elif god not in gods:
+		reply(locale_manager.get('gods.no_god', self.lang), gods)
 	else:
 		if len(self.last_god) > 0 and god != self.last_god:
 			self.evilgod(reply, self.last_god)
@@ -110,17 +111,17 @@ def divine_intervention(self, reply):
 		return
 
 	if self.has_item('intoxicated_shoes'):
-		reply(locale_manager.get('divine.divine_forgives', self.lang))
+		reply(locale_manager.get('divine_intervantion.divine_forgives', self.lang))
 		self.remove_item('intoxicated_shoes')
 	else:
 		if res < 0.1 and not self.has_item('assasin_ticket'):
 			self.add_item('special', 'assasin_ticket')
-			reply(locale_manager.get('divine.divine_assasin', self.lang))
+			reply(locale_manager.get('divine_intervantion.divine_assasin', self.lang))
 		elif res < 0.55 and self.hp < self.max_hp:
 			self.heal(self.max_hp // 2)
-			reply(locale_manager.get('divine.divine_heal', self.lang))
+			reply(locale_manager.get('divine_intervantion.divine_heal', self.lang))
 		elif self.mp < self.max_mp:
 			self.mana(self.max_mp // 2)
-			reply(locale_manager.get('divine.divine_mana', self.lang))
+			reply(locale_manager.get('divine_intervantion.divine_mana', self.lang))
 		else:
 			self.give_gold(2000)

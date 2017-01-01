@@ -650,23 +650,8 @@ en:
     no_goods: I don't have that
     shop_check: ! "```\n             RECEIPT              \n         Dungeon Mall Ltd.        \n             WELCOME!           \n             Date: {0}\nCashier 1\n------------------------------------------\n  {1} ({2}) \n— {3}.00 gold\n\n  TOTAL \n— {4}.00 gold\n\nThanks, please come again!```"
     shop_exited: See you soon!
-    shop_message: ! 'Hi! Long time no see, look what I have: {0}
-
-      Cost: {1}
-
-      {2} {3}
-
-      Cost: {4}
-
-      {5} {6}
-
-      Cost: {7}
-
-      {8} {9}
-
-      Cost: {10}
-
-      {11}'
+    'Привет! Давно не виделись, смотри, что у меня есть: {0}\nЦена: {1}\n{2} {3}\nЦена: {4}\n{5} {6}\nЦена: {7}\n{8} {9}\nЦена: {10}\n{11}'
+    shop_message: ! 'Hi! Long time no see, look what I have: {0}\nCost: {1}\n{2} {3}\nCost: {4}\n{5} {6}\nCost: {7}\n{8} {9}\nCost: {10}\n{11}'
   rooms:
     default:
       boss:

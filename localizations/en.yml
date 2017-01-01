@@ -551,7 +551,7 @@ en:
     open_next_door: ! "\U0001F6AA Open another door"
     open_shop: ! "\U0001F6CD Enter the alchemist's shop"
     player_characteristics: ! "\U0001F4C8 Check player stats"
-    pray_o_god: ! "\U0001F64F Pray God for egress"
+    pray_to_god: ! "\U0001F64F Pray God for egress"
     show_inventory: ! "\U0001F392 Check your inventory"
     use_sign: Use the Signpost
     what_will_we_do: ! "What's next?"
@@ -586,7 +586,7 @@ en:
     no_fight_thing: I don't have this item, but you can roll the dice and try.
     use: ! 'ГўВћВ° Use: '
     user_damaged: In return you received *{0}* damage
-    you_won: ! "\U0001F389 You won!\nAlso you found in the room... {0\n"
+    you_won: ! "\U0001F389 You won!\nAlso you found in the room... {0}\n"
     count: ! ' ({0} pcs.)'
     no_mana: Not enough mana :(
     nothing: Nothing

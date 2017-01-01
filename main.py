@@ -58,7 +58,7 @@ def _reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 
 		reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard, one_time_keyboard=True)
 		try:
-			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup, parse_mode=telegram.ParseMode.MARKDOWN)
+			bot.sendMessage(c_id, text=txt, reply_markup=reply_markup)#, parse_mode=telegram.ParseMode.MARKDOWN)
 		except Exception as e:
 			if not repeat:
 				raise e
@@ -70,7 +70,7 @@ def _reply(c_id, bot, txt, buttons=None, photo=None, repeat=True):
 				raise e
 
 	elif len(txt) > 0:
-		bot.sendMessage(c_id, text=txt, parse_mode=telegram.ParseMode.MARKDOWN)
+		bot.sendMessage(c_id, text=txt)#, parse_mode=telegram.ParseMode.MARKDOWN)
 
 	if photo:
 		bot.sendSticker(c_id, sticker=photo)
@@ -411,16 +411,19 @@ def rate(bot, update):
 	bot.sendMessage(update.message.chat_id, text='{0}'.format(link))
 
 def error_callback(bot, update, error):
-	error_msg = 'User "%s" had error "%s"' % (update.message.chat_id, error)
+	error_msg = str(error)
 	if '429' in str(error):
 		logger.warn('429!')
 	else:
 		logger.warn(error_msg)
 	msg = 'Error. Tech support - @yegorf1'
-	bot.sendMessage(update.message.chat_id, text=msg)
-	bot.sendMessage(update.message.chat_id, 
-					text='```text\n{0}\n```'.format(error_msg),
-					parse_mode=telegram.ParseMode.MARKDOWN)
+	try:
+		bot.sendMessage(update.message.chat_id, text=msg)
+		bot.sendMessage(update.message.chat_id, 
+						text='```text\n{0}\n```'.format(error_msg),
+						parse_mode=telegram.ParseMode.MARKDOWN)
+	except AttributeError:
+		pass
 
 def main():
 	if os.path.isfile(question_filename):

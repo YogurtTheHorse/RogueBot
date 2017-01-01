@@ -493,13 +493,13 @@ en:
     story:
       glasses:
         phrase_1: Sunglasses
-        phrase_2: Like+A497:A507 ones that cool guys from Hollywood have!
+        phrase_2: Like ones that cool guys from Hollywood have!
       gun:
         phrase_1: Pistol
         phrase_2: Nice pistol. 20mm.
         phrase_3: BAM! Shot!
         phrase_4: Ammo is over, but don't be afraid. This thing is heavy enough.
-      first:
+      map:
         phrase_1: Treasure map
         phrase_2: There are only black strip and three numbers on it.
     potions:
@@ -545,8 +545,8 @@ en:
     start_new_game: Start new game
   corridor:
     characteristics: ! "\U0001F4AA Strength: _{0}_\n\U0001F6E1 Defense: _{1}_\nCharisma: _{2}_\n\U0001F393 Intelligence (magic dmg.): _{3}_\n\U0001F47E Monsters killed: {4}\n\U0001F6AA Doors opened: {5}"
-    go_down: ГўВ¬В‡ Go downstairs
-    go_up: ГўВ¬В† Go upstairs
+    go_up: ⬆ Go upstairs
+    go_down: ⬇ Go downstairs
     join_tornament: ! "\U0001F4CB Sign up for tournament"
     open_next_door: ! "\U0001F6AA Open another door"
     open_shop: ! "\U0001F6CD Enter the alchemist's shop"
@@ -576,7 +576,7 @@ en:
   fight:
     didnt_understand: I didn't get you
     gold_found: You found some gold on the floor. You're now *{0}* coins richer.
-    imagination: ГўВњЕЎ Imagination
+    imagination: ✨ Imagination
     imagination_fight: Your contraption dealt *{0}* damage.
     item_used: With some simple manipulations {0} deals *{1}* damage
     kick_arm: ! "\U0001F44A Punch"
@@ -624,16 +624,16 @@ en:
     divine_mana: Gods give you magic powder!
   inventory:
     activate: ! "\U0001F53A Put it on"
-    activated: ГўВ­В• It has just equipped by itself
-    back: Гў—ВЂ Go back
-    cant_activate: ГўВ­В• It won't equip
-    cant_throw: ГўВ­В• You can't throw it away
+    activated: ! "⭕ It has just equipped by itself"
+    back: ◀ Go back
+    cant_activate: ⭕ It won't equip
+    cant_throw: ⭕ You can't throw it away
     deactivate: ! "\U0001F53B Take it off"
     inventory_message: ! 'In the inventory you found:'
-    next: ГўВ–В¶ Next
-    sell: ! "\U0001F4B0 Sell"
-    throw_away: ! "\U0001F5D1 Throw it away"
-    to_corridor: ГўВ†ВЄ To the corridor
+    next: ▶ Next
+    sell: ! "\U0001F4B0 Sell "
+    throw_away: ! "\U0001F5D1 Throw "
+    to_corridor: ↪ To the corridor
     cant_sell: Not for sale
     item_str: ! '{0} ({2} items at the price of {4} gold.) {1}:
 
@@ -859,14 +859,6 @@ en:
             *BILL GATES!*"
           phrase_4: Be lost
           phrase_5: Loading
-
-
-
-
-            You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ 
-
-
-            *Gabe Newell*!'
           phrase_10: -I'm sorry, I got too excited.
           phrase_11: ! '- Look who you became! Sloth and gluttony!'
           phrase_12: -Gaaaaaabe... Plz:'(
@@ -933,7 +925,7 @@ en:
             Have fun.'
           phrase_9: Have an ice-cream cone.
         kiba:
-          phrase_1: You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ 
+          phrase_1: You hardly walk into the room. Your eyes don't deceive you, it really is... 
           phrase_10: Ask a fox
           phrase_11: Did you get a fox for me?
           phrase_12: Who are you?
@@ -951,7 +943,7 @@ en:
           phrase_23: ! "in the middle of the room. Yep, eyes didn't let you down, it really was...
 
 
-            *ГЈВ‚В­ГЈВѓВђ*!"
+            @thekiba!"
           phrase_24: I can't hear you!!! Please, speak louder.
           phrase_25: Hello!
           phrase_26: ! 'Can you help me finish that potion?
@@ -2262,7 +2254,9 @@ en:
         gabe:
           phrase_1: ! "- Come, {0}. What do you want?
 
-            You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ "
+            You hardly walk into the room. Your eyes don't deceive you, it really is...
+
+            *Gabe Newell*!'"
           phrase_10: ! '- Look who you became! Sloth and gluttony!'
           phrase_11: ! "- Fine! I'll do it myself!"
           phrase_12: ! "- How you're doing?"

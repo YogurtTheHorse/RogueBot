@@ -584,7 +584,7 @@ en:
     magic_kicked: ibbidi-Bobbidi-Boo! "\n A giant fist appears out of nowhere and deals *{0}* damage
     monster_damaged: You deal *{0}* damage to the monster
     no_fight_thing: I don't have this item, but you can roll the dice and try.
-    use: ! 'ГўВћВ° Use: '
+    use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
     you_won: ! "\U0001F389 You won!\nAlso you found in the room... {0}\n"
     count: ! ' ({0} pcs.)'

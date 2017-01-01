@@ -109,7 +109,7 @@ en:
           You point at enemy and water splashes at him.'
         phrase_4: Unfortunately water sprayed extensively so you become wet.
         phrase_5: Not enough mana
-        name: _Water_
+        name: Water
       stone:
         phrase_1: Rock
         phrase_2: ! 'It says:'

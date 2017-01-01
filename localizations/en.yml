@@ -584,7 +584,7 @@ en:
     magic_kicked: ibbidi-Bobbidi-Boo! "\n A giant fist appears out of nowhere and deals *{0}* damage
     monster_damaged: You deal *{0}* damage to the monster
     no_fight_thing: I don't have this item, but you can roll the dice and try.
-    use: ! 'ГўВћВ° Use: '
+    use: ! '➰ Use: '
     user_damaged: In return you received *{0}* damage
     you_won: ! "\U0001F389 You won!\nAlso you found in the room... {0}\n"
     count: ! ' ({0} pcs.)'
@@ -624,16 +624,16 @@ en:
     divine_mana: Gods give you magic powder!
   inventory:
     activate: ! "\U0001F53A Put it on"
-    activated: ГўВ­В• It has just equipped by itself
-    back: Гў—ВЂ Go back
-    cant_activate: ГўВ­В• It won't equip
-    cant_throw: ГўВ­В• You can't throw it away
+    activated: ! "⭕ It has just equipped by itself"
+    back: ◀ Go back
+    cant_activate: ⭕ It won't equip
+    cant_throw: ⭕ You can't throw it away
     deactivate: ! "\U0001F53B Take it off"
     inventory_message: ! 'In the inventory you found:'
-    next: ГўВ–В¶ Next
-    sell: ! "\U0001F4B0 Sell"
-    throw_away: ! "\U0001F5D1 Throw it away"
-    to_corridor: ГўВ†ВЄ To the corridor
+    next: ▶ Next
+    sell: ! "\U0001F4B0 Sell "
+    throw_away: ! "\U0001F5D1 Throw "
+    to_corridor: ↪ To the corridor
     cant_sell: Not for sale
     item_str: ! '{0} ({2} items at the price of {4} gold.) {1}:
 
@@ -859,14 +859,6 @@ en:
             *BILL GATES!*"
           phrase_4: Be lost
           phrase_5: Loading
-
-
-
-
-            You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ 
-
-
-            *Gabe Newell*!'
           phrase_10: -I'm sorry, I got too excited.
           phrase_11: ! '- Look who you became! Sloth and gluttony!'
           phrase_12: -Gaaaaaabe... Plz:'(
@@ -933,7 +925,7 @@ en:
             Have fun.'
           phrase_9: Have an ice-cream cone.
         kiba:
-          phrase_1: You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ 
+          phrase_1: You hardly walk into the room. Your eyes don't deceive you, it really is... 
           phrase_10: Ask a fox
           phrase_11: Did you get a fox for me?
           phrase_12: Who are you?
@@ -951,7 +943,7 @@ en:
           phrase_23: ! "in the middle of the room. Yep, eyes didn't let you down, it really was...
 
 
-            *ГЈВ‚В­ГЈВѓВђ*!"
+            @thekiba!"
           phrase_24: I can't hear you!!! Please, speak louder.
           phrase_25: Hello!
           phrase_26: ! 'Can you help me finish that potion?
@@ -2262,7 +2254,9 @@ en:
         gabe:
           phrase_1: ! "- Come, {0}. What do you want?
 
-            You hardly walk into the room. Your eyes don't deceive you, it really isГўВЂЕ "
+            You hardly walk into the room. Your eyes don't deceive you, it really is...
+
+            *Gabe Newell*!'"
           phrase_10: ! '- Look who you became! Sloth and gluttony!'
           phrase_11: ! "- Fine! I'll do it myself!"
           phrase_12: ! "- How you're doing?"

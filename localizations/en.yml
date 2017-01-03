@@ -1878,6 +1878,7 @@ en:
           phrase_8: Everyone died.
           phrase_9: You ended the battle. And Forces of Light set truce with Forces of Dark.
         water:
+          name: Water
           phrase_1: ! "_Man_, here's a room full of _water_! There's a water wall, but it won't last long...
 
             Think *faster*."

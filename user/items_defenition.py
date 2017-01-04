@@ -43,7 +43,7 @@ def remove_item_by_name(self, name):
 			ind = i
 			break
 
-	if ind >= 0 and not items[ind].iscursed and items[ind]:
+	if ind >= 0 and items[ind] and not items[ind].iscursed:
 		del self.items[ind]
 
 		return True

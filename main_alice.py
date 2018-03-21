@@ -45,13 +45,6 @@ def main():
 # Функция для непосредственной обработки диалога.
 def handle_dialog(req, res):
     user_id = 'alice' + req['session']['user_id']
-    
-    if req['session']['new']:
-        # Это новый пользователь.
-        # Инициализируем сессию и поприветствуем его.
-        res['response']['text'] = 'Теперь скажи мне свое имя'
-        usermanager.new_user(user_id)
-        return
     global text, buttons_list
     text = ''
     buttons_list = [ ]
@@ -68,9 +61,13 @@ def handle_dialog(req, res):
                 buttons_list.extend(btn)
             else:
                 buttons_list.append(btn)
-
-    usermanager.message(user_id, reply, req['request']['command'])
     
+    if req['session']['new']:
+        if not usermanager.new_user(user_id, reply=reply):
+            text = 'Теперь скажи мне свое имя'
+    else:
+        usermanager.message(user_id, reply, req['request']['command'])
+        
     res['response']['text'] = text.strip()
 
     res['response']['buttons'] = [

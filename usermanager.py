@@ -17,14 +17,17 @@ def save_user(usr):
 
 def new_user(uid, nickname=None, reply=lambda *x, **y: None):
 	usr = get_user(uid)
+	res = False
 
 	if usr is None or usr.confirm_restart(reply):
 		usr = User(uid)
 		if nickname is not None:
 			usr.nickname = nickname
 		reply('Теперь скажи мне свое имя.')
+		res = True
 
 	save_user(usr)
+	return res
 
 def random_user():
 	return get_user(random.choice(list(get_telegram_users())))

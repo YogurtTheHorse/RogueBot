@@ -1,8 +1,9 @@
-# RogueBot [![Build Status](https://travis-ci.org/yegorf1/RogueBot.svg?branch=master)](https://travis-ci.org/yegorf1/RogueBot)
-My simple rogue-like game for Telegram and VK (in dev)
+# Project is not maintained currently and probably won't be in future
+
+# RogueBot 
 
 # Requirements
-You must have Python 3 to launch server. Also before launching you have to install requirements via pip3:
+You must have Python 3 and running mongo to launch server. Also before launching you have to install requirements via pip3:
 ```Bash
 pip3 install -r requirements.txt
 ```
@@ -52,4 +53,4 @@ python3 main.pyc
 
 That's it.
 
-You can write me via Telegram (@yegorf1) or VK.com (vk.com/yegorf1) if you have any questions.
+You can write me via Telegram (@yogurtthehorse) or VK.com (vk.com/yogurtthehirse) if you have any questions. 
